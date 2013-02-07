@@ -149,7 +149,6 @@ ul.posts {
 /*****************************************************************************/
 
 #post {
-
 }
 
   /* standard */
@@ -195,3 +194,18 @@ ul.posts {
   #related h2 {
     margin-bottom: 1em;
   }
+
+/* Customizations */
+
+#post p {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #333;
+    font-size: 15px;
+}
+
+#post p.meta {
+    font-family: arial, helvetica, sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #666;
+}
