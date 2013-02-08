@@ -8,11 +8,12 @@ tags: []
 {% include JB/setup %}
 
 Some time ago on my old blog I showed the simply typed lambda calculus
-in core.logic with no explanation based on some Prolog code I found on
-StackOverflow. I'd like to revisit that meager post with a much more
-detailed exposition of the ideas behind that code. I recommend setting
-up [core.logic]() with [Clojure](http://clojure.org) or $\alpha$Kanren
-with your favorite Scheme or Scheme-like (I like
+in core.logic with no explanation based on some
+[Prolog code](http://stackoverflow.com/questions/3702855/typing-the-y-combinator)
+I found on StackOverflow. I'd like to revisit that meager post with a
+much more detailed exposition of the ideas behind that code. I
+recommend setting up [core.logic]() with [Clojure](http://clojure.org)
+or $\alpha$Kanren with your favorite Scheme or Scheme-like (I like
 [Petite Chez](http://scheme.com) and [Racket](http://racket-lang.org))
 so that you can follow along where relevant.
 
