@@ -12,8 +12,9 @@ in core.logic with no explanation based on some Prolog code I found on
 StackOverflow. I'd like to revisit that meager post with a much more
 detailed exposition of the ideas behind that code. I recommend setting
 up [core.logic]() with [Clojure](http://clojure.org) or $\alpha$Kanren
-with your favorite Scheme (I like [Petite Chez](http://scheme.com)) so that
-you can follow along where relevant.
+with your favorite Scheme or Scheme-like (I like
+[Petite Chez](http://scheme.com) and [Racket](http://racket-lang.org))
+so that you can follow along where relevant.
 
 Thanks to [Nada Amin's](http://github.com/namin) work, core.logic now
 supports [Nominal Logic Programming](http://arxiv.org/abs/cs/0609062)
