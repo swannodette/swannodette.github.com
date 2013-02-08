@@ -44,9 +44,9 @@ I would like to show how we can take the typing rules for the simply
 typed lambda calculus and encode them directly into a program. Once
 done, we will also have a **type inferencer** as well as **term
 inhabitation**. Don't worry if you don't know what these words mean
-yet, we'll get to them. If you've ever seen Dan & Will do one of their
-presentations on miniKanren these posts will cover similar territory
-but at a much slower pace.
+yet, we'll get to them. If you've ever seen
+[Dan & Will do one of their presentations on miniKanren](http://www.infoq.com/presentations/miniKanren)
+these posts will cover similar territory but at a much slower pace.
 
 What follows are the typing rules for the simply typed lambda
 calculus. Don't be put off by the notation! We'll explain each typing
