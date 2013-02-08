@@ -87,7 +87,7 @@ not already in $\Gamma$, that is, it is **free**, and we have some
 expression $e$ of type $\tau'$ then the expression $\lambda x . e$ has
 the type $\tau \to \tau'$. Remember $\lambda$ here just denotes a
 function which takes one argument $x$ and whose body is some
-expression $e$ in our language. You may have noticced we haven't
+expression $e$ in our language. You may have noticed we haven't
 talked precisely about what valid expressions are in our language,
 we'll talk about this in a later post.
 
