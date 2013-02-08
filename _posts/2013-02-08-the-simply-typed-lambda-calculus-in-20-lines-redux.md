@@ -67,7 +67,7 @@ $$\frac{\Gamma, x:\tau \vdash e:\tau' \qquad (x \notin
 Dom(\Gamma))}{\Gamma \vdash \lambda x . e : \tau \to \tau'}\rlap{(3)}$$
 </div>
 
-$(1)$ simply states that if some var $x$ with type $t$ exists in the
+$(1)$ simply states that if some var $x$ with type $\tau$ exists in the
 type context $\Gamma$, then $\Gamma$ implies that $x$ has the type
 $\tau$. Clearly then $\Gamma$ will be represented by some associative
 data structure that maps vars to their types. We can and will
