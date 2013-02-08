@@ -94,7 +94,7 @@ talked precisely about what valid expressions are in our language,
 we'll talk about this in a later post.
 
 You may be scratching your head at the term **free**. Every working
-programming has an intuitive notion of **scope**, regardless of the particular
+programmer has an intuitive notion of **scope**, regardless of the particular
 scoping rules a programming language may have. In many popular
 languages these days, it's understood that the arguments to a method
 or function are **bound** within the body or method of the
