@@ -12,7 +12,7 @@ in core.logic with no explanation based on some Prolog code I found on
 StackOverflow. I'd like to revisit that meager post with a much more
 detailed exposition of the ideas behind that code. I recommend setting
 up [core.logic]() with [Clojure](http://clojure.org) or $\alpha$Kanren
-with your favorite Scheme (I like [Chez](http://scheme.com)) so that
+with your favorite Scheme (I like [Petite Chez](http://scheme.com)) so that
 you can follow along where relevant.
 
 Thanks to [Nada Amin's](http://github.com/namin) work, core.logic now
