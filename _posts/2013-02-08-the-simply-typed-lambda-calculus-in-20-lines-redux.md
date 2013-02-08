@@ -8,12 +8,12 @@ tags: []
 {% include JB/setup %}
 
 Some time ago on my old blog I showed the simply typed lambda calculus
-in core.logic with no explanation. I'd like to revisit that meager
-post with a much more detailed exposition of the ideas behind that
-code. I recommend setting up [core.logic]() with
-[Clojure](http://clojure.org) or $\alpha$Kanren with your favorite
-Scheme (I like [Chez](http://scheme.com)) so that you can follow along
-where relevant.
+in core.logic with no explanation based on some Prolog code I found on
+StackOverflow. I'd like to revisit that meager post with a much more
+detailed exposition of the ideas behind that code. I recommend setting
+up [core.logic]() with [Clojure](http://clojure.org) or $\alpha$Kanren
+with your favorite Scheme (I like [Chez](http://scheme.com)) so that
+you can follow along where relevant.
 
 Thanks to [Nada Amin's](http://github.com/namin) work, core.logic now
 supports [Nominal Logic Programming](http://arxiv.org/abs/cs/0609062)
@@ -43,7 +43,7 @@ typed lambda calculus and encode them directly into a program. Once
 done, we will also have a **type inferencer** as well as **term
 inhabitation**. Don't worry if you don't know what these words mean
 yet, we'll get to them. If you've ever seen Dan & Will do one of their
-presentation on miniKanren these posts will cover similar territory
+presentations on miniKanren these posts will cover similar territory
 but at a much slower pace.
 
 What follows are the typing rules for the simply typed lambda
@@ -67,36 +67,32 @@ $$\frac{\Gamma, x:\tau \vdash e:\tau' \qquad (x \notin
 Dom(\Gamma))}{\Gamma \vdash \lambda x . e : \tau \to \tau'}\rlap{(3)}$$
 </div>
 
-<p>
 $(1)$ simply states that if some var $x$ with type $t$ exists in the
 type context $\Gamma$, then $\Gamma$ implies that $x$ has the type
 $\tau$. Clearly then $\Gamma$ will be represented by some associative
 data structure that maps vars to their types. We can and will
 represent the type context as a list of pairs.
-</p>
 
-<p>
 $(2)$ states that if some valid expression $e$ in our language has the
-type $\tau \to \tau'$ and some valid expression $e'$ has the
-type $\tau$ then the result of the application of $e$ to $e'$ has the
-type $\tau'$. We could imagine writing a function $\mathtt{even?}$, clearly
-this function has type $\mathtt{Int} \to \mathtt{Bool}$. So if we pass
-$\mathtt{2}$ to $\mathtt{even?}$ we know we're going to get $\mathtt{True}$ or
+type $\tau \to \tau'$ (arrow types are functions!) and some valid
+expression $e'$ has the type $\tau$ then the result of the application
+of $e$ to $e'$ has the type $\tau'$. We could imagine writing a
+function $\mathtt{even?}$, clearly this function has type
+$\mathtt{Int} \to \mathtt{Bool}$. So if we pass $\mathtt{2}$ to
+$\mathtt{even?}$ we know we're going to get $\mathtt{True}$ or
 $\mathtt{False}$ back.
-</p>
 
-<p>
-Finally $(3)$ states that if the var $x$ (which has type $\tau$) is not already
-in $\Gamma$, that is, it is "free", and we have some expression $e$ of
-type $\tau'$ then $\lambda x . e$ has the type $\tau \to
-\tau'$. Remember $\lambda$ here just denotes a function which takes
-one argument $x$ and whose body is some expression $e$ in our
-language. You may have we haven't talked about what valid expressions
-are in our language, we'll talk about this in a later post.
-</p>
+Finally $(3)$ states that if the var $x$ (which has type $\tau$) is
+not already in $\Gamma$, that is, it is **free**, and we have some
+expression $e$ of type $\tau'$ then the expression $\lambda x . e$ has
+the type $\tau \to \tau'$. Remember $\lambda$ here just denotes a
+function which takes one argument $x$ and whose body is some
+expression $e$ in our language. You may have noticced we haven't
+talked precisely about what valid expressions are in our language,
+we'll talk about this in a later post.
 
 You may be scratching your head at the term **free**. Every working
-programming has an intuitive notion of scope, regardless of the particular
+programming has an intuitive notion of **scope**, regardless of the particular
 scoping rules a programming language may have. In many popular
 languages these days, it's understood that the arguments to a method
 or function are **bound** within the body or method of the
@@ -117,7 +113,7 @@ function(x) {
 }
 </pre>
 
-Hopefully this makes $(3)$ paragraph more clear.
+Hopefully this makes $(3)$ more clear.
 
 So $\lambda x . e$ is a subtle point! Not only does it communicate the
 notion of a function, it also communicates that $x$ is *bound* in the
@@ -126,4 +122,5 @@ handle properly and we'll see how Nominal Logic Programming gives us
 the tools for doing so.
 
 Hopefully this post has honed your informal understanding of the
-typing rules for the simply typed lambda calculus. Stay tuned.
+typing rules for the simply typed lambda calculus. Stay tuned, the
+real fun is yet to come!
