@@ -118,7 +118,7 @@ function(x) {
 Hopefully this makes $(3)$ more clear.
 
 So $\lambda x . e$ is a subtle point! Not only does it communicate the
-notion of a function, it also communicates that $x$ is *bound* in the
+notion of a function, it also communicates that $x$ is **bound** in the
 expression $e$. This is essential information which we will need to
 handle properly and we'll see how Nominal Logic Programming gives us
 the tools for doing so.
