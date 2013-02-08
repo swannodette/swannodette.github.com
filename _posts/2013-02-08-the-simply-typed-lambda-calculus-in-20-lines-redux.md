@@ -2,8 +2,8 @@
 layout: post
 title: "The Simply Typed Lambda Calculus in 20 Lines Redux"
 description: ""
-category: 
-tags: []
+category: "Nominal Logic"
+tags: ["lambda calculus", "types"]
 ---
 {% include JB/setup %}
 
