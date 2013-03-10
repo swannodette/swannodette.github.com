@@ -74,7 +74,7 @@ Here's my approach to the puzzle solution:
       (ruleo q :reserv :5pm :cheese :mozzarella)))) ;; 11
 </pre>
 
-This above solution takes about 84ms on my machine campared to about 430ms
+This above solution takes about 84ms on my machine compared to about 430ms
 with a list comprehension. Note that I freely use `run*` over `run 1`, it
 makes no difference.
 
