@@ -77,7 +77,7 @@ Here's my approach to the puzzle solution:
 This above solution takes about 84ms if we only ask for the first
 solution on my machine compared to about 430ms with a list
 comprehension. If we call `doall` instead of `first` on the result of
-invoking `puzzle` then it takes 270ms to determine there is only one
+invoking `puzzle`, it takes 270ms to determine there is only one
 solution. This is still faster than the list comprehension.
 
 How can a solution like this with no goal reordering outperform a
