@@ -28,7 +28,7 @@ My solution solves the puzzle about five times faster on my machine
 than Mark's optimized list comprehension version without any change
 to the order of the rules.
 
-Admittedly, Mark's version wins on the readability and concisions
+Admittedly, Mark's version wins on the readability and concision
 fronts due to the moving between keywords and integers in my
 code. This could be avoided with support for CLP(Set) which is on the
 roadmap for core.logic and I sketch my ideal puzzle solution near the
