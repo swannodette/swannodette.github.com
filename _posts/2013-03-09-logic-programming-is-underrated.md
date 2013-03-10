@@ -30,7 +30,7 @@ to the order of the rules.
 
 Admittedly, Mark's version wins on the readability and concision
 fronts due to the moving between keywords and integers in my
-code. This could be avoided with support for CLP(Set) which is on the
+code. This could be avoided with support for [CLP(Set)](http://cmpe.emu.edu.tr/bayram/courses/532/ForPresentation/p861-dovier.pdf) which is on the
 roadmap for core.logic and I sketch my ideal puzzle solution near the
 bottom of the post.
 
