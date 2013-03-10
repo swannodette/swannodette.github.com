@@ -66,7 +66,7 @@ $$\frac{\Gamma \vdash e : \tau \to \tau' \qquad \Gamma \vdash e' :
 
 <div>
 $$\frac{\Gamma, x:\tau \vdash e:\tau' \qquad (x \notin
-Dom(\Gamma))}{\Gamma \vdash \lambda x . e : \tau \to \tau'}\rlap{(3)}$$
+Dom(\Gamma))}{\Gamma \vdash \lambda x.e : \tau \to \tau'}\rlap{(3)}$$
 </div>
 
 $(1)$ simply states that if some var $x$ with type $\tau$ exists in the
