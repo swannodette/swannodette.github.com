@@ -53,24 +53,18 @@ Here's my approach to the puzzle solution:
         [(ruleo q :name :landon :cheese :mozzarella)
          (ruleo q :name :jason :reserv :730pm)]) ;; 1
       (ruleo q :cheese :blue :mag :fortune) ;; 2
-      (fresh [x]
-        (!= x (-> p->i :mag :vogue))
-        (ruleo q :cheese :muenster :mag x)) ;; 3
+      (neg-ruleo q :cheese :muenster :mag :vogue) ;; 3
       (peopleo q
         [[:mag :fortune] [:name :landon] [:reserv :5pm]
          [:cheese :mascarpone] [:mag :vogue]]) ;; 4
-      (fresh [x]
-        (!= x (-> p->i :mag :time))
-        (ruleo q :reserv :5pm :mag x)) ;; 5
+      (neg-ruleo q :reserv :5pm :mag :time) ;; 5
       (earliero q :mag :cosmopolitan :cheese :mascarpone) ;; 6
       (earliero q :cheese :blue :name :bailey) ;; 7
       (conde
         [(ruleo q :reserv :7pm :mag :fortune)]
         [(ruleo q :reserv :730pm :mag :fortune)]) ;; 8
       (earliero q :mag :time :name :landon) ;; 9
-      (fresh [x]
-        (!= x (-> p->i :mag :fortune))
-        (ruleo q :name :jamari :mag x)) ;; 10
+      (neg-ruleo q :name :jamari :mag :fortune) ;; 10
       (ruleo q :reserv :5pm :cheese :mozzarella)))) ;; 11
 </pre>
 
