@@ -80,7 +80,7 @@ makes no difference.
 
 It's worth pondering exactly how a solution like this with no goal
 reordering can outperform a tuned list comprehension especially
-consdering the copious use of unification, constraints, membero and
+consdering the copious use of unification, constraints, `membero` and
 other costly high level stuff.
 
 In summary, do you need logic programming to solve logic puzzles?
