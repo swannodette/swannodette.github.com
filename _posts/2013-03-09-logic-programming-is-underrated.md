@@ -71,7 +71,7 @@ Here's my approach to the puzzle solution:
       (fresh [x]
         (!= x (-> p->i :mag :fortune))
         (ruleo q :name :jamari :mag x)) ;; 10
-      (ruleo q :reserv :5pm :cheese :mozzarella))))
+      (ruleo q :reserv :5pm :cheese :mozzarella)))) ;; 11
 </pre>
 
 This above solution takes about 84ms on my machine campared to about 430ms
