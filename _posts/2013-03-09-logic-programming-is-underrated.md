@@ -43,7 +43,7 @@ Here's my approach to the puzzle solution:
              (map #(into {}
                (map vector [:name :cheese :mag :reserv] %)))
              (into []))]
-    (run 1 [q]
+    (run* [q]
       (== q ps)
       (everyg #(fd/in % (fd/interval 1 5)) vs)
       (everyg fd/distinct (apply map vector (map vals ps)))
