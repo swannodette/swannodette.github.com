@@ -84,7 +84,7 @@ reordering can outperform a tuned list comprehension.
 In summary, do you need logic programming to solve logic puzzles?
 *Absolutely not!* Should you implement logic puzzles using core.logic?
 *Most definitely!* Importantly, you absolutely need to try both
-approach in order to understand the tradeoffs. What bothered me about
+approaches in order to understand the tradeoffs. What bothered me about
 Mark's post was the abundance of claims with little evidence of
 core.logic experience.
 
