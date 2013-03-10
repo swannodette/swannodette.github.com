@@ -22,7 +22,7 @@ or functional programming this way.
 
 What follows is an explanation of how I would approach the
 problem. The main insight here is the original problem is a finite
-domain problem in disguise - suprisingly similar to solving sudoku!
+domain problem in disguise - surprisingly similar to solving sudoku!
 
 My solution solves the puzzle about five times faster on my machine
 than Mark's optimized list comprehension version without any change
