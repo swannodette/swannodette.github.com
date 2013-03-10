@@ -74,14 +74,17 @@ Here's my approach to the puzzle solution:
       (ruleo q :reserv :5pm :cheese :mozzarella)))) ;; 11
 </pre>
 
-This above solution takes about 84ms on my machine compared to about 430ms
-with a list comprehension. Note that I freely use `run*` over `run 1`, it
-makes no difference.
+This above solution takes about 84ms if we only ask for the first
+solution on my machine compared to about 430ms with a list
+comprehension. If we call `doall` instead of `first` on the result of
+invoking `puzzle` then it takes 270ms to determine there is only one
+solution. This is still faster than the list comprehension.
 
-It's worth pondering exactly how a solution like this with no goal
-reordering can outperform a tuned list comprehension especially
-considering the copious use of unification, constraints, `membero` and
-other costly high level stuff.
+How can a solution like this with no goal reordering outperform a
+tuned list comprehension given the copious use of
+unification, constraints, `membero` and other costly high level stuff?
+I mention some great books below which give insights into the how
+and why.
 
 In summary, do you need logic programming to solve logic puzzles?
 *Absolutely not!* Should you implement logic puzzles using core.logic?
