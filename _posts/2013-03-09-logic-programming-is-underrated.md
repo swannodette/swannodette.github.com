@@ -78,8 +78,10 @@ This above solution takes about 84ms on my machine campared to about 430ms
 with a list comprehension. Note that I freely use `run*` over `run 1`, it
 makes no difference.
 
-It's worth pondering exactly how a generic solution like this with no goal
-reordering can outperform a tuned list comprehension.
+It's worth pondering exactly how a solution like this with no goal
+reordering can outperform a tuned list comprehension especially
+consdering the copious use of unification, constraints, membero and
+other costly high level stuff.
 
 In summary, do you need logic programming to solve logic puzzles?
 *Absolutely not!* Should you implement logic puzzles using core.logic?
