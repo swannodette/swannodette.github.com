@@ -7,7 +7,7 @@ tags: []
 ---
 {% include JB/setup %}
 
-Mark Engleberg wrote a very interesting post titled
+Mark Engelberg wrote a very interesting post titled
 [Logic Programming is Overrated](http://programming-puzzler.blogspot.com/2013/03/logic-programming-is-overrated.html). I
 take issue with a quite a few points made in that post and I would
 like to address a couple of them here.
