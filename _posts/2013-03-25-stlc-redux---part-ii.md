@@ -102,7 +102,7 @@ is defined in the following manner:
   `(~'fn ~(nom/tie x e)))
 </pre>
 
-It just take two values, a nom and an expression. It then constructs a
+It just takes two values, a nom and an expression. It then constructs a
 Clojure sequence which which starts with the symbol
 $\mathtt{fn}$. This is just to ensure that the output is comprehensible
 and importantly - executable Clojure code. The body of the function is
