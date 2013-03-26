@@ -50,11 +50,7 @@ seem to have a new primitive `nom/fresh`. This primitive is similar to
 `fresh` but instead of creating fresh logic variables, it creates
 fresh *noms*. What are noms? They are like identifiers/names in
 programming languages. What they buy us over traditional logic
-variables is that we can use them to reason about scope. If you've
-done any work with traditional logic variables, you know that logic
-variables don't really involve any notion of scope and in fact allow
-for some neat disciplined
-[action at a distance](http://en.wikibooks.org/wiki/Prolog/Difference_Lists).
+variables is that we can use them to reason about scope.
 
 But before we get into scope let's break down what the program above
 means. If we were to write this in a more standard notation we might
