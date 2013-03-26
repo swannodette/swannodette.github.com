@@ -111,7 +111,7 @@ something we haven't see before $\mathtt{nom/tie}$.
 
 $\mathtt{nom/tie}$ takes a nom and an expression and it *constructs a
 scope*. In this scope, the nom $\mathtt{x}$ will be bound! This is
-precisely what what we need.
+precisely what we need.
 
 In the next posts we'll start translating the paper
 ideas of the first post into *runnable* ideas.
