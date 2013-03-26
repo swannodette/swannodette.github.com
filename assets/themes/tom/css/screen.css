@@ -210,3 +210,8 @@ ul.posts span {
     text-transform: uppercase;
     color: #666;
 }
+
+.MathJax .noError {
+    border: none !important;
+    padding: 0 !important;
+}
