@@ -10,7 +10,7 @@ tags: ["lambda calculus", "types"]
 [Clojure/West](http://clojurewest.org) was a blast and I'm happy that
 Michael Fogus's joke became a
 [reality](http://blog.fogus.me/2013/02/20/confo/) with 140+
-attendees. All the presentations were stellar, in particular I enjoyed
+attendees. All the presentations were great, in particular I enjoyed
 [Adam Foltzer's](http://twitter.com/acfoltzer) talk on implementing a
 logic programming system in Haskell,
 [Ryan Senior's](http://twitter.com/objcmdo) tutorial on the new
