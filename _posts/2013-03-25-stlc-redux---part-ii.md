@@ -22,9 +22,8 @@ and Will Byrd's relational
 [nominal logic programming](http://arxiv.org/abs/cs/0609062) was
 stellar but I think it may have seemed a bit too far into the deep end
 for some of the attendees. In this post I'd like to explain some of
-the interesting bits of her talk at a much slower pace. I hope by the
-end that you see that nominal logic programming is really a
-simple idea in the end.
+the interesting bits of her talk at a much slower pace. I hope you'll
+see that nominal logic programming is really a simple idea in the end.
 
 Whether we know it or not, when we use a functional programming
 language we benefit heavily from the formalism of the lambda calculus
