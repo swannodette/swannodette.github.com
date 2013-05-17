@@ -8,12 +8,14 @@ tags: ["prolog", "negation", "core.logic"]
 {% include JB/setup %}
 
 While I should probably wrap up my nominal logic series, I'm instead
-taking a detour to explain a new feature I just landed in core.logic -
-negation as failure.
+taking a detour to explain a new feature I just landed in
+[core.logic](http://github.com/clojure/core.logic) - negation as
+failure.
 
-Despite Prolog's name (Programmation Logique), programming in it often
-feels like anything but logic. One particular weakspot is
-negation. Take for example the following simple Prolog program:
+Despite [Prolog](http://en.wikipedia.org/wiki/Prolog)'s name
+(*programmation en logique*), programming in it often feels like
+anything but logic. One particular weakspot is negation. Take for
+example the following simple Prolog program:
 
 Given this information how do you find the data that *doesn't* satisfy
 some predicate. What appears to be an incredibly simple idea isn't! In
