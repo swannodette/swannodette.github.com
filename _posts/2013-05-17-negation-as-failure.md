@@ -14,7 +14,7 @@ failure.
 
 Despite [Prolog](http://en.wikipedia.org/wiki/Prolog)'s name
 (*programmation en logique*), programming in it often feels like
-anything but logic. One particular weakspot is negation. Take for
+anything but logic. One particular weak spot is negation. Take for
 example the following simple Prolog program:
 
 Given this information how do you find the data that *doesn't* satisfy
@@ -30,13 +30,13 @@ issues.
 
 All we have to do is delay the negated goal until all of the arguments
 to the negated goal are *ground*. By ground we mean that the term is
-completely instantied and doesn't have any *holes* in it - that is
+completely instantiated and doesn't have any *holes* in it - that is
 fresh variables that are not bound to some value.
 
-Note that using `nafc` in your code might degrade performance - such
-as combining it with CLP(FD) operator. In general a hand written
-negated goal or constraint will likely perform better every
-time. However I think the great convenience of `nafc` and the fact
-that we can provide a version with few issues warrants it
+Note that `nafc` is very experimental. However I think the great
+convenience of `nafc` and the fact that we can provide a version
+without the issues traditional found in Prolog warrants it
 conclusion. Many programs that were formerly hard to express now have
 a dramatically simpler encoding.
+
+I look forward to feedback!
