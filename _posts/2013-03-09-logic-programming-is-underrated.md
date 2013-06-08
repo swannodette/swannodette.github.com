@@ -15,10 +15,11 @@ like to address a couple of them here.
 First off, yes, list comprehensions are an excellent concise, readable
 way to do search when the search is reasonably small and when you
 don't really care about performance. That said making any judgements
-about core.logic and its utility for solving problems based on
-blogpost code written by someone having a bit of fun makes little
-sense in my opinion - imagine judging the utility of object oriented
-or functional programming this way.
+about [core.logic](http://github.com/clojure/core.logic) and its
+utility for solving problems based on blog post code written by
+someone having a bit of fun makes little sense in my opinion - imagine
+judging the utility of object oriented or functional programming this
+way.
 
 What follows is an explanation of how I would approach the
 problem. The main insight here is the original problem is a finite
