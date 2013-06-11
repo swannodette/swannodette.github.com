@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Functional Programming is a Scam!"
+title: "Functional Programming Is A Scam!"
 description: ""
 category: 
 tags: ["ClojureScript", "performance", "games"]
