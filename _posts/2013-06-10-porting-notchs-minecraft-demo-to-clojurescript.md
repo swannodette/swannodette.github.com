@@ -99,7 +99,7 @@ lightning fast build times, but once the JVM is warm, the turn around
 is not large enough to matter.
 
 One thing that I absolutely loved about ClojureScript is how many
-warings you get from the compiler - getting file and line information
+warinngs you get from the compiler - getting file and line information
 for typos and bad arities for functions calls save a lot of time I
 often lose when doing JavaScript.
 
