@@ -86,7 +86,7 @@ semantics don't admit mutable locals - something that Notch's code
 uses freely. This required a little bit of experimenting, I tried
 using a `Box` type with one mutable field, I tried putting the entire
 render step into a `deftype` with mutable fields. In the end I settled
-on representing mutable locals as arrays of one elements. The
+on representing mutable locals as arrays of one element. The
 performance of this representation is stunningly good on Chrome and
 pretty good in Firefox as well. Surprisingly Safari performs the least
 well on this bit of code and I haven't had time to dig into why.
