@@ -37,11 +37,12 @@ ships with a standard library nearly 7500 lines long. That's right,
 those are unnecessary and will disappear when ClojureScript gets real
 keywords instead of piggy-backing on JavaScript strings).
 
-Voodoo?! No, [Google Closure](http://closure.org) dead code
-elimination is really that good. I've only employed the ClojureScript
-operations that map directly to fast JavaScript constructs, no
-persistent data structures or cool seq operations in sight and the
-advanced compiled source reflects that.
+Voodoo?! No,
+[Google Closure Compiler](https://developers.google.com/closure/compiler/)
+dead code elimination is really that good. I've only employed the
+ClojureScript operations that map directly to fast JavaScript
+constructs, no persistent data structures or cool seq operations in
+sight and the advanced compiled source reflects that.
 
 # Local mutation
 
@@ -94,7 +95,7 @@ well on this bit of code and I haven't had time to dig into why.
 I honestly spent most of the development
 time just trying to understand what the original code did. I did find
 the ClojureScript development cycle relatively pleasant due to
-[lein-cljsbuild]()'s `auto` feature. I wish we had CoffeeScript's
+[lein-cljsbuild](http://github.com/emezeske/lein-cljsbuild)'s `auto` feature. I wish we had CoffeeScript's
 lightning fast build times, but once the JVM is warm, the turn around
 is not large enough to matter.
 
