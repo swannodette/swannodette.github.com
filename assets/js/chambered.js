@@ -125,8 +125,8 @@ x = function(a, b, c) {
   }
   throw Error("Invalid arity: " + arguments.length);
 };
-x.e = ga;
-x.g = ha;
+x.g = ga;
+x.e = ha;
 w = x;
 var z, E = d;
 function ia(a, b) {
@@ -137,7 +137,7 @@ function ia(a, b) {
     if(c = a) {
       c = (c = a.l & 256) ? c : a.k
     }
-    c = c ? a.h(a, b) : a instanceof Array ? b < a.length ? a[b] : d : ca(a) ? b < a.length ? a[b] : d : da(a) ? w.e(a, b) : d
+    c = c ? a.h(a, b) : a instanceof Array ? b < a.length ? a[b] : d : ca(a) ? b < a.length ? a[b] : d : da(a) ? w.g(a, b) : d
   }
   return c
 }
@@ -147,7 +147,7 @@ function ja(a, b, c) {
     if(e = a) {
       e = (e = a.l & 256) ? e : a.k
     }
-    a = e ? a.j(a, b, c) : a instanceof Array ? b < a.length ? a[b] : c : ca(a) ? b < a.length ? a[b] : c : da(a) ? w.g(a, b, c) : c
+    a = e ? a.j(a, b, c) : a instanceof Array ? b < a.length ? a[b] : c : ca(a) ? b < a.length ? a[b] : c : da(a) ? w.e(a, b, c) : c
   }else {
     a = c
   }
@@ -162,15 +162,15 @@ E = function(a, b, c) {
   }
   throw Error("Invalid arity: " + arguments.length);
 };
-E.e = ia;
-E.g = ja;
+E.g = ia;
+E.e = ja;
 z = E;
 var ka, H = d;
 function la() {
-  return Math.random.a ? Math.random.a() : Math.random.call(d)
+  return Math.random.b ? Math.random.b() : Math.random.call(d)
 }
 function ma(a) {
-  return a * H.a()
+  return a * H.b()
 }
 H = function(a) {
   switch(arguments.length) {
@@ -181,19 +181,19 @@ H = function(a) {
   }
   throw Error("Invalid arity: " + arguments.length);
 };
-H.a = la;
-H.b = ma;
+H.b = la;
+H.a = ma;
 ka = H;
 function I(a) {
-  a = ka.b(a);
-  return 0 <= a ? Math.floor.b ? Math.floor.b(a) : Math.floor.call(d, a) : Math.ceil.b ? Math.ceil.b(a) : Math.ceil.call(d, a)
+  a = ka.a(a);
+  return 0 <= a ? Math.floor.a ? Math.floor.a(a) : Math.floor.call(d, a) : Math.ceil.a ? Math.ceil.a(a) : Math.ceil.call(d, a)
 }
 var na = d, na = function(a, b, c) {
   switch(arguments.length) {
     case 2:
-      return z.e(b, this.toString());
+      return z.g(b, this.toString());
     case 3:
-      return z.g(b, this.toString(), c)
+      return z.e(b, this.toString(), c)
   }
   throw Error("Invalid arity: " + arguments.length);
 };
@@ -202,14 +202,14 @@ String.prototype.apply = function(a, b) {
   return a.call.apply(a, [a].concat(b.slice()))
 };
 String.prototype.apply = function(a, b) {
-  return 2 > b.length ? z.e(b[0], a) : z.g(b[0], a, b[1])
+  return 2 > b.length ? z.g(b[0], a) : z.e(b[0], a, b[1])
 };
 var J = d;
 function oa() {
-  return J.b(1)
+  return J.a(1)
 }
 function pa(a) {
-  return(Math.random.a ? Math.random.a() : Math.random.call(d)) * a
+  return(Math.random.b ? Math.random.b() : Math.random.call(d)) * a
 }
 J = function(a) {
   switch(arguments.length) {
@@ -220,11 +220,11 @@ J = function(a) {
   }
   throw Error("Invalid arity: " + arguments.length);
 };
-J.a = oa;
-J.b = pa;
+J.b = oa;
+J.a = pa;
 ka = J;
 I = function(a) {
-  return Math.floor.b ? Math.floor.b((Math.random.a ? Math.random.a() : Math.random.call(d)) * a) : Math.floor.call(d, (Math.random.a ? Math.random.a() : Math.random.call(d)) * a)
+  return Math.floor.a ? Math.floor.a((Math.random.b ? Math.random.b() : Math.random.call(d)) * a) : Math.floor.call(d, (Math.random.b ? Math.random.b() : Math.random.call(d)) * a)
 };
 function qa(a, b, c) {
   return(b = a > b) ? a < c : b
@@ -235,7 +235,7 @@ function ra() {
 }
 var L, M = d;
 function sa(a, b) {
-  return M.g(a, b, 0)
+  return M.e(a, b, 0)
 }
 function ta(a, b, c) {
   return(a >> c & 255) * b / 255 << c
@@ -249,18 +249,18 @@ M = function(a, b, c) {
   }
   throw Error("Invalid arity: " + arguments.length);
 };
-M.e = sa;
-M.g = ta;
+M.g = sa;
+M.e = ta;
 L = M;
-for(var ua = 2 * Math.PI, va = Math.PI / 2, N = document.getElementById("game").getContext("2d"), wa = Array(262144), xa = 0;;) {
-  if(64 > xa) {
+for(var ua = 2 * Math.PI, va = Math.PI / 2, wa = document.getElementById("game").getContext("2d"), xa = Array(262144), N = 0;;) {
+  if(64 > N) {
     for(var O = 0;;) {
       if(64 > O) {
         for(var P = 0;;) {
           if(64 > P) {
-            var ya = P << 12 | O << 6 | xa, za = 0.4 * (O - 32.5), Aa = 0.4 * (P - 32.5);
-            wa[ya] = I(16);
-            Math.random() > Math.sqrt(Math.sqrt(za * za + Aa * Aa)) - 0.8 && (wa[ya] = 0);
+            var ya = P << 12 | O << 6 | N, za = 0.4 * (O - 32.5), Aa = 0.4 * (P - 32.5);
+            xa[ya] = I(16);
+            Math.random() > Math.sqrt(Math.sqrt(za * za + Aa * Aa)) - 0.8 && (xa[ya] = 0);
             P += 1
           }else {
             break
@@ -271,7 +271,7 @@ for(var ua = 2 * Math.PI, va = Math.PI / 2, N = document.getElementById("game").
         break
       }
     }
-    xa += 1
+    N += 1
   }else {
     break
   }
@@ -319,7 +319,7 @@ for(var Ba = Array(12288), Q = Array(1), R = Array(1), T = Array(1), X = 1;;) {
             32 <= Y && (T[0] /= 2);
             8 === X && (Q[0] = 5298487, 0 === I(2) ? Q[0] = 0 : T[0] = 255);
             var Ha = Q[0], La = T[0];
-            Ba[K + 16 * Y + 768 * X] = L.g(Ha, La, 16) | L.g(Ha, La, 8) | L.e(Ha, La);
+            Ba[K + 16 * Y + 768 * X] = L.e(Ha, La, 16) | L.e(Ha, La, 8) | L.g(Ha, La);
             K += 1
           }else {
             break
@@ -335,8 +335,8 @@ for(var Ba = Array(12288), Q = Array(1), R = Array(1), T = Array(1), X = 1;;) {
     break
   }
 }
-function Ma(a, b) {
-  for(var c = Date.now() % 1E4 / 1E4, e = 0.4 * Math.sin(c * ua) + va, k = 0.4 * Math.cos(c * ua), r = Math.cos(k), k = Math.sin(k), U = Math.cos(e), e = Math.sin(e), c = 32.5 + 64 * c, C = Array(1), V = Array(1), D = Array(1), y = Array(1), W = Array(1), h = 0;;) {
+function Ma(a) {
+  for(var b = a.createImageData(424, 240), c = Date.now() % 1E4 / 1E4, e = 0.4 * Math.sin(c * ua) + va, k = 0.4 * Math.cos(c * ua), r = Math.cos(k), k = Math.sin(k), U = Math.cos(e), e = Math.sin(e), c = 32.5 + 64 * c, C = Array(1), V = Array(1), D = Array(1), y = Array(1), W = Array(1), h = 0;;) {
     if(101760 > h) {
       b.data[4 * h + 3] = 255, h += 1
     }else {
@@ -360,7 +360,7 @@ function Ma(a, b) {
               m = j;
               for(s = g;;) {
                 if(y[0] < W[0]) {
-                  j = wa[(s & 63) << 12 | (m & 63) << 6 | i & 63], 0 < j && (1 === f ? (g = 16 * s & 15, g = 0 > B ? g + 32 : g) : g = (16 * m & 15) + 16, j = Ba[(1 === f ? 16 * i & 15 : 16 * (i + s) & 15) + 16 * g + 768 * j], g = (f + 2) % 3, 0 < j && (C[0] = j, D[0] = 255 - (255 * (y[0] / 32) | 0), V[0] = 255 * (255 - 50 * g) / 255, W[0] = y[0])), y[0] += A, m += B, s += Ja, i += G
+                  j = xa[(s & 63) << 12 | (m & 63) << 6 | i & 63], 0 < j && (1 === f ? (g = 16 * s & 15, g = 0 > B ? g + 32 : g) : g = (16 * m & 15) + 16, j = Ba[(1 === f ? 16 * i & 15 : 16 * (i + s) & 15) + 16 * g + 768 * j], g = (f + 2) % 3, 0 < j && (C[0] = j, D[0] = 255 - (255 * (y[0] / 32) | 0), V[0] = 255 * (255 - 50 * g) / 255, W[0] = y[0])), y[0] += A, m += B, s += Ja, i += G
                 }else {
                   break
                 }
@@ -393,5 +393,5 @@ function Ma(a, b) {
   return a.putImageData(b, 0, 0)
 }
 setInterval(function() {
-  return Ma.e ? Ma.e(N, N.createImageData(424, 240)) : Ma.call(d, N, N.createImageData(424, 240))
+  return Ma.a ? Ma.a(wa) : Ma.call(d, wa)
 }, 10);
