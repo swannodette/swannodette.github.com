@@ -83,7 +83,7 @@ completely dwarfed by the real work done in `render-minecraft!`.
 
 I admit one tricky bit that required experimentation is that Clojure's
 semantics don't admit mutable locals - something that Notch's code
-wields freely. This required a little bit of experimenting, I tried
+uses freely. This required a little bit of experimenting, I tried
 using a `Box` type with one mutable field, I tried putting the entire
 render step into a `deftype` with mutable fields. In the end I settled
 on representing mutable locals as arrays of one elements. The
@@ -98,15 +98,14 @@ the ClojureScript development cycle relatively pleasant due to
 lightning fast build times, but once the JVM is warm, the turn around
 is not large enough to matter.
 
-One thing that I absolutely loved about ClojureScript and working on
-this port really drove it home is how many errors you get from the
-compiler - getting file and line information for typos and
-bad arities for functions calls save a lot of time I often
-lose when doing JavaScript.
+One thing that I absolutely loved about ClojureScript is how many
+warings you get from the compiler - getting file and line information
+for typos and bad arities for functions calls save a lot of time I
+often lose when doing JavaScript.
 
 The one real scratch your head issue I ran into while developing this
 was a Google Closure mishandling of the modulo operator. Closure will
-incorrectly remove parentheses, this is easily worked around by put
+incorrectly remove parentheses, this is easily worked around by putting
 the result of the modulus operation in an intermediate variable but I
 lost more time on this subtle issue than I care to recall.
 
