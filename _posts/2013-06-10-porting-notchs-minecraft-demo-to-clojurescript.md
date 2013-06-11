@@ -107,7 +107,7 @@ of time I often lose when doing JavaScript.
 The one real scratch your head issue I ran into while developing this
 was a Google Closure mishandling of the modulo operator. Closure will
 incorrectly remove parentheses, this is easily worked around by putting
-the result of the modulus operation in an intermediate variable but I
+the result of the modulo operation in an intermediate variable but I
 lost more time on this subtle issue than I care to recall.
 
 While this exercise might seem only like a bit of fun, it really
