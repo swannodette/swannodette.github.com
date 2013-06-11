@@ -16,11 +16,12 @@ fun.
 
 In this post I want to talk about my port of Notch's beautiful
 JavaScript demo to ClojureScript. When I say beautiful I'm not
-referring to the code - it's pretty ugly. And being a faithful port the
-ClojureScript version is hardly any better. This post isn't about writing
-beautiful code, it's about demonstrating that ClojureScript is
-suitable for writing computationally intensive interactive
-applications.
+referring to the code - it's pretty ugly. And being a faithful port
+the ClojureScript version is hardly any better. But this post is not
+about writing beautiful code, it's about demonstrating that
+ClojureScript is suitable for writing computationally intensive
+interactive applications in the web browser. I did make one major
+conceptual change to Notch's code - emphasize *local mutation*.
 
 Without further ado here it is:
 
