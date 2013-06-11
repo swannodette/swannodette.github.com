@@ -98,10 +98,10 @@ the ClojureScript development cycle relatively pleasant due to
 lightning fast build times, but once the JVM is warm, the turn around
 is not large enough to matter.
 
-One thing that I absolutely loved about ClojureScript is how many
-warinngs you get from the compiler - getting file and line information
-for typos and bad arities for functions calls save a lot of time I
-often lose when doing JavaScript.
+One thing that I absolutely loved about using ClojureScript on this is
+how many warnings you get from the compiler - getting file and line
+information for typos and bad arities for functions calls save a lot
+of time I often lose when doing JavaScript.
 
 The one real scratch your head issue I ran into while developing this
 was a Google Closure mishandling of the modulo operator. Closure will
