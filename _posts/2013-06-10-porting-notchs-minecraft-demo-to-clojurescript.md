@@ -21,7 +21,8 @@ the ClojureScript version is hardly any better. But this post is not
 about writing beautiful code, it's about demonstrating that
 ClojureScript is suitable for writing computationally intensive
 interactive applications in the web browser. I did make one major
-conceptual change to Notch's code - emphasize *local mutation*.
+conceptual change to Notch's code - emphasize *local mutation*. I'll
+elaborate on this in a moment.
 
 Without further ado here it is:
 
@@ -33,26 +34,37 @@ Pretty neat huh? If you're familiar with how much JavaScript the
 ClojureScript compiler generates without the help of Google Cloure you
 should find the advanced compiled code
 [shocking small](/assets/js/chambered.js). That's right, *400* lines
-of generated code. 200 of those are unnecessary and will disappear
+of generated code (200 of those are unnecessary and will disappear
 when ClojureScript gets real keywords instead of piggy-backing on
-JavaScript strings.
+JavaScript strings).
 
-This seems like powerful voodoo! But it really isn't, Google Closure
-is just really, really good. I've only employed the ClojureScript
-operations that map directly to fast JavaScript constructs.
+This seems like powerful voodoo! It really isn't, Google Closure dead
+code elimination is just really, really good and I've only employed the
+ClojureScript operations that map directly to fast JavaScript
+constructs. There's no persistent data structure or seq operation in
+sight and the advanced compiled source reflects that.
 
-Without a doubt, I am a firm advocate of functional programming, but
-unlike the various puritans you might encounter in the wild, I don't
-find that is the right tool for all problems especially when
-performance is absolutely critical.
+So how I am able to achieve this kind of performance from a language
+that is so much higher level than JavaScript? 
 
-The sleight of hand that Clojure has pulled is to make functional
-programming so fun and attractive that it's unusual to see Clojure
-code that isn't largely functional.
+So isn't this cheating? To a functional purist maybe, but then they're
+probably OK with abysmal framerates. The big takeaway here is that
+*local mutation is ok*. Clojure supports this whopping great idea in
+the notion of transients. We often want to construct some value as
+quickly as possible - if it doesn't escape does it matter? *No*.
 
-But there are of many kinds of interactive applications one might
-right for which functional technique may simply not provide the best
-tool.
+Notch's original code has quite a bit of global mutation, as it turns
+out it all of it unnecessary. For example the procedural texture and
+block generation both operate on a global mutable array - this is
+unnecessary. Now instead we have functions that return the populated
+arrays - we shifted our thinking away from bashing on arrays to
+functions that might bash internally but return values intended to be
+used in an immutable way.
+
+Surprisingly even the global `pixels` object is unnecessary. We can
+allocate this internally in `render-minecraft!`. The cost of
+allocating a 424X240 ImageData object is completely dwarfed by the
+work done in `render-minecraft!`.
 
 Clojure fortunately doesn't close all the pathway to performance, like
 Standard ML before it, Clojure provides.
