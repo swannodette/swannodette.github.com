@@ -66,7 +66,7 @@ For example here is the block generation code:
 Ok, but still isn't it cheating to be bashing on mutable arrays inside of
 functions?
 
-No even among people who argue even more strongly for function purity,
+No even among people who argue even more strongly for functional purity,
 *local mutation is absolutely ok*. Clojure has long supported this
 insanely great idea in the notion of
 [transients](http://clojure.org/transients).
