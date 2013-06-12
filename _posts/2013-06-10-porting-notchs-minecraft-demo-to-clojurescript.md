@@ -66,10 +66,10 @@ For example here is the block generation code:
 Ok, but still isn't it cheating to be bashing on mutable arrays inside of
 functions?
 
-To a functional purist maybe, but then they're probably OK
-with abysmal frame rates and inferior interactive experiences. I am
-not. *Local mutation is absolutely ok*. Clojure has long supported
-this insanely great idea in the notion of [transients](http://clojure.org/transients).
+No even among people who argue even more strongly for function purity,
+*local mutation is absolutely ok*. Clojure has long supported this
+insanely great idea in the notion of
+[transients](http://clojure.org/transients).
 
 But what about `render-minecraft!`? In the original Notch allocated
 an `ImageData` instance *once* and he would bash on this at each turn
