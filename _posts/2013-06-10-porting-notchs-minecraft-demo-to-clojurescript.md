@@ -110,7 +110,7 @@ incorrectly remove parentheses, this is easily worked around by putting
 the result of the modulo operation in an intermediate variable but I
 lost more time on this subtle issue than I care to recall.
 
-While this exercise might seem only like a bit of fun, it really
+While this exercise might only seem like a bit of fun, it really
 isn't. If ClojureScript could not guarantee this kind of performance
 we would have written those fancy persistent data structures in
 JavaScript the same way Clojure on the JVM implements them in Java.
