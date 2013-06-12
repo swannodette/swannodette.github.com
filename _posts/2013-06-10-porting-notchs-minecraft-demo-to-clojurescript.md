@@ -17,12 +17,13 @@ In this post I want to talk about
 [my port](http://github.com/swannodette/chambered) of
 [Notch](http://twitter.com/notch)'s beautiful
 [Minecraft JavaScript demo](http://jsfiddle.net/uzMPU/) to
-ClojureScript. When I say beautiful I'm not referring to the code -
-frankly it's ugly. And being a faithful port the ClojureScript version
-ain't much prettier. But this post isn't about writing beautiful code,
-it's about ClojureScript's suitability for computationally intensive
-interactive applications. However, I did make one very important major
-conceptual change to Notch's code and I'll elaborate on this later.
+[ClojureScript](http://github.com/clojure/clojurescript). When I say
+beautiful I'm not referring to the code - frankly it's ugly. And being
+a faithful port the ClojureScript version ain't much prettier. But
+this post isn't about writing beautiful code, it's about
+ClojureScript's suitability for computationally intensive interactive
+applications. However, I did make one very important major conceptual
+change to Notch's code and I'll elaborate on this later.
 
 Without further ado here it is (it will look best in Chrome & Firefox):
 
