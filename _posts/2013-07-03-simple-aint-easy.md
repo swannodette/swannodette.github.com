@@ -31,22 +31,28 @@ I frequently blog and talk about [Lisp](http://vimeo.com/68334908) and
 its advantages but I truly harbor no animosity towards the lingua
 franca of the web - JavaScript. But I also don't self identity as a
 JavaScript programmer. And while I may talk on Twitter endlessly about
-Clojure and ClojureScript - I primarily see them as tools, a poewrful
+Clojure and ClojureScript - I primarily see them as tools, a powerful
 means to a personal end.
 
-I see myself primarily as a User Interface programmer. It's what I've
-been happily paid to do for the past eight years. In 2004/5 when I
-started it truly seemed like the Wild West. But in 2013 it looks pretty
-much the same as it did 9 years ago. Newer faces, better tooling, but
-the development process is more or less unchanged.
+When it comes to code I primarily see myself as a User Interface
+programmer. It's what I've been happily paid to do for the past eight
+years. In 2004/5 when I started out it seemed like Wild West. But in
+2013 it looks pretty much the same as it did 9 years ago. Newer faces,
+better tooling, but the development process is more or less
+unchanged and maybe in some ways worse.
 
-Well not completely. There's a truly misguided excitement about
-Promises, and slightly misguided one about Generators. Misguided how?
+There's a truly misguided excitement about Promises, and a slightly
+misguided one about Generators. Misguided how?
 
-If you ask the average front developer what they did would they answer
-"Distributed Systems Programming"? I doubt it - it's sounds so
-pretentious - yet this is precisely what client sides JavaScript
-development is!
+If you ask the average front developer their occupation would they
+answer "Distributed Systems Programmer"? I doubt it - but this is
+precisely what client sides JavaScript development is! Every
+JavaScript developer is stuck between a rock and hard place - the user
+and the server.
+
+So why not Promises? Why not Generators? I firmly believe that they
+are too far down the abstraction stack - they simply don't offer
+enough to guide application developers to avoid or manage complexity.
 
 And by that I do not mean an inventor of ideas
 like the fabulous [Bret Victor](http://vimeo.com/36579366). one of
