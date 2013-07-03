@@ -59,13 +59,7 @@ hundred of libraries that deal with "control flow". Neither Promises
 nor Generators will change the state of things as neigther of these
 things bring a "process philosophy" to JavaScript.
 
-And by that I do not mean an inventor of ideas
-like the fabulous [Bret Victor](http://vimeo.com/36579366). one of
-most rewarding a challenging professions one can have. of the using
-JavaScript for UI programming for some eight years now, I was very
-intrigued by core.async. I've written large code bases with promises
-in the past and I've toyed around with the coming
-[EcmaScript 6 Generators](http://wiki.ecmascript.org/doku.php?id=harmony:generators). I'm
-still not convinced
+Let's look at some concrete examples.
 
-I've been playing around with core.async pretty intens
+## Examples
+
