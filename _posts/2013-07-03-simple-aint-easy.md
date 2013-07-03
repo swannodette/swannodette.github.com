@@ -22,33 +22,20 @@ have been playing with it intensely since the announcement.
 
 tldr; It's beautiful, it's simple, but it ain't easy and that's OK!
 
-So why core.async? If you've done Go channels you are probably already
-sold. Whatever the case may be, I think this post will demonstrate
-core.async's applicability to solving a class of hard problems that
-arise in one of the most critical components of our modern distributed
-computing ecosystem - User Interface programming.
+Why core.async? I'll tell my own version of story via my own biases. I
+believe core.async's provides tools to solve a class of hard problems
+that arise in one of the most critical components of our modern
+distributed computing ecosystem - User Interface programming. It is
+capable of going where few others have (MVC, FRP, etc) because it
+takes independent communicating processes as it foundation.
 
-I frequently blog and talk about [Lisp](http://vimeo.com/68334908) and
-its advantages but I truly harbor JavaScript. But I also don't self
-identity as a JavaScript programmer. And while I may talk on Twitter
-endlessly about Clojure and ClojureScript - I primarily see them as
-tools, a powerful means to a personal end.
+Take the average JavaScript front developer and ask them their
+occupation? Would they answer "Distributed Systems Programmer"? I
+doubt it - but this is precisely what client sides JavaScript
+development is! Every JavaScript developer is stuck between a rock and
+hard place - the user and the server.
 
-When it comes to code I primarily see myself as a User Interface
-programmer. It's what I've been happily paid to do for the past eight
-years. In 2004/5 when I started out it seemed like Wild West. But in
-2013 it looks pretty much the same as it did 9 years ago. Newer faces,
-better tooling, but the type of code I write is largely
-unchanged. Why?
-
-If you ask the average front developer their occupation would they
-answer "Distributed Systems Programmer"? I doubt it - but this is
-precisely what client sides JavaScript development is! Every
-JavaScript developer is stuck between a rock and hard place - the user
-and the server.
-
-JavaScript is unsuited for reasoning about complex networks of
-processes because it provide no tools for doing so.
+Yet JavaScript does not ship with any resembling a process about processes.
 
 Wait, wait, wait. What about Promises? Generators? There's a truly
 misguided excitement about Promises, and a slightly misguided one
