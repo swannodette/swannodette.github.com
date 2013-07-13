@@ -343,7 +343,7 @@ of the page.
 Still so far we've only seen what I would consider very trivial if
 impressive examples. In the next post we'll look at an advanced
 example - a non-toy autocompleter input field. We will see core.async's
-advantage over traditional object oriented approaches as well as
-purely reactive approaches.
+advantage over traditional object oriented approaches as well
+as purely reactive approaches.
 
 <script type="text/javascript" src="/assets/js/csp.js"></script>
