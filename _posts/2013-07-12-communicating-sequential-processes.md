@@ -90,7 +90,7 @@ libraries or JavaScript itself -
 JavaScript promises don't solve the inversion of control problem -
 callback hell is unnested but it's still callback hell. ECMAScript 6
 generators suffer in various ways from being too simplistic, you need
-manage coordination by hand or provide your own scheduler. You can
+manage to coordination by hand or provide your own scheduler. You can
 [combine generators with promises](http://jlongster.com/A-Study-on-Solving-Callbacks-with-JavaScript-Generators)
 but now you're managing two abstractions instead of one.
 
