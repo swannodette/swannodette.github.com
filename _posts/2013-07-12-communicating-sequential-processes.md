@@ -186,7 +186,8 @@ Mouse over the grey box below:
     <div id="ex1-mouse" class="out"></div>
 </div>
 
-Only in `go` blocks can we appear to read and write synchronously to a
+Only in `go` blocks can we appear to read and write synchronously (via
+<span class="code">&gt;!</span> and <span class="code">&lt;!</span> respectively) to a
 channel. This allows us to fully escape callback hell in our
 coordination code.
 

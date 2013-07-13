@@ -1,10 +1,16 @@
-pre, code {
+pre, code, .code  {
     font-weight: 400;
     font-style: normal;
     font-family: 'Inconsolata', sans-serif;
     font-size: 14px;
 }
 body #post code {
+    font-weight: 400;
+    font-style: normal;
+    font-family: 'Inconsolata', sans-serif;
+    font-size: 14px;
+}
+body #post .code {
     font-weight: 400;
     font-style: normal;
     font-family: 'Inconsolata', sans-serif;

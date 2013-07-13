@@ -165,7 +165,7 @@ ul.posts span {
             margin-left: 1.35em;
         }
 
-#post code {
+#post code, #post .code {
     border: 1px solid #ddd;
     background-color: #eef;
     font-size: 85%;
