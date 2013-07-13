@@ -281,8 +281,9 @@ channels as you can see with our use of `condp`.
 Note this is quite different from the usual JavaScript solutions where we
 tend to smear our asynchronous handling across the code base.
 
-Let's end with a final dramatic example, we present a port of Rob
-Pike's Go code that demonstrate parallel search with timeouts:
+Let's end with a final dramatic example, we present a port of
+[Rob Pike's Go code](http://talks.golang.org/2012/concurrency.slide#50)
+that demonstrate parallel search with timeouts:
 
 ```
 (defn fake-search [kind]
