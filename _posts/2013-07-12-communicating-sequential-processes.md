@@ -200,7 +200,7 @@ fix this with our first higher order channel operation `map-chan`:
   (let [c (chan)]
     (go (loop []
           (>! c (f (<! in)))
-            (recur)))
+          (recur)))
     c))
 ```
 
