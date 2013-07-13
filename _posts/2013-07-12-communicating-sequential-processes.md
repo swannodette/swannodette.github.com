@@ -187,7 +187,7 @@ Mouse over the grey box below:
 </div>
 
 Only in `go` blocks can we appear to read and write synchronously (via
-<span class="code">&gt;!</span> and <span class="code">&lt;!</span> respectively) to a
+<span class="code">&lt;!</span> and <span class="code">&gt;!</span> respectively) to a
 channel. This allows us to fully escape callback hell in our
 coordination code.
 
