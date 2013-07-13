@@ -283,7 +283,7 @@ tend to smear our asynchronous handling across the code base.
 
 Let's end with a final dramatic example, we present a port of
 [Rob Pike's Go code](http://talks.golang.org/2012/concurrency.slide#50)
-that demonstrate parallel search with timeouts:
+that demonstrates parallel search with timeouts:
 
 ```
 (defn fake-search [kind]
