@@ -57,9 +57,9 @@ tags: ["clojurescript", "csp"]
     background-color: white;
     border: 1px solid #333;
     cursor: pointer;
-    border-radius: 2px;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
   }
   #ex4 #ex4-out {
     margin-top: 20px;
