@@ -1,4 +1,5 @@
-pre { font-family: 'Inconsolata', sans-serif; }
+pre, code { font-family: 'Inconsolata', sans-serif; font-size: 14px; }
+body #post code { font-family: 'Inconsolata', sans-serif; font-size: 14px; }
 .highlight  { background: #ffffff; }
 .highlight .c { color: #999988; font-style: italic } /* Comment */
 .highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
