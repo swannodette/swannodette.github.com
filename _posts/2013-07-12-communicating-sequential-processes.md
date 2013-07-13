@@ -237,7 +237,7 @@ Mouse over the grey box below to confirm that this works:
 It's important to understand that `go` blocks create *local*
 loops. Normally when writing client side code you are participating in
 a *global* loop. As with global mutable variables, global loops defy
-local reasoning. As JavaScript developers we work around this by
+local reasoning. As JavaScript developers we work around the global loop by
 coordinating through mutable locals or mutable object fields or by
 adding coordination methods to our API. With core.async all these
 ad-hoc methods disappear because we don't need them.
