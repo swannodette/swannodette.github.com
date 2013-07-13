@@ -98,7 +98,7 @@ Enough rhetoric, let's see how core.async works in practice.
 
 First let's start off with something dramatic (in fact something that
 should seem impossible for those familiar with JavaScript). We will
-coordinate three independents processes running at three different
+coordinate three independent processes running at three different
 speeds via a fourth process which shows the results of the
 coordination *without any obvious use of mutation* - only recursion.
 
