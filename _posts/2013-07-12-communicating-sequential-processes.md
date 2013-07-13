@@ -137,9 +137,9 @@ sight.
 If you haven't fallen out of your chair, let's look at some simpler
 examples to build up our intuition.
 
-The following code snippets may look familiar to fans of
+The code snippets in this post may look familiar to fans of
 [functional reactive programming](http://reactive-extensions.github.io/RxJS/),
-but fear not, we'll get to the good stuff.
+but fear not, we'll get to the good stuff eventually.
 
 The following code convert events on a DOM element into a channel
 we can read from:
