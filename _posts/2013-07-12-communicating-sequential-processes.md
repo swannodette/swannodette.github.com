@@ -43,6 +43,32 @@ tags: ["clojurescript", "csp"]
     line-height: 200px;
     font-family: 'Inconsolata', sans-serif; font-size: 72px;
   }
+  #ex4 {
+    height: 100px;
+    text-align: center;
+  }
+  #ex4 button:active {
+    background-color: #ccc;
+  }
+  #ex4 button {
+    margin-top: 15px;
+    font-size: 18px;
+    padding: 6px 15px;
+    background-color: white;
+    border: 1px solid #333;
+    cursor: pointer;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+  }
+  #ex4 #ex4-out {
+    margin-top: 20px;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 1.3em;
+    color: #666;
+  }
 </style>
 
 With the arrival of
@@ -128,13 +154,13 @@ we can read from:
 I've intentionally kept the code as simple as possible to limit the amount
 of novelty that we need to introduce. `event-chan` takes a DOM element
 and an event type. The event listener callback puts the DOM event into the
-channel, since we're not in a `go` block we do with an async `put!`.
+channel, since we're not in a `go` block we do this with an async `put!`.
 
 Channels are like the channels found in
 [Tony Hoare's Communicating Sequential Processes](http://www.usingcsp.com/cspbook.pdf). The
 [Go community](http://golang.org) is visibly enjoying the benefits of
 Hoare's abstraction - but of course programming languages have offered
-it's treasures since the 1980s ([occam-pi](http://en.wikipedia.org/wiki/Occam-),
+its treasures since the 1980s ([occam-pi](http://en.wikipedia.org/wiki/Occam-),
 [Concurrent ML](http://cml.cs.uchicago.edu),
 [JCSP](http://www.cs.kent.ac.uk/projects/ofa/jcsp/)). Interestingly both
 [Rob Pike](http://swtch.com/~rsc/thread/cws.pdf) and
@@ -227,14 +253,17 @@ Say we want to handle both mouse and key events:
       outk (by-id "ex3-key")
       mc   (map-chan (offset el)
              (event-chan el "mousemove"))
-      kc   (event-chan el "keyup")]
+      kc   (event-chan js/window "keyup")]
   (go (loop []
         (let [[v c] (alts! [mc kc])]
           (condp = c
             mc (set-html outm (str (:x v) ", " (:y v)))
-            kc (set-html outk (.-keyCode v)))
+            kc (set-html outk (str (.-keyCode v))))
           (recur)))))
 ```
+
+Make sure the window is focused and mouse over the following grey box
+and type at the same time:
 
 <div id="ex3" class="example">
     <div class="out">
@@ -242,17 +271,73 @@ Say we want to handle both mouse and key events:
     </div>
 </div>
 
+`alts!` gives us non-deterministic choice over multiple streams. We will
+read from whichever channel has information. When reading from a
+channel `alts!` will return a tuple, the first element is the value
+read from the channel and the second element is the channel that was
+read from. This allows us to conditionally handle results from different
+channels as you can see with our use of `condp`.
+
+Note this is quite different from the usual JavaScript solutions where we
+tend smear our asynchronous handling across the code base.
+
 Let's end with a final dramatic example, we present a port of Rob
-Pike's code demonstrate parallel search with timeouts.
+Pike's Go code that demonstrate parallel search with timeouts:
+
+```
+(defn fake-search [kind]
+  (fn [c query]
+    (go
+     (<! (timeout (rand-int 100)))
+     (>! c [kind query]))))
+
+(def web1 (fake-search :web1))
+(def web2 (fake-search :web2))
+(def image1 (fake-search :image1))
+(def image2 (fake-search :image2))
+(def video1 (fake-search :video1))
+(def video2 (fake-search :video2))
+
+(defn fastest [query & replicas]
+  (let [c (chan)]
+    (doseq [replica replicas]
+      (replica c query))
+    c))
+
+(defn google [query]
+  (let [c (chan)
+        t (timeout 80)]
+    (go (>! c (<! (fastest query web1 web2))))
+    (go (>! c (<! (fastest query image1 image2))))
+    (go (>! c (<! (fastest query video1 video2))))
+    (go (loop [i 0 ret []]
+          (if (= i 3)
+            ret
+            (recur (inc i) (conj ret (alt! [c t] ([v] v)))))))))
+
+(let [el (by-id "ex4-out")
+      c  (event-chan (by-id "search") "click")]
+  (go (loop []
+        (set-html el (pr-str (<! (google "clojure")))))))
+```
 
 <div id="ex4" class="example">
-    <button>Search</button>
-    <div class="out"></div>
+    <button id="search">Search</button>
+    <div id="ex4-out"></div>
 </div>
 
-So far we've only seen very simple examples. In the next post we'll
-look at an advanced example - a non-toy autocompleter input field. We
-will see core.async advantage over traditional object oriented
-approaches as well as purely reactive approaches.
+We can run 3 pairs of requests in parallel, choosing the fastest of
+each pair. In addition we set a timeout of 80 milliseconds for the
+whole process.
+
+Just to drive the point home all of the examples we have covered are
+all running at once, including the original process example at the top
+of the page.
+
+Still so far we've only seen what I would consider very trivial if
+impressive examples. In the next post we'll look at an advanced
+example - a non-toy autocompleter input field. We will see core.async
+advantage over traditional object oriented approaches as well as
+purely reactive approaches.
 
 <script type="text/javascript" src="/assets/js/csp.js"></script>
