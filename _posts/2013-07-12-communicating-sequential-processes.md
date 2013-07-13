@@ -320,7 +320,9 @@ that demonstrates parallel search with timeouts:
 (let [el (by-id "ex4-out")
       c  (event-chan (by-id "search") "click")]
   (go (loop []
-        (set-html el (pr-str (<! (google "clojure")))))))
+        (<! c)
+        (set-html el (pr-str (<! (google "clojure"))))
+        (recur))))
 ```
 
 Click the search button below multiple times:
