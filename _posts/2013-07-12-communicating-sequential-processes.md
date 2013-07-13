@@ -279,7 +279,7 @@ read from. This allows us to conditionally handle results from different
 channels as you can see with our use of `condp`.
 
 Note this is quite different from the usual JavaScript solutions where we
-tend smear our asynchronous handling across the code base.
+tend to smear our asynchronous handling across the code base.
 
 Let's end with a final dramatic example, we present a port of Rob
 Pike's Go code that demonstrate parallel search with timeouts:
