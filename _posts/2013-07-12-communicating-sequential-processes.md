@@ -165,7 +165,7 @@ its treasures since the 1980s ([occam-pi](http://en.wikipedia.org/wiki/Occam-),
 [JCSP](http://www.cs.kent.ac.uk/projects/ofa/jcsp/)). Interestingly both
 [Rob Pike](http://swtch.com/~rsc/thread/cws.pdf) and
 [John Reppy](http://alleystoughton.us/eXene/1991-ml-workshop.pdf) have
-discussed their applicability for the coordination of user interfaces
+both discussed the applicability of CSP for the coordination of user interfaces
 which are inherently asynchronous and thus concurrent.
 
 Let's see `event-chan` in action:
