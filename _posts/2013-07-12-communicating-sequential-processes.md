@@ -323,6 +323,8 @@ that demonstrates parallel search with timeouts:
         (set-html el (pr-str (<! (google "clojure")))))))
 ```
 
+Click the search button below multiple times:
+
 <div id="ex4" class="example">
     <button id="search">Search</button>
     <div id="ex4-out"></div>
