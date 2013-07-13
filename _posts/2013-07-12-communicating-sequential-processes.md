@@ -234,14 +234,14 @@ Mouse over the grey box below to confirm that this works:
     <div id="ex2-mouse" class="out"></div>
 </div>
 
-It's important to understand that `go` blocks create *local* event
-loops. Normally when writing client side code you are participating in
-a *global* event loop. As with global mutable variables, global event
-loops defy local reasoning. As JavaScript developers we work around
-the global event loop by coordinating through mutable locals or
-mutable object fields or by adding coordination methods to our
-API. With core.async all these ad-hoc methods disappear because we
-don't need them.
+It's important to understand that `go` blocks paired with `loop/recur`
+allow us to create *local* event loops. Normally when writing client
+side code you are participating in a *global* event loop. As with
+global mutable variables, global event loops defy local reasoning. As
+JavaScript developers we work around the global event loop by
+coordinating through mutable locals or mutable object fields or by
+adding coordination methods to our API. With core.async all these
+ad-hoc methods disappear because we don't need them.
 
 To further illustrate, let's see the coordination of two different
 streams in the *same logical local event loop*.
