@@ -92,7 +92,9 @@ callback hell is unnested but it's still callback hell. ECMAScript 6
 generators suffer in various ways from being too simplistic, you need
 to manage coordination by hand or provide your own scheduler. You can
 [combine generators with promises](http://jlongster.com/A-Study-on-Solving-Callbacks-with-JavaScript-Generators)
-but now you're managing two abstractions instead of one.
+but now you're managing two abstractions instead of one (Dart
+[appears to suffer from the same dualism](http://api.dartlang.org/docs/releases/latest/dart_async/Stream.html)
+but there it's Future/Stream).
 
 Enough rhetoric, let's see how core.async works in practice.
 
