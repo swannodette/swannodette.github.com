@@ -90,7 +90,7 @@ libraries or JavaScript itself -
 JavaScript promises don't solve the inversion of control problem -
 callback hell is unnested but it's still callback hell. ECMAScript 6
 generators suffer in various ways from being too simplistic, you need
-manage to coordination by hand or provide your own scheduler. You can
+to manage coordination by hand or provide your own scheduler. You can
 [combine generators with promises](http://jlongster.com/A-Study-on-Solving-Callbacks-with-JavaScript-Generators)
 but now you're managing two abstractions instead of one.
 
@@ -152,7 +152,9 @@ we can read from:
 ```
 
 I've intentionally kept the code as simple as possible to limit the amount
-of novelty that we need to introduce. `event-chan` takes a DOM element
+of novelty that we need to introduce (nearly everything I will show
+can look prettier/shorter either with more higher order channel operations or
+a touch of sweetening via macro sugar). `event-chan` takes a DOM element
 and an event type. The event listener callback puts the DOM event into the
 channel, since we're not in a `go` block we do this with an async `put!`.
 
