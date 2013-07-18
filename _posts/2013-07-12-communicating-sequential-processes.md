@@ -112,19 +112,22 @@ coordination *without any obvious use of mutation* - only recursion.
     (for [p (reverse q)]
       (str "<div class='proc-" p "'>Process " p "</div>"))))
 
-(go (loop [] (<! (timeout 250)) (>! c 1) (recur)))
-(go (loop [] (<! (timeout 1000)) (>! c 2) (recur)))
-(go (loop [] (<! (timeout 1500)) (>! c 3) (recur)))
+(go (while true (<! (timeout 250)) (>! c 1)))
+(go (while true (<! (timeout 1000)) (>! c 2)))
+(go (while true (<! (timeout 1500)) (>! c 3)))
+
+(defn peekn
+  "Returns vector of (up to) n items from the end of vector v"
+  [v n]
+  (if (> (count v) n)
+    (subvec v (- (count v) n))
+    v))
 
 (let [el  (by-id "ex0")
       out (by-id "ex0-out")]
   (go (loop [q []]
-        (let [e (<! c)
-              q (as-> (conj q e) q
-                  (cond-> q
-                    (> (count q) 10) (subvec 1)))]
-          (set-html out (render q))
-          (recur q)))))
+        (set-html out (render q))
+        (recur (-> (conj q (<! c)) (peekn 10))))))
 ```
 
 <div id="ex0" class="example">
