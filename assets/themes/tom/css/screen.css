@@ -161,9 +161,10 @@ ul.posts span {
 }
 
 #post ul,
-        #post ol {
-            margin-left: 1.35em;
-        }
+#post ol {
+    margin-left: 1.35em;
+    font-family: Georgia;
+}
 
 #post code, #post .code {
     border: 1px solid #ddd;
