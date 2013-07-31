@@ -60,8 +60,8 @@ capabilities - components either bloat to address client fragmentation
 or you provide two versions of the same components like
 [this](http://jqueryui.com) and [that](http://jquerymobile.com).
 
-What would it looks like pull apart these concerns? First let's
-consider 3:
+What would it look like to pull apart these concerns? First let's
+consider **3**:
 
 ```
 (defprotocol IUIList
@@ -71,31 +71,46 @@ consider 3:
 
 That's it.
 
-We don't really care about the rendering of a selected item beyond
-these two methods. This means we can render any visual list component
-regardless of the actual representation.
+We don't really care about the rendering of list item selection beyond
+these two methods. This means we are free to use any visual
+representation we please - and in fact we'll demonstrate this by
+rendering text based lists.
 
-What about 1?
+What about **1**?
 
 ```
-(let [keys (->> (events js/window "keydown")
-             (map key-event->keycode)
-             (filter SELECTOR_KEYS)
-             (map selector-key->keyword))
-      list  (array "  one" "  two" "  three")
-      c     (selector keys list ["one" "two" "three"])]
-  (go (while true
-        (.log js/console (<! v)))))
+(def ex0-events
+  (->> (events js/window "keydown")
+    (map key-event->keycode)
+    (filter SELECTOR_KEYS)
+    (map selector-key->keyword)))
 ```
 
 We take the stream of key events, map them into key codes, filter keys
-that don't correspond to the selection process controls and then map
-them into the kinds of messages that the selector actually listens
-for - `:next`, `:previous`, `:clear`, or a number.
+that don't correspond to the selection process controls (in this case
+the up arrow, down arrow, and enter) and then map them into the
+messages that the selector process actually listens for - `:next`,
+`:previous`, `:clear`, `:select`, or a number.
 
-And the rendering? We use a simple array representation. This is to
-illustrate that our selector code will work as well for HTML as it
-would for a terminal based Rouge-like.
+The previous point is extremely important - *the selector process does
+not care how the stream events are constructed*. They could just as
+easily come from a mouse, a ClojureScript vector or a [Leap
+Motion](https://www.leapmotion.com/) device.
+
+Our UI in this case will be a JavaScript array of strings. This is to
+illustrate that our selector process could be used just as well for a
+text adventure game. We can then construct a selector process with
+`ex0-events`, the array, and a vector representing the actual data
+represented by the user interface.
+
+```
+(def ui (array "  one" "  two" "  three"))
+
+(def c (selector ex0-events list ["one" "two" "three"]))
+
+(go (while true
+      (.log js/console (<! c)))))
+```
 
 ```
 (defn selector [in list data]
