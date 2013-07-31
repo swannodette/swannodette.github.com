@@ -21,6 +21,8 @@ tags: []
     font-family: Georgia;
     margin: 30px 0;
   }
+  .example {
+  }
 </style>
 
 When architecting user interface components programmers usually engage
@@ -41,8 +43,8 @@ three critical pieces of any UI component:
   3. User interface updates
 
 When you look at most widgets written in good object oriented style
-you find these three aspects merged together into one logical
-component. What advantage is there to pulling these apart?
+you find these three distint aspects complected together. But is there
+any point to actually pulling them apart?
 
 <div id="resp">
     Responsive design
@@ -73,8 +75,7 @@ That's it.
 
 We don't really care about the rendering of list item selection beyond
 these two methods. This means we are free to use any visual
-representation we please - and in fact we'll demonstrate this by
-rendering text based lists.
+representation we please and we'll see this in a moment.
 
 What about **1**?
 
@@ -94,8 +95,47 @@ messages that the selector process actually listens for - `:next`,
 
 The previous point is extremely important - *the selector process does
 not care how the stream events are constructed*. They could just as
-easily come from a mouse, a ClojureScript vector or a [Leap
-Motion](https://www.leapmotion.com/) device.
+easily come from a mouse, a finger on a touch screen, a [Leap
+Motion](https://www.leapmotion.com/) device, or a Clojure vector
+(think testing).
+
+Now what about **2**?
+
+```
+(defn selector [in list data]
+  (let [out (chan)
+        changes (chan (sliding-buffer 1))]
+    (go (loop [selected ::none]
+          (let [v (<! in)]
+            (cond
+              (= v :select) (do (>! out (nth data selected))
+                              (recur selected))
+              :else (let [selected (handle-event v selected list)]
+                      (>! changes selected)
+                      (recur selected))))))
+    {:out out
+     :changes changes}))
+```
+
+`selector` takes three arguments, `in` a input channel of events,
+`list` a UI rendering target, and `data` the values represented by the
+UI rendering target. We enter a loop with one piece of local state -
+the current selected index. We process every event we receive from
+`in`. If we receive a `:select` event we write the selected value to
+`out`, the output channel. Otherwise we have either a keyword event to
+change the selection or a number to set the selection directly and we
+update the selector state and the UI rendering target accordingly.
+
+<div id="ex0" class="example">
+   <pre id="ui"></pre>
+   <div>
+       User selected: <span id="selected"></span>
+   </div>
+   <div>
+       <input id="csv"></input>
+       <button>Send</button>
+   </div>
+</div>
 
 Our UI in this case will be a JavaScript array of strings. This is to
 illustrate that our selector process could be used just as well for a
@@ -104,32 +144,12 @@ text adventure game. We can then construct a selector process with
 represented by the user interface.
 
 ```
-(def ui (array "  one" "  two" "  three"))
+(def ex0-ui (array "  one" "  two" "  three"))
 
-(def c (selector ex0-events list ["one" "two" "three"]))
+(def ex0-c (selector ex0-events ex0-ui ["one" "two" "three"]))
 
 (go (while true
-      (.log js/console (<! c)))))
-```
-
-```
-(defn selector [in list data]
-  (let [out (chan)]
-    (go
-      (loop [selected ::none]
-        (let [v (<! in)]
-          (cond
-            (nil? v) :ok
-            (= v :select) (do (>! out (nth data selected))
-                            (recur selected))
-            :else (do (when (number? selected)
-                        (-unselect! list selected))
-                    (if (= v :out)
-                      (recur ::none)
-                      (let [n (if (number? v) v (select list selected v))]
-                        (-select! list n)
-                        (recur n))))))))
-    out))
+      (.log js/console (<! ex0-c)))))
 ```
 
 I've found that even with the rising popularity of
