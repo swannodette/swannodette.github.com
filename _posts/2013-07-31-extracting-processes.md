@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Extracting Processes"
+title: "CSP is Responsive Design"
 description: ""
 category: 
 tags: []
@@ -59,11 +59,12 @@ those parts relevant for a particular client.
 But what about user interfaces? User interface programmers are now
 faced with an ever growing number of clients with different
 capabilities - components either bloat to address client fragmentation
-or you provide two versions of the same components like
+or you provide incompatible versions of the same components like
 [this](http://jqueryui.com) and [that](http://jquerymobile.com).
 
-What would it look like to pull apart these concerns? First let's
-consider **3**:
+What would it look like to pull apart these concerns?
+
+First let's consider **3**:
 
 ```
 (defprotocol IUIList
@@ -90,7 +91,7 @@ What about **1**?
 We take the stream of key events, map them into key codes, filter keys
 that don't correspond to the selection process controls (in this case
 the up arrow, down arrow, and enter) and then map them into the
-messages that the selector process actually listens for - `:next`,
+messages that the selector process actually listens for: `:next`,
 `:previous`, `:clear`, `:select`, or a number.
 
 The previous point is extremely important - *the selector process does
@@ -126,10 +127,17 @@ the current selected index. We process every event we receive from
 change the selection or a number to set the selection directly and we
 update the selector state and the UI rendering target accordingly.
 
+While some render targets like the DOM might update automagically, if
+we're rendering ASCII graphics we need to know when the selection has
+changed. Thus we provide another channel `changes` where we write
+selection change events. Note that we using a `sliding-buffer`, this
+because we don't want to block on channel write if there doesn't
+happen to be a consumer.
+
 <div id="ex0" class="example">
-   <pre id="ui"></pre>
+   <pre id="ex0-ui"></pre>
    <div>
-       User selected: <span id="selected"></span>
+       User selected: <span id="ex0-selected"></span>
    </div>
    <div>
        <input id="csv"></input>
