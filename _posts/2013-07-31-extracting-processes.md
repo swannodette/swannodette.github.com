@@ -165,12 +165,12 @@ messages that the highlighter process actually listens for: `:next`,
 `:previous`, `:clear`, or a number. *This is our process
 protocol*.
 
-While this may seem strange it's important that the currency of event
-coordination is at a more abstract level than concrete events sources
-like key presses and mouse movement - this will allow our system to be
-responsive. Another benefit that falls out of designing an
-abstract stream protocol like is that we don't need to complicate our
-program with superflous coordination APIs.
+It's critical that the currency of event coordination be at higher
+level than concrete events sources like key presses and mouse
+movement - this will allow our system to be responsive. Another
+benefit that falls out of designing an abstract stream protocol like
+is that we don't need to complicate our program with superflous
+coordination APIs.
 
 Just to drive the point home one more time - *the highlighter process
 does not care how the stream events are constructed*. They could just
