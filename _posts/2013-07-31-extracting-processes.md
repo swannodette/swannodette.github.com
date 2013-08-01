@@ -232,9 +232,11 @@ representation** protocol:
   (-unselect! [list n]))
 ```
 
-We don't need anymore **event stream processing**, the stream above
-produces all the information we need - it includes `:enter`
-events. We can move straight away to **event stream coordination**:
+We don't need additional **event stream processing**, the stream above
+produces all the information we need - it includes `:select` events
+and the highlighter simply passes it along since it cannot handle that
+message itself. We can move straight away to **event stream
+coordination**:
 
 ```
 (defn selector [in list data]
