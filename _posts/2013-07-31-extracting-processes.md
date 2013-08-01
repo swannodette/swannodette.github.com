@@ -202,14 +202,14 @@ the rendering target accordingly. Note if we cannot handle the message
 we just write it to `out`, more on this later.
 
 Lets see this in action. Place your mouse into the grey area and
-trying pressing the up and down arrows as well as the enter key:
+trying pressing the up and down arrows:
 
 <div id="ex0" class="example">
    <pre id="ex0-ui" style="border: none;"></pre>
 </div>
 
 It seems we have a text based interface similar to the kind you might
-find in Rogue-like. In fact our rendering surface is a JavaScript
+find in a Rogue-like. In fact our rendering surface is a JavaScript
 array!
 
 ```
@@ -234,7 +234,7 @@ representation** protocol:
 
 We don't need anymore **event stream processing**, the stream above
 produces all the information we need - it includes `:enter`
-events. We can move straight away to **even stream coordination**:
+events. We can move straight away to **event stream coordination**:
 
 ```
 (defn selector [in list data]
