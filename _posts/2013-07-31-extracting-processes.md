@@ -78,7 +78,7 @@ in copious amounts of
 we shouldn't be blamed as traditional approaches do not make
 the boundaries clear. In the
 [last post](http://swannodette.github.io/2013/07/12/communicating-sequential-processes/)
-I alluded to the possibility that [CSP](http://en.wikipedia.org/wiki/CSP) provides
+I alluded to the possibility that [CSP](http://en.wikipedia.org/wiki/Communicating_sequential_processes) provides
 opportunities to pull things apart and that there might be real value
 in such a separation of concerns.
 
