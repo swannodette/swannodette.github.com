@@ -84,7 +84,7 @@ in such a separation of concerns.
 
 I believe there are three main elements not called Model View
 Controller (nor any other arbitrary variation on that tired old
-theme). The trichotomic design I'd like to suggest is far more
+theme). The trichotomic design I'd like to suggest is more
 fundamental:
 
   1. Event stream processing
@@ -125,9 +125,9 @@ What would it look like to pull apart these concerns? And once we pull
 them apart do we actually have a more responsive system?
 
 Rather than tackling a complex component like a non-toy autocompleter
-in its entirety, in this post we'll focus on how we can productively
-apply the separation of concerns to a subcomponent of the
-autocompleter - the drop down menu.
+in its entirety as I suggested in the last post, instead I'd like
+focus on how we can productively apply the separation of concerns to a
+subcomponent of the autocompleter - the drop down menu.
 
 First let's consider **interface representations** for our submenu
 process. In order to be responsive we'd like to make no commitments at
@@ -218,12 +218,13 @@ array!
                    "   John McCarthy"))
 ```
 
-With each key press we mutate this array and render its
-contents into a `pre` tag. We'll see later than all of our code can be
-reused to target an HTML interface.
+With each key press we mutate this array, concatenate it into a
+string, and render that into a `pre` tag. We'll see in a momemnt that
+all of this code can be reused without modification to target an HTML
+interface.
 
 But before we do that we should address a deficiency - we cannot
-select anything in the submenu. Lets add another **interface
+select anything in the submenu. Let's add another **interface
 representation** protocol:
 
 ```
@@ -274,7 +275,7 @@ familiar.
 Because we have committed to so little we can now reap the rewards of
 the design, what follows is an HTML submenu component that uses all of
 the prior logic - the only difference is that the initial stream
-includes hover information (which are converted in to integer) from
+includes hover information (which are converted into integers) from
 the list items as well as mouse clicks (which are converted in to
 `:select`s). Put your mouse in the grey area - note that hovering,
 clicking, arrows keys, and enter all work.
