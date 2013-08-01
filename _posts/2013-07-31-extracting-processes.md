@@ -168,7 +168,7 @@ protocol*.
 It's critical that the currency of event coordination be at higher
 level than concrete events sources like key presses and mouse
 movement - this will allow our system to be responsive. Another
-benefit that falls out of designing an abstract stream protocol like
+benefit that falls out of designing an abstract stream protocol
 is that we don't need to complicate our program with superflous
 coordination APIs.
 
