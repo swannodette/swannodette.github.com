@@ -73,7 +73,7 @@ tags: []
 </style>
 
 When architecting user interface components programmers usually engage
-in copious amount of
+in copious amounts of
 [complecting](http://www.infoq.com/presentations/Simple-Made-Easy). However
 we shouldn't be blamed as traditional approaches do not make
 the boundaries clear. In the
