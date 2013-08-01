@@ -56,6 +56,7 @@ tags: []
     -moz-border-radius: 4px;
   }
   #post #ex2 li {
+    cursor: pointer;
     list-style: none;
     padding: 4px 4px 4px 8px;
     border-bottom: 1px solid #ccc;
@@ -65,6 +66,9 @@ tags: []
   }
   #post #ex2 li.selected {
     background-color: #ffcccc;
+  }
+  #post #ex2 li.highlighted.selected {
+    background-color: #ffccff;
   }
 </style>
 
@@ -237,16 +241,18 @@ events. We can move straight away to **even stream coordination**:
   (let [out (chan)]
     (go (loop [highlighted ::none selected ::none]
           (let [e (<! in)]
-            (if (or (= e ::none) (number? e))
-              (do
-                (>! out e)
-                (recur e selected))
+            (if (= e :select)
               (do
                 (when (number? selected)
                   (-unselect! list selected))
                 (-select! list highlighted)
                 (>! out [:select (nth data highlighted)])
-                (recur highlighted highlighted))))))
+                (recur highlighted highlighted))
+              (do
+                (>! out e)
+                (if (or (= e ::none) (number? e))
+                  (recur e selected)
+                  (recur highlighted selected)))))))
     out))
 ```
 
@@ -269,7 +275,7 @@ prior logic - the only difference is that the initial stream includes
 mouse information and our render target is now HTML lists!
 
 <div id="ex2" class="example">
-   <ul>
+   <ul id="ex2-list">
       <li>Gravity's Rainbow</li>
       <li>Swann's Way</li>
       <li>Absalom, Absalom</li>
