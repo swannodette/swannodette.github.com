@@ -83,8 +83,8 @@ opportunities to pull things apart and that there might be real value
 in such a separation of concerns.
 
 I believe there are three main elements not called Model View
-Controller nor any other arbitrary variation on that tired old
-theme. The trichotomic design I'd like to suggest is far more
+Controller (nor any other arbitrary variation on that tired old
+theme). The trichotomic design I'd like to suggest is far more
 fundamental:
 
   1. Event stream processing
@@ -272,7 +272,9 @@ familiar ...
 Because we have committed to little we can now reap the rewards of the
 design, what follows is an HTML submenu component that uses all of the
 prior logic - the only difference is that the initial stream includes
-mouse information and our render target is now HTML lists!
+hover information from the list items as well as mouse clicks. Put
+your mouse in the grey area - note that hovering, clicking, arrows
+keys, and enter all work.
 
 <div id="ex2" class="example">
    <ul id="ex2-list">
@@ -282,5 +284,14 @@ mouse information and our render target is now HTML lists!
       <li>Moby Dick</li>
    </ul>
 </div>
+
+It should be clear now that by teasing apart the architecture of the
+UI components we now have a truly modular system in which it easy to
+envision mixing and matching the pieces in various ways. We've seen
+how we could easily use the same process logic for a terminal based
+Rogue-like or a rich HTML client.
+
+In the next post we'll see how to put the result of this post and the
+original post into a cohesive whole.
 
 <script type="text/javascript" src="/assets/js/csp2.js"></script>
