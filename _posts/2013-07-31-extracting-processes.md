@@ -93,7 +93,7 @@ fundamental:
 
 When you look at UI components written in good object oriented style
 whether in Java, Objective-C, or JavaScript you nearly always find
-these three clear and distint aspects complected together. In a
+these three clear and distinct aspects complected together. In a
 traditional design you would have event stream processing provided by
 a base class or mixin. By subclassing you can provide custom interface
 representations. When it comes to the most complex and application
@@ -258,25 +258,26 @@ coordination**:
     out))
 ```
 
-This looks remarkably similar to `highlighter`, in fact we're going to
-feed the output of `highlighter` into `selector`! Again place your
-mouse over the grey area and press either the up arrow, down arrow, or
-enter keys. You'll now see that selections are preserved:
+This looks remarkably similar to `highlighter`, in fact we're feeding
+the output of `highlighter` into `selector`! Again place your mouse
+over the grey area and press either the up arrow, down arrow, or enter
+keys. You'll now see that selections are preserved:
 
 <div id="ex1" class="example">
    <pre id="ex1-ui" style="border: none;"></pre>
 </div>
 
-It appears we can inherit functionality just by composing streams. We
-simply pass along messages we can't handle - this sounds eerily
-familiar ...
+We can inherit functionality just by composing streams. We simply pass
+along the messages we don't understand. This all sounds eerily
+familiar.
 
-Because we have committed to little we can now reap the rewards of the
-design, what follows is an HTML submenu component that uses all of the
-prior logic - the only difference is that the initial stream includes
-hover information from the list items as well as mouse clicks. Put
-your mouse in the grey area - note that hovering, clicking, arrows
-keys, and enter all work.
+Because we have committed to so little we can now reap the rewards of
+the design, what follows is an HTML submenu component that uses all of
+the prior logic - the only difference is that the initial stream
+includes hover information (which are converted in to integer) from
+the list items as well as mouse clicks (which are converted in to
+`:select`s). Put your mouse in the grey area - note that hovering,
+clicking, arrows keys, and enter all work.
 
 <div id="ex2" class="example">
    <ul id="ex2-list">
@@ -287,11 +288,9 @@ keys, and enter all work.
    </ul>
 </div>
 
-It should be clear now that by teasing apart the architecture of the
-UI components we now have a truly modular system in which it easy to
-envision mixing and matching the pieces in various ways. We've seen
-how we could easily use the same process logic for a terminal based
-Rogue-like or a rich HTML client.
+By teasing apart the architecture of the UI components we now have a
+truly modular and *responsive* system. It's also pleasantly small for the
+amount of flexibility we get in return.
 
 In the next post we'll see how to put the result of this post and the
 original post into a cohesive whole.
