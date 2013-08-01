@@ -219,7 +219,7 @@ array!
 ```
 
 With each key press we mutate this array, concatenate it into a
-string, and render that into a `pre` tag. We'll see in a momemnt that
+string, and render that into a `pre` tag. We'll see in a moment that
 all of this code can be reused without modification to target an HTML
 interface.
 
