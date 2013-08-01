@@ -21,7 +21,17 @@ tags: []
     font-family: Georgia;
     margin: 30px 0;
   }
-  .example {
+  #post .example {
+    height: 200px;
+    background-color: #efefef;
+    border: none;
+    padding-top: 20px;
+  }
+  #post .example pre {
+    background-color: transparent;
+    position: relative;
+    left: 200px;
+    font-size: 18px;
   }
 </style>
 
@@ -84,6 +94,8 @@ must conform to. In ClojureScript this is simple to express:
 
 ```
 (defprotocol IUIList
+  (-highlight! [list n])
+  (-unhighlight! [list n])
   (-select! [list n])
   (-unselect! [list n]))
 ```
@@ -131,14 +143,20 @@ Now what about **event stream coordination**?
 (defn selector [in list data]
   (let [out (chan)
         changes (chan (sliding-buffer 1))]
-    (go (loop [selected ::none]
-          (let [v (<! in)]
-            (cond
-              (= v :select) (do (>! out (nth data selected))
-                              (recur selected))
-              :else (let [selected (handle-event v selected list)]
-                      (>! changes selected)
-                      (recur selected))))))
+    (go (loop [highlighted ::none selected ::none]
+          (let [e (<! in)]
+            (if (and (= e :select)
+                     (not= highlighted ::none))
+              (do
+                (when (number? selected)
+                  (-unselect! list selected))
+                (-select! list highlighted)
+                (>! changes highlighted)
+                (>! out (nth data highlighted))
+                (recur highlighted highlighted))
+              (let [highlighted (handle-event e highlighted list)]
+                (>! changes highlighted)
+                (recur highlighted selected))))))
     {:out out
      :changes changes}))
 ```
@@ -158,14 +176,14 @@ selection change events. Note that we using a `sliding-buffer`
 because we don't want to block on writes to `changes` if there isn't
 someone to consume them.
 
+Before we go over the last few lines lets see this in action. Place
+your mouse into the grey area and trying pressing the up and down
+arrows as well as the enter key:
+
 <div id="ex0" class="example">
-   <pre id="ex0-ui"></pre>
+   <pre id="ex0-ui" style="border: none;"></pre>
    <div>
        User selected: <span id="ex0-selected"></span>
-   </div>
-   <div>
-       <input id="csv"></input>
-       <button>Send</button>
    </div>
 </div>
 
@@ -178,7 +196,7 @@ represented by the user interface.
 ```
 (def ex0-ui (array "  one" "  two" "  three"))
 
-(def ex0-c (selector ex0-events ex0-ui ["one" "two" "three"]))
+(def ex0-c (selector ex0-events ex0-ui ["mcarthy" "kay" "licklider" "englebart"]))
 
 (go (while true
       (.log js/console (<! ex0-c)))))
@@ -190,3 +208,5 @@ systems from the CSP perspective so we'll move at a relaxed pace
 in this post. Instead of considering an entire autocompletion
 component, we'll instead look at just one piece - the drop down
 menu. We'll discuss the full component in a later post.
+
+<script type="text/javascript" src="/assets/js/csp2.js"></script>
