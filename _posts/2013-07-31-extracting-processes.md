@@ -40,6 +40,25 @@ tags: []
     font-size: 18px;
   }
   #post #ex2 {
+    height: 150px;
+    background-color: #efefef;
+    border: none;
+    padding-top: 20px;
+  }
+  #post #ex2 ul {
+    position: relative;
+    background: white;
+    width: 170px;
+    left: 190px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+  }
+  #post #ex2 li {
+    list-style: none;
+    padding: 4px 4px 4px 8px;
+    border-bottom: 1px solid #ccc;
   }
   #post #ex2 li.highlighted {
     background-color: #ccccff;
