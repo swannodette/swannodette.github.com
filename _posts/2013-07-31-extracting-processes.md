@@ -116,8 +116,8 @@ for a particular client.
 
 User interface programmers don't have the luxury of CSS for complex
 interactions yet are faced with the same rapidly growing heterogenous
-population of clients - components written in a traditional style tend
-bloat to address this fragmentation or libraries provide incompatible
+population of clients - components written in a traditional style
+either bloat to address fragmentation or libraries provide incompatible
 versions of the same conceptual components like
 [this](http://jqueryui.com) and [that](http://jquerymobile.com).
 
