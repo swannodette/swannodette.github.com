@@ -201,8 +201,8 @@ receive from `in`. If we have an event we can handle we side effect
 the rendering target accordingly. Note if we cannot handle the message
 we just write it to `out`, more on this later.
 
-Lets see this in action. Place your mouse into the grey area and
-trying pressing the up and down arrows:
+Lets see this in action. Place your mouse into the grey area (you may
+need to click) and trying pressing the up and down arrows:
 
 <div id="ex0" class="example">
    <pre id="ex0-ui" style="border: none;"></pre>
