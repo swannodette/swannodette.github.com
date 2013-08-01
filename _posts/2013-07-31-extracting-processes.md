@@ -276,7 +276,7 @@ Because we have committed to so little we can now reap the rewards of
 the design, what follows is an HTML submenu component that uses all of
 the prior logic - the only difference is that the initial stream
 includes hover information (which are converted into integers) from
-the list items as well as mouse clicks (which are converted in to
+the list items as well as mouse clicks (which are converted into
 `:select`s). Put your mouse in the grey area - note that hovering,
 clicking, arrows keys, and enter all work.
 
