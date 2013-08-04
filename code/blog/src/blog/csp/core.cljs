@@ -45,32 +45,29 @@
 (let [el  (by-id "ex1")
       out (by-id "ex1-mouse")
       c   (event-chan el "mousemove")]
-  (go (loop []
-        (let [e (<! c)]
-          (set-html out (str (.-pageX e) ", " (.-pageY e)))
-          (recur)))))
+  (go (while true
+        (let [e (.-event_ (<! c))]
+          (set-html out (str (.-pageX e) ", " (.-pageY e)))))))
 
 (defn map-chan [f in]
   (let [c (chan)]
-    (go (loop []
-          (>! c (f (<! in)))
-          (recur)))
+    (go (while true
+          (>! c (f (<! in)))))
     c))
 
 (defn offset [el]
   (fn [e]
-    {:x (- (.-pageX e) (.-offsetLeft el))
-     :y (- (.-pageY e) (.-offsetTop el))}))
+    (let [e (.-event_ e)]
+      {:x (- (.-pageX e) (.-offsetLeft el))
+       :y (- (.-pageY e) (.-offsetTop el))})))
 
 (let [el  (by-id "ex2")
       out (by-id "ex2-mouse")
       c   (map-chan (offset el)
             (event-chan el "mousemove"))]
-  (go (loop []
+  (go (while true
         (let [e (<! c)]
-          (.log js/console e)
-          (set-html out (str (:x e) ", " (:y e)))
-          (recur)))))
+          (set-html out (str (:x e) ", " (:y e)))))))
 
 (let [el   (by-id "ex3")
       outm (by-id "ex3-mouse")
@@ -78,12 +75,11 @@
       mc   (map-chan (offset el)
              (event-chan el "mousemove"))
       kc   (event-chan js/window "keyup")]
-  (go (loop []
+  (go (while true
         (let [[v c] (alts! [mc kc])]
           (condp = c
             mc (set-html outm (str (:x v) ", " (:y v)))
-            kc (set-html outk (str (.-keyCode v))))
-          (recur)))))
+            kc (set-html outk (str (.-keyCode v))))))))
 
 (defn fake-search [kind]
   (fn [c query]
@@ -117,7 +113,6 @@
 
 (let [el (by-id "ex4-out")
       c  (event-chan (by-id "search") "click")]
-  (go (loop []
+  (go (while true
         (<! c)
-        (set-html el (pr-str (<! (google "clojure"))))
-        (recur))))
+        (set-html el (pr-str (<! (google "clojure")))))))
