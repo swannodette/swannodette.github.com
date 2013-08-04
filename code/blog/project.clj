@@ -21,9 +21,9 @@
      :compiler {:optimizations :whitespace
                 :pretty-print false
                 :static-fns true
-                :output-to "csp.js"}}
+                :output-to "../../assets/js/csp.js"}}
     {:id "csp-adv"
      :source-paths ["src/csp"]
      :compiler {:optimizations :advanced
                 :pretty-print false
-                :output-to "csp.js"}}]}))
+                :output-to "../../assets/js/csp.js"}}]})

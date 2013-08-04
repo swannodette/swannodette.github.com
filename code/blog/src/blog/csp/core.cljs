@@ -1,13 +1,11 @@
 (ns blog.csp.core
   (:require
     [cljs.core.async :as async
-      :refer [<! >! chan close! put! take! sliding-buffer
-               dropping-buffer timeout]]
+      :refer [<! >! chan put! timeout]]
     [clojure.string :as string]
     [goog.events :as events])
   (:require-macros
     [cljs.core.async.macros :refer [go alt!]]))
-
 
 (defn by-id [id]
   (.getElementById js/document id))
@@ -17,7 +15,7 @@
 
 (defn event-chan [el type]
   (let [c (chan)]
-    (event/listen el type #(put! c %))
+    (events/listen el type #(put! c %))
     c))
 
 (def c (chan))
@@ -70,6 +68,7 @@
             (event-chan el "mousemove"))]
   (go (loop []
         (let [e (<! c)]
+          (.log js/console e)
           (set-html out (str (:x e) ", " (:y e)))
           (recur)))))
 
