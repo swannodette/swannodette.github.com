@@ -17,13 +17,13 @@
   :cljsbuild
   {:builds
    [{:id "csp-dev"
-     :source-paths ["src/"]
+     :source-paths ["src/blog/csp"]
      :compiler {:optimizations :whitespace
                 :pretty-print false
                 :static-fns true
                 :output-to "../../assets/js/csp.js"}}
     {:id "csp-adv"
-     :source-paths ["src/csp"]
+     :source-paths ["src/blog/csp"]
      :compiler {:optimizations :advanced
                 :pretty-print false
                 :output-to "../../assets/js/csp.js"}}]})
