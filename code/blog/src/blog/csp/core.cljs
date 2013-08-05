@@ -3,7 +3,7 @@
   (:require [cljs.core.async :as async
               :refer [<! >! chan put! timeout]]
             [clojure.string :as string]
-            [blog.utils.dom :refer [by-id set-html offset]]
+            [blog.utils.dom :refer [by-id set-html! offset]]
             [blog.utils.reactive :refer [listen map]])
   (:require-macros [cljs.core.async.macros :refer [go alt!]]))
 
@@ -28,7 +28,7 @@
 (let [el  (by-id "ex0")
       out (by-id "ex0-out")]
   (go (loop [q []]
-        (set-html out (render q))
+        (set-html! out (render q))
         (recur (-> (conj q (<! c)) (peekn 10))))))
 
 (let [el  (by-id "ex1")
@@ -36,7 +36,7 @@
       c   (listen el :mousemove)]
   (go (while true
         (let [e (<! c)]
-          (set-html out (str (.-offsetX e) ", " (.-offsetY e)))))))
+          (set-html! out (str (.-offsetX e) ", " (.-offsetY e)))))))
 
 (defn location [el]
   (let [[left top] (cljs.core/map int (offset el))]
@@ -50,7 +50,7 @@
             (listen el :mousemove))]
   (go (while true
         (let [e (<! c)]
-          (set-html out (str (:x e) ", " (:y e)))))))
+          (set-html! out (str (:x e) ", " (:y e)))))))
 
 (let [el   (by-id "ex3")
       outm (by-id "ex3-mouse")
@@ -61,8 +61,8 @@
   (go (while true
         (let [[v c] (alts! [mc kc])]
           (condp = c
-            mc (set-html outm (str (:x v) ", " (:y v)))
-            kc (set-html outk (str (.-charCode v))))))))
+            mc (set-html! outm (str (:x v) ", " (:y v)))
+            kc (set-html! outk (str (.-charCode v))))))))
 
 (defn fake-search [kind]
   (fn [c query]
@@ -98,4 +98,4 @@
       c  (listen (by-id "search") :click)]
   (go (while true
         (<! c)
-        (set-html el (pr-str (<! (google "clojure")))))))
+        (set-html! el (pr-str (<! (google "clojure")))))))

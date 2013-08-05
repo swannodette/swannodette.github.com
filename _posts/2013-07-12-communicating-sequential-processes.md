@@ -126,7 +126,7 @@ coordination *without any obvious use of mutation* - only recursion.
 (let [el  (by-id "ex0")
       out (by-id "ex0-out")]
   (go (loop [q []]
-        (set-html out (render q))
+        (set-html! out (render q))
         (recur (-> (conj q (<! c)) (peekn 10))))))
 ```
 
@@ -183,7 +183,7 @@ Let's see `listen` in action:
       c   (listen el :mousemove)]
   (go (while true
         (let [e (<! c)]
-          (set-html out (str (.-offsetX e) ", " (.-offsetY e)))))))
+          (set-html! out (str (.-offsetX e) ", " (.-offsetY e)))))))
 ```
 
 Mouse over the grey box below:
@@ -235,7 +235,7 @@ Let's use `map`:
             (listen el :mousemove))]
   (go (while true
         (let [e (<! c)]
-          (set-html out (str (:x e) ", " (:y e)))))))
+          (set-html! out (str (:x e) ", " (:y e)))))))
 ```
 
 Mouse over the grey box below to confirm that this works:
@@ -268,8 +268,8 @@ Say we want to handle both mouse and key events:
   (go (while true
         (let [[v c] (alts! [mc kc])]
           (condp = c
-            mc (set-html outm (str (:x v) ", " (:y v)))
-            kc (set-html outk (str (.-keyCode v))))))))
+            mc (set-html! outm (str (:x v) ", " (:y v)))
+            kc (set-html! outk (str (.-keyCode v))))))))
 ```
 
 Make sure the window is focused and mouse over the following grey box
@@ -330,7 +330,7 @@ that demonstrates parallel search with timeouts:
       c  (listen (by-id "search") :click)]
   (go (while true
         (<! c)
-        (set-html el (pr-str (<! (google "clojure")))))))
+        (set-html! el (pr-str (<! (google "clojure")))))))
 ```
 
 Click the search button below multiple times:

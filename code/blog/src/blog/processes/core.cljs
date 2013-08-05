@@ -1,48 +1,3 @@
----
-layout: post
-title: "10,000 Processes"
-description: ""
-category: 
-tags: []
----
-{% include JB/setup %}
-
-<style>
-table {
-    margin-left: 45px;
-    font-family: courier;
-    font-size: 8px;
-    line-height: 1em !important;
-    margin-bottom: 50px;
-}
-.group0 {
-    color: #000
-}
-.group1 {
-    color: #f00
-}
-.group2 {
-    color: #0f0
-}
-.group3 {
-    color: #00f
-}
-.group4 {
-    color: #ff0
-}
-.group5 {
-    color: #0ff
-}
-</style>
-
-**UPDATE**: I got too enthusiastic from the last post, this 10,000 not
-100,000 go blocks.
-
-10,000 independent go blocks all running at the same time.
-
-<table id="big-table" cellpadding="0" cellspacing="0"></table>
-
-```
 (ns blog.processes.core
   (:require [cljs.core.async :as async
              :refer [<! >! chan put! timeout]]
@@ -95,7 +50,3 @@ table {
             (<! (timeout (+ 1000 (rand-int 10000))))
             (>! render [(rand-int 10000) (rand-int 10)])))
       (recur (inc i)))))
-```
-
-<script type="text/javascript" src="/assets/js/proc.js"></script>
-
