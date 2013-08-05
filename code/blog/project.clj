@@ -9,7 +9,7 @@
                  "https://oss.sonatype.org/content/groups/staging/"}
 
   :dependencies [[org.clojure/clojure "1.5.1"]
-                 [org.clojure/clojurescript "0.0-1847"]
+                 [org.clojure/clojurescript "0.0-1853"]
                  [org.clojure/core.async "0.1.0-SNAPSHOT"]]
 
   :plugins [[lein-cljsbuild "0.3.2"]]
