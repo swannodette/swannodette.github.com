@@ -36,13 +36,14 @@
       c   (listen el "mousemove")]
   (go (while true
         (let [e (<! c)]
-          (set-html out (str (.-clientX e) ", " (.-clientY e)))))))
+          (set-html out (str (.-offsetX e) ", " (.-offsetY e)))))))
 
 (defn offset [el]
-  (fn [e]
-    (let [e (.-event_ e)]
-      {:x (- (.-pageX e) (.-offsetLeft el))
-       :y (- (.-pageY e) (.-offsetTop el))})))
+  (let [offset ]
+    (fn [e]
+      (let [e (.-event_ e)]
+        {:x (- (.-pageX e) (.-offsetLeft el))
+         :y (- (.-pageY e) (.-offsetTop el))}))))
 
 (let [el  (by-id "ex2")
       out (by-id "ex2-mouse")

@@ -152,14 +152,14 @@ we can read from:
 ```
 (defn event-chan [el type]
   (let [c (chan)]
-    (.addEventListener el type #(put! c %))
-    c)))
+    (events/listen el type #(put! c %))
+    c))
 ```
 
 I've intentionally kept the code as simple as possible to limit the amount
 of novelty that we need to introduce (nearly everything I will show
 can look prettier/shorter either with more higher order channel operations or
-a touch of sweetening via macro sugar). `event-chan` takes a DOM element
+a touch of sweetening via macro sugar). `listen` takes a DOM element
 and an event type. The event listener callback puts the DOM event into the
 channel, since we're not in a `go` block we do this with an async `put!`.
 
@@ -175,16 +175,15 @@ its treasures since the 1980s ([occam-pi](http://en.wikipedia.org/wiki/Occam-),
 both discussed the applicability of CSP for the coordination of user
 interfaces - user interfaces are inherently asynchronous and thus concurrent.
 
-Let's see `event-chan` in action:
+Let's see `listen` in action:
 
 ```
 (let [el  (by-id "ex1")
       out (by-id "ex1-mouse")
-      c   (event-chan el "mousemove")]
-  (go (loop []
+      c   (listen el "mousemove")]
+  (go (while true
         (let [e (<! c)]
-          (set-html out (str (.-pageX e) ", " (.-pageY e)))
-          (recur))))))
+          (set-html out (str (.-clientX e) ", " (.-clientY e)))))))
 ```
 
 Mouse over the grey box below:
@@ -199,26 +198,29 @@ channel. This allows us to fully escape callback hell in our
 coordination code.
 
 Note that the above example is showing the position of the mouse in
-the window instead of relative to the element we care about - let's
-fix this with our first higher order channel operation `map-chan`:
+the element instead of absolute to the document - let's
+fix this with our first higher order channel operation `map`,
+analogous to Clojure's `map` except this works on channels not sequences:
 
 ```
-(defn map-chan [f in]
+(defn map [f in]
   (let [c (chan)]
     (go (loop []
-          (>! c (f (<! in)))
-          (recur)))
+          (if-let [v (<! in)]
+            (do (>! c (f v))
+              (recur))
+            (close! c))))
     c))
 ```
 
-`map-chan` takes a function `f` and a channel `in` and returns a new
+`map` takes a function `f` and a channel `in` and returns a new
 channel. All the magic happens once again inside the `go` block, we
 can read values out of the `in` channel as they appear, apply `f` and
 write the result to the channel we returned. This works just as well
 for mouse events or asynchronous results from I/O or an
 `XMLHttpRequest`.
 
-Let's use `map-chan`:
+Let's use `map`:
 
 ```
 (defn offset [el]
