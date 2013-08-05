@@ -3,7 +3,7 @@
   (:require [cljs.core.async :as async
               :refer [<! >! chan put! timeout]]
             [clojure.string :as string]
-            [blog.utils.dom :refer [by-id set-html]]
+            [blog.utils.dom :refer [by-id set-html offset]]
             [blog.utils.reactive :refer [listen map]])
   (:require-macros [cljs.core.async.macros :refer [go alt!]]))
 
@@ -33,22 +33,21 @@
 
 (let [el  (by-id "ex1")
       out (by-id "ex1-mouse")
-      c   (listen el "mousemove")]
+      c   (listen el :mousemove)]
   (go (while true
         (let [e (<! c)]
           (set-html out (str (.-offsetX e) ", " (.-offsetY e)))))))
 
-(defn offset [el]
-  (let [offset ]
+(defn location [el]
+  (let [[left top] (cljs.core/map int (offset el))]
     (fn [e]
-      (let [e (.-event_ e)]
-        {:x (- (.-pageX e) (.-offsetLeft el))
-         :y (- (.-pageY e) (.-offsetTop el))}))))
+      {:x (+ (.-offsetX e) left)
+       :y (+ (.-offsetY e) top)})))
 
 (let [el  (by-id "ex2")
       out (by-id "ex2-mouse")
-      c   (map (offset el)
-            (listen el "mousemove"))]
+      c   (map (location el)
+            (listen el :mousemove))]
   (go (while true
         (let [e (<! c)]
           (set-html out (str (:x e) ", " (:y e)))))))
@@ -56,9 +55,9 @@
 (let [el   (by-id "ex3")
       outm (by-id "ex3-mouse")
       outk (by-id "ex3-key")
-      mc   (map (offset el)
-             (listen el "mousemove"))
-      kc   (listen js/window "keyup")]
+      mc   (map (location el)
+             (listen el :mousemove))
+      kc   (listen js/window :keypress)]
   (go (while true
         (let [[v c] (alts! [mc kc])]
           (condp = c
@@ -96,7 +95,7 @@
             (recur (inc i) (conj ret (alt! [c t] ([v] v)))))))))
 
 (let [el (by-id "ex4-out")
-      c  (listen (by-id "search") "click")]
+      c  (listen (by-id "search") :click)]
   (go (while true
         (<! c)
         (set-html el (pr-str (<! (google "clojure")))))))
