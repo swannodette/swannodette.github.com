@@ -112,7 +112,7 @@
 (defn hover [el]
   (distinct (fan-in [(mouse-enter el) (mouse-leave el)])))
 
-(defn hover-children [el tag]
+(defn hover-child [el tag]
   (let [matcher (tag-match tag)
         matches (by-tag-name el tag)
         over (->> (listen el :mouseover)
