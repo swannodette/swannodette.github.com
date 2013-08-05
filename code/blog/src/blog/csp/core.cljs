@@ -57,7 +57,7 @@
       outk (by-id "ex3-key")
       mc   (map (location el)
              (listen el :mousemove))
-      kc   (listen js/window :keypress)]
+      kc   (listen js/document :keypress)]
   (go (while true
         (let [[v c] (alts! [mc kc])]
           (condp = c

@@ -150,7 +150,7 @@ The following code convert events on a DOM element into a channel
 we can read from:
 
 ```
-(defn event-chan [el type]
+(defn listen [el type]
   (let [c (chan)]
     (events/listen el type #(put! c %))
     c))
@@ -180,10 +180,10 @@ Let's see `listen` in action:
 ```
 (let [el  (by-id "ex1")
       out (by-id "ex1-mouse")
-      c   (listen el "mousemove")]
+      c   (listen el :mousemove)]
   (go (while true
         (let [e (<! c)]
-          (set-html out (str (.-clientX e) ", " (.-clientY e)))))))
+          (set-html out (str (.-offsetX e) ", " (.-offsetY e)))))))
 ```
 
 Mouse over the grey box below:
@@ -198,7 +198,7 @@ channel. This allows us to fully escape callback hell in our
 coordination code.
 
 Note that the above example is showing the position of the mouse in
-the element instead of absolute to the document - let's
+the element instead of absolute relative to the document - let's
 fix this with our first higher order channel operation `map`,
 analogous to Clojure's `map` except this works on channels not sequences:
 
@@ -223,19 +223,19 @@ for mouse events or asynchronous results from I/O or an
 Let's use `map`:
 
 ```
-(defn offset [el]
-  (fn [e]
-    {:x (- (.-pageX e) (.-offsetLeft el))
-     :y (- (.-pageY e) (.-offsetTop el))}))
+(defn location [el]
+  (let [[left top] (cljs.core/map int (offset el))]
+    (fn [e]
+      {:x (+ (.-offsetX e) left)
+       :y (+ (.-offsetY e) top)})))
 
 (let [el  (by-id "ex2")
       out (by-id "ex2-mouse")
-      c   (map-chan (offset el)
-            (event-chan el "mousemove"))]
-  (go (loop []
+      c   (map (location el)
+            (listen el :mousemove))]
+  (go (while true
         (let [e (<! c)]
-          (set-html out (str (:x e) ", " (:y e)))
-          (recur)))))
+          (set-html out (str (:x e) ", " (:y e)))))))
 ```
 
 Mouse over the grey box below to confirm that this works:
@@ -262,15 +262,14 @@ Say we want to handle both mouse and key events:
 (let [el   (by-id "ex3")
       outm (by-id "ex3-mouse")
       outk (by-id "ex3-key")
-      mc   (map-chan (offset el)
-             (event-chan el "mousemove"))
-      kc   (event-chan js/window "keyup")]
-  (go (loop []
+      mc   (map (location el)
+             (listen el "mousemove"))
+      kc   (listen js/window "keyup")]
+  (go (while true
         (let [[v c] (alts! [mc kc])]
           (condp = c
             mc (set-html outm (str (:x v) ", " (:y v)))
-            kc (set-html outk (str (.-keyCode v))))
-          (recur)))))
+            kc (set-html outk (str (.-keyCode v))))))))
 ```
 
 Make sure the window is focused and mouse over the following grey box
@@ -328,11 +327,10 @@ that demonstrates parallel search with timeouts:
             (recur (inc i) (conj ret (alt! [c t] ([v] v)))))))))
 
 (let [el (by-id "ex4-out")
-      c  (event-chan (by-id "search") "click")]
-  (go (loop []
+      c  (listen (by-id "search") :click)]
+  (go (while true
         (<! c)
-        (set-html el (pr-str (<! (google "clojure"))))
-        (recur))))
+        (set-html el (pr-str (<! (google "clojure")))))))
 ```
 
 Click the search button below multiple times:
