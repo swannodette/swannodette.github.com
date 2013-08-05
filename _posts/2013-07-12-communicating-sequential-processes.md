@@ -354,4 +354,6 @@ example - a non-toy autocompleter input field. We will see core.async's
 advantage over traditional object oriented approaches as well
 as purely reactive approaches.
 
+You can find and build these examples for yourself [here](http://github.com/swannodette/swannodette.github.com).
+
 <script type="text/javascript" src="/assets/js/csp.js"></script>
