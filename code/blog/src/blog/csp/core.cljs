@@ -1,22 +1,11 @@
 (ns blog.csp.core
-  (:require
-    [cljs.core.async :as async
-      :refer [<! >! chan put! timeout]]
-    [clojure.string :as string]
-    [goog.events :as events])
-  (:require-macros
-    [cljs.core.async.macros :refer [go alt!]]))
-
-(defn by-id [id]
-  (.getElementById js/document id))
-
-(defn set-html [el s]
-  (set! (.-innerHTML el) s))
-
-(defn event-chan [el type]
-  (let [c (chan)]
-    (events/listen el type #(put! c %))
-    c))
+  (:refer-clojure :exclude [map])
+  (:require [cljs.core.async :as async
+              :refer [<! >! chan put! timeout]]
+            [clojure.string :as string]
+            [blog.utils.dom :refer [by-id set-html]]
+            [blog.utils.reactive :refer [listen map]])
+  (:require-macros [cljs.core.async.macros :refer [go alt!]]))
 
 (def c (chan))
 
@@ -44,16 +33,10 @@
 
 (let [el  (by-id "ex1")
       out (by-id "ex1-mouse")
-      c   (event-chan el "mousemove")]
+      c   (listen el "mousemove")]
   (go (while true
-        (let [e (.-event_ (<! c))]
-          (set-html out (str (.-pageX e) ", " (.-pageY e)))))))
-
-(defn map-chan [f in]
-  (let [c (chan)]
-    (go (while true
-          (>! c (f (<! in)))))
-    c))
+        (let [e (<! c)]
+          (set-html out (str (.-clientX e) ", " (.-clientY e)))))))
 
 (defn offset [el]
   (fn [e]
@@ -63,8 +46,8 @@
 
 (let [el  (by-id "ex2")
       out (by-id "ex2-mouse")
-      c   (map-chan (offset el)
-            (event-chan el "mousemove"))]
+      c   (map (offset el)
+            (listen el "mousemove"))]
   (go (while true
         (let [e (<! c)]
           (set-html out (str (:x e) ", " (:y e)))))))
@@ -72,9 +55,9 @@
 (let [el   (by-id "ex3")
       outm (by-id "ex3-mouse")
       outk (by-id "ex3-key")
-      mc   (map-chan (offset el)
-             (event-chan el "mousemove"))
-      kc   (event-chan js/window "keyup")]
+      mc   (map (offset el)
+             (listen el "mousemove"))
+      kc   (listen js/window "keyup")]
   (go (while true
         (let [[v c] (alts! [mc kc])]
           (condp = c
@@ -112,7 +95,7 @@
             (recur (inc i) (conj ret (alt! [c t] ([v] v)))))))))
 
 (let [el (by-id "ex4-out")
-      c  (event-chan (by-id "search") "click")]
+      c  (listen (by-id "search") "click")]
   (go (while true
         (<! c)
         (set-html el (pr-str (<! (google "clojure")))))))
