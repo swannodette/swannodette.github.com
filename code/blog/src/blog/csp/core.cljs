@@ -62,7 +62,7 @@
         (let [[v c] (alts! [mc kc])]
           (condp = c
             mc (set-html outm (str (:x v) ", " (:y v)))
-            kc (set-html outk (str (.-keyCode v))))))))
+            kc (set-html outk (str (.-charCode v))))))))
 
 (defn fake-search [kind]
   (fn [c query]
