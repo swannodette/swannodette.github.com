@@ -103,12 +103,12 @@
     (while true
       (when (= (<! hc) :enter)
         (>! ctrl true)
-        (reset! prevent-default? true)
+        (reset! prevent true)
         (loop []
           (let [[e c] (alts! [hc changes])]
             (cond
               (= e :leave) (do (>! ctrl false)
-                             (reset! prevent-default? false))
+                             (reset! prevent false))
               (= c changes) (do (when render-fn (render-fn))
                               (recur))
               :else (recur)))))))))
