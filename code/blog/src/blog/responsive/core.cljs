@@ -142,6 +142,7 @@
                 "   J.C.R. Licklider"
                 "   John McCarthy")]
   (create-example "ex0"
+    ex0-events
     (fn []
       (set-html (by-id "ex0-ui") (.join ui "\n")))
     (fn [events]
@@ -162,7 +163,8 @@
                    "   ML"))
 
 (let [ui (by-id "ex1-ui")]
-  (create-example "ex1" ex1-events
+  (create-example "ex1"
+    ex1-events
     (fn []
       (set-html ui (.join ex1-ui "\n")))
     (fn [events]
