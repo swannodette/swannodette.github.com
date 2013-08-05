@@ -109,7 +109,7 @@
             (cond
               (= e :leave) (do (>! ctrl false)
                              (reset! prevent-default? false))
-              (= c changes) (do (render-fn)
+              (= c changes) (do (when render-fn (render-fn))
                               (recur))
               :else (recur)))))))))
 
@@ -121,13 +121,6 @@
     (map key-event->keycode)
     (filter KEYS)
     (map key->keyword)))
-
-(def ex0-ui (array "   Alan Kay"
-                   "   J.C.R. Licklider"
-                   "   John McCarthy"))
-
-(defn ex0-render! []
-  (set-html (by-id "ex0-ui") (.join ex0-ui "\n")))
 
 (extend-type array
   IHighlightable
@@ -145,9 +138,14 @@
 (defn set-char [s i c]
   (str (.substring s 0 i) c (.substring s (inc i))))
 
-(create-example "ex0"
-  ex0-events ex0-render!
-  #(highlighter % ex0-ui))
+(let [ui (array "   Alan Kay"
+                "   J.C.R. Licklider"
+                "   John McCarthy")]
+  (create-example "ex0"
+    (fn []
+      (set-html (by-id "ex0-ui") (.join ui "\n")))
+    (fn [events]
+      (highlighter events ui))))
 
 ;; =============================================================================
 ;; Example 1
@@ -163,11 +161,13 @@
                    "   Prolog"
                    "   ML"))
 
-(defn ex1-render! []
-  (set-html (by-id "ex1-ui") (.join ex1-ui "\n")))
-
-(create-example "ex1" ex1-events ex1-render!
-  #(highlighter % (by-id "ex1-ui")))
+(let [ui (by-id "ex1-ui")]
+  (create-example "ex1" ex1-events
+    (fn []
+      (set-html ui (.join ex1-ui "\n")))
+    (fn [events]
+      (selector (highlighter events ui)
+        ui ["smalltalk", "lisp", "prolog", "ml"]))))
 
 ;;=============================================================================
 ;; Example 2
@@ -181,7 +181,7 @@
        (map key-event->keycode)
        (filter KEYS)
        (map key->keyword))
-      (hover-child ui "li")]))
+     (hover-child ui "li")]))
 
 (extend-type js/HTMLUListElement
   ICounted
@@ -206,6 +206,9 @@
     (filter KEYS)
     (map key->keyword)))
 
-(let [ex2-ui (by-id "ex2-list")]
-  (create-example "ex2" #(ex2-key-events ex2-ui %) ex2-render!
-    #(selector (highlighter % ex2-ui) ex2-ui)))
+(let [ui (by-id "ex2-list")]
+  (create-example "ex2"
+    (fn [prevent] (ex2-events ui prevent))
+    nil
+    (fn [events]
+      (selector (highlighter events ui) ui))))
