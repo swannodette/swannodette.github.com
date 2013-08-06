@@ -298,4 +298,4 @@ amount of flexibility we get in return.
 In the next post we'll see how to put the result of this post and the
 original post into a cohesive whole.
 
-<script type="text/javascript" src="/assets/js/csp2.js"></script>
+<script type="text/javascript" src="/assets/js/resp.js"></script>
