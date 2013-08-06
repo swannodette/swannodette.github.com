@@ -103,7 +103,8 @@
         c       (r/toggle raw)
         changes (ctor-fn (:chan c))
         ctrl    (:control c)]
-  (render-fn)
+  (when render-fn
+    (render-fn))
   (go
     (>! ctrl false)
     (while true

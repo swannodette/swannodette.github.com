@@ -9,6 +9,9 @@
   (:require-macros [cljs.core.async.macros :refer [go alt!]])
   (:import goog.events.EventType))
 
+(defn atom? [x]
+  (instance? Atom x))
+
 (def keyword->event-type
   {:keyup goog.events.EventType.KEYUP
    :keydown goog.events.EventType.KEYDOWN
@@ -19,14 +22,11 @@
    :mouseout goog.events.EventType.MOUSEOUT
    :mousemove goog.events.EventType.MOUSEMOVE})
 
-(defn atom? [x]
-  (instance? Atom x))
-
 (defn listen
   ([el type] (listen el type false))
   ([el type prevent-default?]
     (let [out (chan)]
-      (events/listen el type
+      (events/listen el (keyword->event-type type)
         (fn [e]
           (if (atom? prevent-default?)
             (when @prevent-default?
