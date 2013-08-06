@@ -304,4 +304,6 @@ amount of flexibility we get in return.
 In the next post we'll see how to put the result of this post and the
 original post into a cohesive whole.
 
+You can see all the code for this post [here](http://github.com/swannodette/swannodette.github.com/blob/master/code/blog/src/blog/responsive/core.cljs).
+
 <script type="text/javascript" src="/assets/js/resp.js"></script>
