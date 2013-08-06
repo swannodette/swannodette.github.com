@@ -4,7 +4,7 @@
   (let [len (count xs)]
     (loop [i 0]
       (if (< i len)
-        (if (xs (nth xs i) x)
+        (if (= (nth xs i) x)
           i
           (recur (inc i)))
         -1))))
