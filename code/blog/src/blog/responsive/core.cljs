@@ -8,9 +8,10 @@
     [cljs.core.async :refer [>! <! alts! put! sliding-buffer chan]]
     [blog.utils.helpers :refer [index-of]]
     [blog.utils.dom
-     :refer [by-id set-html! add-class! remove-class!]]
+     :refer [by-id set-html! add-class! remove-class! el-matcher]]
     [blog.utils.reactive
-     :refer [map filter distinct remove hover hover-child]])
+     :refer [listen map filter distinct remove hover hover-child
+             toggle fan-in]])
   (:import
     goog.events.BrowserEvent))
 
@@ -23,8 +24,14 @@
 
 (def KEYS #{UP_ARROW DOWN_ARROW ENTER})
 
-(defn el-matcher [el]
-  (fn [other] (identical? el other)))
+(defn key-event->keycode [e]
+  (.-keyCode e))
+
+(defn key->keyword [code]
+  (condp = code
+    UP_ARROW :previous
+    DOWN_ARROW :next
+    ENTER :select))
 
 ;; -----------------------------------------------------------------------------
 ;; Interface representation protocols
@@ -96,7 +103,7 @@
     (filter KEYS)
     (map key->keyword)))
 
-(def create-example [id event-fn render-fn ctor-fn]
+(defn create-example [id event-fn render-fn ctor-fn]
   (let [hc      (hover (by-id id))
         prevent (atom false)
         raw     (event-fn prevent)
@@ -122,21 +129,21 @@
 ;; =============================================================================
 ;; Example 0
 
+(defn set-char! [s i c]
+  (str (.substring s 0 i) c (.substring s (inc i))))
+
 (extend-type array
   IHighlightable
   (-highlight! [list n]
-    (aset list n (set-char (aget list n) 0 ">")))
+    (aset list n (set-char! (aget list n) 0 ">")))
   (-unhighlight! [list n]
-    (aset list n (set-char (aget list n) 0 " ")))
+    (aset list n (set-char! (aget list n) 0 " ")))
   
   ISelectable
   (-select! [list n]
-    (aset list n (set-char (aget list n) 1 "*")))
+    (aset list n (set-char! (aget list n) 1 "*")))
   (-unselect! [list n]
-    (aset list n (set-char (aget list n) 1 " "))))
-
-(defn set-char [s i c]
-  (str (.substring s 0 i) c (.substring s (inc i))))
+    (aset list n (set-char! (aget list n) 1 " "))))
 
 (let [ui (array "   Alan Kay"
                 "   J.C.R. Licklider"
@@ -144,7 +151,7 @@
   (create-example "ex0"
     key-events
     (fn []
-      (set-html (by-id "ex0-ui") (.join ui "\n")))
+      (set-html! (by-id "ex0-ui") (.join ui "\n")))
     (fn [events]
       (highlighter events ui))))
 
@@ -158,7 +165,7 @@
   (create-example "ex1"
     key-events
     (fn []
-      (set-html (by-id ex1-ui) (.join ex1-ui "\n")))
+      (set-html! (by-id "ex1-ui") (.join ui "\n")))
     (fn [events]
       (selector (highlighter events ui)
         ui ["smalltalk", "lisp", "prolog", "ml"]))))
@@ -195,4 +202,5 @@
     (fn [prevent] (ex2-events ui prevent))
     nil
     (fn [events]
-      (selector (highlighter events ui) ui))))
+      (selector (highlighter events ui) ui
+        ["pynchon" "proust" "faulkner" "melville"]))))
