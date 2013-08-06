@@ -145,7 +145,7 @@
   (create-example "ex0"
     key-events
     (fn []
-      (dom/set-html! (dom/by-id "ex0-ui") (.join ui "\n")))
+      (dom/set-text! (dom/by-id "ex0-ui") (.join ui "\n")))
     (fn [events]
       (highlighter events ui))))
 
@@ -159,7 +159,7 @@
   (create-example "ex1"
     key-events
     (fn []
-      (dom/set-html! (dom/by-id "ex1-ui") (.join ui "\n")))
+      (dom/set-text! (dom/by-id "ex1-ui") (.join ui "\n")))
     (fn [events]
       (selector (highlighter events ui)
         ui ["smalltalk", "lisp", "prolog", "ml"]))))

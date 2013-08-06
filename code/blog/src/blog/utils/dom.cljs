@@ -1,11 +1,15 @@
 (ns blog.utils.dom
-  (:require [goog.style :as style]))
+  (:require [goog.style :as style]
+            [goog.dom :as dom]))
 
 (defn by-id [id]
   (.getElementById js/document id))
 
 (defn set-html! [el s]
   (set! (.-innerHTML el) s))
+
+(defn set-text! [el s]
+  (dom/setTextContent el s))
 
 (defn set-class! [el class]
   (set! (.-className el) class))
