@@ -149,11 +149,11 @@ see this in a moment.
 What about **event stream processing**? 
 
 ```
-(defn ex0-key-events [prevent-default?]
-  (->> (events js/window "keydown" prevent-default?)
-    (map key-event->keycode)
-    (filter KEYS)
-    (map key->keyword)))
+(defn key-events [prevent-default?]
+  (->> (r/listen js/document :keydown prevent-default?)
+    (r/map key-event->keycode)
+    (r/filter KEYS)
+    (r/map key->keyword)))
 ```
 
 Again we see the
@@ -215,9 +215,15 @@ find in a Rogue-like. In fact our rendering surface is a JavaScript
 array!
 
 ```
-(def ex0-ui (array "   Alan Kay"
-                   "   J.C.R. Licklider"
-                   "   John McCarthy"))
+(let [ui (array "   Alan Kay"
+                "   J.C.R. Licklider"
+                "   John McCarthy")]
+  (create-example "ex0"
+    key-events
+    (fn []
+      (dom/set-text! (dom/by-id "ex0-ui") (.join ui "\n")))
+    (fn [events]
+      (highlighter events ui))))
 ```
 
 With each key press we mutate this array, concatenate it into a
