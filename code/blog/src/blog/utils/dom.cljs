@@ -33,7 +33,7 @@
   (fn [other] (identical? other el)))
 
 (defn by-tag-name [el tag]
-  (prim-seq (.getElementsByTagName el tag)))
+  (prim-seq (dom/getElementsByTagNameAndClass tag nil el)))
 
 (defn offset [el]
   [(style/getPageOffsetLeft el) (style/getPageOffsetTop el)])
