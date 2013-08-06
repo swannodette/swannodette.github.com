@@ -172,7 +172,9 @@
 
 (defn ex2-events [ui prevent]
   (r/fan-in [(key-events prevent)
-             (r/hover-child ui "li")]))
+             (r/hover-child ui "li")
+             (r/map (constantly :select)
+               (r/listen ui :click))]))
 
 (extend-type js/HTMLUListElement
   ICounted
