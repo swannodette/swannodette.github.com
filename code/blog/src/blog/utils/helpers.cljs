@@ -1,6 +1,6 @@
 (ns blog.utils.helpers)
 
-(defn index-of [x xs]
+(defn index-of [xs x]
   (let [len (count xs)]
     (loop [i 0]
       (if (< i len)
