@@ -1,17 +1,13 @@
 (ns blog.responsive.core
-  (:refer-clojure :exclude [map filter distinct remove])
   (:require-macros
     [cljs.core.async.macros :refer [go alt!]]
     [cljs.core.match.macros :refer [match]])
   (:require
     [cljs.core.match]
     [cljs.core.async :refer [>! <! alts! put! sliding-buffer chan]]
-    [blog.utils.helpers :refer [index-of]]
-    [blog.utils.dom
-     :refer [by-id set-html! add-class! remove-class! el-matcher]]
-    [blog.utils.reactive
-     :refer [listen map filter distinct remove hover hover-child
-             toggle fan-in]])
+    [blog.utils.helpers :as h]
+    [blog.utils.dom :as dom]
+    [blog.utils.reactive :as r])
   (:import
     goog.events.BrowserEvent))
 
@@ -98,16 +94,16 @@
 ;; Example constructor
 
 (defn key-events [prevent-default?]
-  (->> (listen js/document :keydown prevent-default?)
-    (map key-event->keycode)
-    (filter KEYS)
-    (map key->keyword)))
+  (->> (r/listen js/document :keydown prevent-default?)
+    (r/map key-event->keycode)
+    (r/filter KEYS)
+    (r/map key->keyword)))
 
 (defn create-example [id event-fn render-fn ctor-fn]
-  (let [hc      (hover (by-id id))
+  (let [hc      (r/hover (dom/by-id id))
         prevent (atom false)
         raw     (event-fn prevent)
-        c       (toggle raw)
+        c       (r/toggle raw)
         changes (ctor-fn (:chan c))
         ctrl    (:control c)]
   (render-fn)
@@ -151,7 +147,7 @@
   (create-example "ex0"
     key-events
     (fn []
-      (set-html! (by-id "ex0-ui") (.join ui "\n")))
+      (dom/set-html! (dom/by-id "ex0-ui") (.join ui "\n")))
     (fn [events]
       (highlighter events ui))))
 
@@ -165,7 +161,7 @@
   (create-example "ex1"
     key-events
     (fn []
-      (set-html! (by-id "ex1-ui") (.join ui "\n")))
+      (dom/set-html! (dom/by-id "ex1-ui") (.join ui "\n")))
     (fn [events]
       (selector (highlighter events ui)
         ui ["smalltalk", "lisp", "prolog", "ml"]))))
@@ -177,8 +173,8 @@
   (prim-seq (.getElementsByTagName el tag)))
 
 (defn ex2-events [ui prevent]
-  (fan-in [(key-events prevent)
-           (hover-child ui "li")]))
+  (r/fan-in [(key-events prevent)
+             (r/hover-child ui "li")]))
 
 (extend-type js/HTMLUListElement
   ICounted
@@ -187,17 +183,17 @@
 
   IHighlightable
   (-highlight! [list n]
-    (add-class! (nth (by-tag-name list "li") n) "highlighted"))
+    (dom/add-class! (nth (by-tag-name list "li") n) "highlighted"))
   (-unhighlight! [list n]
-    (remove-class! (nth (by-tag-name list "li") n) "highlighted"))
+    (dom/remove-class! (nth (by-tag-name list "li") n) "highlighted"))
   
   ISelectable
   (-select! [list n]
-    (add-class! (nth (by-tag-name list "li") n) "selected"))
+    (dom/add-class! (nth (by-tag-name list "li") n) "selected"))
   (-unselect! [list n]
-    (remove-class! (nth (by-tag-name list "li") n) "selected")))
+    (dom/remove-class! (nth (by-tag-name list "li") n) "selected")))
 
-(let [ui (by-id "ex2-list")]
+(let [ui (dom/by-id "ex2-list")]
   (create-example "ex2"
     (fn [prevent] (ex2-events ui prevent))
     nil
