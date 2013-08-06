@@ -1,6 +1,7 @@
 (ns blog.utils.dom
   (:require [goog.style :as style]
-            [goog.dom :as dom]))
+            [goog.dom :as dom]
+            [goog.dom.classes :as classes]))
 
 (defn by-id [id]
   (.getElementById js/document id))
@@ -11,18 +12,14 @@
 (defn set-text! [el s]
   (dom/setTextContent el s))
 
-(defn set-class! [el class]
-  (set! (.-className el) class))
+(defn set-class! [el name]
+  (classes/set el name))
 
 (defn add-class! [el name]
-  (let [cn (.-className el)]
-    (when (= (.search cn name) -1)
-      (set! (.-className el) (str cn " " name)))))
+  (classes/add el name))
 
 (defn remove-class! [el name]
-  (let [cn (.-className el)]
-    (when-not (= (.search cn name) -1)
-      (set! (.-className el) (.replace cn name "")))))
+  (classes/remove el name))
 
 (defn tag-match [tag]
   (fn [el]
