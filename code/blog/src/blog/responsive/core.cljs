@@ -167,9 +167,6 @@
 ;;=============================================================================
 ;; Example 2
 
-(defn by-tag-name [el tag]
-  (prim-seq (.getElementsByTagName el tag)))
-
 (defn ex2-events [ui prevent]
   (r/fan-in [(key-events prevent)
              (r/hover-child ui "li")
@@ -179,19 +176,19 @@
 (extend-type js/HTMLUListElement
   ICounted
   (-count [list]
-    (count (by-tag-name list "li")))
+    (count (dom/by-tag-name list "li")))
 
   IHighlightable
   (-highlight! [list n]
-    (dom/add-class! (nth (by-tag-name list "li") n) "highlighted"))
+    (dom/add-class! (nth (dom/by-tag-name list "li") n) "highlighted"))
   (-unhighlight! [list n]
-    (dom/remove-class! (nth (by-tag-name list "li") n) "highlighted"))
+    (dom/remove-class! (nth (dom/by-tag-name list "li") n) "highlighted"))
   
   ISelectable
   (-select! [list n]
-    (dom/add-class! (nth (by-tag-name list "li") n) "selected"))
+    (dom/add-class! (nth (dom/by-tag-name list "li") n) "selected"))
   (-unselect! [list n]
-    (dom/remove-class! (nth (by-tag-name list "li") n) "selected")))
+    (dom/remove-class! (nth (dom/by-tag-name list "li") n) "selected")))
 
 (let [ui (dom/by-id "ex2-list")]
   (create-example "ex2"
