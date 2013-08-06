@@ -28,13 +28,8 @@
 (defn el-matcher [el]
   (fn [other] (identical? other el)))
 
-(defn index-of [node-list el]
-  (loop [i 0]
-    (if (< i (count node-list))
-      (if (identical? (nth node-list i) el)
-        i
-        (recur (inc i)))
-      -1)))
+(defn by-tag-name [el tag]
+  (prim-seq (.getElementsByTagName el tag)))
 
 (defn offset [el]
   [(style/getPageOffsetLeft el) (style/getPageOffsetTop el)])

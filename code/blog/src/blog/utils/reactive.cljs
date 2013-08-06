@@ -2,11 +2,12 @@
   (:refer-clojure :exclude [map filter remove distinct])
   (:require [goog.events :as events]
             [goog.events.EventType]
-            [goog.dom :as dom]
+            [goog.dom :as gdom]
             [cljs.core.async :refer [>! <! chan put! close!]]
-            [blog.utils.dom
-             :refer [el-matcher tag-match by-tag-name index-of]])
-  (:require-macros [cljs.core.async.macros :refer [go alt!]]))
+            [blog.utils.helpers :refer [index-of]]
+            [blog.utils.dom :as dom])
+  (:require-macros [cljs.core.async.macros :refer [go alt!]])
+  (:import goog.events.EventType))
 
 (def keyword->event-type
   {:keyup goog.events.EventType.KEYUP
@@ -90,24 +91,24 @@
      :control control}))
 
 (defn mouse-enter [el]
-  (let [matcher (el-matcher el)]
+  (let [matcher (dom/el-matcher el)]
     (->> (listen el :mouseover)
       (filter
         (fn [e]
           (and (identical? el (.-target e))
             (if-let [rel (.-relatedTarget e)] 
-              (nil? (dom/getAncestor rel matcher))
+              (nil? (gdom/getAncestor rel matcher))
               true))))
       (map (constantly :enter)))))
 
 (defn mouse-leave [el]
-  (let [matcher (el-matcher el)]
+  (let [matcher (dom/el-matcher el)]
     (->> (listen el :mouseout)
       (filter
         (fn [e]
           (and (identical? el (.-target e))
             (if-let [rel (.-relatedTarget e)]
-              (nil? (dom/getAncestor rel matcher))
+              (nil? (gdom/getAncestor rel matcher))
               true))))
       (map (constantly :leave)))))
 
@@ -115,14 +116,14 @@
   (distinct (fan-in [(mouse-enter el) (mouse-leave el)])))
 
 (defn hover-child [el tag]
-  (let [matcher (tag-match tag)
-        matches (by-tag-name el tag)
+  (let [matcher (dom/tag-match tag)
+        matches (dom/by-tag-name el tag)
         over (->> (listen el :mouseover)
                (map
                  #(let [target (.-target %)]
                     (if (matcher target)
                       target
-                      (if-let [el (dom/getAncestor target matcher)]
+                      (if-let [el (gdom/getAncestor target matcher)]
                         el
                         :no-match))))
                (remove #{:no-match})

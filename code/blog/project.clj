@@ -22,7 +22,6 @@
                     "src/blog/utils"]
      :compiler {:optimizations :whitespace
                 :pretty-print false
-                :static-fns true
                 :output-to "../../assets/js/csp.js"}}
     {:id "csp-adv"
      :source-paths ["src/blog/csp"
@@ -36,7 +35,6 @@
                     "src/blog/utils"]
      :compiler {:optimizations :whitespace
                 :pretty-print false
-                :static-fns true
                 :output-to "../../assets/js/proc.js"}}
     {:id "proc-adv"
      :source-paths ["src/blog/processes"
@@ -50,7 +48,6 @@
                     "src/blog/utils"]
      :compiler {:optimizations :whitespace
                 :pretty-print false
-                :static-fns true
                 :output-to "../../assets/js/resp.js"}}
     {:id "resp-adv"
      :source-paths ["src/blog/responsive"
