@@ -25,6 +25,9 @@
     (when-let [tag-name (.-tagName el)]
       (= tag (.toLowerCase tag-name)))))
 
+(defn el-matcher [el]
+  (fn [other] (identical? other el)))
+
 (defn index-of [node-list el]
   (loop [i 0]
     (if (< i (count node-list))

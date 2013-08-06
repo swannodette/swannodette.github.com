@@ -1,10 +1,12 @@
 (ns blog.utils.reactive
-  (:refer-clojure :exclude [map filter remove])
+  (:refer-clojure :exclude [map filter remove distinct])
   (:require [goog.events :as events]
             [goog.events.EventType]
             [goog.dom :as dom]
-            [cljs.core.async :refer [>! <! chan put! close!]])
-  (:require-macros [cljs.core.async.macros :refer [go]]))
+            [cljs.core.async :refer [>! <! chan put! close!]]
+            [blog.utils.dom
+             :refer [el-matcher tag-match by-tag-name index-of]])
+  (:require-macros [cljs.core.async.macros :refer [go alt!]]))
 
 (def keyword->event-type
   {:keyup goog.events.EventType.KEYUP
@@ -36,8 +38,8 @@
 (defn map [f in]
   (let [out (chan)]
     (go (loop []
-          (if-let [v (<! in)]
-            (do (>! out (f v))
+          (if-let [x (<! in)]
+            (do (>! out (f x))
               (recur))
             (close! out))))
     out))
@@ -63,9 +65,9 @@
 (defn distinct [in]
   (let [out (chan)]
     (go (loop [last nil]
-          (if-let [v (<! in)]
-            (do (when (not= v last) (>! out v))
-              (recur))
+          (if-let [x (<! in)]
+            (do (when (not= x last) (>! out x))
+              (recur x))
             (close! out))))
     out))
 
@@ -82,8 +84,8 @@
     (go (loop [on true]
           (recur
             (alt!
-              in ([v] (when on (>! out v)) on)
-              control ([v] v)))))
+              in ([x] (when on (>! out x)) on)
+              control ([x] x)))))
     {:chan out
      :control control}))
 

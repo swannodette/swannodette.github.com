@@ -90,6 +90,12 @@
 ;; =============================================================================
 ;; Example constructor
 
+(defn key-events [prevent-default?]
+  (->> (listen js/document :keydown prevent-default?)
+    (map key-event->keycode)
+    (filter KEYS)
+    (map key->keyword)))
+
 (def create-example [id event-fn render-fn ctor-fn]
   (let [hc      (hover (by-id id))
         prevent (atom false)
@@ -116,12 +122,6 @@
 ;; =============================================================================
 ;; Example 0
 
-(defn ex0-events [prevent-default?]
-  (->> (listen js/document :keydown prevent-default?)
-    (map key-event->keycode)
-    (filter KEYS)
-    (map key->keyword)))
-
 (extend-type array
   IHighlightable
   (-highlight! [list n]
@@ -142,7 +142,7 @@
                 "   J.C.R. Licklider"
                 "   John McCarthy")]
   (create-example "ex0"
-    ex0-events
+    key-events
     (fn []
       (set-html (by-id "ex0-ui") (.join ui "\n")))
     (fn [events]
@@ -151,22 +151,14 @@
 ;; =============================================================================
 ;; Example 1
 
-(defn ex1-events [prevent-default?]
-  (->> (events js/document :keydown prevent-default?)
-    (map key-event->keycode)
-    (filter KEYS)
-    (map key->keyword)))
-
-(def ex1-ui (array "   Smalltalk"
-                   "   Lisp"
-                   "   Prolog"
-                   "   ML"))
-
-(let [ui (by-id "ex1-ui")]
+(let [ui (array "   Smalltalk"
+                "   Lisp"
+                "   Prolog"
+                "   ML")]
   (create-example "ex1"
-    ex1-events
+    key-events
     (fn []
-      (set-html ui (.join ex1-ui "\n")))
+      (set-html (by-id ex1-ui) (.join ex1-ui "\n")))
     (fn [events]
       (selector (highlighter events ui)
         ui ["smalltalk", "lisp", "prolog", "ml"]))))
@@ -177,13 +169,9 @@
 (defn by-tag-name [el tag]
   (prim-seq (.getElementsByTagName el tag)))
 
-(defn ex2-events [ui prevent-default?]
-  (fan-in
-    [(->> (events js/document :keydown prevent-default?)
-       (map key-event->keycode)
-       (filter KEYS)
-       (map key->keyword))
-     (hover-child ui "li")]))
+(defn ex2-events [ui prevent]
+  (fan-in [(key-events prevent)
+           (hover-child ui "li")]))
 
 (extend-type js/HTMLUListElement
   ICounted
@@ -201,12 +189,6 @@
     (add-class! (nth (by-tag-name list "li") n) "selected"))
   (-unselect! [list n]
     (remove-class! (nth (by-tag-name list "li") n) "selected")))
-
-(defn ex2-key-events [prevent-default?]
-  (->> (listen js/document :keydown prevent-default?)
-    (map key-event->keycode)
-    (filter KEYS)
-    (map key->keyword)))
 
 (let [ui (by-id "ex2-list")]
   (create-example "ex2"

@@ -10,7 +10,8 @@
 
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/clojurescript "0.0-1853"]
-                 [org.clojure/core.async "0.1.0-SNAPSHOT"]]
+                 [org.clojure/core.async "0.1.0-SNAPSHOT"]
+                 [org.clojure/core.match "0.2.0-rc5"]]
 
   :plugins [[lein-cljsbuild "0.3.2"]]
 
@@ -29,7 +30,8 @@
      :compiler {:optimizations :advanced
                 :pretty-print false
                 :output-to "../../assets/js/csp.js"}}
-     {:id "proc-dev"
+
+    {:id "proc-dev"
      :source-paths ["src/blog/processes"
                     "src/blog/utils"]
      :compiler {:optimizations :whitespace
@@ -41,4 +43,18 @@
                     "src/blog/utils"]
      :compiler {:optimizations :advanced
                 :pretty-print false
-                :output-to "../../assets/js/proc.js"}}]})
+                :output-to "../../assets/js/proc.js"}}
+
+    {:id "resp-dev"
+     :source-paths ["src/blog/responsive"
+                    "src/blog/utils"]
+     :compiler {:optimizations :whitespace
+                :pretty-print false
+                :static-fns true
+                :output-to "../../assets/js/resp.js"}}
+    {:id "resp-adv"
+     :source-paths ["src/blog/responsive"
+                    "src/blog/utils"]
+     :compiler {:optimizations :advanced
+                :pretty-print false
+                :output-to "../../assets/js/resp.js"}}]})
