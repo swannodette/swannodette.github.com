@@ -139,30 +139,32 @@
   (-unselect! [list n]
     (aset list n (set-char! (aget list n) 1 " "))))
 
-(let [ui (array "   Alan Kay"
-                "   J.C.R. Licklider"
-                "   John McCarthy")]
-  (create-example "ex0"
-    key-events
-    (fn []
-      (dom/set-text! (dom/by-id "ex0-ui") (.join ui "\n")))
-    (fn [events]
-      (highlighter events ui))))
+(when (dom/by-id "ex0")
+  (let [ui (array "   Alan Kay"
+                  "   J.C.R. Licklider"
+                  "   John McCarthy")]
+    (create-example "ex0"
+      key-events
+      (fn []
+        (dom/set-text! (dom/by-id "ex0-ui") (.join ui "\n")))
+      (fn [events]
+        (highlighter events ui)))))
 
 ;; =============================================================================
 ;; Example 1
 
-(let [ui (array "   Smalltalk"
-                "   Lisp"
-                "   Prolog"
-                "   ML")]
-  (create-example "ex1"
-    key-events
-    (fn []
-      (dom/set-text! (dom/by-id "ex1-ui") (.join ui "\n")))
-    (fn [events]
-      (selector (highlighter events ui)
-        ui ["smalltalk", "lisp", "prolog", "ml"]))))
+(when (dom/by-id "ex1")
+  (let [ui (array "   Smalltalk"
+                  "   Lisp"
+                  "   Prolog"
+                  "   ML")]
+    (create-example "ex1"
+      key-events
+      (fn []
+        (dom/set-text! (dom/by-id "ex1-ui") (.join ui "\n")))
+      (fn [events]
+        (selector (highlighter events ui)
+          ui ["smalltalk", "lisp", "prolog", "ml"])))))
 
 ;;=============================================================================
 ;; Example 2
@@ -190,10 +192,11 @@
   (-unselect! [list n]
     (dom/remove-class! (nth (dom/by-tag-name list "li") n) "selected")))
 
-(let [ui (dom/by-id "ex2-list")]
-  (create-example "ex2"
-    (fn [prevent] (ex2-events ui prevent))
-    nil
-    (fn [events]
-      (selector (highlighter events ui) ui
-        ["pynchon" "proust" "faulkner" "melville"]))))
+(when (dom/by-id "ex2-list")
+  (let [ui (dom/by-id "ex2-list")]
+    (create-example "ex2"
+      (fn [prevent] (ex2-events ui prevent))
+      nil
+      (fn [events]
+        (selector (highlighter events ui) ui
+          ["pynchon" "proust" "faulkner" "melville"])))))
