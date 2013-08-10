@@ -165,7 +165,7 @@
 
 (defn html-menu-events [input menu]
   (r/fan-in
-    [(->> (r/listen input :keydown)
+    [(->> (r/listen input :keyup)
        (r/map key-event->keycode)
        (r/filter KEYS)
        (r/map key->keyword))
@@ -174,7 +174,7 @@
        (r/listen ui :click))]))
 
 (defn html-input-events [input]
-  (->> (r//listen input :keyup)
+  (->> (r/listen input :keyup)
     (r/map #(.-value input))
     (r/split #(string/blank? %))))
 
