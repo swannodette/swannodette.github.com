@@ -1,7 +1,9 @@
 (ns blog.utils.reactive
-  (:refer-clojure :exclude [map filter remove distinct])
+  (:refer-clojure :exclude [map filter remove distinct concat])
   (:require [goog.events :as events]
             [goog.events.EventType]
+            [goog.net.Jsonp]
+            [goog.Uri]
             [goog.dom :as gdom]
             [cljs.core.async :refer [>! <! chan put! close!]]
             [blog.utils.helpers :refer [index-of]]
@@ -159,3 +161,10 @@
                        (not (matcher (.-relatedTarget e))))))
               (map (constantly :clear)))]
     (distinct (fan-in [over out]))))
+
+(defn jsonp
+  ([uri] (jsonp (chan) uri))
+  ([c uri]
+    (let [gjsonp (goog.net.Jsonp. (goog.Uri. uri))]
+      (.send gjsonp nil #(put! c %))
+      c)))

@@ -54,4 +54,19 @@
                     "src/blog/utils"]
      :compiler {:optimizations :advanced
                 :pretty-print false
-                :output-to "../../assets/js/resp.js"}}]})
+                :output-to "../../assets/js/resp.js"}}
+
+    {:id "ac-dev"
+     :source-paths ["src/blog/autocomplete"
+                    "src/blog/responsive"
+                    "src/blog/utils"]
+     :compiler {:optimizations :whitespace
+                :pretty-print false
+                :output-to "../../assets/js/ac.js"}}
+    {:id "ac-adv"
+     :source-paths ["src/blog/autcomplete"
+                    "src/blog/responsive"
+                    "src/blog/utils"]
+     :compiler {:optimizations :advanced
+                :pretty-print false
+                :output-to "../../assets/js/ac.js"}}]})

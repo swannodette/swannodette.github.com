@@ -9,6 +9,9 @@
     [blog.utils.dom :as dom]
     [blog.utils.reactive :as r]))
 
+(def base-url
+  "http://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=")
+
 ;; -----------------------------------------------------------------------------
 ;; Interface representation protocols
 
@@ -20,10 +23,13 @@
   (-set-text! [field txt])
   (-text [field]))
 
+(defprotocol IUIList
+  (-set-items! [list items]))
+
 ;; =============================================================================
 ;; Autocompleter
 
-(defn menu-proc [last-event select cancel menu data]
+(defn menu-proc [last-event select cancel input menu data]
   (let [{sel :chan ctrl :control}
         (resp/selector
           (r/concat [last-event] (resp/highlighter select menu))
@@ -37,21 +43,26 @@
             (-hide! menu)
             v))))))
 
+(defn show-results [menu items]
+  (->> (for [item items] (str "<li>" items "</li>"))
+    (apply str)
+    (-set-items! menu)))
+
 (defn autocompleter* [fetch select cancel input menu]
   (let [out (chan)]
-    (go (loop [data nil]
+    (go (loop [items nil]
           (let [[v sc] (alts! [cancel select fetch])]
             (cond
               (= sc cancel)
               (do (-hide! menu)
-                (recur data))
+                (recur items))
 
-              (and data (= sc select))
-              (let [v (<! (menu-proc v select cancel menu data))]
+              (and items (= sc select))
+              (let [v (<! (menu-proc v select cancel input menu items))]
                 (if (= v ::cancel)
                   (recur nil)
                   (do (>! out v)
-                    (recur data)))))
+                    (recur items)))))
 
               (= sc fetch)
               (let [[v c] (alts! [cancel (r/jsonp (str base-url v))])]
@@ -59,11 +70,12 @@
                   (do (-hide! menu)
                     (recur nil))
                   (do (-show! menu)
-                    (show-results res)
-                    (recur (nth v 1)))))
+                    (let [items (nth v 1)]
+                      (show-results menu items)
+                      (recur items)))))
 
               :else
-              (recur data)))))
+              (recur items))))
     out))
 
 ;; =============================================================================
@@ -72,7 +84,7 @@
 (extend-type js/HTMLInput
   ITextField
   (-set-text! [field text]
-    (set (.-value list) text))
+    (set! (.-value list) text))
   (-text [field]
     (.-value field)))
 
@@ -89,9 +101,9 @@
        (r/map resp/key-event->keycode)
        (r/filter resp/KEYS)
        (r/map resp/key->keyword))
-     (r/hover-child ui "li")
+     (r/hover-child menu "li")
      (r/map (constantly :select)
-       (r/listen ui :click))]))
+       (r/listen menu :click))]))
 
 (defn html-input-events [input]
   (->> (r/listen input :keyup)
@@ -100,7 +112,7 @@
 
 (defn html-autocompleter [input menu msecs]
   (let [[filtered removed] (html-input-events input)
-        ac (autocomplete
+        ac (autocompleter*
              (r/throttle filtered msecs)
              (html-menu-events input menu)
              (r/map (constantly :cancel)
