@@ -33,11 +33,11 @@
   (let [{sel :chan ctrl :control} (resp/selector select menu data)]
     (go
       (let [[v sc] (alts! [sel cancel])]
+        (>! ctrl :exit)
+        (-hide! menu)
         (if (= sc cancel)
           ::cancel
           (do (-set-text! input v)
-            (>! ctrl :exit)
-            (-hide! menu)
             v))))))
 
 (defn autocompleter* [fetch select cancel completions input menu]
@@ -132,3 +132,4 @@
            (dom/by-id "autocomplete-menu")
            750)]
   (go (while true (<! ac))))
+
