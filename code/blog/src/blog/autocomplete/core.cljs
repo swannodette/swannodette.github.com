@@ -5,99 +5,24 @@
   (:require
     [cljs.core.match]
     [cljs.core.async :refer [>! <! alts! put! sliding-buffer chan]]
+    [blog.reponsive.core :as resp]
     [blog.utils.dom :as dom]
     [blog.utils.reactive :as r]))
 
 ;; -----------------------------------------------------------------------------
-;; Declarations
-
-(def ENTER 13)
-(def UP_ARROW 38)
-(def DOWN_ARROW 40)
-
-(def KEYS #{UP_ARROW DOWN_ARROW ENTER})
-
-(defn key-event->keycode [e]
-  (.-keyCode e))
-
-(defn key->keyword [code]
-  (condp = code
-    UP_ARROW :previous
-    DOWN_ARROW :next
-    ENTER :select))
-
-;; -----------------------------------------------------------------------------
 ;; Interface representation protocols
-
-(defprotocol IHighlightable
-  (-highlight! [list n])
-  (-unhighlight! [list n]))
-
-(defprotocol ISelectable
-  (-select! [list n])
-  (-unselect! [list n]))
 
 (defprotocol IHideable
   (-hide! [view])
   (-show! [view]))
-
-;; -----------------------------------------------------------------------------
-;; Highlighting and Selection
-
-(defn handle-change-event [list idx key]
-  (let [cnt (count list)]
-    (match [idx key]
-      [::none :next    ] 0
-      [::none :previous] (dec cnt)
-      [_      :next    ] (mod (inc idx) cnt)
-      [_      :previous] (mod (dec idx) cnt))))
-
-(defn handle-event [e cur list]
-  (when (and list (number? cur))
-    (-unhighlight! list cur))
-  (if (= e :clear)
-    ::none
-    (let [n (if (number? e) e (handle-change-event list cur e))]
-      (when list (-highlight! list n))
-      n)))
-
-(defn highlighter [in list]
-  (let [out (chan)]
-    (go (loop [highlighted ::none]
-          (let [e (<! in)]
-            (if (or (#{:next :previous :clear} e) (number? e))
-              (let [highlighted (handle-event e highlighted list)]
-                (>! out highlighted)
-                (recur highlighted))
-              (do (>! out e)
-                (recur highlighted))))))
-    out))
-
-(defn selector [in list data]
-  (let [out (chan)]
-    (go (loop [highlighted ::none selected ::none]
-          (let [e (<! in)]
-            (if (= e :select)
-              (do
-                (when (and list (number? selected))
-                  (-unselect! list selected))
-                (when list (-select! list highlighted))
-                (>! out [:select (nth data highlighted)])
-                (recur highlighted highlighted))
-              (do
-                (>! out e)
-                (if (or (= e ::none) (number? e))
-                  (recur e selected)
-                  (recur highlighted selected)))))))
-    out))
 
 ;; =============================================================================
 ;; Autocompleter
 
 (defn menu-proc [last-event select cancel menu data]
   (let [{sel :chan ctrl :control}
-        (selector
-          (r/concat [last-event] (highlighter select menu))
+        (resp/selector
+          (r/concat [last-event] (resp/highlighter select menu))
           menu data)]
     (go
       (let [[v sc] (alts! [sel cancel])]
@@ -145,13 +70,13 @@
   (-count [list]
     (count (dom/by-tag-name list "li")))
 
-  IHighlightable
+  resp/IHighlightable
   (-highlight! [list n]
     (dom/add-class! (nth (dom/by-tag-name list "li") n) "highlighted"))
   (-unhighlight! [list n]
     (dom/remove-class! (nth (dom/by-tag-name list "li") n) "highlighted"))
   
-  ISelectable
+  resp/ISelectable
   (-select! [list n]
     (dom/add-class! (nth (dom/by-tag-name list "li") n) "selected"))
   (-unselect! [list n]
@@ -166,9 +91,9 @@
 (defn html-menu-events [input menu]
   (r/fan-in
     [(->> (r/listen input :keyup)
-       (r/map key-event->keycode)
-       (r/filter KEYS)
-       (r/map key->keyword))
+       (r/map resp/key-event->keycode)
+       (r/filter resp/KEYS)
+       (r/map resp/key->keyword))
      (r/hover-child ui "li")
      (r/map (constantly :select)
        (r/listen ui :click))]))
