@@ -163,10 +163,7 @@
   (-show! [list]
     (dom/remove-class! list "hidden")))
 
-;; =============================================================================
-;; The Example
-
-(defn menu-events [input menu]
+(defn html-menu-events [input menu]
   (r/fan-in
     [(->> (r/listen input :keydown)
        (r/map key-event->keycode)
@@ -176,22 +173,26 @@
      (r/map (constantly :select)
        (r/listen ui :click))]))
 
-(defn input-events [input]
-  (->> (events/listen input :keyup)
-    (map #(.-value input))
+(defn html-input-events [input]
+  (->> (r//listen input :keyup)
+    (r/map #(.-value input))
     (r/split #(string/blank? %))))
 
 (defn html-autocompleter [input menu msecs]
-  (let [[filtered removed] (input-events input)
+  (let [[filtered removed] (html-input-events input)
         ac (autocomplete
-             (throttle filtered msecs)
-             (menu-events input menu)
-             (map (constantly :cancel)
-               (fan/in [removed (events/listen input :blur)]))
+             (r/throttle filtered msecs)
+             (html-menu-events input menu)
+             (r/map (constantly :cancel)
+               (r/fan-in [removed (r/listen input :blur)]))
              input menu)]
-    (go (while true (<! ac)))))
+    ac))
 
-(html-autocompleter
-  (by-id "autocomplete")
-  (by-id "atutocomplete-menu")
-  750)
+;; =============================================================================
+;; Example
+
+(let [ac (html-autocompleter
+           (dom/by-id "autocomplete")
+           (dom/by-id "atutocomplete-menu")
+           750)]
+  (go (while true (<! ac))))
