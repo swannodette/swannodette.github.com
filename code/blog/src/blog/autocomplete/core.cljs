@@ -35,7 +35,7 @@
                (resp/highlighter select menu ctrl)
                menu data)]
     (go
-      (let [[v sc] (alts! [sel cancel])]
+      (let [[v sc] (alts! [cancel sel])]
         (>! ctrl :exit)
         (-hide! menu)
         (if (= sc cancel)
