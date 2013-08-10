@@ -66,6 +66,15 @@
             (close! out))))
     out))
 
+(defn spool [xs]
+  (let [out (chan)]
+    (go (loop [xs (seq xs)]
+          (if xs
+            (do (>! out (first xs))
+              (recur (next xs)))
+            (close! out))))
+    out))
+
 (defn split [pred in]
   (let [out1 (chan)
         out2 (chan)]
