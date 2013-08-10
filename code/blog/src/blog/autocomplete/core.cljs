@@ -81,7 +81,7 @@
 ;; =============================================================================
 ;; HTML Specific Code
 
-(extend-type js/HTMLInput
+(extend-type js/HTMLInputElement
   ITextField
   (-set-text! [field text]
     (set! (.-value list) text))
