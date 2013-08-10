@@ -16,6 +16,10 @@
   (-hide! [view])
   (-show! [view]))
 
+(defprotocol ITextField
+  (-set-text! [field txt])
+  (-text [field]))
+
 ;; =============================================================================
 ;; Autocompleter
 
@@ -65,6 +69,13 @@
 ;; =============================================================================
 ;; HTML Specific Code
 
+(extend-type js/HTMLInput
+  ITextField
+  (-set-text! [field text]
+    (set (.-value list) text))
+  (-text [field]
+    (.-value field)))
+
 (extend-type js/HTMLUListElement
   IHideable
   (-hide! [list]
@@ -84,7 +95,7 @@
 
 (defn html-input-events [input]
   (->> (r/listen input :keyup)
-    (r/map #(.-value input))
+    (r/map #(-text input))
     (r/split #(string/blank? %))))
 
 (defn html-autocompleter [input menu msecs]
