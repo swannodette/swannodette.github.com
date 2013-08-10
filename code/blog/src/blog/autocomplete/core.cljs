@@ -40,12 +40,7 @@
             (-hide! menu)
             v))))))
 
-(defn show-results [menu items]
-  (->> (for [item items] (str "<li>" items "</li>"))
-    (apply str)
-    (-set-items! menu)))
-
-(defn autocompleter* [fetch select cancel input menu]
+(defn autocompleter* [fetch select cancel completions input menu]
   (let [out (chan)]
     (go (loop [items nil]
           (let [[v sc] (alts! [cancel select fetch])]
@@ -63,13 +58,13 @@
                     (recur items)))))
 
               (= sc fetch)
-              (let [[v c] (alts! [cancel (r/jsonp (str base-url v))])]
+              (let [[v c] (alts! [cancel (completions v)])]
                 (if (= c cancel)
                   (do (-hide! menu)
                     (recur nil))
                   (do (-show! menu)
                     (let [items (nth v 1)]
-                      (show-results menu items)
+                      (-set-items! menu items)
                       (recur items)))))
 
               :else
@@ -91,7 +86,13 @@
   (-hide! [list]
     (dom/add-class! list "hidden"))
   (-show! [list]
-    (dom/remove-class! list "hidden")))
+    (dom/remove-class! list "hidden"))
+
+  IUIList
+  (-set-items! [list items]
+    (->> (for [item items] (str "<li>" items "</li>"))
+      (apply str)
+      (dom/set-html! list))))
 
 (defn html-menu-events [input menu]
   (r/fan-in
@@ -108,6 +109,10 @@
     (r/map #(-text input))
     (r/split #(string/blank? %))))
 
+(defn html-completions [base-url]
+  (fn [query]
+    (r/jsonp (str base-url query))))
+
 (defn html-autocompleter [input menu msecs]
   (let [[filtered removed] (html-input-events input)
         ac (autocompleter*
@@ -115,6 +120,7 @@
              (html-menu-events input menu)
              (r/map (constantly :cancel)
                (r/fan-in [removed (r/listen input :blur)]))
+             (html-completions base-url)
              input menu)]
     ac))
 
