@@ -30,7 +30,10 @@
 ;; Autocompleter
 
 (defn menu-proc [select cancel input menu data]
-  (let [{sel :chan ctrl :control} (resp/selector select menu data)]
+  (let [ctrl (chan)
+        sel  (resp/selector
+               (resp/highlighter select menu ctrl)
+               menu data)]
     (go
       (let [[v sc] (alts! [sel cancel])]
         (>! ctrl :exit)

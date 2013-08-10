@@ -57,17 +57,22 @@
       (-highlight! list n)
       n)))
 
-(defn highlighter [in list]
-  (let [out (chan)]
-    (go (loop [highlighted ::none]
-          (let [e (<! in)]
-            (if (or (#{:next :previous :clear} e) (number? e))
-              (let [highlighted (handle-event e highlighted list)]
-                (>! out highlighted)
-                (recur highlighted))
-              (do (>! out e)
-                (recur highlighted))))))
-    out))
+(defn highlighter
+  ([in list] (highlighter in list (chan)))
+  ([in list control]
+    (let [out (chan)]
+      (go (loop [highlighted ::none]
+            (let [[e c] (alts! [in control])]
+              (condp = c
+                control :done
+
+                in (if (or (#{:next :previous :clear} e) (number? e))
+                     (let [highlighted (handle-event e highlighted list)]
+                       (>! out highlighted)
+                       (recur highlighted))
+                     (do (>! out e)
+                       (recur highlighted)))))))
+      out)))
 
 (defn selector [in list data]
   (let [out (chan)]
