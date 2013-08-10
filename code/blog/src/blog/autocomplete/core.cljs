@@ -125,6 +125,6 @@
 
 (let [ac (html-autocompleter
            (dom/by-id "autocomplete")
-           (dom/by-id "atutocomplete-menu")
+           (dom/by-id "autocomplete-menu")
            750)]
   (go (while true (<! ac))))

@@ -5,7 +5,7 @@
             [goog.net.Jsonp]
             [goog.Uri]
             [goog.dom :as gdom]
-            [cljs.core.async :refer [>! <! chan put! close!]]
+            [cljs.core.async :refer [>! <! chan put! close! timeout]]
             [blog.utils.helpers :refer [index-of]]
             [blog.utils.dom :as dom])
   (:require-macros [cljs.core.async.macros :refer [go alt!]])
@@ -22,7 +22,8 @@
    :dblclick goog.events.EventType.DBLCLICK
    :mouseover goog.events.EventType.MOUSEOVER
    :mouseout goog.events.EventType.MOUSEOUT
-   :mousemove goog.events.EventType.MOUSEMOVE})
+   :mousemove goog.events.EventType.MOUSEMOVE
+   :blur goog.events.EventType.BLUR})
 
 (defn listen
   ([el type] (listen el type false))
@@ -168,3 +169,44 @@
     (let [gjsonp (goog.net.Jsonp. (goog.Uri. uri))]
       (.send gjsonp nil #(put! c %))
       c)))
+
+(defn throttle
+  ([source msecs]
+    (throttle (chan) source msecs))
+  ([out source msecs]
+    (go
+      (loop [state ::init last nil cs [source]]
+        (let [[_ sync] cs]
+          (let [[v sc] (alts! cs)]
+            (condp = sc
+              source (condp = state
+                       ::init (do (>! out v)
+                                (recur ::throttling last
+                                  (conj cs (timeout msecs))))
+                       ::throttling (recur state v cs))
+              sync (if last 
+                     (do (>! out last)
+                       (recur state nil
+                         (conj (pop cs) (timeout msecs))))
+                     (recur ::init last (pop cs))))))))
+    out))
+
+(defn debounce
+  ([source msecs]
+    (debounce (chan) source msecs))
+  ([out source msecs]
+    (go
+      (loop [state ::init cs [source]]
+        (let [[_ threshold] cs]
+          (let [[v sc] (alts! cs)]
+            (condp = sc
+              source (condp = state
+                       ::init
+                         (do (>! out v)
+                           (recur ::debouncing
+                             (conj cs (timeout msecs))))
+                       ::debouncing
+                         (recur state
+                           (conj (pop cs) (timeout msecs))))
+              threshold (recur ::init (pop cs)))))))
+    out))
