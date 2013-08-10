@@ -29,11 +29,8 @@
 ;; =============================================================================
 ;; Autocompleter
 
-(defn menu-proc [last-event select cancel input menu data]
-  (let [{sel :chan ctrl :control}
-        (resp/selector
-          (r/concat [last-event] (resp/highlighter select menu))
-          menu data)]
+(defn menu-proc [select cancel input menu data]
+  (let [{sel :chan ctrl :control} (resp/selector select menu data)]
     (go
       (let [[v sc] (alts! [sel cancel])]
         (if (= sc cancel)
@@ -58,7 +55,8 @@
                 (recur items))
 
               (and items (= sc select))
-              (let [v (<! (menu-proc v select cancel input menu items))]
+              (let [v (<! (menu-proc (r/concat [v] select)
+                            cancel input menu items))]
                 (if (= v ::cancel)
                   (recur nil)
                   (do (>! out v)
