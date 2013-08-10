@@ -54,13 +54,37 @@
             (close! out))))
     out))
 
-(defn remove [f source]
+(defn remove [f in]
   (let [out (chan)]
     (go (loop []
-          (if-let [v (<! source)]
+          (if-let [v (<! in)]
             (do (when-not (f v) (>! out v))
               (recur))
             (close! out))))
+    out))
+
+(defn split [pred in]
+  (let [out1 (chan)
+        out2 (chan)]
+    (go (loop []
+          (if-let [v (<! in)]
+            (if (pred v)
+              (do (>! out1 v)
+                (recur))
+              (do (>! out2 v)
+                (recur))))))
+    [out1 out2]))
+
+(defn concat [xs in]
+  (let [out (chan)]
+    (go (loop [xs (seq xs)]
+          (if xs
+            (do (>! out (first xs))
+              (recur (next xs)))
+            (if-let [x (<! in)]
+              (do (>! out x)
+                (recur xs))
+              (close! out)))))
     out))
 
 (defn distinct [in]
