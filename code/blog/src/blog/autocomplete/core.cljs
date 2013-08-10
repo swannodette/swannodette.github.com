@@ -5,7 +5,7 @@
   (:require
     [cljs.core.match]
     [cljs.core.async :refer [>! <! alts! put! sliding-buffer chan]]
-    [blog.reponsive.core :as resp]
+    [blog.responsive.core :as resp]
     [blog.utils.dom :as dom]
     [blog.utils.reactive :as r]))
 
