@@ -66,22 +66,6 @@
 ;; HTML Specific Code
 
 (extend-type js/HTMLUListElement
-  ICounted
-  (-count [list]
-    (count (dom/by-tag-name list "li")))
-
-  resp/IHighlightable
-  (-highlight! [list n]
-    (dom/add-class! (nth (dom/by-tag-name list "li") n) "highlighted"))
-  (-unhighlight! [list n]
-    (dom/remove-class! (nth (dom/by-tag-name list "li") n) "highlighted"))
-  
-  resp/ISelectable
-  (-select! [list n]
-    (dom/add-class! (nth (dom/by-tag-name list "li") n) "selected"))
-  (-unselect! [list n]
-    (dom/remove-class! (nth (dom/by-tag-name list "li") n) "selected"))
-
   IHideable
   (-hide! [list]
     (dom/add-class! list "hidden"))
