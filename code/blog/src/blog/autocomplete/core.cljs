@@ -1,9 +1,7 @@
 (ns blog.autocomplete.core
   (:require-macros
-    [cljs.core.async.macros :refer [go alt!]]
-    [cljs.core.match.macros :refer [match]])
+    [cljs.core.async.macros :refer [go alt!]])
   (:require
-    [cljs.core.match]
     [cljs.core.async :refer [>! <! alts! put! sliding-buffer chan]]
     [blog.responsive.core :as resp]
     [blog.utils.dom :as dom]
@@ -130,9 +128,13 @@
 ;; =============================================================================
 ;; Example
 
-(let [ac (html-autocompleter
+#_(let [ac (html-autocompleter
            (dom/by-id "autocomplete")
            (dom/by-id "autocomplete-menu")
            750)]
   (go (while true (<! ac))))
+
+(go
+  (-set-items! (dom/by-id "autocomplete-menu")
+    (nth (<! (r/jsonp (str base-url "dog"))) 1)))
 

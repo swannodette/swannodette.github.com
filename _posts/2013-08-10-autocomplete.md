@@ -48,11 +48,92 @@ tags: []
   }
 </style>
 
+This is the long promised autocompleter post. It's a doozy so I've
+decided to present it as a piece of literate code. If you haven't read
+the first two posts I recommend going over those first.
+
+Here's the autocompleter in action. Make sure to try the following
+
+* Typing control characters should not trigger async request
+* Losing focus via clicking or via tabs should close menu
+* Keyboard based selection works
+* Mouse based selection works
+
 <div id="ac-ex0">
     <div class="ac-container">
         <input id="autocomplete" type="text"/>
         <ul id="autocomplete-menu"></ul>
     </div>
 </div>
+
+Unlike many reactive autocompleter you'll find around the web what
+follows is a non-trivial autocompleter closer to the type of component
+you would actually want to integrate. As we go along we'll note the
+advantages over the implementation provided by jQuery UI.
+
+First we declare our namespace. We import the async functions and
+macros. We also import the components from the previous blog post, no
+need to write that code again. We also import some dom helpers and
+some reactive conveniences.
+
+```
+(ns blog.autocomplete.core
+  (:require-macros
+    [cljs.core.async.macros :refer [go alt!]]
+  (:require
+    [cljs.core.async :refer [>! <! alts! put! sliding-buffer chan]]
+    [blog.responsive.core :as resp]
+    [blog.utils.dom :as dom]
+    [blog.utils.reactive :as r]))
+```
+
+We setup the url we'll use to populate our menu:
+
+```
+(def base-url
+  "http://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=")
+```
+
+The autocompleter requires some new interface representations - we
+need hideable UI components, we need to be able to set text fields,
+and we need to update the contents of a list.
+
+```
+;; -----------------------------------------------------------------------------
+;; Interface representation protocols
+
+(defprotocol IHideable
+  (-hide! [view])
+  (-show! [view]))
+
+(defprotocol ITextField
+  (-set-text! [field txt])
+  (-text [field]))
+
+(defprotocol IUIList
+  (-set-items! [list items]))
+```
+
+We can now think about the autocompleter. If you look at the jQuery
+autocompleter you'll notice a lot of logic about event suppression,
+this is because you have duplicate event handling between the jQuery
+autocompleter and the jQuery menu.
+
+In this version we're going to something a bit novel, the
+autocompleter will not hold onto a menu instance, it will construct
+the menu on the fly as needed and we can complete avoid the problem of
+event suppression as we'll just wait until the menu subprocess
+completes.
+
+Read the last one more time - *we can just wait until the menu
+subprocess completes*. That is when the menu subprocess finishes we
+resume where we left off.
+
+Because some of the event handling code is in the jQuery autocompleter
+all the browser quirks must be handled there. In our implementation we
+have a pure process coordination core devoid of all the browser
+specific insanity. It's precisely for this reason why we can
+fearlessly combine all the work from the previous post with the code
+in this post. We can quarantine client idiosyncracies!
 
 <script type="text/javascript" src="/assets/js/ac.js"></script>
