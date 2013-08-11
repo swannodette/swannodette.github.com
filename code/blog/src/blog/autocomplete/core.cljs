@@ -93,7 +93,7 @@
 
   IUIList
   (-set-items! [list items]
-    (->> (for [item items] (str "<li>" items "</li>"))
+    (->> (for [item items] (str "<li>" item "</li>"))
       (apply str)
       (dom/set-html! list))))
 
