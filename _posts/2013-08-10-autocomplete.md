@@ -136,4 +136,39 @@ specific insanity. It's precisely for this reason why we can
 fearlessly combine all the work from the previous post with the code
 in this post. We can quarantine client idiosyncracies!
 
+Let's cover the HTML autocompleter implementation:
+
+First we want to write complete implementation of `ITextField` for HTML inputs.
+
+```
+(extend-type js/HTMLInputElement
+  ITextField
+  (-set-text! [field text]
+    (set! (.-value list) text))
+  (-text [field]
+    (.-value field)))
+```
+
+Now we want HTML `ul` tags to act as hideable ui components. So we add
+concrete implementations of `IHideable` and `IUIList`.
+
+```
+(extend-type js/HTMLUListElement
+  IHideable
+  (-hide! [list]
+    (dom/add-class! list "hidden"))
+  (-show! [list]
+    (dom/remove-class! list "hidden"))
+
+  IUIList
+  (-set-items! [list items]
+    (->> (for [item items] (str "<li>" item "</li>"))
+      (apply str)
+      (dom/set-html! list))))
+```
+
+Now we cover the event handling.
+
+Finally we put it all together.
+
 <script type="text/javascript" src="/assets/js/ac.js"></script>
