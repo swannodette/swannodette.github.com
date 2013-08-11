@@ -9,7 +9,8 @@ tags: []
 
 <style>
   #ac-ex0 {
-    height: 260px;
+    margin: 20px 0;
+    height: 75px;
     background-color: #efefef;
     padding: 10px;
   }
@@ -19,7 +20,7 @@ tags: []
   }
 
   #ac-ex0 input {
-    width: 100%;
+    width: 460px;
     padding: 5px;
     font-size: 15px;
     font-family: inconsolata;
@@ -28,8 +29,19 @@ tags: []
     -webkit-box-sizing: border-box;
   }
 
+  #ac-ex0 label {
+    font-family: inconsolata;
+    font-weight: bold;
+    width: 100px;
+    display: inline-block;
+    text-align: right;
+  }
+
+  #ac-ex0 .section {
+    margin-bottom: 10px;
+  }
+
   #ac-ex0 ul {
-    width: 100%;
     background-color: white;
     margin: 0;
     font-family: inconsolata;
@@ -49,20 +61,39 @@ tags: []
 </style>
 
 This is the long promised autocompleter post. It's a doozy so I've
-decided to present it as a piece of literate code. If you haven't read
-the first two posts I recommend going over those first.
+decided to present it in the format of *comparative literate
+code*. I'll be documenting every part of autocompleter and showing how
+analagous cases are handled in jQuery UI. Don't read this post as a
+criticism of the jQuery UI autocompleter, rather a frame of reference
+to understand more easily what CSP might offer UI programmers. If you
+haven't read the
+[original post](http://swannodette.github.io/2013/07/12/communicating-sequential-processes/)
+on CSP or the
+[second post](http://swannodette.github.io/2013/07/31/extracting-processes/)
+on the selection menu component, please do so before proceeding.
 
-Here's the autocompleter in action. Make sure to try the following
+First off, here's the autocompleter in action. Make sure to try all
+the following
 
-* Typing control characters should not trigger async request
-* Losing focus via clicking or via tabs should close menu
+* Typing control characters should not trigger new results in the menu
+* Losing focus via clicking or via tabbing out should close menu and
+  cancel any pending request.
 * Keyboard based selection works
 * Mouse based selection works
 
 <div id="ac-ex0">
     <div class="ac-container">
-        <input id="autocomplete" type="text"/>
-        <ul id="autocomplete-menu"></ul>
+        <div class="section">
+            <label>Query:</label>
+            <span>
+                <input id="autocomplete" type="text"/>
+                <ul id="autocomplete-menu"></ul>
+            </span>
+        </div>
+        <div class="section">
+            <label>Some field:</label>
+            <input type="text" />
+        </div>
     </div>
 </div>
 

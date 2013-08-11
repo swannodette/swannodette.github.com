@@ -134,7 +134,7 @@
            750)]
   (go (while true (<! ac))))
 
-(go
+#_(go
   (-set-items! (dom/by-id "autocomplete-menu")
     (nth (<! (r/jsonp (str base-url "dog"))) 1)))
 
