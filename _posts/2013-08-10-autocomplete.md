@@ -110,8 +110,8 @@ the following
 
 In contrast to many toy reactive autocompleters you'll find around the
 web what follows is an autocompleter much closer to the type of
-component you would actually consider integrating. For proponents of
-the reactive style I would like to see an FRP version of this
+component you would actually consider integrating. For fans of
+the reactive style I would love to see alternative version of this
 autocompleter that demonstrates not only the level of functionality
 but the same level of separation of concerns.
 
