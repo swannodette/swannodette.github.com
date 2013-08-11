@@ -1,8 +1,8 @@
 (ns blog.autocomplete.core
   (:require-macros
-    [cljs.core.async.macros :refer [go alt!]])
+    [cljs.core.async.macros :refer [go]])
   (:require
-    [cljs.core.async :refer [>! <! alts! put! sliding-buffer chan]]
+    [cljs.core.async :refer [>! <! alts! chan]]
     [blog.responsive.core :as resp]
     [blog.utils.dom :as dom]
     [blog.utils.reactive :as r]))

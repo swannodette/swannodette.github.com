@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "autocomplete"
+title: "Comparative Literate Programming"
 description: ""
 category: 
 tags: []
@@ -8,6 +8,14 @@ tags: []
 {% include JB/setup %}
 
 <style>
+  #post ul,
+  #post li {
+    list-style: none;
+  }
+  #post li {
+    list-indent: -10px;
+  }
+
   #ac-ex0 {
     margin: 20px 0;
     height: 75px;
@@ -42,6 +50,7 @@ tags: []
   }
 
   #ac-ex0 ul {
+    list-style: none;
     background-color: white;
     margin: 0;
     font-family: inconsolata;
@@ -63,10 +72,12 @@ tags: []
 This is the long promised autocompleter post. It's a doozy so I've
 decided to present it in the format of *comparative literate
 code*. I'll be documenting every part of autocompleter and showing how
-analagous cases are handled in jQuery UI. Don't read this post as a
-criticism of the jQuery UI autocompleter, rather a frame of reference
-to understand more easily what CSP might offer UI programmers. If you
-haven't read the
+analagous cases are handled in the
+[jQuery UI autocompleter](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js). Don't
+read this post as a criticism of the jQuery UI autocompleter, rather a
+frame of reference to understand more easily what
+[CSP](http://en.wikipedia.org/wiki/Communicating_sequential_processe)
+might offer UI programmers. If you haven't read the
 [original post](http://swannodette.github.io/2013/07/12/communicating-sequential-processes/)
 on CSP or the
 [second post](http://swannodette.github.io/2013/07/31/extracting-processes/)
@@ -75,11 +86,11 @@ on the selection menu component, please do so before proceeding.
 First off, here's the autocompleter in action. Make sure to try all
 the following
 
-* Typing control characters should not trigger new results in the menu
-* Losing focus via clicking or via tabbing out should close menu and
-  cancel any pending request.
-* Keyboard based selection works
-* Mouse based selection works
+* &mdash; Control characters should not trigger fetch for results
+* &mdash; Losing focus via outside click should close menu
+* &mdash; Losing focus by tabbing out of input field should close menu
+* &mdash; Keyboard based selection should work
+* &mdash; Mouse based selection should work
 
 <div id="ac-ex0">
     <div class="ac-container">
@@ -97,10 +108,12 @@ the following
     </div>
 </div>
 
-Unlike many reactive autocompleter you'll find around the web what
-follows is a non-trivial autocompleter closer to the type of component
-you would actually want to integrate. As we go along we'll note the
-advantages over the implementation provided by jQuery UI.
+In contrast to many toy reactive autocompleters you'll find around the
+web what follows is an autocompleter much closer to the type of
+component you would actually consider integrating. For proponents of
+the reactive style I would like to see an FRP version of this
+autocompleter that demonstrates not only the level of functionality
+but the same level of separation of concerns.
 
 First we declare our namespace. We import the async functions and
 macros. We also import the components from the previous blog post, no
@@ -110,9 +123,9 @@ some reactive conveniences.
 ```
 (ns blog.autocomplete.core
   (:require-macros
-    [cljs.core.async.macros :refer [go alt!]]
+    [cljs.core.async.macros :refer [go]])
   (:require
-    [cljs.core.async :refer [>! <! alts! put! sliding-buffer chan]]
+    [cljs.core.async :refer [>! <! alts! chan]]
     [blog.responsive.core :as resp]
     [blog.utils.dom :as dom]
     [blog.utils.reactive :as r]))
@@ -130,9 +143,6 @@ need hideable UI components, we need to be able to set text fields,
 and we need to update the contents of a list.
 
 ```
-;; -----------------------------------------------------------------------------
-;; Interface representation protocols
-
 (defprotocol IHideable
   (-hide! [view])
   (-show! [view]))
