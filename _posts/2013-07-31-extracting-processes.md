@@ -21,6 +21,11 @@ tags: []
     font-family: Georgia;
     margin: 30px 0;
   }
+  #ex0-ui, #ex1-ui, #ex2-ui {
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
   #post #ex0 {
     height: 90px;
     background-color: #efefef;
