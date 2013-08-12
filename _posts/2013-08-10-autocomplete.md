@@ -74,10 +74,13 @@ decided to present it in the format of *comparative literate
 code*. I'll be documenting every part of autocompleter and showing how
 analagous cases are handled in the
 [jQuery UI autocompleter](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js). Don't
-read this post as a criticism of the jQuery UI autocompleter, rather a
-frame of reference to understand more easily what
+read this post as a trash-talking of the jQuery UI autocompleter,
+rather a frame of reference to understand more easily what
 [CSP](http://en.wikipedia.org/wiki/Communicating_sequential_processe)
-might offer UI programmers. If you haven't read the
+might offer UI programmers. This method of comparison and critique could
+readily be applied to Twitter's more featureful and more complicated
+[typeahead.js](http://twitter.github.io/typeahead.js/). If you haven't
+read the
 [original post](http://swannodette.github.io/2013/07/12/communicating-sequential-processes/)
 on CSP or the
 [second post](http://swannodette.github.io/2013/07/31/extracting-processes/)
