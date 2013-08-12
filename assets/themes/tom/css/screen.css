@@ -174,9 +174,14 @@ ul.posts span {
   /* standard */
 
 #post pre {
-    border: 1px solid #ddd;
-    background-color: #eef;
-    padding: 0 .4em;
+    border-top: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
+    padding: 20px 0;
+    margin: 15px 0;
+}
+
+#post pre code {
+    font-weight: normal;
 }
 
 #post ul,
@@ -186,9 +191,7 @@ ul.posts span {
 }
 
 #post code, #post .code {
-    border: 1px solid #ddd;
-    background-color: #eef;
-    font-size: 85%;
+    font-weight: bold;
     padding: 0 .2em;
 }
 
