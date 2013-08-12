@@ -1,10 +1,10 @@
 (ns blog.responsive.core
   (:require-macros
-    [cljs.core.async.macros :refer [go alt!]]
+    [cljs.core.async.macros :refer [go]]
     [cljs.core.match.macros :refer [match]])
   (:require
     [cljs.core.match]
-    [cljs.core.async :refer [>! <! alts! put! sliding-buffer chan]]
+    [cljs.core.async :refer [>! <! alts! chan]]
     [blog.utils.dom :as dom]
     [blog.utils.reactive :as r]))
 
