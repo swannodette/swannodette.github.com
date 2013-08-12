@@ -40,18 +40,18 @@
           ::cancel
           v)))))
 
-(defn autocompleter* [{:keys [fetch select cancel] :as opts}]
+(defn autocompleter* [{:keys [fetch select cancel menu] :as opts}]
   (let [out (chan)]
     (go (loop [items nil]
           (let [[v sc] (alts! [cancel select fetch])]
             (cond
               (= sc cancel)
-              (do (-hide! (:menu opts))
+              (do (-hide! menu)
                 (recur items))
 
               (and items (= sc select))
-              (let [v (<! (menu-proc (r/concat [v] select)
-                            cancel (:menu opts) items))]
+              (let [v (<! ((:menu-proc opts) (r/concat [v] select)
+                            cancel menu items))]
                 (if (= v ::cancel)
                   (recur nil)
                   (do (-set-text! (:input opts) v)
@@ -61,11 +61,11 @@
               (= sc fetch)
               (let [[v c] (alts! [cancel ((:completions opts) v)])]
                 (if (= c cancel)
-                  (do (-hide! (:menu opts))
+                  (do (-hide! menu)
                     (recur nil))
-                  (do (-show! (:menu opts))
+                  (do (-show! menu)
                     (let [items (nth v 1)]
-                      (-set-items! (:menu opts) items)
+                      (-set-items! menu items)
                       (recur items)))))
 
               :else
@@ -121,8 +121,10 @@
        :select (html-menu-events input menu)
        :cancel (r/map (constantly :cancel)
                  (r/fan-in [removed (r/listen input :blur)]))
-       :input  input
-       :menu   menu
+
+       :input        input
+       :menu         menu
+       :menu-proc    menu-proc
        :completions (html-completions base-url)})))
 
 ;; =============================================================================
