@@ -27,7 +27,7 @@
 ;; =============================================================================
 ;; Autocompleter
 
-(defn menu-proc [select cancel input menu data]
+(defn menu-proc [select cancel menu data]
   (let [ctrl (chan)
         sel  (resp/selector
                (resp/highlighter select menu ctrl)
@@ -38,10 +38,9 @@
         (-hide! menu)
         (if (= sc cancel)
           ::cancel
-          (do (-set-text! input v)
-            v))))))
+          v)))))
 
-(defn autocompleter* [fetch select cancel completions input menu]
+(defn autocompleter* [fetch select cancel completions menu]
   (let [out (chan)]
     (go (loop [items nil]
           (let [[v sc] (alts! [cancel select fetch])]
@@ -52,7 +51,7 @@
 
               (and items (= sc select))
               (let [v (<! (menu-proc (r/concat [v] select)
-                            cancel input menu items))]
+                            cancel menu items))]
                 (if (= v ::cancel)
                   (recur nil)
                   (do (>! out v)
@@ -122,8 +121,13 @@
              (r/map (constantly :cancel)
                (r/fan-in [removed (r/listen input :blur)]))
              (html-completions base-url)
-             input menu)]
-    ac))
+             input menu)
+        out (chan)]
+    (go (while true
+          (let [v (<! ac)]
+            (-set-text! input v)
+            (>! out v))))
+    out))
 
 ;; =============================================================================
 ;; Example

@@ -14,17 +14,19 @@
 (def ENTER 13)
 (def UP_ARROW 38)
 (def DOWN_ARROW 40)
+(def TAB 9)
 
-(def KEYS #{UP_ARROW DOWN_ARROW ENTER})
+(def KEYS #{UP_ARROW DOWN_ARROW ENTER TAB})
 
 (defn key-event->keycode [e]
   (.-keyCode e))
 
 (defn key->keyword [code]
   (condp = code
-    UP_ARROW :previous
+    UP_ARROW   :previous
     DOWN_ARROW :next
-    ENTER :select))
+    ENTER      :select
+    TAB        :select))
 
 ;; -----------------------------------------------------------------------------
 ;; Interface representation protocols

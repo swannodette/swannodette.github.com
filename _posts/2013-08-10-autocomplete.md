@@ -127,7 +127,7 @@ Let's begin.
 
 First we declare our namespace. We import the async functions and
 macros. We also import the components from the previous blog post, no
-need to write that code again. We also import some dom helpers and
+need to write that code again. We also import some DOM helpers and
 some reactive conveniences.
 
 ```

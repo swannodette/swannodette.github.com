@@ -25,6 +25,8 @@
    :mousemove goog.events.EventType.MOUSEMOVE
    :blur goog.events.EventType.BLUR})
 
+;; TODO: listen should take an optional side-effect fn - David
+
 (defn listen
   ([el type] (listen el type false))
   ([el type prevent-default?]
