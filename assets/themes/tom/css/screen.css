@@ -43,6 +43,14 @@ h1 {
     font-size: 24px;
 }
 
+h2 {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
 h1 {
     margin-bottom: 1em;
 }
@@ -177,6 +185,7 @@ ul.posts span {
     border: 1px solid #ddd;
     background-color: #eef;
     padding: 0 .4em;
+    margin: 15px 0;
 }
 
 #post ul,

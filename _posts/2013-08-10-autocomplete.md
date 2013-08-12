@@ -108,12 +108,19 @@ the following
     </div>
 </div>
 
+## The Program
+
 In contrast to many toy reactive autocompleters you'll find around the
 web what follows is an autocompleter much closer to the type of
-component you would actually consider integrating. For fans of
-the reactive style I would love to see alternative version of this
-autocompleter that demonstrates not only the level of functionality
-but the same level of separation of concerns.
+component you would actually consider integrating. This is also
+another reason to compare with the jQuery UI autocompleter, it
+actually handles a lot of edge cases the various FRP toys do
+not. Still this isn't a problem with FRP, just the examples, I would
+love to see alternative version of this autocompleter using an FRP
+library or [language](http://elm-lang.org/) that demonstrates not only
+the level of functionality but the same separation of concerns.
+
+### Namespace definition
 
 First we declare our namespace. We import the async functions and
 macros. We also import the components from the previous blog post, no
@@ -131,6 +138,8 @@ some reactive conveniences.
     [blog.utils.reactive :as r]))
 ```
 
+### Declarations
+
 We setup the url we'll use to populate our menu:
 
 ```
@@ -138,9 +147,11 @@ We setup the url we'll use to populate our menu:
   "http://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=")
 ```
 
+### Protocols
+
 The autocompleter requires some new interface representations - we
-need hideable UI components, we need to be able to set text fields,
-and we need to update the contents of a list.
+need hideable components, we need to be able to set text fields,
+and we need to update the contents of a list component.
 
 ```
 (defprotocol IHideable
@@ -155,20 +166,93 @@ and we need to update the contents of a list.
   (-set-items! [list items]))
 ```
 
-We can now think about the autocompleter. If you look at the jQuery
-autocompleter you'll notice a lot of logic about event suppression,
-this is because you have duplicate event handling between the jQuery
-autocompleter and the jQuery menu.
+### Menu subprocess
 
-In this version we're going to something a bit novel, the
-autocompleter will not hold onto a menu instance, it will construct
-the menu on the fly as needed and we can complete avoid the problem of
-event suppression as we'll just wait until the menu subprocess
-completes.
+We can now begin to consider the autocompleter. In this version we're
+going to do something a bit novel, the autocompleter will not hold onto a
+menu instance, it will construct the menu selection process on the fly as
+needed. Contrast this to the jQuery autocompleter where the menu is
+constructed once and held onto:
+
+```
+this.menu = $( "<ul>" )
+	.addClass( "ui-autocomplete ui-front" )
+	.appendTo( this._appendTo() )
+	.menu({
+		// disable ARIA support, the live region takes care of that
+		role: null
+	})
+	.hide()
+	.menu( "instance" );
+```
+
+You can see the source in context
+[here](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js#L192).
+
+Our menu subprocess looks like this:
+
+```
+(defn menu-proc [select cancel input menu data]
+  (let [ctrl (chan)
+        sel  (resp/selector
+               (resp/highlighter select menu ctrl)
+               menu data)]
+    (go
+      (let [[v sc] (alts! [cancel sel])]
+        (>! ctrl :exit)
+        (-hide! menu)
+        (if (= sc cancel)
+          ::cancel
+          (do (-set-text! input v)
+            v))))))
+```
+
 
 Read the last one more time - *we can just wait until the menu
 subprocess completes*. That is when the menu subprocess finishes we
 resume where we left off.
+
+## Core autocompleter
+
+This is our autocompleter process. There are three main cases,
+cancellation, menu subprocess trigger, or a fetch completiions. Take
+note of how little we have specified in the autocompleter* - this
+function only takes channels or abstract ui components as
+arguments. We can as easily use this code in a HTML based program as a
+WebGL based one.
+
+```
+(defn autocompleter* [fetch select cancel completions input menu]
+  (let [out (chan)]
+    (go (loop [items nil]
+          (let [[v sc] (alts! [cancel select fetch])]
+            (cond
+              (= sc cancel)
+              (do (-hide! menu)
+                (recur items))
+
+              (and items (= sc select))
+              (let [v (<! (menu-proc (r/concat [v] select)
+                            cancel input menu items))]
+                (if (= v ::cancel)
+                  (recur nil)
+                  (do (>! out v)
+                    (recur items)))))
+
+              (= sc fetch)
+              (let [[v c] (alts! [cancel (completions v)])]
+                (if (= c cancel)
+                  (do (-hide! menu)
+                    (recur nil))
+                  (do (-show! menu)
+                    (let [items (nth v 1)]
+                      (-set-items! menu items)
+                      (recur items)))))
+
+              :else
+              (recur items))))
+    out))
+```
 
 Because some of the event handling code is in the jQuery autocompleter
 all the browser quirks must be handled there. In our implementation we
@@ -176,6 +260,8 @@ have a pure process coordination core devoid of all the browser
 specific insanity. It's precisely for this reason why we can
 fearlessly combine all the work from the previous post with the code
 in this post. We can quarantine client idiosyncracies!
+
+### HTML based implementation
 
 Let's cover the HTML autocompleter implementation:
 
