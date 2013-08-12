@@ -113,12 +113,15 @@ the following
 In contrast to many toy reactive autocompleters you'll find around the
 web what follows is an autocompleter much closer to the type of
 component you would actually consider integrating. This is also
-another reason to compare with the jQuery UI autocompleter, it
-actually handles a lot of edge cases the various FRP toys do
-not. Still this isn't a problem with FRP, just the examples, I would
-love to see alternative version of this autocompleter using an FRP
-library or [language](http://elm-lang.org/) that demonstrates not only
-the level of functionality but the same separation of concerns.
+another reason to compare with the jQuery UI autocompleter; it
+actually handles a lot of edge cases the various FRP toys do not. Of
+course this is not a problem with FRP, just the examples you find
+online. I would love to see an alternative version of this autocompleter
+using an FRP library or [language](http://elm-lang.org/) that
+demonstrates not only the level of functionality but the same
+separation of concerns.
+
+Let's begin.
 
 ### Namespace definition
 
@@ -189,6 +192,12 @@ this.menu = $( "<ul>" )
 You can see the source in context
 [here](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js#L192).
 
+Just to drive a point home that's easy to miss, not only will we
+construct the menu selection subprocess on *demand*, we can *pause*
+the autocompleter until the selection subprocess completes. This
+eliminates a considerable amount of inter component coordination and
+additional state tracking.
+
 Our menu subprocess looks like this:
 
 ```
@@ -207,10 +216,10 @@ Our menu subprocess looks like this:
             v))))))
 ```
 
-
-Read the last one more time - *we can just wait until the menu
-subprocess completes*. That is when the menu subprocess finishes we
-resume where we left off.
+`menu-proc` takes some channels and some UI components. Notice the
+complete lack of anything specific to HTML representation. We
+construct a channel `ctrl` so that we can tell the menu subprocess to
+quit (and thus get garbage collected). 
 
 ## Core autocompleter
 
@@ -294,8 +303,54 @@ concrete implementations of `IHideable` and `IUIList`.
       (dom/set-html! list))))
 ```
 
+### HTML Event Wrangling
+
 Now we cover the event handling.
 
+First the events for the HTML based menu:
+
+```
+(defn html-menu-events [input menu]
+  (r/fan-in
+    [(->> (r/listen input :keyup)
+       (r/map resp/key-event->keycode)
+       (r/filter resp/KEYS)
+       (r/map resp/key->keyword))
+     (r/hover-child menu "li")
+     (r/map (constantly :select)
+       (r/listen menu :click))]))
+```
+
+Now the event for the HTML input field:
+
+```
+(defn html-input-events [input]
+  (->> (r/listen input :keyup)
+    (r/map #(-text input))
+    (r/split #(string/blank? %))))
+```
+
+We don't want hard code where completions come from:
+
+```
+(defn html-completions [base-url]
+  (fn [query]
+    (r/jsonp (str base-url query))))
+```
+
 Finally we put it all together.
+
+```
+(defn html-autocompleter [input menu msecs]
+  (let [[filtered removed] (html-input-events input)
+        ac (autocompleter*
+             (r/throttle filtered msecs)
+             (html-menu-events input menu)
+             (r/map (constantly :cancel)
+               (r/fan-in [removed (r/listen input :blur)]))
+             (html-completions base-url)
+             input menu)]
+    ac))
+```
 
 <script type="text/javascript" src="/assets/js/ac.js"></script>
