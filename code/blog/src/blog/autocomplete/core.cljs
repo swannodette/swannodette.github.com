@@ -121,7 +121,6 @@
        :select (html-menu-events input menu)
        :cancel (r/map (constantly :cancel)
                  (r/fan-in [removed (r/listen input :blur)]))
-
        :input        input
        :menu         menu
        :menu-proc    menu-proc

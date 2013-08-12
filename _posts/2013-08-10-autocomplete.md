@@ -39,7 +39,6 @@ tags: []
 
   #ac-ex0 label {
     font-family: inconsolata;
-    font-weight: bold;
     width: 100px;
     display: inline-block;
     text-align: right;
