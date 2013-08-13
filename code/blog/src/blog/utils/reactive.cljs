@@ -1,5 +1,5 @@
 (ns blog.utils.reactive
-  (:refer-clojure :exclude [map filter remove distinct concat])
+  (:refer-clojure :exclude [map filter remove distinct concat take-while])
   (:require [goog.events :as events]
             [goog.events.EventType]
             [goog.net.Jsonp]
@@ -116,6 +116,28 @@
           (let [[x] (alts! ins)]
             (>! out x))))
     out))
+
+(defn take-while
+  ([pred in] (take-while pred in (chan)))
+  ([pred in out]
+    (go (loop []
+          (if-let [v (<! in)]
+            (do
+              (if (pred v)
+                (do (>! out v)
+                  (recur))
+                (do (close! out)
+                  (concat [v] in))))
+            :done)))
+    out))
+
+(defn siphon
+  ([in] (siphon in []))
+  ([in coll]
+    (go (loop [coll coll]
+          (if-let [v (<! in)]
+            (recur (conj coll v))
+            coll)))))
 
 (defn toggle [in]
   (let [out (chan)
