@@ -232,7 +232,7 @@ quit (and thus get garbage collected).
 
 This is our autocompleter process. There are three main cases,
 cancellation, menu subprocess trigger, or a fetch completiions. Take
-note of how little we have specified in the autocompleter* - this
+note of how little we have specified in the `autocompleter*` - this
 function only takes channels or abstract ui components as
 arguments. We can as easily use this code in a HTML based program as a
 WebGL based one.
@@ -247,14 +247,6 @@ WebGL based one.
               (do (-hide! menu)
                 (recur items))
 
-              (and items (= sc select))
-              (let [v (<! (menu-proc (r/concat [v] select)
-                            cancel input menu items))]
-                (if (= v ::cancel)
-                  (recur nil)
-                  (do (>! out v)
-                    (recur items)))))
-
               (= sc fetch)
               (let [[v c] (alts! [cancel (completions v)])]
                 (if (= c cancel)
@@ -265,10 +257,33 @@ WebGL based one.
                       (-set-items! menu items)
                       (recur items)))))
 
+              (and items (= sc select))
+              (let [v (<! (menu-proc (r/concat [v] select)
+                            cancel input menu items))]
+                (if (= v ::cancel)
+                  (recur nil)
+                  (do (>! out v)
+                    (recur items)))))
+
               :else
               (recur items))))
     out))
 ```
+
+In the first case we have a cancellation event, we simply hide the
+menu component.
+
+In the second case we need to fetch data from the server. We call
+`completions` with the query `v` supplied by the user. We handle
+possible cancellation. If we actually get a result and no cancellation
+event we show the menu component, we extract the relevant data from
+the response and we update the contents of the menu component.
+
+The third case is the most interesting. We hand off control to the menu
+process. Notice that we pass along the cancellation channel. The
+entire autocompletion process will be *paused* until the subprocess
+complete. Because we can hand off control a lot ad hoc coordination
+become unnecessary.
 
 > ## Code Comprehension
 > So far we haven't see anything in our code related to HTML DOM - we've
