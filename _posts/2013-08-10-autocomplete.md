@@ -201,7 +201,7 @@ we can *pause* the autocompleter until the selection subprocess
 completes. This eliminates a considerable amount of inter component
 coordination and additional state tracking. It also means we can share
 streams of events avoiding redundancy and duplication of logic - [lines
-202 to 307 in the jQuery autocompleter](https://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js#L202)
+202 to 307 in the jQuery autocompleter](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js#L202)
 is all detailed inter component coordination that we would like to
 avoid.
 
@@ -274,7 +274,7 @@ WebGL based one.
 > So far we haven't see anything in our code related to HTML DOM - we've
 > only been examining an abstract autocompleter process. At first glance
 > this may seem like a bit of over engineering, however reading through
-> the source of the jQuery autocompleter or through
+> the source of the [jQuery autocompleter](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js) or through
 > [typeahead.js](http://github.com/twitter/typeahead.js/blob/master/src/typeahead_view.js)
 > it becomes readily clear that a large amount of the difficulty in
 > understanding the implementations is precisely the lack of separation
