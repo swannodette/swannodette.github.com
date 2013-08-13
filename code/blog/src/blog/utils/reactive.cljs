@@ -117,18 +117,17 @@
             (>! out x))))
     out))
 
-(defn take-while
-  ([pred in] (take-while pred in (chan)))
-  ([pred in out]
+(defn take-until
+  ([pred-sentinel in] (take-until pred-sentinel in (chan)))
+  ([pred-sentinel in out]
     (go (loop []
           (if-let [v (<! in)]
             (do
-              (if (pred v)
-                (do (>! out v)
-                  (recur))
-                (do (close! out)
-                  (concat [v] in))))
-            :done)))
+              (>! out v)
+              (if-not (pred-sentinel v)
+                (recur)
+                (close! out)))
+            (close! out))))
     out))
 
 (defn siphon
