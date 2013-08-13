@@ -356,16 +356,17 @@ Now the event for the HTML input field:
 ```
 
 > ### Quarantining Quirks
-> Because neither of the autocompleters we've
-> considered have disciplined separation of concerns browser quirk
-> logic is fully interleaved into the process logic, see
+> Because neither of the JavaScript autocompleters we've
+> considered have disciplined separation of concerns, browser quirk
+> logic is fully interleaved into the process logic - see
 > [here](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js#L127)
 > and
 > [here](http://github.com/twitter/typeahead.js/blob/master/src/typeahead_view.js#L216).
-> In our implementation we have an untainted process coordination core
-> devoid of all the browser specific insanity. Browser quirks need
+> In our implementation process coordination is untainted by
+> browser specific insanity; browser quirks need
 > only appear in the place where it matters - event handling and DOM
-> manipulation!
+> manipulation! Again this aids code comprehension as well as
+> code maintenance.
 
 We don't want hard code where completions come from:
 
