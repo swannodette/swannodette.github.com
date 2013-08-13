@@ -280,15 +280,6 @@ WebGL based one.
 > understanding the implementations is precisely the lack of separation
 > of concerns!
 
-### Quarantining Quirks
-
-Because some of the event handling code is in the jQuery autocompleter
-all the browser quirks must be handled there. In our implementation we
-have a pure process coordination core devoid of all the browser
-specific insanity. It's precisely for this reason why we can
-fearlessly combine all the work from the previous post with the code
-in this post. We can quarantine client idiosyncracies!
-
 ### HTML based implementation
 
 Let's cover the HTML autocompleter implementation:
@@ -348,6 +339,18 @@ Now the event for the HTML input field:
     (r/map #(-text input))
     (r/split #(string/blank? %))))
 ```
+
+> ### Quarantining Quirks
+> Because neither of the autocompleters we've
+> considered have disciplined separation of concerns browser quirk
+> logic is fully interleaved into the process logic, see
+> [here](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js#L127)
+> and
+> [here](http://github.com/twitter/typeahead.js/blob/master/src/typeahead_view.js#L216).
+> In our implementation we have an untainted process coordination core
+> devoid of all the browser specific insanity. Browser quirks need
+> only appear in the place where it matters - event handling and DOM
+> manipulation!
 
 We don't want hard code where completions come from:
 
