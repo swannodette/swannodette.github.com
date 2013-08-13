@@ -92,8 +92,8 @@ the following cases:
 * &mdash; Control characters should not trigger fetch for results
 * &mdash; Losing focus via outside click should close menu
 * &mdash; Losing focus by tabbing out of input field should close menu
-* &mdash; Keyboard based selection should work
-* &mdash; Mouse based selection should work
+* &mdash; Keyboard based selection
+* &mdash; Mouse based selection
 
 <div id="ac-ex0">
     <div class="ac-container">
