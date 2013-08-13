@@ -229,6 +229,13 @@ ul.posts span {
 
 /* Customizations */
 
+blockquote {
+    font-family: 'Latin Modern Roman', Georgia, 'Times New Roman', Times, serif;
+    padding: 20px 30px 10px 30px;
+    border: 1px solid black;
+    margin: 15px 0;
+}
+
 #post p {
     font-family: 'Latin Modern Roman', Georgia, 'Times New Roman', Times, serif;
     color: #333;

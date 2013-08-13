@@ -73,11 +73,12 @@ decided to present it in the format of *comparative literate
 code*. I'll be documenting every part of autocompleter and showing how
 analagous cases are handled in the
 [jQuery UI autocompleter](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js). Don't
-read this post as a trash-talking of the jQuery UI autocompleter,
-rather a frame of reference to understand more easily what
+read this post as trash talking the jQuery UI autocompleter, rather a
+frame of reference to understand more easily what
 [CSP](http://en.wikipedia.org/wiki/Communicating_sequential_processe)
-might offer UI programmers. This method of comparison and critique could
-readily be applied to Twitter's more featureful and more complicated
+might offer UI programmers over more traditional patterns; this method
+of comparison and critique could be just as readily applied to
+Twitter's more featureful and more complicated
 [typeahead.js](http://twitter.github.io/typeahead.js/). If you haven't
 read the
 [original post](http://swannodette.github.io/2013/07/12/communicating-sequential-processes/)
@@ -85,8 +86,8 @@ on CSP or the
 [second post](http://swannodette.github.io/2013/07/31/extracting-processes/)
 on the selection menu component, please do so before proceeding.
 
-First off, here's the autocompleter in action. Make sure to try all
-the following
+First, the autocompleter in action. Make sure to try all
+the following cases:
 
 * &mdash; Control characters should not trigger fetch for results
 * &mdash; Losing focus via outside click should close menu
@@ -117,13 +118,12 @@ web what follows is an autocompleter much closer to the type of
 component you would actually consider integrating. This is also
 another reason to compare with the jQuery UI autocompleter; it
 actually handles a lot of edge cases the various FRP toys do not. Of
-course this is not a problem with FRP, just the examples you find
-online. I would love to see an alternative version of this autocompleter
-using an FRP library or [language](http://elm-lang.org/) that
-demonstrates not only the level of functionality but the same
-separation of concerns.
-
-Let's begin.
+course this is not a problem with
+[FRP](http://en.wikipedia.org/wiki/Functional_reactive_programming),
+just the examples you find online. In fact, I would love to see an
+alternative version of this autocompleter using an FRP library or
+[language](http://elm-lang.org/) that demonstrates not only the level
+of functionality but the same deep separation of concerns.
 
 ### Namespace definition
 
@@ -145,7 +145,7 @@ some reactive conveniences.
 
 ### Declarations
 
-We setup the url we'll use to populate our menu:
+We setup the url, Wikipedia Search, that we'll use to populate our menu:
 
 ```
 (def base-url
@@ -156,7 +156,7 @@ We setup the url we'll use to populate our menu:
 
 The autocompleter requires some new interface representations - we
 need hideable components, we need to be able to set text fields,
-and we need to update the contents of a list component.
+and we need to update the contents of list components.
 
 ```
 (defprotocol IHideable
@@ -173,11 +173,10 @@ and we need to update the contents of a list component.
 
 ### Menu subprocess
 
-We can now begin to consider the autocompleter. In this version we're
-going to do something a bit novel, the autocompleter will not hold onto a
-menu instance, it will construct the menu selection process on the fly as
-needed. Contrast this to the jQuery autocompleter where the menu is
-constructed once and held onto:
+In this implementation we're going to do something a bit novel as far
+as common JavaScript practice. In the jQuery UI, the menu used by the
+autocompleter is constructed once and stored in a field of the
+autocompleter:
 
 ```
 this.menu = $( "<ul>" )
@@ -194,11 +193,17 @@ this.menu = $( "<ul>" )
 You can see the source in context
 [here](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js#L192).
 
-Just to drive a point home that's easy to miss, not only will we
-construct the menu selection subprocess on *demand*, we can *pause*
-the autocompleter until the selection subprocess completes. This
-eliminates a considerable amount of inter component coordination and
-additional state tracking.
+In our implementation we will not hold onto a menu *instance*, instead
+we will construct a menu selection *process* on the fly as needed.
+
+Not only will we construct the menu selection subprocess on *demand*,
+we can *pause* the autocompleter until the selection subprocess
+completes. This eliminates a considerable amount of inter component
+coordination and additional state tracking. It also means we can share
+streams of events avoiding redundancy and duplication of logic - [lines
+202 to 307 in the jQuery autocompleter](https://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js#L202)
+is all detailed inter component coordination that we would like to
+avoid.
 
 Our menu subprocess looks like this:
 
@@ -264,6 +269,18 @@ WebGL based one.
               (recur items))))
     out))
 ```
+
+> ## Code Comprehension
+> So far we haven't see anything in our code related to HTML DOM - we've
+> only been examining an abstract autocompleter process. At first glance
+> this may seem like a bit of over engineering, however reading through
+> the source of the jQuery autocompleter or through
+> [typeahead.js](http://github.com/twitter/typeahead.js/blob/master/src/typeahead_view.js)
+> it becomes readily clear that a large amount of the difficulty in
+> understanding the implementations is precisely the lack of separation
+> of concerns!
+
+### Quarantining Quirks
 
 Because some of the event handling code is in the jQuery autocompleter
 all the browser quirks must be handled there. In our implementation we
