@@ -195,11 +195,11 @@ this.menu = $( "<ul>" )
 You can see the source in context
 [here](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js#L192).
 
-In our implementation we will not hold onto a menu *instance*, instead
-we will construct a menu selection *process* on the fly as needed.
+In our implementation we will not hold onto a *selectable menu instance*, instead
+we will create a *menu selection process* on the fly as needed.
 
 Not only will we construct the menu selection subprocess on *demand*,
-we can *pause* the autocompleter until the selection subprocess
+we can *pause* the autocompleter until the subprocess
 completes. This eliminates coordination between components
 and superfluous state tracking. It also means we can share
 streams of events avoiding redundancy and duplication of logic. [Lines
@@ -234,21 +234,24 @@ representation (more on this later). We construct a channel `ctrl` so
 that we can tell the menu subprocess to quit (and thus get garbage
 collected).
 
+A soon as we receive something from `cancel` or `select` we quit the
+subprocess and either return `::cancel` or the user selection respectively.
+
 Once more, in this model we only create the menu selection process
-when we need it. In many traditional MVC designs
-you'll see complex graphs of objects that get allocated only to sit around
-in memory and *do nothing*.
+when we need it. In many traditional MVC designs you'll see complex
+graphs of objects that get allocated at initialization only to sit
+around in memory and *do nothing*.
 
 In this design we're alluding to a system that only constructs the
 processes when they are needed and which are destroyed when they have
-completed their work.
+completed their work. Sounds like a good idea right?
 
 ## Core autocompleter
 
 This is our main autocompleter process. There are three main cases,
-cancellation, menu subprocess trigger, or a fetch completiions. Again take
+cancellation, menu subprocess trigger, or a network fetch for completions. Again take
 note how abstractly we have specified `autocompleter*` - this
-function only takes channels or abstract ui components as
+function only takes channels or abstract UI components as
 arguments. We can just as easily use this code in a HTML based program as a
 Canvas or WebGL based one.
 
@@ -296,10 +299,10 @@ the response and update the contents of the menu component.
 
 The third case is the most interesting. *We hand off control to the menu
 process*. We pass along the `select` channel making sure to put the
-event we read back at the front, and we pass along the `cancel`
+event we read back at the front. We also pass along the `cancel`
 channel. `autocompleter*` will be *paused* until the menu selection subprocess
-complete. Because we can hand off control a lot of pointless
-coordination logic simply disappears.
+completes. Because we can hand off control, coordination logic between
+`autocompleter*` and `menu-proc` becomes unnecessary.
 
 > ### Code Comprehension
 > We've seen hardly anything so far related to HTML - we've
@@ -308,8 +311,9 @@ coordination logic simply disappears.
 > the source of the [jQuery autocompleter](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js) or through
 > [typeahead.js](http://github.com/twitter/typeahead.js/blob/master/src/typeahead_view.js)
 > it becomes apparent that the difficulty in
-> understanding their implementations is due precisely the lack of separation
+> understanding their implementations is due precisely to the lack of separation
 > of concerns. We have to digest so many different concerns at once!
+> How exhausting.
 
 Now that we defined a fairly sensible autocompleter for any interface
 representation, lets actually implement a concrete representation.
@@ -364,14 +368,14 @@ These are events for the HTML based menu:
        (r/listen menu :click))]))
 ```
 
-We listen up arrow, down arrow, enter, and tab keys. We also listen
+We listen for up arrow, down arrow, enter, and tab keys. We also listen
 for mouse hover events on the `li` children elements of `menu` and
 any clicks on `menu`. We don't care about which `li` element gets
 clicked because `highlighter` from the previous post tracks that for us.
 
 Then we need to listen to key events from the input field. We only
-care when the text of input field actually changes, thus ignoring
-control characters. We use `r/split` to generate two channels, a channel of
+care when the text of input field actually changes (automatically
+ignoring control characters). We use `r/split` to generate two channels, a channel of
 the things we might query and another channel of blank input events to cancel
 the menu selection process.
 
@@ -394,7 +398,8 @@ the menu selection process.
 > browser specific insanity; browser quirks need
 > only appear in the place where it matters, event handling and DOM
 > manipulation! This aids code comprehension as well as
-> code maintenance.
+> code maintenance. This is real readability, not the purely surface appearance
+> notion of readability that's usually bandied about these days.
 
 We don't want hard code where completions come from:
 
@@ -432,6 +437,10 @@ essence of the autocompleter. DOM and browser specific quirks are
 quarantined into the parts of the code where they make sense. There
 are no monolithic objects, no contorted class hierarchies, no
 elaborate mixins, just some functions, some data, and some processes.
+
+Even if you don't use ClojureScript hopefully you've noticed some
+patterns here that you can use to make your own code more robust,
+easier to read, easier to extend, and easier to maintain.
 
 Who knew UI programming could be so *simple*?
 
