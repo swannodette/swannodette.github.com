@@ -70,16 +70,16 @@ tags: []
 
 This is the long promised autocompleter post. It's a doozy so I've
 decided to present it in the format of *comparative literate
-code*. I'll be documenting every part of autocompleter and showing how
+code*. I'll be documenting every part of the autocompleter and showing how
 analagous cases are handled in the
 [jQuery UI autocompleter](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js). Don't
 read this post as trash talking the jQuery UI autocompleter, rather a
 frame of reference to understand more easily what
 [CSP](http://en.wikipedia.org/wiki/Communicating_sequential_processe)
-might offer UI programmers over more traditional patterns; this method
-of comparison and critique could be just as readily applied to
+might offer UI programmers over more traditional patterns; we will apply
+this method of comparison and critique to
 Twitter's more featureful and more complicated
-[typeahead.js](http://twitter.github.io/typeahead.js/). If you haven't
+[typeahead.js](http://twitter.github.io/typeahead.js/) as well. If you haven't
 read the
 [original post](http://swannodette.github.io/2013/07/12/communicating-sequential-processes/)
 on CSP or the
@@ -127,9 +127,11 @@ of functionality but the same deep separation of concerns.
 
 ### Namespace definition
 
-First we declare our namespace. We import the async functions and
-macros. We also import the components from the previous blog post, no
-need to write that code again. We also import some DOM helpers and
+First we declare our namespace. We import the core.async functions and
+macros. We also import the components from the previous blog post; no
+need to write that code again. We also import some utility DOM helpers
+(which are just wrappers around Google Closure's battle tested cross
+browser DOM library) and
 some reactive conveniences.
 
 ```
@@ -145,7 +147,7 @@ some reactive conveniences.
 
 ### Declarations
 
-We setup the url, Wikipedia Search, that we'll use to populate our menu:
+We setup the url that will serve the data that will populate our menu:
 
 ```
 (def base-url
@@ -176,7 +178,7 @@ and we need to update the contents of list components.
 In this implementation we're going to do something a bit novel as far
 as common JavaScript practice. In the jQuery UI, the menu used by the
 autocompleter is constructed once and stored in a field of the
-autocompleter:
+autocompleter like so:
 
 ```
 this.menu = $( "<ul>" )
@@ -198,11 +200,11 @@ we will construct a menu selection *process* on the fly as needed.
 
 Not only will we construct the menu selection subprocess on *demand*,
 we can *pause* the autocompleter until the selection subprocess
-completes. This eliminates a considerable amount of inter component
-coordination and additional state tracking. It also means we can share
-streams of events avoiding redundancy and duplication of logic - [lines
+completes. This eliminates coordination between components
+and superfluous state tracking. It also means we can share
+streams of events avoiding redundancy and duplication of logic. [Lines
 202 to 307 in the jQuery autocompleter](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js#L202)
-is all detailed inter component coordination that we would like to
+is all component coordination and event handling redundancy that we would like to
 avoid.
 
 Our menu subprocess looks like this:
@@ -223,19 +225,32 @@ Our menu subprocess looks like this:
             v))))))
 ```
 
-`menu-proc` takes some channels and some UI components. Notice the
-complete lack of anything specific to HTML representation. We
-construct a channel `ctrl` so that we can tell the menu subprocess to
-quit (and thus get garbage collected). 
+`menu-proc` takes some channels and some UI components. The `select`
+channel provides the events that affect the menu component. The
+`cancel` channel allows us to abort the selection process should the
+user blur input field by tabbing out or clicking elsewhere in the
+window. Yet notice the actual lack of anything specific to HTML
+representation (more on this later). We construct a channel `ctrl` so
+that we can tell the menu subprocess to quit (and thus get garbage
+collected).
+
+Once more, in this model we only create the menu selection process
+when we need it. In many traditional MVC designs
+you'll see complex graphs of objects that get allocated only to sit around
+in memory and *do nothing*.
+
+In this design we're alluding to a system that only constructs the
+processes when they are needed and which are destroyed when they have
+completed their work.
 
 ## Core autocompleter
 
-This is our autocompleter process. There are three main cases,
-cancellation, menu subprocess trigger, or a fetch completiions. Take
-note of how little we have specified in the `autocompleter*` - this
+This is our main autocompleter process. There are three main cases,
+cancellation, menu subprocess trigger, or a fetch completiions. Again take
+note how abstractly we have specified `autocompleter*` - this
 function only takes channels or abstract ui components as
-arguments. We can as easily use this code in a HTML based program as a
-WebGL based one.
+arguments. We can just as easily use this code in a HTML based program as a
+Canvas or WebGL based one.
 
 ```
 (defn autocompleter* [fetch select cancel completions input menu]
@@ -276,30 +291,32 @@ menu component.
 In the second case we need to fetch data from the server. We call
 `completions` with the query `v` supplied by the user. We handle
 possible cancellation. If we actually get a result and no cancellation
-event we show the menu component, we extract the relevant data from
-the response and we update the contents of the menu component.
+event we show the menu component, extract the relevant data from
+the response and update the contents of the menu component.
 
-The third case is the most interesting. We hand off control to the menu
-process. Notice that we pass along the cancellation channel. The
-entire autocompletion process will be *paused* until the subprocess
-complete. Because we can hand off control a lot ad hoc coordination
-become unnecessary.
+The third case is the most interesting. *We hand off control to the menu
+process*. We pass along the `select` channel making sure to put the
+event we read back at the front, and we pass along the `cancel`
+channel. `autocompleter*` will be *paused* until the menu selection subprocess
+complete. Because we can hand off control a lot of pointless
+coordination logic simply disappears.
 
-> ## Code Comprehension
-> So far we haven't see anything in our code related to HTML DOM - we've
-> only been examining an abstract autocompleter process. At first glance
-> this may seem like a bit of over engineering, however reading through
+> ### Code Comprehension
+> We've seen hardly anything so far related to HTML - we've
+> only been examining an abstract autocompleter process. 
+> This may seem like over engineering, but reading through
 > the source of the [jQuery autocompleter](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js) or through
 > [typeahead.js](http://github.com/twitter/typeahead.js/blob/master/src/typeahead_view.js)
-> it becomes readily clear that a large amount of the difficulty in
-> understanding the implementations is precisely the lack of separation
-> of concerns!
+> it becomes apparent that the difficulty in
+> understanding their implementations is due precisely the lack of separation
+> of concerns. We have to digest so many different concerns at once!
+
+Now that we defined a fairly sensible autocompleter for any interface
+representation, lets actually implement a concrete representation.
 
 ### HTML based implementation
 
-Let's cover the HTML autocompleter implementation:
-
-First we want to write complete implementation of `ITextField` for HTML inputs.
+We write a concrete implementation of `ITextField` for HTML text inputs.
 
 ```
 (extend-type js/HTMLInputElement
@@ -310,7 +327,7 @@ First we want to write complete implementation of `ITextField` for HTML inputs.
     (.-value field)))
 ```
 
-Now we want HTML `ul` tags to act as hideable ui components. So we add
+We want HTML `ul` tags to act as hideable list components. So we add
 concrete implementations of `IHideable` and `IUIList`.
 
 ```
@@ -328,11 +345,12 @@ concrete implementations of `IHideable` and `IUIList`.
       (dom/set-html! list))))
 ```
 
+That concludes all the interface presentation code - short and
+sweet. Event handling is a bit more involved.
+
 ### HTML Event Wrangling
 
-Now we cover the event handling.
-
-First the events for the HTML based menu:
+These are events for the HTML based menu:
 
 ```
 (defn html-menu-events [input menu]
@@ -346,12 +364,22 @@ First the events for the HTML based menu:
        (r/listen menu :click))]))
 ```
 
-Now the event for the HTML input field:
+We listen up arrow, down arrow, enter, and tab keys. We also listen
+for mouse hover events on the `li` children elements of `menu` and
+any clicks on `menu`. We don't care about which `li` element gets
+clicked because `highlighter` from the previous post tracks that for us.
+
+Then we need to listen to key events from the input field. We only
+care when the text of input field actually changes, thus ignoring
+control characters. We use `r/split` to generate two channels, a channel of
+the things we might query and another channel of blank input events to cancel
+the menu selection process.
 
 ```
 (defn html-input-events [input]
   (->> (r/listen input :keyup)
     (r/map #(-text input))
+    r/distinct
     (r/split #(string/blank? %))))
 ```
 
@@ -364,8 +392,8 @@ Now the event for the HTML input field:
 > [here](http://github.com/twitter/typeahead.js/blob/master/src/typeahead_view.js#L216).
 > In our implementation process coordination is untainted by
 > browser specific insanity; browser quirks need
-> only appear in the place where it matters - event handling and DOM
-> manipulation! Again this aids code comprehension as well as
+> only appear in the place where it matters, event handling and DOM
+> manipulation! This aids code comprehension as well as
 > code maintenance.
 
 We don't want hard code where completions come from:
@@ -376,7 +404,12 @@ We don't want hard code where completions come from:
     (r/jsonp (str base-url query))))
 ```
 
-Finally we put it all together.
+### Putting it all together
+
+We provide a constructor `html-autocompleter`. If someone want to
+write an autocompleter that does intelligent caching of server results
+they only need to supply their own `completions` - do all the fancy
+`typeahead.js` optimizations there.
 
 ```
 (defn html-autocompleter [input menu msecs]
@@ -390,5 +423,16 @@ Finally we put it all together.
              input menu)]
     ac))
 ```
+
+## Conclusion
+
+We've examine an extremely small amount of code. The core is not
+polluted by concrete impelmentation concerns aiding readability of the
+essence of the autocompleter. DOM and browser specific quirks are
+quarantined into the parts of the code where they make sense. There
+are no monolithic objects, no contorted class hierarchies, no
+elaborate mixins, just some functions, some data, and some processes.
+
+Who knew UI programming could be so *simple*?
 
 <script type="text/javascript" src="/assets/js/ac.js"></script>
