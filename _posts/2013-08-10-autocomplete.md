@@ -228,19 +228,19 @@ Our menu subprocess looks like this:
 `menu-proc` takes some channels and some UI components. The `select`
 channel provides the events that affect the menu component. The
 `cancel` channel allows us to abort the selection process should the
-user blur input field by tabbing out or clicking elsewhere in the
-window. Yet notice the actual lack of anything specific to HTML
-representation (more on this later). We construct a channel `ctrl` so
-that we can tell the menu subprocess to quit (and thus get garbage
-collected).
+user blur the autocomplete field by tabbing out or clicking elsewhere in the
+window. It's important to notice the lack of anything specific to HTML
+representation at this point (more on this later). We also construct a channel `ctrl` so
+that we can tell the menu subprocess to quit and thus get garbage
+collected.
 
-A soon as we receive something from `cancel` or `select` we quit the
+As soon as we receive something from `cancel` or `select` we quit the
 subprocess and either return `::cancel` or the user selection respectively.
 
 Once more, in this model we only create the menu selection process
 when we need it. In many traditional MVC designs you'll see complex
 graphs of objects that get allocated at initialization only to sit
-around in memory and *do nothing*.
+around in memory spending most of their time *doing nothing*.
 
 In this design we're alluding to a system that only constructs the
 processes when they are needed and which are destroyed when they have
@@ -252,7 +252,7 @@ This is our main autocompleter process. There are three main cases,
 cancellation, menu subprocess trigger, or a network fetch for completions. Again take
 note how abstractly we have specified `autocompleter*` - this
 function only takes channels or abstract UI components as
-arguments. We can just as easily use this code in a HTML based program as a
+arguments. We can just as easily use this code in an DOM based program as a
 Canvas or WebGL based one.
 
 ```
@@ -350,7 +350,7 @@ concrete implementations of `IHideable` and `IUIList`.
 ```
 
 That concludes all the interface presentation code - short and
-sweet. Event handling is a bit more involved.
+sweet. Event handling is only a little bit more involved.
 
 ### HTML Event Wrangling
 
@@ -401,7 +401,8 @@ the menu selection process.
 > code maintenance. This is real readability, not the purely surface appearance
 > notion of readability that's usually bandied about these days.
 
-We don't want hard code where completions come from:
+Finally, a simple `html-completions` function that uses
+`JSONP` to make a cross domain request to Wikipedia.
 
 ```
 (defn html-completions [base-url]
@@ -411,10 +412,10 @@ We don't want hard code where completions come from:
 
 ### Putting it all together
 
-We provide a constructor `html-autocompleter`. If someone want to
+We provide a constructor `html-autocompleter`. If someone wants to
 write an autocompleter that does intelligent caching of server results
 they only need to supply their own `completions` - do all the fancy
-`typeahead.js` optimizations there.
+[typeahead.js]() optimizations there.
 
 ```
 (defn html-autocompleter [input menu msecs]
@@ -432,11 +433,11 @@ they only need to supply their own `completions` - do all the fancy
 ## Conclusion
 
 We've examine an extremely small amount of code. The core is not
-polluted by concrete impelmentation concerns aiding readability of the
-essence of the autocompleter. DOM and browser specific quirks are
-quarantined into the parts of the code where they make sense. There
-are no monolithic objects, no contorted class hierarchies, no
-elaborate mixins, just some functions, some data, and some processes.
+polluted by concrete implementation concerns improving
+readability. DOM and browser specific quirks are quarantined into the
+parts of the code where they make sense. There are no monolithic
+objects, no contorted class hierarchies, no elaborate mixins, just
+some functions, some data, and some processes.
 
 Even if you don't use ClojureScript hopefully you've noticed some
 patterns here that you can use to make your own code more robust,
