@@ -70,17 +70,18 @@ tags: []
 
 This is the long promised autocompleter post. It's a doozy so I've
 decided to present it in the format of *comparative literate
-code*. I'll be documenting every part of the autocompleter and showing how
-analagous cases are handled in the
+code*. I'll be documenting every part of the autocompleter and showing
+how analagous cases are handled in the
 [jQuery UI autocompleter](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js). Don't
 read this post as trash talking the jQuery UI autocompleter, rather a
 frame of reference to understand more easily what
 [CSP](http://en.wikipedia.org/wiki/Communicating_sequential_processe)
-might offer UI programmers over more traditional patterns; we will apply
-this method of comparison and critique to
-Twitter's more featureful and more complicated
-[typeahead.js](http://twitter.github.io/typeahead.js/) as well. If you haven't
-read the
+might offer UI programmers over more traditional patterns as well as
+reactive ones. We will also
+apply this method of comparison and critique to Twitter's more
+featureful and more complicated
+[typeahead.js](http://twitter.github.io/typeahead.js/). If you
+haven't read the
 [original post](http://swannodette.github.io/2013/07/12/communicating-sequential-processes/)
 on CSP or the
 [second post](http://swannodette.github.io/2013/07/31/extracting-processes/)
@@ -195,8 +196,8 @@ this.menu = $( "<ul>" )
 You can see the source in context
 [here](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js#L192).
 
-In our implementation we will not hold onto a *selectable menu instance*, instead
-we will create a *menu selection process* on the fly as needed.
+In our implementation we will not hold onto a selectable menu instance, instead
+we will create a menu selection process on the fly as needed.
 
 Not only will we construct the menu selection subprocess on *demand*,
 we can *pause* the autocompleter until the subprocess
@@ -240,7 +241,7 @@ subprocess and either return `::cancel` or the user selection respectively.
 Once more, in this model we only create the menu selection process
 when we need it. In many traditional MVC designs you'll see complex
 graphs of objects that get allocated at initialization only to sit
-around in memory spending most of their time *doing nothing*.
+around in memory spending most of their time doing nothing.
 
 In this design we're alluding to a system that only constructs the
 processes when they are needed and which are destroyed when they have
@@ -252,7 +253,7 @@ This is our main autocompleter process. There are three main cases,
 cancellation, menu subprocess trigger, or a network fetch for completions. Again take
 note how abstractly we have specified `autocompleter*` - this
 function only takes channels or abstract UI components as
-arguments. We can just as easily use this code in an DOM based program as a
+arguments. We can just as easily use this code in a DOM based program as a
 Canvas or WebGL based one.
 
 ```
@@ -292,7 +293,7 @@ In the first case we have a cancellation event, we simply hide the
 menu component.
 
 In the second case we need to fetch data from the server. We call
-`completions` with the query `v` supplied by the user. We handle
+`completions` with the query supplied by the user. We handle
 possible cancellation. If we actually get a result and no cancellation
 event we show the menu component, extract the relevant data from
 the response and update the contents of the menu component.
@@ -371,7 +372,10 @@ These are events for the HTML based menu:
 We listen for up arrow, down arrow, enter, and tab keys. We also listen
 for mouse hover events on the `li` children elements of `menu` and
 any clicks on `menu`. We don't care about which `li` element gets
-clicked because `highlighter` from the previous post tracks that for us.
+clicked because `highlighter` from the previous post tracks that for
+us. We use `r/fan-in` to merge these different channels into a single
+channel of events, this will be the `select` channel used by
+`autocompleter*` and `menu-proc`.
 
 Then we need to listen to key events from the input field. We only
 care when the text of input field actually changes (automatically
@@ -432,15 +436,15 @@ they only need to supply their own `completions` - do all the fancy
 
 ## Conclusion
 
-We've examine an extremely small amount of code. The core is not
-polluted by concrete implementation concerns improving
+We've examined a small and manageable amount of code. The core is not
+polluted by concrete implementation concerns and thus improving
 readability. DOM and browser specific quirks are quarantined into the
 parts of the code where they make sense. There are no monolithic
 objects, no contorted class hierarchies, no elaborate mixins, just
 some functions, some data, and some processes.
 
-Even if you don't use ClojureScript hopefully you've noticed some
-patterns here that you can use to make your own code more robust,
+Even if you don't intend to use ClojureScript, hopefully you've noticed some
+patterns that you can leverage to make your own code more robust,
 easier to read, easier to extend, and easier to maintain.
 
 Who knew UI programming could be so *simple*?
