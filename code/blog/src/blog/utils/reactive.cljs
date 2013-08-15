@@ -214,8 +214,8 @@
 
 (defn throttle
   ([source msecs]
-    (throttle (chan) source msecs))
-  ([out source msecs]
+    (throttle source msecs (chan)))
+  ([source msecs out]
     (go
       (loop [state ::init last nil cs [source]]
         (let [[_ sync] cs]

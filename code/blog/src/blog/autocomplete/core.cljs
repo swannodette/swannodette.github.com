@@ -37,41 +37,43 @@
     (go
       (let [[v sc] (alts! [cancel sel])]
         (>! ctrl :exit)
-        (-hide! menu)
         (if (= sc cancel)
           ::cancel
           v)))))
 
-(defn autocompleter* [{:keys [fetch select cancel menu] :as opts}]
+(defn autocompleter* [{:keys [focus fetch select cancel menu] :as opts}]
   (let [out (chan)]
-    (go (loop [items nil]
+    (go (loop [items nil focused false]
           (let [[v sc] (alts! [cancel select fetch])]
             (cond
+              (= sc focus)
+              (recur items true)
+
               (= sc cancel)
               (do (-hide! menu)
-                (recur items))
+                (recur items false))
 
-              (= sc fetch)
+              (and focused (= sc fetch))
               (let [[v c] (alts! [cancel ((:completions opts) v)])]
                 (if (= c cancel)
                   (do (-hide! menu)
-                    (recur nil))
+                    (recur nil false))
                   (do (-show! menu)
-                    (let [items (nth v 1)]
-                      (-set-items! menu items)
-                      (recur items)))))
+                    (-set-items! menu v)
+                    (recur items focused))))
               
               (and items (= sc select))
               (let [v (<! ((:menu-proc opts) (r/concat [v] select)
                             cancel menu items))]
-                (if (= v ::cancel)
-                  (recur nil)
+                (if (= v ::canceled)
+                  (do (-hide! menu)
+                    (recur nil false))
                   (do (-set-text! (:input opts) v)
                     (>! out v)
-                    (recur items)))))
+                    (recur items focused)))))
 
               :else
-              (recur items))))
+              (recur items focused))))
     out))
 
 ;; =============================================================================
@@ -104,25 +106,24 @@
        (r/filter resp/KEYS)
        (r/map resp/key->keyword))
      (r/hover-child menu "li")
-     (r/map (constantly :select)
-       (r/listen menu :click))]))
+     (r/always :select (r/listen menu :click))]))
 
 (defn html-input-events [input]
-  (->> (r/listen input :keyup)
+  (->> (r/listen input :keydown)
     (r/map #(-text input))
-    (r/split #(string/blank? %))))
+    (r/split #(not (string/blank? %)))))
 
 (defn html-completions [base-url]
   (fn [query]
-    (r/jsonp (str base-url query))))
+    (go (nth (<! (r/jsonp (str base-url query))) 0))))
 
 (defn html-autocompleter [input menu msecs]
   (let [[filtered removed] (html-input-events input)]
     (autocompleter*
-      {:fetch  (r/throttle filtered msecs)
+      {:focus  (r/always :focus (r/listen input :focus))
+       :fetch  (r/throttle filtered msecs)
        :select (html-menu-events input menu)
-       :cancel (r/map (constantly :cancel)
-                 (r/fan-in [removed (r/listen input :blur)]))
+       :cancel (r/always :cancel (r/fan-in [removed (r/listen input :blur)]))
        :input        input
        :menu         menu
        :menu-proc    menu-proc
