@@ -112,6 +112,8 @@
         (let [li (dom/parent (.-target e) "li")]
           (h/index-of (dom/by-tag-name menu "li") li))))))
 
+;; TODO: add IE hack for blur
+
 (defn html-menu-events [input menu]
   (r/fan-in
     [(->> (r/listen input :keydown)
@@ -129,6 +131,8 @@
   (->> (r/listen input :keydown)
     (r/map #(-text input))
     (r/split #(not (string/blank? %)))))
+
+;; NOTE: in IE we want to ignore blur somehow
 
 (defn html-autocompleter [input menu completions msecs]
   (let [[filtered removed] (html-input-events input)]

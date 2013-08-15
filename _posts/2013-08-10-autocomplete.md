@@ -324,6 +324,12 @@ channel. `autocompleter*` will be *paused* until the menu selection subprocess
 completes. Because we can hand off control, coordination logic between
 `autocompleter*` and `menu-proc` becomes unnecessary.
 
+It worth taking a breath to consider how flexible this is. Because
+channels do require explicit subscription we can simply pass them
+along as values, pause our execution allowing some other process to
+read from the channel until they are done at which point we can pick
+up where we left off.
+
 > ### Code Comprehension
 > We've seen hardly anything so far related to HTML - we've
 > only been examining an abstract autocompleter process. 
