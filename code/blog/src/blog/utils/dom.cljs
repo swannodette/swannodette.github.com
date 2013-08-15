@@ -26,6 +26,12 @@
     (when-let [tag-name (.-tagName el)]
       (= tag (.toLowerCase tag-name)))))
 
+(defn parent [el tag]
+  (let [matcher (tag-match tag)]
+    (if (matcher el)
+      el
+      (dom/getAncestor el (tag-match tag)))))
+
 (defn el-matcher [el]
   (fn [other] (identical? other el)))
 
