@@ -6,7 +6,7 @@
             [goog.Uri]
             [goog.dom :as gdom]
             [cljs.core.async :refer [>! <! chan put! close! timeout]]
-            [blog.utils.helpers :refer [index-of]]
+            [blog.utils.helpers :refer [index-of now]]
             [blog.utils.dom :as dom])
   (:require-macros [cljs.core.async.macros :refer [go alt!]])
   (:import goog.events.EventType))
