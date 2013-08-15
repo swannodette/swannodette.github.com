@@ -15,8 +15,9 @@
 (def UP_ARROW 38)
 (def DOWN_ARROW 40)
 (def TAB 9)
+(def ESC 27)
 
-(def KEYS #{UP_ARROW DOWN_ARROW ENTER TAB})
+(def KEYS #{UP_ARROW DOWN_ARROW ENTER TAB ESC})
 
 (defn key-event->keycode [e]
   (.-keyCode e))
@@ -26,7 +27,8 @@
     UP_ARROW   :previous
     DOWN_ARROW :next
     ENTER      :select
-    TAB        :select))
+    TAB        :select
+    ESC        :exit))
 
 ;; -----------------------------------------------------------------------------
 ;; Interface representation protocols
