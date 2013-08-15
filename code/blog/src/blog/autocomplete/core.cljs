@@ -3,6 +3,7 @@
     [cljs.core.async.macros :refer [go]]
     [blog.utils.macros :refer [dochan]])
   (:require
+    [goog.userAgent :as ua]
     [clojure.string :as string]
     [cljs.core.async :refer [>! <! alts! chan sliding-buffer]]
     [blog.responsive.core :as resp]
@@ -132,7 +133,8 @@
     (r/map #(-text input))
     (r/split #(not (string/blank? %)))))
 
-;; NOTE: in IE we want to ignore blur somehow
+;; NOTE: in IE we want to ignore blur somehow, in IE we should
+;; filter out blur
 
 (defn html-autocompleter [input menu completions msecs]
   (let [[filtered removed] (html-input-events input)]
