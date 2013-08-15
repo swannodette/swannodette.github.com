@@ -23,8 +23,17 @@ tags: []
     padding: 10px;
   }
 
-  #ac-container {
-    width: 562px;
+  .ac-container .combo-box {
+    position: relative;
+  }
+
+  #autocomplete-menu {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    top: 20px;
+    z-index: 999;
   }
 
   #ac-ex0 input {
@@ -53,16 +62,18 @@ tags: []
     background-color: white;
     margin: 0;
     font-family: inconsolata;
+    border-top: 1px solid #ccc;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgb(220,220,220);
   }
 
   #ac-ex0 li {
     list-style: none;
-    padding: 0 0 0 8px;
+    padding: 8px 0 8px 8px;
     margin: 0;
     border-bottom: 1px solid #ccc;
   }
@@ -100,7 +111,7 @@ the following cases:
     <div class="ac-container">
         <div class="section">
             <label>Query:</label>
-            <span>
+            <span class="combo-box">
                 <input id="autocomplete" type="text"/>
                 <ul id="autocomplete-menu"></ul>
             </span>
