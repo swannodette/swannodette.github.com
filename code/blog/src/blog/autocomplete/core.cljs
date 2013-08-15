@@ -80,7 +80,7 @@
     out))
 
 ;; =============================================================================
-;; HTML Specific Code
+;; HTML Specific Code (aka Quarantine Line)
 
 (extend-type js/HTMLInputElement
   ITextField
