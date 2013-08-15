@@ -35,7 +35,7 @@
   ([el type f]
     (let [out (chan)]
       (events/listen el (keyword->event-type type)
-        (fn [e] (.log js/console "WTF") (when f (f e)) (put! out e)))
+        (fn [e] (when f (f e)) (put! out e)))
       out)))
 
 (defn map [f in]
