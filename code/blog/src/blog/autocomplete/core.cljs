@@ -4,7 +4,7 @@
     [blog.utils.macros :refer [dochan]])
   (:require
     [clojure.string :as string]
-    [cljs.core.async :refer [>! <! alts! chan]]
+    [cljs.core.async :refer [>! <! alts! chan sliding-buffer]]
     [blog.responsive.core :as resp]
     [blog.utils.dom :as dom]
     [blog.utils.reactive :as r]))
@@ -100,6 +100,13 @@
       (apply str)
       (dom/set-html! list))))
 
+(defn menu-item-event [menu type]
+  (r/listen menu :mousedown
+    (fn [e]
+      (when (dom/in? e menu)
+        (.preventDefault e)))
+    (chan (sliding-buffer 1))))
+
 (defn html-menu-events [input menu]
   (r/fan-in
     [(->> (r/listen input :keydown)
@@ -109,14 +116,8 @@
      (r/hover-child menu "li")
      (r/always :select
        (r/cyclic-barrier
-         [(r/listen menu :mousedown
-            (fn [e]
-              (when (dom/in? e menu)
-                (.preventDefault e))))
-          (r/listen menu :mouseup
-            (fn [e]
-              (when (dom/in? e menu)
-                (.preventDefault e))))]))]))
+         [(menu-item-event menu :mousedown)
+          (menu-item-event menu :mouseup)]))]))
 
 (defn html-input-events [input]
   (->> (r/listen input :keydown)

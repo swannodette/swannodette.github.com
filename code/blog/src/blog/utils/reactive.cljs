@@ -32,11 +32,11 @@
 
 (defn listen
   ([el type] (listen el type nil))
-  ([el type f]
-    (let [out (chan)]
-      (events/listen el (keyword->event-type type)
-        (fn [e] (when f (f e)) (put! out e)))
-      out)))
+  ([el type f] (listen el type (chan)))
+  ([el type f out]
+    (events/listen el (keyword->event-type type)
+      (fn [e] (when f (f e)) (put! out e)))
+    out))
 
 (defn map [f in]
   (let [out (chan)]
