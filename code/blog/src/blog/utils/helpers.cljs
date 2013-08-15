@@ -1,5 +1,7 @@
 (ns blog.utils.helpers)
 
+(defn now [] (js/Date.))
+
 (defn index-of [xs x]
   (let [len (count xs)]
     (loop [i 0]
