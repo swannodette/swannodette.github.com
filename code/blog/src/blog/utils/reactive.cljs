@@ -155,6 +155,17 @@
     {:chan out
      :control control}))
 
+(defn barrier [cs]
+  (go (doseq [c cs] (<! c))))
+
+(defn cyclic-barrier [cs]
+  (let [out (chan)]
+    (go (loop []
+          (<! (barrier cs))
+          (>! out (now))
+          (recur)))
+    out))
+
 (defn mouse-enter [el]
   (let [matcher (dom/el-matcher el)]
     (->> (listen el :mouseover)
