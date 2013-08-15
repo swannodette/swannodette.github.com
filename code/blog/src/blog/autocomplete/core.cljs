@@ -31,17 +31,16 @@
 
 (defn menu-proc [select cancel menu data]
   (let [ctrl (chan)
-        sel  (resp/selector
-               (resp/highlighter select menu ctrl)
-               menu data)]
-    (go (loop []
-          (let [[v sc] (alts! [cancel sel])]
-            (if (and (vector? v) (= (first v) :select))
-              (do (>! ctrl :exit)
-                (if (= sc cancel)
-                  ::cancel
-                  v))
-              (recur)))))))
+        sel  (->> (resp/selector
+                    (resp/highlighter select menu ctrl)
+                    menu data)
+               (r/filter vector?)
+               (r/map second))]
+    (go (let [[v sc] (alts! [cancel sel])]
+          (do (>! ctrl :exit)
+            (if (= sc cancel)
+              ::cancel
+              v))))))
 
 (defn autocompleter* [{:keys [focus fetch select cancel menu] :as opts}]
   (let [out (chan)]
@@ -68,12 +67,12 @@
               (and items (= sc select))
               (let [v (<! ((:menu-proc opts) (r/concat [v] select)
                             cancel menu items))]
+                (-hide! menu)
                 (if (= v ::canceled)
-                  (do (-hide! menu)
-                    (recur nil false))
+                  (recur nil false)
                   (do (-set-text! (:input opts) v)
                     (>! out v)
-                    (recur items focused)))))
+                    (recur nil focused)))))
 
               :else
               (recur items focused))))
@@ -85,7 +84,7 @@
 (extend-type js/HTMLInputElement
   ITextField
   (-set-text! [field text]
-    (set! (.-value list) text))
+    (set! (.-value field) text))
   (-text [field]
     (.-value field)))
 
