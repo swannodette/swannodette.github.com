@@ -73,7 +73,7 @@ tags: []
 
   #ac-ex0 li {
     list-style: none;
-    padding: 8px 0 8px 8px;
+    padding: 3px 0 3px 8px;
     margin: 0;
     border-bottom: 1px solid #ccc;
   }
