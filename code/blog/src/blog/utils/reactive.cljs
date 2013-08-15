@@ -156,13 +156,15 @@
      :control control}))
 
 (defn barrier [cs]
-  (go (doseq [c cs] (<! c))))
+  (go (loop [cs (seq cs) result []]
+        (if cs
+          (recur (next cs) (conj result (<! (first cs))))
+          result))))
 
 (defn cyclic-barrier [cs]
   (let [out (chan)]
     (go (loop []
-          (<! (barrier cs))
-          (>! out (now))
+          (>! out (<! (barrier cs)))
           (recur)))
     out))
 
