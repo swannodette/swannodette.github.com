@@ -1,7 +1,9 @@
 (ns blog.autocomplete.core
   (:require-macros
-    [cljs.core.async.macros :refer [go]])
+    [cljs.core.async.macros :refer [go]]
+    [blog.utils.macros :refer [dochan]])
   (:require
+    [clojure.string :as string]
     [cljs.core.async :refer [>! <! alts! chan]]
     [blog.responsive.core :as resp]
     [blog.utils.dom :as dom]
