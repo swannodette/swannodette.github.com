@@ -102,7 +102,7 @@
       (dom/set-html! list))))
 
 (defn menu-item-event [menu type]
-  (->> (r/listen menu :mousedown
+  (->> (r/listen menu type
          (fn [e]
            (when (dom/in? e menu)
              (.preventDefault e)))
@@ -119,10 +119,11 @@
        (r/filter resp/KEYS)
        (r/map resp/key->keyword))
      (r/hover-child menu "li")
-     (r/filter (fn [[d u]] (= d u))
-       (r/cyclic-barrier
-         [(menu-item-event menu :mousedown)
-          (menu-item-event menu :mouseup)]))]))
+     (->> (r/cyclic-barrier
+            [(menu-item-event menu :mousedown)
+             (menu-item-event menu :mouseup)])
+       (r/filter (fn [[d u]] (= d u)))
+       (r/always :select))]))
 
 (defn html-input-events [input]
   (->> (r/listen input :keydown)
