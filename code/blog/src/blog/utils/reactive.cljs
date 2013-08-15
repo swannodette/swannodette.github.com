@@ -23,6 +23,7 @@
    :mouseover goog.events.EventType.MOUSEOVER
    :mouseout goog.events.EventType.MOUSEOUT
    :mousemove goog.events.EventType.MOUSEMOVE
+   :focus goog.events.EventType.FOCUS
    :blur goog.events.EventType.BLUR})
 
 ;; TODO: listen should take an optional side-effect fn - David
