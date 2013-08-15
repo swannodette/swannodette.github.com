@@ -49,15 +49,6 @@
               (do (-hide! menu)
                 (recur items))
 
-              (and items (= sc select))
-              (let [v (<! ((:menu-proc opts) (r/concat [v] select)
-                            cancel menu items))]
-                (if (= v ::cancel)
-                  (recur nil)
-                  (do (-set-text! (:input opts) v)
-                    (>! out v)
-                    (recur items)))))
-
               (= sc fetch)
               (let [[v c] (alts! [cancel ((:completions opts) v)])]
                 (if (= c cancel)
@@ -67,6 +58,15 @@
                     (let [items (nth v 1)]
                       (-set-items! menu items)
                       (recur items)))))
+              
+              (and items (= sc select))
+              (let [v (<! ((:menu-proc opts) (r/concat [v] select)
+                            cancel menu items))]
+                (if (= v ::cancel)
+                  (recur nil)
+                  (do (-set-text! (:input opts) v)
+                    (>! out v)
+                    (recur items)))))
 
               :else
               (recur items))))
