@@ -81,6 +81,10 @@ tags: []
     margin: 0;
     border-bottom: 1px solid #ccc;
   }
+
+  #ac-ex0 li.highlighted {
+    background-color: #ccccff;
+  }
 </style>
 
 This is the long promised autocompleter post. It's a doozy so I've

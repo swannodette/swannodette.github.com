@@ -44,10 +44,11 @@
 (defn autocompleter* [{:keys [focus fetch select cancel menu] :as opts}]
   (let [out (chan)]
     (go (loop [items nil focused false]
-          (let [[v sc] (alts! [cancel select fetch])]
+          (let [[v sc] (alts! [cancel focus select fetch])]
             (cond
               (= sc focus)
-              (recur items true)
+              (do
+                (recur items true))
 
               (= sc cancel)
               (do (-hide! menu)
@@ -60,7 +61,7 @@
                     (recur nil false))
                   (do (-show! menu)
                     (-set-items! menu v)
-                    (recur items focused))))
+                    (recur v focused))))
               
               (and items (= sc select))
               (let [v (<! ((:menu-proc opts) (r/concat [v] select)
@@ -113,7 +114,7 @@
     (r/map #(-text input))
     (r/split #(not (string/blank? %)))))
 
-(defn html-autocompleter [input menu msecs completions]
+(defn html-autocompleter [input menu completions msecs]
   (let [[filtered removed] (html-input-events input)]
     (autocompleter*
       {:focus  (r/always :focus (r/listen input :focus))
@@ -129,16 +130,10 @@
 ;; Example
 
 (defn wikipedia-search [query]
-  (go (nth (<! (r/jsonp (str base-url query))) 0)))
+  (go (nth (<! (r/jsonp (str base-url query))) 1)))
 
-#_(let [ac (html-autocompleter
+(let [ac (html-autocompleter
            (dom/by-id "autocomplete")
            (dom/by-id "autocomplete-menu")
-           (wikipedia-search)
-           750)]
+           wikipedia-search 750)]
   (go (while true (<! ac))))
-
-#_(go
-  (-set-items! (dom/by-id "autocomplete-menu")
-    (nth (<! (r/jsonp (str base-url "dog"))) 1)))
-
