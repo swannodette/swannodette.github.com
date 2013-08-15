@@ -48,30 +48,29 @@
           (let [[v sc] (alts! [cancel focus select fetch])]
             (cond
               (= sc focus)
-              (do
-                (recur items true))
+              (recur items true)
 
               (= sc cancel)
               (do (-hide! menu)
-                (recur items false))
+                (recur items (not= v :blur)))
 
               (and focused (= sc fetch))
               (let [[v c] (alts! [cancel ((:completions opts) v)])]
                 (if (= c cancel)
                   (do (-hide! menu)
-                    (recur nil false))
+                    (recur nil (not= v :blur)))
                   (do (-show! menu)
                     (-set-items! menu v)
                     (recur v focused))))
               
               (and items (= sc select))
-              (let [v (<! ((:menu-proc opts) (r/concat [v] select)
-                            cancel menu items))]
+              (let [choice (<! ((:menu-proc opts) (r/concat [v] select)
+                                 cancel menu items))]
                 (-hide! menu)
-                (if (= v ::canceled)
-                  (recur nil false)
-                  (do (-set-text! (:input opts) v)
-                    (>! out v)
+                (if (= choice ::canceled)
+                  (recur nil (not= v :blur))
+                  (do (-set-text! (:input opts) choice)
+                    (>! out choice)
                     (recur nil focused)))))
 
               :else
@@ -121,7 +120,7 @@
       {:focus  (r/always :focus (r/listen input :focus))
        :fetch  (r/throttle (r/distinct filtered) msecs)
        :select (html-menu-events input menu)
-       :cancel (r/always :cancel (r/fan-in [removed (r/listen input :blur)]))
+       :cancel (r/fan-in [removed (r/always :blur (r/listen input :blur))])
        :input  input
        :menu   menu
        :menu-proc   menu-proc
