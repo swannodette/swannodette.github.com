@@ -8,6 +8,10 @@ tags: []
 {% include JB/setup %}
 
 <style>
+  .hidden {
+    display: none;
+  }
+
   #post ul,
   #post li {
     list-style: none;
@@ -113,7 +117,7 @@ the following cases:
             <label>Query:</label>
             <span class="combo-box">
                 <input id="autocomplete" type="text"/>
-                <ul id="autocomplete-menu"></ul>
+                <ul id="autocomplete-menu" class="hidden"></ul>
             </span>
         </div>
         <div class="section">
