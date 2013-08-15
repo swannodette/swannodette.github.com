@@ -34,3 +34,8 @@
 
 (defn offset [el]
   [(style/getPageOffsetLeft el) (style/getPageOffsetTop el)])
+
+(defn in? [e el]
+  (let [target (.-target e)]
+    (or (identical? target el)
+        (dom/getAncestor target (el-matcher el)))))
