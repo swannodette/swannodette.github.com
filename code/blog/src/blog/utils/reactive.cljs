@@ -138,6 +138,15 @@
             (recur (conj coll v))
             coll)))))
 
+(defn always [v c]
+  (let [out (chan)]
+    (go (loop []
+          (if-let [e (<! c)]
+            (do (>! out v)
+              (recur))
+            (close! out))))
+    out))
+
 (defn toggle [in]
   (let [out (chan)
         control (chan)]
