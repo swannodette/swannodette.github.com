@@ -113,28 +113,28 @@
     (r/map #(-text input))
     (r/split #(not (string/blank? %)))))
 
-(defn html-completions [base-url]
-  (fn [query]
-    (go (nth (<! (r/jsonp (str base-url query))) 0))))
-
-(defn html-autocompleter [input menu msecs]
+(defn html-autocompleter [input menu msecs completions]
   (let [[filtered removed] (html-input-events input)]
     (autocompleter*
       {:focus  (r/always :focus (r/listen input :focus))
-       :fetch  (r/throttle filtered msecs)
+       :fetch  (r/throttle (r/distinct filtered) msecs)
        :select (html-menu-events input menu)
        :cancel (r/always :cancel (r/fan-in [removed (r/listen input :blur)]))
-       :input        input
-       :menu         menu
-       :menu-proc    menu-proc
-       :completions (html-completions base-url)})))
+       :input  input
+       :menu   menu
+       :menu-proc   menu-proc
+       :completions completions})))
 
 ;; =============================================================================
 ;; Example
 
+(defn wikipedia-search [query]
+  (go (nth (<! (r/jsonp (str base-url query))) 0)))
+
 #_(let [ac (html-autocompleter
            (dom/by-id "autocomplete")
            (dom/by-id "autocomplete-menu")
+           (wikipedia-search)
            750)]
   (go (while true (<! ac))))
 
