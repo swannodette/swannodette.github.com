@@ -34,12 +34,14 @@
         sel  (resp/selector
                (resp/highlighter select menu ctrl)
                menu data)]
-    (go
-      (let [[v sc] (alts! [cancel sel])]
-        (>! ctrl :exit)
-        (if (= sc cancel)
-          ::cancel
-          v)))))
+    (go (loop []
+          (let [[v sc] (alts! [cancel sel])]
+            (if (and (vector? v) (= (first v) :select))
+              (do (>! ctrl :exit)
+                (if (= sc cancel)
+                  ::cancel
+                  v))
+              (recur)))))))
 
 (defn autocompleter* [{:keys [focus fetch select cancel menu] :as opts}]
   (let [out (chan)]
@@ -102,7 +104,7 @@
 
 (defn html-menu-events [input menu]
   (r/fan-in
-    [(->> (r/listen input :keyup)
+    [(->> (r/listen input :keydown)
        (r/map resp/key-event->keycode)
        (r/filter resp/KEYS)
        (r/map resp/key->keyword))
