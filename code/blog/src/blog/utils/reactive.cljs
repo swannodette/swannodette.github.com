@@ -186,7 +186,6 @@
 
 (defn hover-child [el tag]
   (let [matcher (dom/tag-match tag)
-        matches (dom/by-tag-name el tag)
         over (->> (listen el :mouseover)
                (map
                  #(let [target (.-target %)]
@@ -196,7 +195,7 @@
                         el
                         :no-match))))
                (remove #{:no-match})
-               (map #(index-of matches %)))
+               (map #(index-of (dom/by-tag-name el tag) %)))
         out (->> (listen el :mouseout)
               (filter
                 (fn [e]
