@@ -7,6 +7,7 @@
     [cljs.core.async :refer [>! <! alts! chan sliding-buffer]]
     [blog.responsive.core :as resp]
     [blog.utils.dom :as dom]
+    [blog.utils.helpers :as h]
     [blog.utils.reactive :as r]))
 
 (def base-url
@@ -101,11 +102,15 @@
       (dom/set-html! list))))
 
 (defn menu-item-event [menu type]
-  (r/listen menu :mousedown
-    (fn [e]
-      (when (dom/in? e menu)
-        (.preventDefault e)))
-    (chan (sliding-buffer 1))))
+  (->> (r/listen menu :mousedown
+         (fn [e]
+           (when (dom/in? e menu)
+             (.preventDefault e)))
+         (chan (sliding-buffer 1)))
+    (r/map
+      (fn [e]
+        (let [li (dom/parent (.-target e) "li")]
+          (h/index-of (dom/by-tag-name menu "li") li))))))
 
 (defn html-menu-events [input menu]
   (r/fan-in
@@ -114,7 +119,7 @@
        (r/filter resp/KEYS)
        (r/map resp/key->keyword))
      (r/hover-child menu "li")
-     (r/always :select
+     (r/filter (fn [[d u]] (= d u))
        (r/cyclic-barrier
          [(menu-item-event menu :mousedown)
           (menu-item-event menu :mouseup)]))]))
