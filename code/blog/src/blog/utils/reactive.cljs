@@ -20,6 +20,8 @@
    :keypress goog.events.EventType.KEYPRESS
    :click goog.events.EventType.CLICK
    :dblclick goog.events.EventType.DBLCLICK
+   :mousedown goog.events.EventType.MOUSEDOWN
+   :mouseup goog.events.EventType.MOUSEUP
    :mouseover goog.events.EventType.MOUSEOVER
    :mouseout goog.events.EventType.MOUSEOUT
    :mousemove goog.events.EventType.MOUSEMOVE
@@ -29,17 +31,11 @@
 ;; TODO: listen should take an optional side-effect fn - David
 
 (defn listen
-  ([el type] (listen el type false))
-  ([el type prevent-default?]
+  ([el type] (listen el type nil))
+  ([el type f]
     (let [out (chan)]
       (events/listen el (keyword->event-type type)
-        (fn [e]
-          (if (atom? prevent-default?)
-            (when @prevent-default?
-              (.preventDefault e))
-            (when prevent-default?
-              (.preventDefault e)))
-          (put! out e)))
+        (fn [e] (.log js/console "WTF") (when f (f e)) (put! out e)))
       out)))
 
 (defn map [f in]
