@@ -107,7 +107,16 @@
        (r/filter resp/KEYS)
        (r/map resp/key->keyword))
      (r/hover-child menu "li")
-     (r/always :select (r/listen menu :click))]))
+     (r/always :select
+       (r/cyclic-barrier
+         [(r/listen menu :mousedown
+            (fn [e]
+              (when (dom/in? e menu)
+                (.preventDefault e))))
+          (r/listen menu :mouseup
+            (fn [e]
+              (when (dom/in? e menu)
+                (.preventDefault e))))]))]))
 
 (defn html-input-events [input]
   (->> (r/listen input :keydown)
