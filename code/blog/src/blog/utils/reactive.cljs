@@ -283,7 +283,8 @@
               (recur v)
               (do
                 (if (not= n -1)
-                  (do (>! (:in (taps n)) v)
+                  (do
+                    (>! (:in (taps n)) v)
                     (>! out (<! (:out (taps n)))))
                   (>! out v))
                 (recur n))))))
