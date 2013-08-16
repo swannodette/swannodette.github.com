@@ -130,6 +130,8 @@
 
 (defn html-input-events [input]
   (->> (r/listen input :keydown)
+    (r/map resp/key-event->keycode)
+    (r/filter #(or (= % 8) (and (> % 46) (not (#{91 92 93} %)))))
     (r/map #(-text input))
     (r/split #(not (string/blank? %)))))
 

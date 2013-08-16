@@ -8,7 +8,8 @@
             [cljs.core.async :refer [>! <! chan put! close! timeout]]
             [blog.utils.helpers :refer [index-of now]]
             [blog.utils.dom :as dom])
-  (:require-macros [cljs.core.async.macros :refer [go alt!]])
+  (:require-macros [cljs.core.async.macros :refer [go alt!]]
+                   [blog.utils.macros :refer [dochan]])
   (:import goog.events.EventType))
 
 (defn atom? [x]
@@ -29,6 +30,13 @@
    :blur goog.events.EventType.BLUR})
 
 ;; TODO: listen should take an optional side-effect fn - David
+
+(defn log [in]
+  (let [out (chan)]
+    (dochan [e in]
+      (.log js/console e)
+      (>! out e))
+    out))
 
 (defn listen
   ([el type] (listen el type nil))
