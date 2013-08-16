@@ -76,6 +76,7 @@ tags: []
   }
 
   #ac-ex0 li {
+    cursor: pointer;
     list-style: none;
     padding: 3px 0 3px 8px;
     margin: 0;
