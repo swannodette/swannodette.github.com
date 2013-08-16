@@ -268,3 +268,24 @@
                            (conj (pop cs) (timeout msecs))))
               threshold (recur ::init (pop cs)))))))
     out))
+
+(defn tapify [f & args]
+  (as-> (chan) in
+    {:in in
+     :out (apply f in args)}))
+
+(defn switch
+  ([in taps control] (switch taps control (chan)))
+  ([in taps control out]
+    (go (loop [n -1]
+          (let [[v c] (alts! [control in])]
+            (if (= c control)
+              (recur v)
+              (do
+                (if (not= n -1)
+                  (do (>! (:in (taps n)) v)
+                    (>! out (<! (:out (taps n)))))
+                  (>! out v))
+                (recur n))))))
+    out))
+
