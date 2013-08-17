@@ -44,12 +44,11 @@
               ::cancel
               v))))))
 
-(defn autocompleter* [{:keys [focus fetch select cancel menu msecs] :as opts}]
+(defn autocompleter* [{:keys [focus query select cancel menu] :as opts}]
   (let [out (chan)
-        fetch-ctrl (chan)
-        fetch (r/switch fetch [(r/tapify r/throttle msecs)] fetch-ctrl 0)]
+        [query raw] (r/split #(r/throttle-msg? %) query)]
     (go (loop [items nil focused false]
-          (let [[v sc] (alts! [cancel focus select fetch])]
+          (let [[v sc] (alts! [cancel focus select query])]
             (cond
               (= sc focus)
               (recur items true)
@@ -58,8 +57,9 @@
               (do (-hide! menu)
                 (recur items (not= v :blur)))
 
-              (and focused (= sc fetch))
-              (let [[v c] (alts! [cancel ((:completions opts) v)])]
+              (and focused (= sc query)
+                   (r/throttle-msg? v))
+              (let [[v c] (alts! [cancel ((:completions opts) (second v))])]
                 (if (= c cancel)
                   (do (-hide! menu)
                     (recur nil (not= v :blur)))
@@ -68,10 +68,8 @@
                     (recur v focused))))
               
               (and items (= sc select))
-              (let [_ (>! fetch-ctrl -1)
-                    choice (<! ((:menu-proc opts) (r/concat [v] select)
-                                 (r/fan-in [fetch cancel]) menu items))]
-                (>! fetch-ctrl 0)
+              (let [choice (<! ((:menu-proc opts) (r/concat [v] select)
+                                 (r/fan-in [raw cancel]) menu items))]
                 (-hide! menu)
                 (if (= choice ::canceled)
                   (recur nil (not= v :blur))
@@ -147,14 +145,13 @@
 ;; NOTE: in IE we want to ignore blur somehow, in IE we should
 ;; filter out blur
 
-(defn html-autocompleter [input menu completions msecs]
+(defn html-autocompleter [input menu completions throttle]
   (let [[filtered removed] (html-input-events input)]
     (autocompleter*
       {:focus  (r/always :focus (r/listen input :focus))
-       :fetch  (r/distinct filtered)
+       :query  (r/throttle* (r/distinct filtered) throttle)
        :select (html-menu-events input menu)
        :cancel (r/fan-in [removed (r/always :blur (r/listen input :blur))])
-       :msecs  msecs
        :input  input
        :menu   menu
        :menu-proc   menu-proc

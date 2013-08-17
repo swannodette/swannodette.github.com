@@ -82,9 +82,9 @@
             (close! out))))
     out))
 
-(defn split [pred in]
-  (let [out1 (chan)
-        out2 (chan)]
+(defn split
+  ([pred in] (split pred in [(chan) (chan)]))
+  ([pred in [out1 out2]]
     (go (loop []
           (if-let [v (<! in)]
             (if (pred v)
@@ -228,26 +228,39 @@
       (.send gjsonp nil #(put! c %))
       c)))
 
-(defn throttle
-  ([source msecs]
-    (throttle source msecs (chan)))
-  ([source msecs out]
+(defn throttle*
+  ([in msecs]
+    (throttle* in msecs (chan)))
+  ([in msecs out]
     (go
-      (loop [state ::init last nil cs [source]]
+      (loop [state ::init last nil cs [in]]
         (let [[_ sync] cs]
           (let [[v sc] (alts! cs)]
             (condp = sc
-              source (condp = state
-                       ::init (do (>! out v)
-                                (recur ::throttling last
-                                  (conj cs (timeout msecs))))
-                       ::throttling (recur state v cs))
+              in (condp = state
+                   ::init (do (>! out v)
+                            (>! out [::throttle v])
+                            (recur ::throttling last
+                              (conj cs (timeout msecs))))
+                   ::throttling (do (>! out v)
+                                  (recur state v cs)))
               sync (if last 
-                     (do (>! out last)
+                     (do (>! out [::throttle last])
                        (recur state nil
                          (conj (pop cs) (timeout msecs))))
                      (recur ::init last (pop cs))))))))
     out))
+
+(defn throttle-msg? [x]
+  (and (vector? x)
+       (= (first x) ::throttle)))
+
+(defn throttle
+  ([in msecs] (throttle in msecs (chan)))
+  ([in msecs out]
+    (->> (throttle* in msecs out)
+      (filter #(and (vector? %) (= (first %) ::throttle)))
+      (map second))))
 
 (defn debounce
   ([source msecs]
@@ -267,27 +280,5 @@
                          (recur state
                            (conj (pop cs) (timeout msecs))))
               threshold (recur ::init (pop cs)))))))
-    out))
-
-(defn tapify [f & args]
-  (as-> (chan) in
-    {:in in
-     :out (apply f in args)}))
-
-(defn switch
-  ([in taps control] (switch in taps control -1))
-  ([in taps control init] (switch in taps control init (chan)))
-  ([in taps control init out]
-    (go (loop [n init]
-          (let [[v c] (alts! [control in])]
-            (if (= c control)
-              (recur v)
-              (do
-                (if (not= n -1)
-                  (let [tap (taps n)]
-                    (>! (:in tap) v)
-                    (>! out (<! (:out tap))))
-                  (>! out v))
-                (recur n))))))
     out))
 
