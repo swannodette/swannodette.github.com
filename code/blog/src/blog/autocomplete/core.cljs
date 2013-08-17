@@ -44,8 +44,10 @@
               ::cancel
               v))))))
 
-(defn autocompleter* [{:keys [focus fetch select cancel menu] :as opts}]
-  (let [out (chan)]
+(defn autocompleter* [{:keys [focus fetch select cancel menu msecs] :as opts}]
+  (let [out (chan)
+        fetch-ctrl (chan)
+        fetch (r/switch fetch [(r/tapify r/throttle msecs)] fetch-ctrl 0)]
     (go (loop [items nil focused false]
           (let [[v sc] (alts! [cancel focus select fetch])]
             (cond
@@ -66,8 +68,10 @@
                     (recur v focused))))
               
               (and items (= sc select))
-              (let [choice (<! ((:menu-proc opts) (r/concat [v] select)
-                                 cancel menu items))]
+              (let [_ (>! fetch-ctrl -1)
+                    choice (<! ((:menu-proc opts) (r/concat [v] select)
+                                 (r/fan-in [fetch cancel]) menu items))]
+                (>! fetch-ctrl 0)
                 (-hide! menu)
                 (if (= choice ::canceled)
                   (recur nil (not= v :blur))
@@ -147,9 +151,10 @@
   (let [[filtered removed] (html-input-events input)]
     (autocompleter*
       {:focus  (r/always :focus (r/listen input :focus))
-       :fetch  (r/throttle (r/distinct filtered) msecs)
+       :fetch  (r/distinct filtered)
        :select (html-menu-events input menu)
        :cancel (r/fan-in [removed (r/always :blur (r/listen input :blur))])
+       :msecs  msecs
        :input  input
        :menu   menu
        :menu-proc   menu-proc

@@ -275,17 +275,18 @@
      :out (apply f in args)}))
 
 (defn switch
-  ([in taps control] (switch taps control (chan)))
-  ([in taps control out]
-    (go (loop [n -1]
+  ([in taps control] (switch in taps control -1))
+  ([in taps control init] (switch in taps control init (chan)))
+  ([in taps control init out]
+    (go (loop [n init]
           (let [[v c] (alts! [control in])]
             (if (= c control)
               (recur v)
               (do
                 (if (not= n -1)
-                  (do
-                    (>! (:in (taps n)) v)
-                    (>! out (<! (:out (taps n)))))
+                  (let [tap (taps n)]
+                    (>! (:in tap) v)
+                    (>! out (<! (:out tap))))
                   (>! out v))
                 (recur n))))))
     out))
