@@ -42,7 +42,8 @@
                (r/map second))]
     (go (let [[v sc] (alts! [cancel sel])]
           (do (>! ctrl :exit)
-            (if (= sc cancel)
+            (if (or (= sc cancel)
+                    (= v ::resp/none))
               ::cancel
               v))))))
 
@@ -136,8 +137,8 @@
        (r/filter
          (fn [kc]
            (and (resp/KEYS kc)
-             (or (not= kc resp/TAB)
-               @allow-tab?))))
+                (or (not= kc resp/TAB)
+                    @allow-tab?))))
        (r/map resp/key->keyword))
      ;; hover events, index of hovered child
      (r/hover-child menu "li")

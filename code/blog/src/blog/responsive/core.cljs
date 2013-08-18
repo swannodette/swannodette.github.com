@@ -86,8 +86,11 @@
               (do
                 (when (number? selected)
                   (-unselect! list selected))
-                (-select! list highlighted)
-                (>! out [:select (nth data highlighted)])
+                (if (number? highlighted)
+                  (do
+                    (-select! list highlighted)
+                    (>! out [:select (nth data highlighted)]))
+                  (>! out [:select highlighted]))
                 (recur highlighted highlighted))
               (do
                 (>! out e)
