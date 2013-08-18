@@ -352,15 +352,12 @@ event we show the menu component and update its contents.
 ```
               (and focused (= sc query))
               (let [[v c] (alts! [cancel ((:completions opts) (second v))])]
-                (if (= c cancel)
+                (if (or (= c cancel) (zero? (count v)))
                   (do (-hide! menu)
                     (recur nil (not= v :blur)))
                   (do
-                    (if-not (zero? (count v))
-                      (do
-                        (-show! menu)
-                        (-set-items! menu v))
-                      (-hide! menu))
+                    (-show! menu)
+                    (-set-items! menu v)
                     (recur v focused))))
 ```
 
