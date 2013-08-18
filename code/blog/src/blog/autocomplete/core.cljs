@@ -48,7 +48,7 @@
   (let [out (chan)
         [query raw] (r/split #(r/throttle-msg? %) query)]
     (go (loop [items nil focused false]
-          (let [[v sc] (alts! [cancel focus select query])]
+          (let [[v sc] (alts! [raw cancel focus query select])]
             (cond
               (= sc focus)
               (recur items true)
@@ -57,8 +57,7 @@
               (do (-hide! menu)
                 (recur items (not= v :blur)))
 
-              (and focused (= sc query)
-                   (r/throttle-msg? v))
+              (and focused (= sc query))
               (let [[v c] (alts! [cancel ((:completions opts) (second v))])]
                 (if (= c cancel)
                   (do (-hide! menu)
@@ -66,19 +65,19 @@
                   (do (-show! menu)
                     (-set-items! menu v)
                     (recur v focused))))
-              
-              (and items (= sc select))
+
+              (= sc select)
               (let [choice (<! ((:menu-proc opts) (r/concat [v] select)
                                  (r/fan-in [raw cancel]) menu items))]
-                (-hide! menu)
-                (if (= choice ::canceled)
-                  (recur nil (not= v :blur))
-                  (do (-set-text! (:input opts) choice)
-                    (>! out choice)
-                    (recur nil focused)))))
+                  (-hide! menu)
+                  (if (= choice ::canceled)
+                    (recur nil (not= v :blur))
+                    (do (-set-text! (:input opts) choice)
+                      (>! out choice)
+                      (recur nil focused))))
 
               :else
-              (recur items focused))))
+              (recur items focused)))))
     out))
 
 ;; =============================================================================
