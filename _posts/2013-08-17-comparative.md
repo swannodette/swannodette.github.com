@@ -439,7 +439,7 @@ We write a concrete implementation of `ITextField` for HTML text inputs.
 (extend-type js/HTMLInputElement
   ITextField
   (-set-text! [field text]
-    (set! (.-value list) text))
+    (set! (.-value field) text))
   (-text [field]
     (.-value field)))
 ```
