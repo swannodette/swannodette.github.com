@@ -129,7 +129,8 @@
     [;; keyboard menu controls, tab special handling
      (->> (r/listen input :keydown
             (fn [e]
-              (when @allow-tab?
+              (when (and @allow-tab?
+                         (= (.-keyCode resp/TAB)))
                 (.preventDefault e))))
        (r/map resp/key-event->keycode)
        (r/filter
