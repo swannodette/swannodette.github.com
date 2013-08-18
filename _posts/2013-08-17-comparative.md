@@ -277,7 +277,9 @@ that we can tell the menu subprocess to quit and thus get garbage
 collected.
 
 We then construct the highlighter/selection process much as we did in
-the previous post and store the resulting channel in a local binding `sel`.
+the previous post and store the resulting channel in a local binding
+`sel`. If you haven't seen much Clojure before `->>` is just a
+threading macro so we don't have to write our code "inside out" - sugar.
 
 As soon as we receive something from `cancel` or `sel` we quit the
 subprocess and either return `::cancel` or the user selection respectively.
@@ -300,13 +302,13 @@ typeahead.js where the heart of the component is smeared across hundreds
 and hundreds of line of code.
 
 `autocompleter*` takes in a variety of values in a ClojureScript
-hash-map. `focus` is a channel of input field focus events. `query` is
-the stream of text changes made to the input field with values
-"highlighted" at throttled intervals. `select` is the channel of events
-needed by the menu, but we also use this to know when to start the menu
-selection subprocess. `cancel` is channel of events that should cancel
-the selection process and hide the selection menu. `menu` is the
-abstract menu UI component.
+hash-map which we destructure. `focus` is a channel of input field
+focus events. `query` is the stream of text changes made to the input
+field with values "highlighted" at throttled intervals. `select` is
+the channel of events needed by the menu, but we also use this to know
+when to start the menu selection subprocess. `cancel` is channel of
+events that should cancel the selection process and hide the selection
+menu. `menu` is the abstract menu UI component.
 
 ```
 (defn autocompleter* [{:keys [focus query select cancel menu] :as opts}]
