@@ -336,11 +336,12 @@ In the first case we have a focus event, we simply track that bit of state.
 ```
 
 In the second case we have a cancellation event, we simply hide the
-menu component.
+menu component and kill any pending throttled query.
 
 ```
               (= sc cancel)
               (do (-hide! menu)
+                (>! (:query-ctrl opts) (h/now))
                 (recur items (not= v :blur)))
 ```
 
