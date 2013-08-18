@@ -300,7 +300,7 @@ and hundreds of line of code.
 hash-map. `focus` is a channel of input field focus events. `query` is
 the stream of text changes made to the input field with values
 "highlighted" at throttled intervals. `select` is the channel of events
-needed by the menu, but we also this use to know when to start the menu
+needed by the menu, but we also use this to know when to start the menu
 selection subprocess. `cancel` is channel of events that should cancel
 the selection process and hide the selection menu. `menu` is the
 abstract menu UI component.
