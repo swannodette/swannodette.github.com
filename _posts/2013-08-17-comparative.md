@@ -537,7 +537,7 @@ the user mouse downed on matches the one that the user mouse upped on.
 ```
 
 Then we need to listen to key events from the input field. We only
-care when the text of input field actually changes. We filter out the
+care when the text of the input field actually changes. We filter out the
 various cases we don't care about. We use `r/split` to generate two
 channels, a channel of the things we might query and another channel
 of blank input events to cancel the menu selection process.
