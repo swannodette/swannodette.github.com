@@ -67,4 +67,5 @@
                     "src/blog/utils"]
      :compiler {:optimizations :advanced
                 :pretty-print false
-                :output-to "../../assets/js/ac.js"}}]})
+                :output-to "../../assets/js/ac.js"
+                :output-wrapper true}}]})
