@@ -48,7 +48,7 @@
 
 (defn autocompleter* [{:keys [focus query select cancel menu] :as opts}]
   (let [out (chan)
-        [query raw] (r/split #(r/throttle-msg? %) query)]
+        [query raw] (r/split r/throttle-msg? query)]
     (go (loop [items nil focused false]
           (let [[v sc] (alts! [raw cancel focus query select])]
             (cond
