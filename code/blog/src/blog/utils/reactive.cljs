@@ -234,9 +234,11 @@
   ([in msecs]
     (throttle* in msecs (chan)))
   ([in msecs out]
+    (throttle* in msecs out (chan)))
+  ([in msecs out control]
     (go
-      (loop [state ::init last nil cs [in]]
-        (let [[_ sync] cs]
+      (loop [state ::init last nil cs [in control]]
+        (let [[_ _ sync] cs]
           (let [[v sc] (alts! cs)]
             (condp = sc
               in (condp = state
@@ -250,7 +252,8 @@
                      (do (>! out [::throttle last])
                        (recur state nil
                          (conj (pop cs) (timeout msecs))))
-                     (recur ::init last (pop cs))))))))
+                     (recur ::init last (pop cs)))
+              control (recur ::init nil (pop cs)))))))
     out))
 
 (defn throttle-msg? [x]

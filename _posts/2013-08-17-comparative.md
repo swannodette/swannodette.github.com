@@ -641,6 +641,9 @@ easier to read, easier to extend, and easier to maintain.
 
 Who knew UI programming could be so *simple*?
 
-You can see all code for this post [here](http://github.com/swannodette/swannodette.github.com/blob/master/code/blog/src/blog/autocomplete/core.cljs).
+You can see all code for this post
+[here](http://github.com/swannodette/swannodette.github.com/blob/master/code/blog/src/blog/autocomplete/core.cljs).
+
+
 
 <script type="text/javascript" src="/assets/js/ac.js"></script>
