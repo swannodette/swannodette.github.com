@@ -297,7 +297,7 @@ typeahead.js where the heart of the component is smeared across hundreds
 and hundreds of line of code.
 
 There are four main cases, input focus, cancellation, menu subprocess trigger, or
-a network fetch for completions. Again take note how abstractly we
+a fetch for completions. Again take note how abstractly we
 have specified `autocompleter*` - this function only takes channels or
 abstract UI components as arguments. We can just as easily use this
 code in a DOM based program as a Canvas or WebGL based one.
