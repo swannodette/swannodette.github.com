@@ -217,7 +217,9 @@
               (filter
                 (fn [e]
                   (and (matcher (.-target e))
-                       (not (matcher (.-relatedTarget e))))))
+                       (as-> (.-relatedTarget e) rel-target
+                         (or (nil? rel-target)
+                             (not (matcher rel-target)))))))
               (map (constantly :clear)))]
     (distinct (fan-in [over out]))))
 
