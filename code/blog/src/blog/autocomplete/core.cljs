@@ -57,6 +57,7 @@
 
               (= sc cancel)
               (do (-hide! menu)
+                (>! (:query-ctrl opts) (h/now))
                 (recur items (not= v :blur)))
 
               (and focused (= sc query))
