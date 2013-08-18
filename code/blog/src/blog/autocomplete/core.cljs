@@ -126,7 +126,8 @@
 
 (defn html-menu-events [input menu allow-tab?]
   (r/fan-in
-    [(->> (r/listen input :keydown
+    [;; keyboard menu controls, tab special handling
+     (->> (r/listen input :keydown
             (fn [e]
               (when @allow-tab?
                 (.preventDefault e))))
@@ -134,10 +135,12 @@
        (r/filter
          (fn [kc]
            (and (resp/KEYS kc)
-                (or (not= kc resp/TAB)
-                    @allow-tab?))))
+             (or (not= kc resp/TAB)
+               @allow-tab?))))
        (r/map resp/key->keyword))
+     ;; hover events, index of hovered child
      (r/hover-child menu "li")
+     ;; need to handle menu clicks
      (->> (r/cyclic-barrier
             [(menu-item-event menu input :mousedown)
              (menu-item-event menu input :mouseup)])
