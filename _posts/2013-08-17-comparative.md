@@ -468,7 +468,7 @@ sweet. Event handling is only a little bit more involved.
 ### HTML Event Wrangling
 
 We need a way to detect mouse down and up events on items in the menu,
-this is because we cannot prevent blur events if we don't prevent
+this is because we cannot prevent input field blur events if we don't prevent
 default on mouse down.
 
 `menu-item-event` accomplishes this for us. Notice that for bad
@@ -491,7 +491,8 @@ prevent blur events at mouse down.
           (h/index-of (dom/by-tag-name menu "li") li))))))
 ```
 
-For the HTML based menu, we fan in three different channels of events.
+For the HTML based menu, we fan in three different channels of
+events. `menu-item-event` will be used to help construct one of them.
 
 First we need the channel of key events that manipulate the menu. If
 the user is in the middle of menu selection we need to override the
@@ -527,9 +528,10 @@ potential selections.
 ```
 
 In order to trigger selection we need both a mouse down event and a
-mouse up event - we use `r/cyclic-barrier` to make sure that we have
-both before we proceed. We only want to handle cases where the item
-the user mouse downed on matches the one that the user mouse upped on.
+mouse up event - we use `r/cyclic-barrier` in conjunction with
+`menu-item-event` to make sure that we have both before we proceed. We
+only want to handle cases where the item the user mouse downed on
+matches the one that the user mouse upped on.
 
 ```
      ;; need to handle menu clicks
