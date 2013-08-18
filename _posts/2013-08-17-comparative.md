@@ -35,8 +35,7 @@ tags: []
     position: absolute;
     left: 0px;
     right: 0px;
-    width: 100%;
-    top: 20px;
+    top: 25px;
     z-index: 999;
   }
 
@@ -45,6 +44,7 @@ tags: []
     padding: 5px;
     font-size: 15px;
     font-family: inconsolata;
+    height: 30px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
