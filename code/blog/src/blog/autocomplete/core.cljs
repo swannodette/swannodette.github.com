@@ -182,6 +182,7 @@
     (when (less-than-ie9?)
       (events/listen menu goog.events.EventType.SELECTSTART
         (fn [e] false)))
+    (-set-text! input "")
     (autocompleter*
       {:focus (r/always :focus (r/listen input :focus))
        :query (r/throttle* (r/distinct filtered) throttle (chan) query-ctrl)
@@ -210,3 +211,4 @@
            (dom/by-id "autocomplete-menu")
            wikipedia-search 750)]
   (go (while true (<! ac))))
+
