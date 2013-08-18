@@ -386,9 +386,9 @@ up where we left off. This is very different from the approach taken by
 [Reactive Extensions](http://msdn.microsoft.com/en-us/data/gg577609.aspx) and similar systems like [Dart's Stream](http://api.dartlang.org/docs/releases/latest/dart_async/Stream.html).
 
 ```
-              (= sc select)
-              (let [_ (>! (:query-ctrl opts) (h/now))
-                    _ (reset! (:selection-state opts) true)
+              (and items (= sc select))
+              (let [_ (reset! (:selection-state opts) true)
+                    _ (>! (:query-ctrl opts) (h/now))
                     choice (<! ((:menu-proc opts) (r/concat [v] select)
                                  (r/fan-in [raw cancel]) menu items))]
                 (reset! (:selection-state opts) false)
