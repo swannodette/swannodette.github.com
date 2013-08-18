@@ -296,12 +296,6 @@ events or manipulation. This is in stark contrast to jQuery UI or
 typeahead.js where the heart of the component is smeared across hundreds
 and hundreds of line of code.
 
-There are four main cases, input focus, cancellation, menu subprocess trigger, or
-a fetch for completions. Again take note how abstractly we
-have specified `autocompleter*` - this function only takes channels or
-abstract UI components as arguments. We can just as easily use this
-code in a DOM based program as a Canvas or WebGL based one.
-
 `autocompleter*` takes in a variety of values in a ClojureScript
 hash-map. `focus` is a channel of input field focus events. `query` is
 the stream of text changes made to the input field with values
