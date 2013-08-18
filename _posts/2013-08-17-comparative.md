@@ -373,7 +373,7 @@ users starts typing again.
 completes. Because we can hand off control, coordination logic between
 `autocompleter*` and `menu-proc` becomes unnecessary.
 
-It worth taking a breath to consider how flexible this is. Because
+It's worth taking a breath to consider how flexible this is. Because
 channels do not require explicit subscription we can simply pass them
 along as values, pause our execution allowing some other process to
 read from the channel until they are done at which point we can pick
