@@ -100,7 +100,7 @@ This post is a doozy so I've
 decided to present it in the format of *comparative literate
 code*. I'll be documenting every part of the autocompleter and showing
 how analagous cases are handled in the
-[jQuery UI autocompleter](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js). Don't
+[jQuery UI autocompleter](http://github.com/jquery/jquery-ui/blob/9e00e00f3b54770faa0291d6ee6fc1dcbad028cb/ui/jquery.ui.autocomplete.js). Don't
 read this post as trash talking the jQuery UI autocompleter, rather a
 frame of reference to understand more easily what
 [CSP](http://en.wikipedia.org/wiki/Communicating_sequential_processe)
@@ -235,7 +235,7 @@ this.menu = $( "<ul>" )
 ```
 
 You can see the source in context
-[here](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js#L192).
+[here](http://github.com/jquery/jquery-ui/blob/9e00e00f3b54770faa0291d6ee6fc1dcbad028cb/ui/jquery.ui.autocomplete.js#L192).
 
 In our implementation we will not hold onto a selectable menu instance, instead
 we will create a menu selection process on the fly as needed.
@@ -245,7 +245,7 @@ we can *pause* the autocompleter until the subprocess
 completes. This eliminates coordination between components
 and superfluous state tracking. It also means we can share
 streams of events avoiding redundancy and duplication of logic. [Lines
-202 to 307 in the jQuery autocompleter](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js#L202)
+202 to 307 in the jQuery autocompleter](http://github.com/jquery/jquery-ui/blob/9e00e00f3b54770faa0291d6ee6fc1dcbad028cb/ui/jquery.ui.autocomplete.js#L202)
 is all component coordination and event handling redundancy that we would like to
 avoid.
 
@@ -410,8 +410,8 @@ returns its output channel
 > We've seen hardly anything so far related to HTML - we've
 > only been examining an abstract autocompleter process. 
 > This may seem like over engineering, but reading through
-> the source of the [jQuery autocompleter](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js) or through
-> [typeahead.js](http://github.com/twitter/typeahead.js/blob/master/src/typeahead_view.js)
+> the source of the [jQuery autocompleter](http://github.com/jquery/jquery-ui/blob/9e00e00f3b54770faa0291d6ee6fc1dcbad028cb/ui/jquery.ui.autocomplete.js) or through
+> [typeahead.js](http://github.com/twitter/typeahead.js/blob/8c493d55f012bb8e9ee4ebfffaa569e465b53813/src/typeahead_view.js)
 > it becomes apparent that the difficulty in
 > understanding their implementations is due precisely to the lack of separation
 > of concerns. We have to digest so many different concerns at once!
@@ -577,9 +577,9 @@ Now we need to handle bad browsers that complicate blur detection:
 > Because neither of the JavaScript autocompleters we've
 > considered have disciplined separation of concerns, browser quirk
 > logic is fully interleaved into the process logic - see
-> [here](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js#L127)
+> [here](http://github.com/jquery/jquery-ui/blob/9e00e00f3b54770faa0291d6ee6fc1dcbad028cb/ui/jquery.ui.autocomplete.js#L127)
 > and
-> [here](http://github.com/twitter/typeahead.js/blob/master/src/typeahead_view.js#L216).
+> [here](http://github.com/twitter/typeahead.js/blob/8c493d55f012bb8e9ee4ebfffaa569e465b53813/src/typeahead_view.js#L216).
 > In our implementation process coordination is untainted by
 > browser specific insanity; browser quirks need
 > only appear in the place where it matters, event handling and DOM
