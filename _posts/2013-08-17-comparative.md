@@ -367,7 +367,7 @@ process*. We pass along the `select` channel making sure to put the
 event we read back at the front. We also pass along the `cancel`
 channel, note we use `r/fan-in` to mix in `raw`, which is a channel of the
 changes to the input field because we want to cancel menu selection if the
-users starts typing again.
+user starts typing again.
 
 `autocompleter*` will be *paused* until the menu selection subprocess
 completes. Because we can hand off control, coordination logic between
