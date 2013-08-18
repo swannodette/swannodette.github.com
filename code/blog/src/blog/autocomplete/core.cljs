@@ -29,7 +29,7 @@
   (-set-items! [list items]))
 
 ;; =============================================================================
-;; Autocompleter
+;; Autocompleter, pure process logic untainted by HTML concerns
 
 (defn menu-proc [select cancel menu data]
   (let [ctrl (chan)
@@ -67,21 +67,23 @@
                     (recur v focused))))
 
               (= sc select)
-              (let [choice (<! ((:menu-proc opts) (r/concat [v] select)
+              (let [_ (reset! (:selection-state opts) true)
+                    choice (<! ((:menu-proc opts) (r/concat [v] select)
                                  (r/fan-in [raw cancel]) menu items))]
-                  (-hide! menu)
-                  (if (= choice ::cancel)
-                    (recur nil (not= v :blur))
-                    (do (-set-text! (:input opts) choice)
-                      (>! out choice)
-                      (recur nil focused))))
+                (reset! (:selection-state opts) false)
+                (-hide! menu)
+                (if (= choice ::cancel)
+                  (recur nil (not= v :blur))
+                  (do (-set-text! (:input opts) choice)
+                    (>! out choice)
+                    (recur nil focused))))
 
               :else
               (recur items focused)))))
     out))
 
 ;; =============================================================================
-;; HTML Specific Code (aka Quarantine Line)
+;; HTML Specific Code, DANGER DANGER DANGER Quarantine Line
 
 (defn less-than-ie9? []
   (and ua/IE (not (ua/isVersion 9))))
@@ -106,14 +108,13 @@
       (apply str)
       (dom/set-html! list))))
 
-;; TODO: add IE hack for blur
-
 (defn menu-item-event [menu input type]
   (->> (r/listen menu type
          (fn [e]
            (when (dom/in? e menu)
              (.preventDefault e))
-           (when (less-than-ie9?)
+           (when (and (= type :mousedown)
+                      (less-than-ie9?))
              (.focus input)))
          (chan (sliding-buffer 1)))
     (r/map
@@ -121,11 +122,18 @@
         (let [li (dom/parent (.-target e) "li")]
           (h/index-of (dom/by-tag-name menu "li") li))))))
 
-(defn html-menu-events [input menu]
+(defn html-menu-events [input menu allow-tab?]
   (r/fan-in
-    [(->> (r/listen input :keydown)
+    [(->> (r/listen input :keydown
+            (fn [e]
+              (when @allow-tab?
+                (.preventDefault e))))
        (r/map resp/key-event->keycode)
-       (r/filter resp/KEYS)
+       (r/filter
+         (fn [kc]
+           (and (resp/KEYS kc)
+             (or (not= kc resp/TAB)
+                 @allow-tab?))))
        (r/map resp/key->keyword))
      (r/hover-child menu "li")
      (->> (r/cyclic-barrier
@@ -147,18 +155,20 @@
     (r/split #(not (string/blank? %)))))
 
 (defn html-autocompleter [input menu completions throttle]
-  (let [[filtered removed] (html-input-events input)]
+  (let [selection-state (atom false)
+        [filtered removed] (html-input-events input)]
     (autocompleter*
-      {:focus  (r/always :focus (r/listen input :focus))
-       :query  (r/throttle* (r/distinct filtered) throttle)
-       :select (html-menu-events input menu)
+      {:focus (r/always :focus (r/listen input :focus))
+       :query (r/throttle* (r/distinct filtered) throttle)
+       :select (html-menu-events input menu selection-state)
        :cancel (if (less-than-ie9?)
                  (r/fan-in [removed (r/always :blur (r/listen input :blur))])
                  removed)
-       :input  input
-       :menu   menu
-       :menu-proc   menu-proc
-       :completions completions})))
+       :input input
+       :menu menu
+       :menu-proc menu-proc
+       :completions completions
+       :selection-state selection-state})))
 
 ;; =============================================================================
 ;; Example
