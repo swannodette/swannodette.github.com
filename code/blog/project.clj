@@ -57,12 +57,14 @@
                 :output-to "../../assets/js/resp.js"}}
 
     {:id "ac-dev"
-     :source-paths ["src/blog/autocomplete"]
+     :source-paths ["src/blog/autocomplete"
+                    "src/blog/utils"]
      :compiler {:optimizations :whitespace
                 :pretty-print false
                 :output-to "../../assets/js/ac.js"}}
     {:id "ac-adv"
-     :source-paths ["src/blog/autcomplete"]
+     :source-paths ["src/blog/autocomplete"
+                    "src/blog/utils"]
      :compiler {:optimizations :advanced
                 :pretty-print false
                 :output-to "../../assets/js/ac.js"}}]})
