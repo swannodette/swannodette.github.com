@@ -480,6 +480,9 @@ default on mouse down.
 browsers we need to refocus the input field, because we can't even
 prevent blur events at mouse down.
 
+(A puzzle for the concurrency minded: why do I need a sliding buffer backed
+channel?)
+
 ```
 (defn menu-item-event [menu input type]
   (->> (r/listen menu type
