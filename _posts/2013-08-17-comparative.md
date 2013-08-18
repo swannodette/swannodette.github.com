@@ -601,6 +601,7 @@ We can now write the HTML autocompleter construction function.
     (when (less-than-ie9?)
       (events/listen menu goog.events.EventType.SELECTSTART
         (fn [e] false)))
+    (-set-text! input "")
     (autocompleter*
       {:focus (r/always :focus (r/listen input :focus))
        :query (r/throttle* (r/distinct filtered) throttle (chan) query-ctrl)
