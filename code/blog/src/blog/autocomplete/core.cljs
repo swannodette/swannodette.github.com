@@ -151,6 +151,7 @@
 
 (defn html-input-events [input]
   (->> (r/listen input :keydown)
+    (r/remove (fn [e] (.-platformModifierKey e)))
     (r/map resp/key-event->keycode)
     (r/filter relevant-keys)
     (r/map #(-text input))
