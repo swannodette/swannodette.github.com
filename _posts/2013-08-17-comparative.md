@@ -356,9 +356,11 @@ event we show the menu component and update its contents.
                   (do (-hide! menu)
                     (recur nil (not= v :blur)))
                   (do
-                    (when-not (zero? (count v))
-                      (-show! menu)
-                      (-set-items! menu v))
+                    (if-not (zero? (count v))
+                      (do
+                        (-show! menu)
+                        (-set-items! menu v))
+                      (-hide! menu))
                     (recur v focused))))
 ```
 
