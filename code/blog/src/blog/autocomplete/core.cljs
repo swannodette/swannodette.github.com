@@ -70,9 +70,9 @@
                     (-set-items! menu v)
                     (recur v focused))))
 
-              (= sc select)
-              (let [_ (>! (:query-ctrl opts) (h/now))
-                    _ (reset! (:selection-state opts) true)
+              (and items (= sc select))
+              (let [_ (reset! (:selection-state opts) true)
+                    _ (>! (:query-ctrl opts) (h/now))
                     choice (<! ((:menu-proc opts) (r/concat [v] select)
                                  (r/fan-in [raw cancel]) menu items))]
                 (reset! (:selection-state opts) false)
