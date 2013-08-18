@@ -83,6 +83,9 @@
 ;; =============================================================================
 ;; HTML Specific Code (aka Quarantine Line)
 
+(defn less-than-ie9? []
+  (and ua/IE (not (ua/isVersion 9))))
+
 (extend-type js/HTMLInputElement
   ITextField
   (-set-text! [field text]
@@ -103,18 +106,20 @@
       (apply str)
       (dom/set-html! list))))
 
-(defn menu-item-event [menu type]
+;; TODO: add IE hack for blur
+
+(defn menu-item-event [menu input type]
   (->> (r/listen menu type
          (fn [e]
            (when (dom/in? e menu)
-             (.preventDefault e)))
+             (.preventDefault e))
+           (when (less-than-ie9?)
+             (.focus input)))
          (chan (sliding-buffer 1)))
     (r/map
       (fn [e]
         (let [li (dom/parent (.-target e) "li")]
           (h/index-of (dom/by-tag-name menu "li") li))))))
-
-;; TODO: add IE hack for blur
 
 (defn html-menu-events [input menu]
   (r/fan-in
@@ -124,8 +129,8 @@
        (r/map resp/key->keyword))
      (r/hover-child menu "li")
      (->> (r/cyclic-barrier
-            [(menu-item-event menu :mousedown)
-             (menu-item-event menu :mouseup)])
+            [(menu-item-event menu input :mousedown)
+             (menu-item-event menu input :mouseup)])
        (r/filter (fn [[d u]] (= d u)))
        (r/always :select))]))
 
@@ -141,16 +146,15 @@
     (r/map #(-text input))
     (r/split #(not (string/blank? %)))))
 
-;; NOTE: in IE we want to ignore blur somehow, in IE we should
-;; filter out blur
-
 (defn html-autocompleter [input menu completions throttle]
   (let [[filtered removed] (html-input-events input)]
     (autocompleter*
       {:focus  (r/always :focus (r/listen input :focus))
        :query  (r/throttle* (r/distinct filtered) throttle)
        :select (html-menu-events input menu)
-       :cancel (r/fan-in [removed (r/always :blur (r/listen input :blur))])
+       :cancel (if (less-than-ie9?)
+                 (r/fan-in [removed (r/always :blur (r/listen input :blur))])
+                 removed)
        :input  input
        :menu   menu
        :menu-proc   menu-proc
