@@ -290,7 +290,7 @@ completed their work. Sounds like a good idea right?
 
 ## Core autocompleter
 
-This is our main autocompleter process. The 38 lines of code below represent
+This is our main autocompleter process. The 39 lines of code below represent
 the entirety of the process utterly devoid of clutter about DOM
 events or manipulation. This is in stark contrast to jQuery UI or
 typeahead.js where the heart of the component is smeared across hundreds
