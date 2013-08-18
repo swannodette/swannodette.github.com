@@ -369,7 +369,7 @@ event we show the menu component and update its contents.
 
 The fourth case is the most interesting. *We hand off control to the menu
 process*. We pass along the `select` channel making sure to put the
-event we read back at the front. We also pass along the `cancel`
+event we read back at the front with `r/concat`. We also pass along the `cancel`
 channel, note we use `r/fan-in` to mix in `raw`, which is a channel of the
 changes to the input field because we want to cancel menu selection if the
 user starts typing again.
