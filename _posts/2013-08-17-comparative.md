@@ -93,7 +93,7 @@ tags: []
 
 core.async and systems like it have an unmatched level of power when
 it comes to programming user interfaces. I've spent about a week using
-core.async to build the long promised auto completer in about two
+core.async to build the long promised autocompleter in about two
 hundred lines of ClojureScript.
 
 This post is a doozy so I've
