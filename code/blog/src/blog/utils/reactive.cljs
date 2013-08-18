@@ -253,7 +253,10 @@
                        (recur state nil
                          (conj (pop cs) (timeout msecs))))
                      (recur ::init last (pop cs)))
-              control (recur ::init nil (pop cs)))))))
+              control (recur ::init nil
+                        (if (= (count cs) 3)
+                          (pop cs)
+                          cs)))))))
     out))
 
 (defn throttle-msg? [x]
