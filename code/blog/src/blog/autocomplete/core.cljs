@@ -4,6 +4,8 @@
     [blog.utils.macros :refer [dochan]])
   (:require
     [goog.userAgent :as ua]
+    [goog.events :as events]
+    [goog.events.EventType]
     [clojure.string :as string]
     [cljs.core.async :refer [>! <! alts! chan sliding-buffer]]
     [blog.responsive.core :as resp]
@@ -157,6 +159,9 @@
 (defn html-autocompleter [input menu completions throttle]
   (let [selection-state (atom false)
         [filtered removed] (html-input-events input)]
+    (when (less-than-ie9?)
+      (events/listen menu goog.events.EventType.SELECTSTART
+        (fn [e] false)))
     (autocompleter*
       {:focus (r/always :focus (r/listen input :focus))
        :query (r/throttle* (r/distinct filtered) throttle)
