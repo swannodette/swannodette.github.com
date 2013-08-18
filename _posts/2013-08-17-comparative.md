@@ -487,7 +487,7 @@ prevent blur events at mouse down.
           (h/index-of (dom/by-tag-name menu "li") li))))))
 ```
 
-For HTML based menu, we fan in three different channels of events.
+For the HTML based menu, we fan in three different channels of events.
 
 First we need the channel of key events that manipulate the menu. If
 the user is in the middle of menu selection we need to override the
