@@ -494,7 +494,7 @@ the user is in the middle of menu selection we need to override the
 behavior of the tab key. We are able to detect this via
 `allow-tab?` which is an atom, a tiny bit of necessary mutable
 state. This is the `:selection-state` option in `autocompleter*` that we
-bang on.
+banged on earlier.
 
 ```
 (defn html-menu-events [input menu allow-tab?]
