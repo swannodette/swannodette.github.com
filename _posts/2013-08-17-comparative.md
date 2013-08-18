@@ -276,7 +276,10 @@ representation at this point (more on this later). We also construct a channel `
 that we can tell the menu subprocess to quit and thus get garbage
 collected.
 
-As soon as we receive something from `cancel` or `select` we quit the
+We then construct the highlighter/selection process much as we did in
+the previous post and store the resulting channel in a local binding `sel`.
+
+As soon as we receive something from `cancel` or `sel` we quit the
 subprocess and either return `::cancel` or the user selection respectively.
 
 Once more, in this model we only create the menu selection process
