@@ -1,7 +1,6 @@
 (ns blog.autocomplete.core
   (:require-macros
-    [cljs.core.async.macros :refer [go]]
-    [blog.utils.macros :refer [dochan]])
+    [cljs.core.async.macros :refer [go]])
   (:require
     [goog.userAgent :as ua]
     [goog.events :as events]

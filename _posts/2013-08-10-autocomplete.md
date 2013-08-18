@@ -91,7 +91,12 @@ tags: []
   }
 </style>
 
-This is the long promised autocompleter post. It's a doozy so I've
+core.async and systems like it have an unmatched level of power when
+it comes to programming user interfaces. I've spent about a week using
+core.async to build the long promised auto completer in about two
+hundred lines of ClojureScript.
+
+This post is a doozy so I've
 decided to present it in the format of *comparative literate
 code*. I'll be documenting every part of the autocompleter and showing
 how analagous cases are handled in the
@@ -114,10 +119,16 @@ First, the autocompleter in action. Make sure to try all
 the following cases:
 
 * &mdash; Control characters should not trigger fetch for results
-* &mdash; Losing focus via outside click should close menu
-* &mdash; Losing focus by tabbing out of input field should close menu
+* &mdash; Close menu on tab out of field
+* &mdash; Close menu on outside click
+* &mdash; Tab when user is selecting item should prevent default
 * &mdash; Keyboard based selection
 * &mdash; Mouse based selection
+* &mdash; No selection when mouse down on one item and mouse up on
+  different item
+
+The autocompleter should work fine on Internet Explorer 8 or greater
+and we'll see how cleanly we can handle browser quirks.
 
 <div id="ac-ex0">
     <div class="ac-container">
@@ -155,17 +166,23 @@ First we declare our namespace. We import the core.async functions and
 macros. We also import the components from the previous blog post; no
 need to write that code again. We also import some utility DOM helpers
 (which are just wrappers around Google Closure's battle tested cross
-browser DOM library) and
-some reactive conveniences.
+browser DOM library) and some reactive conveniences. We import
+`goog.userAgent` and some other `goog` related namespaces to help us
+deal with Internet Explorer quirks.
 
 ```
 (ns blog.autocomplete.core
   (:require-macros
-    [cljs.core.async.macros :refer [go]])
+    [cljs.core.async.macros :refer [go]]
   (:require
-    [cljs.core.async :refer [>! <! alts! chan]]
+    [goog.userAgent :as ua]
+    [goog.events :as events]
+    [goog.events.EventType]
+    [clojure.string :as string]
+    [cljs.core.async :refer [>! <! alts! chan sliding-buffer put!]]
     [blog.responsive.core :as resp]
     [blog.utils.dom :as dom]
+    [blog.utils.helpers :as h]
     [blog.utils.reactive :as r]))
 ```
 
@@ -234,25 +251,25 @@ avoid.
 Our menu subprocess looks like this:
 
 ```
-(defn menu-proc [select cancel input menu data]
+(defn menu-proc [select cancel menu data]
   (let [ctrl (chan)
-        sel  (resp/selector
-               (resp/highlighter select menu ctrl)
-               menu data)]
-    (go
-      (let [[v sc] (alts! [cancel sel])]
-        (>! ctrl :exit)
-        (-hide! menu)
-        (if (= sc cancel)
-          ::cancel
-          (do (-set-text! input v)
-            v))))))
+        sel  (->> (resp/selector
+                    (resp/highlighter select menu ctrl)
+                    menu data)
+               (r/filter vector?)
+               (r/map second))]
+    (go (let [[v sc] (alts! [cancel sel])]
+          (do (>! ctrl :exit)
+            (if (or (= sc cancel)
+                    (= v ::resp/none))
+              ::cancel
+              v))))))
 ```
 
 `menu-proc` takes some channels and some UI components. The `select`
 channel provides the events that affect the menu component. The
 `cancel` channel allows us to abort the selection process should the
-user blur the autocomplete field by tabbing out or clicking elsewhere in the
+user start typing again, tab out or click elsewhere in the
 window. It's important to notice the lack of anything specific to HTML
 representation at this point (more on this later). We also construct a channel `ctrl` so
 that we can tell the menu subprocess to quit and thus get garbage
@@ -272,59 +289,93 @@ completed their work. Sounds like a good idea right?
 
 ## Core autocompleter
 
-This is our main autocompleter process. There are three main cases,
-cancellation, menu subprocess trigger, or a network fetch for completions. Again take
-note how abstractly we have specified `autocompleter*` - this
-function only takes channels or abstract UI components as
-arguments. We can just as easily use this code in a DOM based program as a
-Canvas or WebGL based one.
+This is our main autocompleter process. The 38 lines of code below represent
+the entirety of the process utterly devoid of clutter about DOM
+events or manipulation. This is in stark contrast to jQuery UI or
+typeahead.js where the heart of the component is smeared across hundreds
+and hundreds of line of code.
+
+There are four main cases, input focus, cancellation, menu subprocess trigger, or
+a network fetch for completions. Again take note how abstractly we
+have specified `autocompleter*` - this function only takes channels or
+abstract UI components as arguments. We can just as easily use this
+code in a DOM based program as a Canvas or WebGL based one.
+
+`autocompleter*` takes in a variety of values in a ClojureScript
+hash-map. `focus` is a channel of input field focus events. `query` is
+the stream of text changes made to the input field with values
+"highlighted" at throttled interval. `select` is the channel of events
+needed by the menu, but we also use to know when to start the menu
+selection subprocess. `cancel` is channel of events that should cancel
+the selection process and hide the selection menu. `menu` is the
+abstract menu UI component.
 
 ```
-(defn autocompleter* [fetch select cancel completions input menu]
-  (let [out (chan)]
-    (go (loop [items nil]
-          (let [[v sc] (alts! [cancel select fetch])]
+(defn autocompleter* [{:keys [focus query select cancel menu] :as opts}]
+  (let [out (chan)
+        [query raw] (r/split #(r/throttle-msg? %) query)]
+```
+
+We enter our go loop. We track two pieces of state, `items` which is the
+last JavaScript array of completions we fetched (it could be local or
+remote it doesn't matter), and `focused` - whether the input field
+is in focus.
+
+We split `query` into the highlighted events and the raw
+events. We'll forward `raw` to the selection process when we create
+it.
+
+We non-deterministically select over all these channels:
+
+```
+    (go (loop [items nil focused false]
+          (let [[v sc] (alts! [raw cancel focus query select])]
+```
+
+In the first case we have a focus event, we simply track that bit of state.
+
+```
             (cond
-              (= sc cancel)
-              (do (-hide! menu)
-                (recur items))
-
-              (= sc fetch)
-              (let [[v c] (alts! [cancel (completions v)])]
-                (if (= c cancel)
-                  (do (-hide! menu)
-                    (recur nil))
-                  (do (-show! menu)
-                    (let [items (nth v 1)]
-                      (-set-items! menu items)
-                      (recur items)))))
-
-              (and items (= sc select))
-              (let [v (<! (menu-proc (r/concat [v] select)
-                            cancel input menu items))]
-                (if (= v ::cancel)
-                  (recur nil)
-                  (do (>! out v)
-                    (recur items)))))
-
-              :else
-              (recur items))))
-    out))
+              (= sc focus)
+              (recur items true)
 ```
 
-In the first case we have a cancellation event, we simply hide the
+In the second case we have a cancellation event, we simply hide the
 menu component.
 
-In the second case we need to fetch data from the server. We call
+```
+              (= sc cancel)
+              (do (-hide! menu)
+                (recur items (not= v :blur)))
+```
+
+In the third case we need to fetch data from the server. We call
 `completions` with the query supplied by the user. We handle
 possible cancellation. If we actually get a result and no cancellation
 event we show the menu component, extract the relevant data from
 the response and update the contents of the menu component.
 
-The third case is the most interesting. *We hand off control to the menu
+```
+              (and focused (= sc query))
+              (let [[v c] (alts! [cancel ((:completions opts) (second v))])]
+                (if (= c cancel)
+                  (do (-hide! menu)
+                    (recur nil (not= v :blur)))
+                  (do
+                    (when-not (zero? (count v))
+                      (-show! menu)
+                      (-set-items! menu v))
+                    (recur v focused))))
+```
+
+The fourth case is the most interesting. *We hand off control to the menu
 process*. We pass along the `select` channel making sure to put the
 event we read back at the front. We also pass along the `cancel`
-channel. `autocompleter*` will be *paused* until the menu selection subprocess
+channel, note we use `r/fan-in` to mix in `raw`, which a channel of the
+changes to the input field (we want to cancel menu selection if the
+users starts typing again).
+
+`autocompleter*` will be *paused* until the menu selection subprocess
 completes. Because we can hand off control, coordination logic between
 `autocompleter*` and `menu-proc` becomes unnecessary.
 
@@ -333,6 +384,29 @@ channels do require explicit subscription we can simply pass them
 along as values, pause our execution allowing some other process to
 read from the channel until they are done at which point we can pick
 up where we left off.
+
+```
+              (= sc select)
+              (let [_ (reset! (:selection-state opts) true)
+                    choice (<! ((:menu-proc opts) (r/concat [v] select)
+                                 (r/fan-in [raw cancel]) menu items))]
+                (reset! (:selection-state opts) false)
+                (-hide! menu)
+                (if (= choice ::cancel)
+                  (recur nil (not= v :blur))
+                  (do (-set-text! (:input opts) choice)
+                    (>! out choice)
+                    (recur nil focused))))
+```
+
+The final case, we just loop around. `autocompleter*` just
+returns its output channel
+
+```
+              :else
+              (recur items focused)))))
+    out))
+```
 
 > ### Code Comprehension
 > We've seen hardly anything so far related to HTML - we've
