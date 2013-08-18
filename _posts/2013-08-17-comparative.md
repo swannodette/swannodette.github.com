@@ -310,10 +310,12 @@ when to start the menu selection subprocess. `cancel` is channel of
 events that should cancel the selection process and hide the selection
 menu. `menu` is the abstract menu UI component.
 
+We split query into the throttled queries and the original raw input.
+
 ```
 (defn autocompleter* [{:keys [focus query select cancel menu] :as opts}]
   (let [out (chan)
-        [query raw] (r/split #(r/throttle-msg? %) query)]
+        [query raw] (r/split r/throttle-msg? query)]
 ```
 
 We enter our go loop. We track two pieces of state, `items` which is the
