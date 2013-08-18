@@ -65,8 +65,10 @@
                 (if (= c cancel)
                   (do (-hide! menu)
                     (recur nil (not= v :blur)))
-                  (do (-show! menu)
-                    (-set-items! menu v)
+                  (do
+                    (when-not (zero? (count v))
+                      (-show! menu)
+                      (-set-items! menu v))
                     (recur v focused))))
 
               (= sc select)
@@ -131,7 +133,7 @@
      (->> (r/listen input :keydown
             (fn [e]
               (when (and @allow-tab?
-                         (= (.-keyCode resp/TAB)))
+                         (= (.-keyCode e) resp/TAB))
                 (.preventDefault e))))
        (r/map resp/key-event->keycode)
        (r/filter
