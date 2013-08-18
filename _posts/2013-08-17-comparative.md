@@ -515,7 +515,7 @@ bang on.
        (r/map resp/key->keyword))
 ```
 
-We also way to detect user hover over items in the menu to track
+We need to detect user hover over items in the menu to track
 potential selections.
 
 ```
