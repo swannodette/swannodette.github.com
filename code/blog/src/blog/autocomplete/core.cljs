@@ -7,7 +7,7 @@
     [goog.events :as events]
     [goog.events.EventType]
     [clojure.string :as string]
-    [cljs.core.async :refer [>! <! alts! chan sliding-buffer]]
+    [cljs.core.async :refer [>! <! alts! chan sliding-buffer put!]]
     [blog.responsive.core :as resp]
     [blog.utils.dom :as dom]
     [blog.utils.helpers :as h]
@@ -134,8 +134,8 @@
        (r/filter
          (fn [kc]
            (and (resp/KEYS kc)
-             (or (not= kc resp/TAB)
-                 @allow-tab?))))
+                (or (not= kc resp/TAB)
+                    @allow-tab?))))
        (r/map resp/key->keyword))
      (r/hover-child menu "li")
      (->> (r/cyclic-barrier
@@ -157,18 +157,31 @@
     (r/split #(not (string/blank? %)))))
 
 (defn html-autocompleter [input menu completions throttle]
-  (let [selection-state (atom false)
+  (let [ie-blur (chan)
+        selection-state (atom false)
         [filtered removed] (html-input-events input)]
+    ;; blur is broken in < IE 9
     (when (less-than-ie9?)
       (events/listen menu goog.events.EventType.SELECTSTART
-        (fn [e] false)))
+        (fn [e] false))
+      (events/listen input goog.events.EventType.KEYPRESS
+        (fn [e]
+          (when (and (= (.-keyCode e) resp/TAB) (not @selection-state))
+            (put! ie-blur (h/now)))))
+      (events/listen js/window goog.events.EventType.MOUSEDOWN
+        (fn [e]
+          (when-not (some #(dom/in? e %) [menu input])
+            (put! ie-blur (h/now))))))
     (autocompleter*
       {:focus (r/always :focus (r/listen input :focus))
        :query (r/throttle* (r/distinct filtered) throttle)
        :select (html-menu-events input menu selection-state)
-       :cancel (if-not (less-than-ie9?)
-                 (r/fan-in [removed (r/always :blur (r/listen input :blur))])
-                 removed)
+       :cancel (r/fan-in
+                 [removed
+                  (r/always :blur
+                    (if-not (less-than-ie9?)
+                      (r/listen input :blur)
+                      ie-blur))])
        :input input
        :menu menu
        :menu-proc menu-proc
