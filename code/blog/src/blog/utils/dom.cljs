@@ -44,4 +44,4 @@
 (defn in? [e el]
   (let [target (.-target e)]
     (or (identical? target el)
-        (dom/getAncestor target (el-matcher el)))))
+        (not (nil? (dom/getAncestor target (el-matcher el)))))))

@@ -117,8 +117,7 @@
          (fn [e]
            (when (dom/in? e menu)
              (.preventDefault e))
-           (when (and (= type :mousedown)
-                      (less-than-ie9?))
+           (when (less-than-ie9?)
              (.focus input)))
          (chan (sliding-buffer 1)))
     (r/map
