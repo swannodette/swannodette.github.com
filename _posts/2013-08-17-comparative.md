@@ -347,7 +347,7 @@ menu component.
 In the third case we need to get some completions. We call
 `completions` with the query supplied by the user. We handle
 possible cancellation. If we actually get a result and no cancellation
-event we show the menu component update the contents.
+event we show the menu component and update its contents.
 
 ```
               (and focused (= sc query))
