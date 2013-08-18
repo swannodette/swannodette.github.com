@@ -399,7 +399,7 @@ There's a little bit of complication above around `:selection-state`
 this is to support tab for selection, we'll explain this later. We
 need to cancel any pending throttle event via `:query-ctrl` as
 otherwise the menu might appear after a selection is made if the user is
-a particular fast typist.
+a particularly fast typist.
 
 The final case, we just loop around. `autocompleter*` just
 returns its output channel
