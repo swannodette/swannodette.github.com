@@ -28,7 +28,8 @@
                     "src/blog/utils"]
      :compiler {:optimizations :advanced
                 :pretty-print false
-                :output-to "../../assets/js/csp.js"}}
+                :output-to "../../assets/js/csp.js"
+                :output-wrapper true}}
 
     {:id "proc-dev"
      :source-paths ["src/blog/processes"
@@ -41,7 +42,8 @@
                     "src/blog/utils"]
      :compiler {:optimizations :advanced
                 :pretty-print false
-                :output-to "../../assets/js/proc.js"}}
+                :output-to "../../assets/js/proc.js"
+                :output-wrapper true}}
 
     {:id "resp-dev"
      :source-paths ["src/blog/responsive"
@@ -54,7 +56,8 @@
                     "src/blog/utils"]
      :compiler {:optimizations :advanced
                 :pretty-print false
-                :output-to "../../assets/js/resp.js"}}
+                :output-to "../../assets/js/resp.js"
+                :output-wrapper true}}
 
     {:id "ac-dev"
      :source-paths ["src/blog/autocomplete"
