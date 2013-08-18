@@ -70,7 +70,7 @@
               (let [choice (<! ((:menu-proc opts) (r/concat [v] select)
                                  (r/fan-in [raw cancel]) menu items))]
                   (-hide! menu)
-                  (if (= choice ::canceled)
+                  (if (= choice ::cancel)
                     (recur nil (not= v :blur))
                     (do (-set-text! (:input opts) choice)
                       (>! out choice)
