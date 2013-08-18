@@ -73,6 +73,9 @@ tags: []
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-shadow: 0px 4px 4px rgb(220,220,220);
+    user-select: none
+    -webkit-user-select: none;
+    -moz-user-select: none;
   }
 
   #ac-ex0 li {
