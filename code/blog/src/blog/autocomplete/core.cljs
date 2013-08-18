@@ -71,7 +71,8 @@
                     (recur v focused))))
 
               (= sc select)
-              (let [_ (reset! (:selection-state opts) true)
+              (let [_ (>! (:query-ctrl opts) (h/now))
+                    _ (reset! (:selection-state opts) true)
                     choice (<! ((:menu-proc opts) (r/concat [v] select)
                                  (r/fan-in [raw cancel]) menu items))]
                 (reset! (:selection-state opts) false)
@@ -177,13 +178,15 @@
 
 (defn html-autocompleter [input menu completions throttle]
   (let [selection-state (atom false)
+        query-ctrl (chan)
         [filtered removed] (html-input-events input)]
     (when (less-than-ie9?)
       (events/listen menu goog.events.EventType.SELECTSTART
         (fn [e] false)))
     (autocompleter*
       {:focus (r/always :focus (r/listen input :focus))
-       :query (r/throttle* (r/distinct filtered) throttle)
+       :query (r/throttle* (r/distinct filtered) throttle (chan) query-ctrl)
+       :query-ctrl query-ctrl
        :select (html-menu-events input menu selection-state)
        :cancel (r/fan-in
                  [removed

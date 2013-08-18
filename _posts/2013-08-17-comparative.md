@@ -382,7 +382,8 @@ up where we left off. This is very different from the approach taken by
 
 ```
               (= sc select)
-              (let [_ (reset! (:selection-state opts) true)
+              (let [_ (>! (:query-ctrl opts) (h/now))
+                    _ (reset! (:selection-state opts) true)
                     choice (<! ((:menu-proc opts) (r/concat [v] select)
                                  (r/fan-in [raw cancel]) menu items))]
                 (reset! (:selection-state opts) false)
@@ -395,7 +396,10 @@ up where we left off. This is very different from the approach taken by
 ```
 
 There's a little bit of complication above around `:selection-state`
-this is to support tab for selection, we'll explain this later.
+this is to support tab for selection, we'll explain this later. We
+need to cancel any pending throttle event via `:query-ctrl` as
+otherwise the menu might appear after a selection is made if the user is
+a particular fast typist.
 
 The final case, we just loop around. `autocompleter*` just
 returns its output channel
@@ -592,13 +596,15 @@ We can now write the HTML autocompleter construction function.
 ```
 (defn html-autocompleter [input menu completions throttle]
   (let [selection-state (atom false)
+        query-ctrl (chan)
         [filtered removed] (html-input-events input)]
     (when (less-than-ie9?)
       (events/listen menu goog.events.EventType.SELECTSTART
         (fn [e] false)))
     (autocompleter*
       {:focus (r/always :focus (r/listen input :focus))
-       :query (r/throttle* (r/distinct filtered) throttle)
+       :query (r/throttle* (r/distinct filtered) throttle (chan) query-ctrl)
+       :query-ctrl query-ctrl
        :select (html-menu-events input menu selection-state)
        :cancel (r/fan-in
                  [removed
