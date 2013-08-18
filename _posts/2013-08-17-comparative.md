@@ -245,7 +245,7 @@ we can *pause* the autocompleter until the subprocess
 completes. This eliminates coordination between components
 and superfluous state tracking. It also means we can share
 streams of events avoiding redundancy and duplication of logic. [Lines
-202 to 307 in the jQuery autocompleter](http://github.com/jquery/jquery-ui/blob/9e00e00f3b54770faa0291d6ee6fc1dcbad028cb/ui/jquery.ui.autocomplete.js#L202)
+202 to 307 in the jQuery autocompleter](http://github.com/jquery/jquery-ui/blob/9e00e00f3b54770faa0291d6ee6fc1dcbad028cb/ui/jquery.ui.autocomplete.js#L202-L307)
 is all component coordination and event handling redundancy that we would like to
 avoid.
 
@@ -395,7 +395,7 @@ up where we left off. This is very different from the approach taken by
                     (recur nil focused))))
 ```
 
-There's a little bit of complication above around `:selection-state`
+There's a little bit of complication above around `:selection-state`, 
 this is to support tab for selection, we'll explain this later. We
 need to cancel any pending throttle event via `:query-ctrl` as
 otherwise the menu might appear after a selection is made if the user is
@@ -422,7 +422,7 @@ returns its output channel
 > How exhausting.
 
 Now that we defined a fairly sensible autocompleter for any interface
-representation, lets actually implement a concrete representation.
+representation, let's actually implement a concrete representation.
 
 ### HTML based implementation
 
