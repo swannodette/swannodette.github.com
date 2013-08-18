@@ -161,7 +161,7 @@
       {:focus (r/always :focus (r/listen input :focus))
        :query (r/throttle* (r/distinct filtered) throttle)
        :select (html-menu-events input menu selection-state)
-       :cancel (if (less-than-ie9?)
+       :cancel (if-not (less-than-ie9?)
                  (r/fan-in [removed (r/always :blur (r/listen input :blur))])
                  removed)
        :input input
