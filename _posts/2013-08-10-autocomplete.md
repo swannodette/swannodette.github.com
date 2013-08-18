@@ -118,7 +118,8 @@ on the selection menu component, please do so before proceeding.
 First, the autocompleter in action. Make sure to try all
 the following cases:
 
-* &mdash; Control characters should not trigger fetch for results
+* &mdash; Control characters should not trigger menu
+* &mdash; Platform command chords should not trigger menu
 * &mdash; Close menu on tab out of field
 * &mdash; Close menu on outside click
 * &mdash; Tab when user is selecting item should prevent default
@@ -372,18 +373,19 @@ The fourth case is the most interesting. *We hand off control to the menu
 process*. We pass along the `select` channel making sure to put the
 event we read back at the front. We also pass along the `cancel`
 channel, note we use `r/fan-in` to mix in `raw`, which a channel of the
-changes to the input field (we want to cancel menu selection if the
-users starts typing again).
+changes to the input field because we want to cancel menu selection if the
+users starts typing again.
 
 `autocompleter*` will be *paused* until the menu selection subprocess
 completes. Because we can hand off control, coordination logic between
 `autocompleter*` and `menu-proc` becomes unnecessary.
 
 It worth taking a breath to consider how flexible this is. Because
-channels do require explicit subscription we can simply pass them
+channels do not require explicit subscription we can simply pass them
 along as values, pause our execution allowing some other process to
 read from the channel until they are done at which point we can pick
-up where we left off.
+up where we left off. This is very different from the approach taken by
+[Reactive Extensions](http://msdn.microsoft.com/en-us/data/gg577609.aspx) and similar systems like [Dart's Stream](http://api.dartlang.org/docs/releases/latest/dart_async/Stream.html).
 
 ```
               (= sc select)
@@ -398,6 +400,9 @@ up where we left off.
                     (>! out choice)
                     (recur nil focused))))
 ```
+
+There's a little bit of complication above around `:selection-state`
+this is to support tab for selection, we'll explain this later.
 
 The final case, we just loop around. `autocompleter*` just
 returns its output channel
@@ -423,6 +428,13 @@ Now that we defined a fairly sensible autocompleter for any interface
 representation, lets actually implement a concrete representation.
 
 ### HTML based implementation
+
+First we need a way to detect bad browsers:
+
+```
+(defn less-than-ie9? []
+  (and ua/IE (not (ua/isVersion 9))))
+```
 
 We write a concrete implementation of `ITextField` for HTML text inputs.
 
@@ -458,40 +470,112 @@ sweet. Event handling is only a little bit more involved.
 
 ### HTML Event Wrangling
 
-These are events for the HTML based menu:
+We need a way to detect mouse down and up events on items in the menu,
+this is because we cannot prevent blur events if we don't prevent
+default on mouse down.
+
+`menu-item-event` accomplishes this for us. Notice that for bad
+browsers we need to refocus the input field, because we can't even
+prevent blur events at mouse down.
 
 ```
-(defn html-menu-events [input menu]
+(defn menu-item-event [menu input type]
+  (->> (r/listen menu type
+         (fn [e]
+           (when (dom/in? e menu)
+             (.preventDefault e))
+           (when (and (= type :mousedown)
+                      (less-than-ie9?))
+             (.focus input)))
+         (chan (sliding-buffer 1)))
+    (r/map
+      (fn [e]
+        (let [li (dom/parent (.-target e) "li")]
+          (h/index-of (dom/by-tag-name menu "li") li))))))
+```
+
+These are the events for the HTML based menu, we fan in three
+different channels of events.
+
+First we need the channel of key events that manipulate the menu. If
+the user is in the middle of menu selection we need to override the
+behavior of the tab key.
+
+```
+(defn html-menu-events [input menu allow-tab?]
   (r/fan-in
-    [(->> (r/listen input :keyup)
+    [;; keyboard menu controls, tab special handling
+     (->> (r/listen input :keydown
+            (fn [e]
+              (when (and @allow-tab?
+                         (= (.-keyCode e) resp/TAB))
+                (.preventDefault e))))
        (r/map resp/key-event->keycode)
-       (r/filter resp/KEYS)
+       (r/filter
+         (fn [kc]
+           (and (resp/KEYS kc)
+                (or (not= kc resp/TAB)
+                    @allow-tab?))))
        (r/map resp/key->keyword))
-     (r/hover-child menu "li")
-     (r/map (constantly :select)
-       (r/listen menu :click))]))
 ```
 
-We listen for up arrow, down arrow, enter, and tab keys. We also listen
-for mouse hover events on the `li` children elements of `menu` and
-any clicks on `menu`. We don't care about which `li` element gets
-clicked because `highlighter` from the previous post tracks that for
-us. We use `r/fan-in` to merge these different channels into a single
-channel of events, this will be the `select` channel used by
-`autocompleter*` and `menu-proc`.
+We also way to detect user hover over items in the menu to track
+potential selections.
+
+```
+     ;; hover events, index of hovered child
+     (r/hover-child menu "li")
+```
+
+In order to trigger selection we need both a mouse down event and a
+mouse up event - we use `r/cyclic-barrier` to make sure that we have
+both before we proceed. We only want to handle cases where the item
+the user mouse downed on matches the one that the user mouse upped on.
+
+```
+     ;; need to handle menu clicks
+     (->> (r/cyclic-barrier
+            [(menu-item-event menu input :mousedown)
+             (menu-item-event menu input :mouseup)])
+       (r/filter (fn [[d u]] (= d u)))
+       (r/always :select))]))
+```
 
 Then we need to listen to key events from the input field. We only
-care when the text of input field actually changes (automatically
-ignoring control characters). We use `r/split` to generate two channels, a channel of
-the things we might query and another channel of blank input events to cancel
-the menu selection process.
+care when the text of input field actually changes. We filter out the
+various cases we don't care about. We use `r/split` to generate two
+channels, a channel of the things we might query and another channel
+of blank input events to cancel the menu selection process.
 
 ```
+(defn relevant-keys [kc]
+  (or (= kc 8)
+      (and (> kc 46)
+           (not (#{91 92 93} kc)))))
+           
 (defn html-input-events [input]
-  (->> (r/listen input :keyup)
+  (->> (r/listen input :keydown)
+    (r/remove (fn [e] (.-platformModifierKey e)))
+    (r/map resp/key-event->keycode)
+    (r/filter relevant-keys)
     (r/map #(-text input))
-    r/distinct
-    (r/split #(string/blank? %))))
+    (r/split #(not (string/blank? %)))))
+```
+
+Now we need to handle bad browsers that complicate blur detection:
+
+```
+(defn ie-blur [input menu selection-state]
+  (let [out (chan)]
+    (events/listen input goog.events.EventType.KEYDOWN
+      (fn [e]
+        (when (and (= (.-keyCode e) resp/TAB) (not @selection-state))
+          (put! out (h/now)))))
+    (events/listen js/document.body goog.events.EventType.MOUSEDOWN
+      (fn [e]
+        (when-not (some #(dom/in? e %) [menu input])
+          (put! out (h/now)))))
+    out))
 ```
 
 > ### Quarantining Quirks
@@ -508,33 +592,43 @@ the menu selection process.
 > code maintenance. This is real readability, not the purely surface appearance
 > notion of readability that's usually bandied about these days.
 
-Finally, a simple `html-completions` function that uses
-`JSONP` to make a cross domain request to Wikipedia.
+We can now write the HTML autocompleter construction function.
 
 ```
-(defn html-completions [base-url]
-  (fn [query]
-    (r/jsonp (str base-url query))))
+(defn html-autocompleter [input menu completions throttle]
+  (let [selection-state (atom false)
+        [filtered removed] (html-input-events input)]
+    (when (less-than-ie9?)
+      (events/listen menu goog.events.EventType.SELECTSTART
+        (fn [e] false)))
+    (autocompleter*
+      {:focus (r/always :focus (r/listen input :focus))
+       :query (r/throttle* (r/distinct filtered) throttle)
+       :select (html-menu-events input menu selection-state)
+       :cancel (r/fan-in
+                 [removed
+                  (r/always :blur
+                    (if-not (less-than-ie9?)
+                      (r/listen input :blur)
+                      (ie-blur input menu selection-state)))])
+       :input input
+       :menu menu
+       :menu-proc menu-proc
+       :completions completions
+       :selection-state selection-state})))
 ```
 
-### Putting it all together
-
-We provide a constructor `html-autocompleter`. If someone wants to
-write an autocompleter that does intelligent caching of server results
-they only need to supply their own `completions` - do all the fancy
-[typeahead.js]() optimizations there.
+### Running it
 
 ```
-(defn html-autocompleter [input menu msecs]
-  (let [[filtered removed] (html-input-events input)
-        ac (autocompleter*
-             (r/throttle filtered msecs)
-             (html-menu-events input menu)
-             (r/map (constantly :cancel)
-               (r/fan-in [removed (r/listen input :blur)]))
-             (html-completions base-url)
-             input menu)]
-    ac))
+(defn wikipedia-search [query]
+  (go (nth (<! (r/jsonp (str base-url query))) 1)))
+
+(let [ac (html-autocompleter
+           (dom/by-id "autocomplete")
+           (dom/by-id "autocomplete-menu")
+           wikipedia-search 750)]
+  (go (while true (<! ac))))
 ```
 
 ## Conclusion
