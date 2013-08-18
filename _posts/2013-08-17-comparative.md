@@ -103,7 +103,7 @@ how analagous cases are handled in the
 [jQuery UI autocompleter](http://github.com/jquery/jquery-ui/blob/9e00e00f3b54770faa0291d6ee6fc1dcbad028cb/ui/jquery.ui.autocomplete.js). Don't
 read this post as trash talking the jQuery UI autocompleter, rather a
 frame of reference to understand more easily what
-[CSP](http://en.wikipedia.org/wiki/Communicating_sequential_processe)
+[CSP](http://en.wikipedia.org/wiki/Communicating_sequential_processes)
 might offer UI programmers over more traditional patterns as well as
 reactive ones. We will also
 apply this method of comparison and critique to Twitter's more
