@@ -310,7 +310,9 @@ when to start the menu selection subprocess. `cancel` is channel of
 events that should cancel the selection process and hide the selection
 menu. `menu` is the abstract menu UI component.
 
-We split query into the throttled queries and the original raw input.
+We split `query` into the highlighted events and the raw
+events. We'll forward `raw` to the selection process when we create
+it.
 
 ```
 (defn autocompleter* [{:keys [focus query select cancel menu] :as opts}]
@@ -322,10 +324,6 @@ We enter our go loop. We track two pieces of state, `items` which is the
 last JavaScript array of completions we fetched (it could be local or
 remote it doesn't matter), and `focused` - whether the input field
 is in focus.
-
-We split `query` into the highlighted events and the raw
-events. We'll forward `raw` to the selection process when we create
-it.
 
 We non-deterministically select over all these channels:
 
