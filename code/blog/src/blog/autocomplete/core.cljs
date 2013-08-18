@@ -162,11 +162,11 @@
 
 (defn ie-blur [input menu selection-state]
   (let [out (chan)]
-    (events/listen input goog.events.EventType.KEYPRESS
+    (events/listen input goog.events.EventType.KEYDOWN
       (fn [e]
         (when (and (= (.-keyCode e) resp/TAB) (not @selection-state))
           (put! out (h/now)))))
-    (events/listen js/window goog.events.EventType.MOUSEDOWN
+    (events/listen js/document.body goog.events.EventType.MOUSEDOWN
       (fn [e]
         (when-not (some #(dom/in? e %) [menu input])
           (put! out (h/now)))))
