@@ -157,22 +157,24 @@
     (r/map #(-text input))
     (r/split #(not (string/blank? %)))))
 
+(defn ie-blur [input menu selection-state]
+  (let [out (chan)]
+    (events/listen input goog.events.EventType.KEYPRESS
+      (fn [e]
+        (when (and (= (.-keyCode e) resp/TAB) (not @selection-state))
+          (put! out (h/now)))))
+    (events/listen js/window goog.events.EventType.MOUSEDOWN
+      (fn [e]
+        (when-not (some #(dom/in? e %) [menu input])
+          (put! out (h/now)))))
+    out))
+
 (defn html-autocompleter [input menu completions throttle]
-  (let [ie-blur (chan)
-        selection-state (atom false)
+  (let [selection-state (atom false)
         [filtered removed] (html-input-events input)]
-    ;; blur is broken in < IE 9
     (when (less-than-ie9?)
       (events/listen menu goog.events.EventType.SELECTSTART
-        (fn [e] false))
-      (events/listen input goog.events.EventType.KEYPRESS
-        (fn [e]
-          (when (and (= (.-keyCode e) resp/TAB) (not @selection-state))
-            (put! ie-blur (h/now)))))
-      (events/listen js/window goog.events.EventType.MOUSEDOWN
-        (fn [e]
-          (when-not (some #(dom/in? e %) [menu input])
-            (put! ie-blur (h/now))))))
+        (fn [e] false)))
     (autocompleter*
       {:focus (r/always :focus (r/listen input :focus))
        :query (r/throttle* (r/distinct filtered) throttle)
@@ -182,7 +184,7 @@
                   (r/always :blur
                     (if-not (less-than-ie9?)
                       (r/listen input :blur)
-                      ie-blur))])
+                      (ie-blur input menu selection-state)))])
        :input input
        :menu menu
        :menu-proc menu-proc
