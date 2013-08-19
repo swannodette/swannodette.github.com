@@ -406,8 +406,13 @@ need to cancel any pending throttle event via `:query-ctrl` as
 otherwise the menu might appear after a selection is made if the user is
 a particularly fast typist.
 
-The final case, we just loop around. `autocompleter*` just
-returns its output channel
+In the last case, we just loop around. Since we don't actually handle
+`raw` this means the events on the `raw` channel will just be dropped;
+this is what we want, otherwise `raw` will have events that need
+reading when we call the menu subprocess (causing it to exit
+immediately).
+
+Finally, `autocompleter*` just returns its output channel
 
 ```
               :else
