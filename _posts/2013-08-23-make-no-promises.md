@@ -134,7 +134,7 @@ small amount of overhead.
 
 I'm sure core.async performance will continue to improve but these
 examples demonstrate that core.async can likely handle even the most
-demanding complex event driven applications while providing the
+demanding complex event driven applications while providing
 one of the highest level of abstractions offered by any language
 targeting JavaScript today.
 
