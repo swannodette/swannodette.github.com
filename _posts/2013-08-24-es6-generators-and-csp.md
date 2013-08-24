@@ -15,6 +15,7 @@ and core.async's flavor of
 [CSP](http://en.wikipedia.org/wiki/Communicating_sequential_processes). Now
 I had thought about this in the past but *I could not see how*. Part
 of this was that I'd never seen how a CSP system works under the hood
+(now I have months of core.async development under my belt)
 and part of it was my distraction over the limitations of combining
 Generators with Promises.
 
