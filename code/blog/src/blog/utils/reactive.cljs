@@ -115,11 +115,17 @@
             (close! out))))
     out))
 
-(defn fan-in [ins]
-  (let [out (chan)]
-    (go (while true
-          (let [[x] (alts! ins)]
-            (>! out x))))
+(defn fan-in
+  ([ins] (fan-in ins (chan)))
+  ([ins out]
+    (go (loop [ins (vec ins)]
+          (when (> (count ins) 0)
+            (let [[x in] (alts! ins)]
+              (when x
+                (>! out x)
+                (recur ins))
+              (recur (vec (disj (set ins) in))))))
+        (close! out))
     out))
 
 (defn take-until
