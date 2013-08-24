@@ -129,7 +129,7 @@ small amount of overhead.
     (let [s (js/Date.)]
       (>! rightmost 1)
       (.log js/console (<! leftmost) " elapsed ms: "
-        (- (.valueOf (js/Date.)) (.valueOf s))))))
+        (- (js/Date.) s)))))
 ```
 
 I'm sure core.async performance will continue to improve but these
