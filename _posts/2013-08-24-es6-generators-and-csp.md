@@ -63,7 +63,7 @@ If instruction is `"continue"` we call `next` on the machine with the value
 portion of the instruction. The yielded process can now continue with the
 result of computation to the next step.
 
-This is actual `go` function users will call, it kicks things off.
+This is the actual `go` function users will call, it kicks things off.
 
 ```
 function go(machine) {
