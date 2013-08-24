@@ -71,4 +71,19 @@
      :compiler {:optimizations :advanced
                 :pretty-print false
                 :output-to "../../assets/js/ac.js"
+                :output-wrapper true}}
+
+    {:id "promises-simp"
+     :source-paths ["src/blog/promises"
+                    "src/blog/utils"]
+     :compiler {:optimizations :simple
+                :static-fns true
+                :pretty-print false
+                :output-to "../../assets/js/promises.js"}}
+    {:id "promises-adv"
+     :source-paths ["src/blog/promises"
+                    "src/blog/utils"]
+     :compiler {:optimizations :advanced
+                :pretty-print false
+                :output-to "../../assets/js/promises.js"
                 :output-wrapper true}}]})
