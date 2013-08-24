@@ -141,3 +141,6 @@ go(function* () {
 
 Don't combine Generators with Promises, combine them with Channels!
 
+With tools like [Traceur](http://github.com/google/traceur-compiler)
+you can implement many of the ideas from my previous core.async blog
+posts today in vanilla JavaScript.
