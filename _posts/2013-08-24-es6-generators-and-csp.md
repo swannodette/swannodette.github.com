@@ -76,7 +76,7 @@ What are channels? Channels are simply queues and the simplest way to
 represent them is an array. Here is our first channel operation
 that asynchronously puts a value onto a channel. Notice that it returns
 the required instruction needed by `go_`. If the channel is empty we
-can place a value in it, if it is not we park.
+can place a value in it, if not we park.
 
 It's easy to imagine the sophisticated buffering strategies supported
 by Go and core.async by using something other than arrays for channels.
