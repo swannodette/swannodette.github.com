@@ -41,11 +41,8 @@ function go_(machine, step) {
       case "park":
         setImmediate(function() { go_(machine, step); });
         return;
-        break;
       case "continue":
         step = machine.next(value);
-        break;
-      default:
         break;
     }
   }
@@ -118,11 +115,9 @@ you try this in Node.js 0.11 you will see they are interleaved.
 var c = [];
 
 go(function* () {
-  var i = 0;
-  while(i < 10) {
+  for(var i = 0; i < 10; i++) {
     yield put(c, i);
     console.log("process one put", i);
-    i++;
   }
   yield put(c, null);
 });
