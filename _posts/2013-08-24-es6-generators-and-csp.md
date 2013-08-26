@@ -108,7 +108,10 @@ function take(chan) {
 }
 ```
 
-We have a simple example program. We run two processes in parallel. If
+It's possible to do Go's `select` or core.async's `alt!` but I leave
+that as an exercise for the reader.
+
+We can now write a simple example program. We run two processes in parallel. If
 you try this in Node.js 0.11 you will see they are interleaved.
 
 ```
