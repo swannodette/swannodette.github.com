@@ -81,3 +81,6 @@ While Promises have enamoured some people in the JavaScript community
 ultimately I believe they are a dead end on the path to simple,
 readable, robust code in highly asynchronous environments like web
 browsers.
+
+*For details on how you can model CSP with ES6 Generators see my
+ [previous post](http://swannodette.github.io/2013/08/24/es6-generators-and-csp/)*
