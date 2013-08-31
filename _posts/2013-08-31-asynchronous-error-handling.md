@@ -18,8 +18,10 @@ In order for
 implementations to be useful they must provide some mechanism for
 handling and propagating errors. But the reason Promise
 implementations must bear this burden is because JavaScript doesn't
-have yield! This will be changing soon with the arrival of ES6
-Generators.
+have yield! By bearing this burden they actually complicate finding
+error sources as they pollute the stack trace.
+
+This will all be changing soon with the arrival of ES6 Generators.
 
 To see what ES6 Generators can provide we can compare a typical
 snippet of Promises based async JavaScript by
@@ -49,8 +51,7 @@ getTweetsFor("swannodette")
 If you are familiar with purely callback based JavaScript this is a
 considerable improvement. This snippet demonstrates how any error in
 the code or the asynchronous calls may be caught uniformly - much like
-`try/catch` except uglier. Also most promises implementations will
-produce stack traces polluted by promise machinery.
+`try/catch` except uglier and you will get garbage in your stack trace.
 
 However if you have a yield construct the code collapses into
 something far more readable - *in fact precisely the code you
@@ -72,11 +73,11 @@ like `(throw-err (<! [expr]))`. In core.async `<!` serves the
 same purpose as ES6's `yield` operator. If an asynchronous process
 writes an error onto its channel we will convert it into an exception.
 
-*Because we can throw an exception we will get more sensible
-stacktraces!* In a promise implementation an error will cascade
-completely mangling the stack trace. Some of the mature promise
-implementations attempt to recover this information but as we can see
-here such contorted complications are unnecessary.
+*Because we can short circuit and throw an exception we will get more
+sensible stacktraces!* In a promise implementation an error will
+cascade completely mangling the stack trace. Some of the mature
+promise implementations attempt to recover this information but as we
+can see here such contorted solutions are unnecessary.
 
 Everything in this post could be accomplished by combining ES6
 Generators, a channel implementation, and a little bit of
