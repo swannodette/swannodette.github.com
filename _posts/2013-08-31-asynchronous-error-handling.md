@@ -18,8 +18,8 @@ Generators.
 To see what ES6 Generators can provide we can compare a typical
 snippet of Promises based async JavaScript by
 [Domenic Denicola](http://twitter.com/domenic) to a version in
-core.async. Domenic's snippet appeared in his interesting blog post last
-year,
+[core.async](http://clojure.com/blog/2013/06/28/clojure-core-async-channels.html). Domenic's
+snippet appeared in his interesting blog post last year,
 [You're Missing the Point of Promises](http://domenic.me/2012/10/14/youre-missing-the-point-of-promises/).
 
 ```
