@@ -7,6 +7,12 @@ tags: ["javascript", "async", "promises", "csp", "core.async"]
 ---
 {% include JB/setup %}
 
+*This blog post came to be after some great discussions with
+[James Long](http://twitter.com/jlongster) about the best way to
+handle errors if CSP is your concurrency model. He showed some neat
+JavaScript sketches for converting channel errors into exceptions
+that I tweaked for core.async*
+
 In order for
 [JavaScript Promise](http://promises-aplus.github.io/promises-spec/)
 implementations to be useful they must provide some mechanism for
