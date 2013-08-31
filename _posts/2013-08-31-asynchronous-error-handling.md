@@ -49,11 +49,13 @@ getTweetsFor("swannodette")
 If you are familiar with purely callback based JavaScript this is a
 considerable improvement. This snippet demonstrates how any error in
 the code or the asynchronous calls may be caught uniformly - much like
-`try/catch` except uglier.
+`try/catch` except uglier. Also most promises implementations will
+produce stack traces polluted by promise machinery.
 
 However if you have a yield construct the code collapses into
 something far more readable - *in fact precisely the code you
-would write if it was synchronous*. The equivalent code in core.async:
+would write if it was synchronous and you can recover
+sensible stack traces*. The equivalent code in core.async:
 
 ```
 (go (try
@@ -72,7 +74,7 @@ writes an error onto its channel we will convert it into an exception.
 
 *Because we can throw an exception we will get more sensible
 stacktraces!* In a promise implementation an error will cascade
-completely mangling the stacktrace. Some of the mature promise
+completely mangling the stack trace. Some of the mature promise
 implementations attempt to recover this information but as we can see
 here such contorted complications are unnecessary.
 
