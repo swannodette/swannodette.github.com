@@ -10,3 +10,12 @@
           i
           (recur (inc i)))
         -1))))
+
+(defn error? [x]
+  (instance? js/Error x))
+
+(defn throw-err [x]
+  (if (error? x)
+    (throw x)
+    x))
+

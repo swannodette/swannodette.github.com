@@ -296,3 +296,16 @@
               threshold (recur ::init (pop cs)))))))
     out))
 
+(defn run-task [f & args]
+  (let [out (chan)
+        cb  (fn [err & results]
+              (go (if err
+                    (>! out err)
+                    (>! out results))
+                (close! out)))]
+    (apply f (cljs.core/concat args [cb]))
+    out))
+
+(defn task [& args]
+  (fn [] (apply run-task args)))
+

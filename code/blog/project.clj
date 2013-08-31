@@ -86,4 +86,12 @@
      :compiler {:optimizations :advanced
                 :pretty-print false
                 :output-to "../../assets/js/promises.js"
-                :output-wrapper true}}]})
+                :output-wrapper true}}
+
+    {:id "errors-simp"
+     :source-paths ["src/blog/errors"
+                    "src/blog/utils"]
+     :compiler {:optimizations :simple
+                :static-fns true
+                :pretty-print false
+                :output-to "../../assets/js/errors.js"}}]})

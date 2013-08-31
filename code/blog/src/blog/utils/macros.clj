@@ -9,3 +9,6 @@
              ~@body
              (recur))
            :done)))))
+
+(defmacro <? [expr]
+  `(blog.utils.helpers/throw-err (cljs.core.async/<! ~expr)))
