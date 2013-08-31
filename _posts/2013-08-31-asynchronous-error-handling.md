@@ -46,7 +46,7 @@ the code or the asynchronous calls may be caught uniformly - much like
 `try/catch` except uglier.
 
 However if you have a yield construct the code collapses into
-something far more readable - *in the fact precisely the code you
+something far more readable - *in fact precisely the code you
 would write if it was synchronous*. The equivalent code in core.async:
 
 ```
