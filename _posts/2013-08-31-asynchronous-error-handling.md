@@ -70,6 +70,12 @@ like `(throw-err (<! [expr]))`. In core.async `<!` serves the
 same purpose as ES6's `yield` operator. If an asynchronous process
 writes an error onto its channel we will convert it into an exception.
 
+*Because we can throw an exception we will get more sensible
+stacktraces!* In a promise implementation an error will cascade
+completely mangling the stacktrace. Some of the mature promise
+implementations attempt to recover this information but as we can see
+here such contorted complications are unnecessary.
+
 Everything in this post could be accomplished by combining ES6
 Generators, a channel implementation, and a little bit of
 [sweet.js](http://sweetjs.org). Importantly channels need only focus
