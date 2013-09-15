@@ -49,8 +49,15 @@ interested in.
 In the meantime you can still test out the feature as we've hacked the
 ClojureScript browser REPL web server to handle serving files from
 JARs and elsewhere! So just make sure source maps are enabled in your
-browser of choice, run `lein trampoline cljsbuild repl-listen` and
-point your browser at `http://localhost:9000`.
+browser of choice, make an `index.html` file that includes your
+ClojureScript output file, run `lein trampoline cljsbuild repl-listen`
+and point your browser at `http://localhost:9000`.
+
+If you get it working you should be able to `console.log` something
+and the browser will give you an accurate location where that
+statement was executed in the original source:
+
+<image width="580" style="border: 1px solid #666" src="/assets/images/sourcemap.png"/>
 
 If you run into issues please let us know on the
 [ClojureScript mailing list](http://groups.google.com/forum/#!forum/clojurescript)
