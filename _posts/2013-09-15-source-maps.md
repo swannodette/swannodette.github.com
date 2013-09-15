@@ -10,13 +10,21 @@ tags: []
 ClojureScript has had experimental
 [source map](http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/)
 support for quite a long time. Unlike other transpile to JavaScript
-languages, ClojureScript source maps actually map all the way through Google
-Closure advanced compilation! However until a fantastic patch by
-[Sean Grove](http://twitter.com/sgrove) landed this weekend, the
-support suffered from inaccuracy. Sean fixed an off by one bug as well
-as making the necessary changes to the compiler to track function parameters and
-let bindings. There's likely more issues but the only way to find out
-is to give it a try and file some bug reports!
+languages, ClojureScript source maps actually map all the way through
+Google Closure advanced compilation! However for a long time this
+support suffered from inaccuracies due to the lack of necessary
+information from the Clojure reader and less than ideal handling of
+function parameters and let bindings in the ClojureScript compiler. We
+switched some time ago to
+[tools.reader](http://github.com/clojure/tools.reader), a wonderful
+library lead by [Nicola Mometto's](http://twitter.com/Bronsa_) that
+works just like the standard reader but provides the needed line and
+column information on all symbols. Then we received a patch this
+weekend from [Sean Grove](http://twitter.com/sgrove) that fixed an off
+by one error and changed the compiler to properly emit function
+parameters and let binding. With these things in place we can finally
+emit accurate source maps. There's likely more issues but the only way
+to find out is to give it a try and file some bug reports!
 
 In order to enable source maps your project.clj should look something
 like this:
