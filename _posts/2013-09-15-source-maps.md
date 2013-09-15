@@ -17,7 +17,7 @@ information from the Clojure reader and less than ideal handling of
 function parameters and let bindings in the ClojureScript compiler. We
 switched some time ago to
 [tools.reader](http://github.com/clojure/tools.reader), a wonderful
-library lead by [Nicola Mometto's](http://twitter.com/Bronsa_) that
+library lead by [Nicola Mometto](http://twitter.com/Bronsa_) that
 works just like the standard reader but provides the needed line and
 column information on all symbols. Then we received a patch this
 weekend from [Sean Grove](http://twitter.com/sgrove) that fixed an off
