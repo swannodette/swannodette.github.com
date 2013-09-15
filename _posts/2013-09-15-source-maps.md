@@ -7,8 +7,11 @@ tags: []
 ---
 {% include JB/setup %}
 
-ClojureScript has had experimental source map support for quite a long
-time. However until a fantastic patch by
+ClojureScript has had experimental
+[source map](http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/)
+support for quite a long time. Unlike other transpile to JavaScript
+languages, ClojureScript source maps actually map all the way through Google
+Closure advanced compilation! However until a fantastic patch by
 [Sean Grove](http://twitter.com/sgrove) landed this weekend, the
 support suffered from inaccuracy. Sean fixed an off by one bug as well
 the necessary changes to the compiler to track function parameters and
