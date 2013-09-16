@@ -9,9 +9,9 @@ tags: []
 
 ClojureScript has had experimental
 [source map](http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/)
-support for quite a long time. Unlike other transpile to JavaScript
+support for some time. Unlike other transpile to JavaScript
 languages, ClojureScript source maps actually map all the way through
-Google Closure advanced compilation! However for a long time this
+Google Closure advanced compilation! However this
 support suffered from inaccuracies due to the lack of necessary
 information from the Clojure reader and less than ideal handling of
 function parameters and let bindings in the ClojureScript compiler. We
