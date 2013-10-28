@@ -42,18 +42,21 @@ lein cljsbuild auto hello-world
 
 It'll take a little while for the first build - a second for JVM start
 up time, a few seconds to compile ClojureScript, and a few seconds to
-compile the standard library. If you edit your source file, subsequent
-compiles will be sub second.
+compile the standard library. Don't worry if you edit your source
+file, subsequent compiles will be sub second.
 
-Open provided `index.html` at the root of the project directory in
-Google Chrome. If you've enabled source maps you should see a
-`console.log` that references a line in ClojureScript. You can enable
-source maps by right clicking in the window and selecting `Inspect
-Element`, in the right corner you should see a gear icon. If you click
-this you see a bunch of options, one of which is `Enable JS source
-maps`.
+Open the provided `index.html` (at the root of the project directory)
+in Google Chrome. Enable source maps by clicking on the View menu and
+selecting Developer > Developer Tools. In the bottom right corner of
+the Developer Tools pane you should see a gear icon. If you click this
+you will get a pane of settings, one of which is `Enable JS source maps`.
 
-Try editing `src/hello_world/core.cljs`, for example make your file
+Refresh the browser, you should see that the `console.log` references
+a line in ClojureScript. If you click the line number displayed on to
+the right of the log message you will be taken to that line in the
+original ClojureScript source.
+
+Now try editing `src/hello_world/core.cljs`. For example make your file
 look like this:
 
 ```
