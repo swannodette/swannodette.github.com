@@ -45,7 +45,8 @@ the **Developer Tools** pane you should see a gear icon. If you click this
 you will get a pane of settings, one of which is **Enable JS source
 maps**. Enable it.
 
-Refresh the browser, you should see that the `console.log` references
+Refresh the browser, select **View > Developer Tools > JavaScript
+Console**. You should see that the `console.log` references
 a line in ClojureScript. If you click the line number displayed to
 the right of the log message you will be taken to that line in the
 original ClojureScript source.
