@@ -19,13 +19,6 @@ ClojureScript with instant recompiles on file save.
 
 Install [Leiningen](http://leiningen.org).
 
-Once installed edit `~/.lein/profile.clj` so that it includes
-`lein-newnew`:
-
-```
-{:user {:plugins [[lein-newnew "0.3.4"]]}}
-```
-
 Goto a directory where you want your project to live and run the
 following on the command line:
 
