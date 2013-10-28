@@ -45,12 +45,13 @@ up time, a few seconds to compile ClojureScript, and a few seconds to
 compile the standard library. If you edit your source file, subsequent
 compiles will be sub second.
 
-Open `index.html` in Google Chrome. If you've enabled source maps you
-should see a `console.log` that references a line in
-ClojureScript. You can enable source maps by right clicking in the
-window and selecting `Inspect Element`, in the right corner you should
-see a gear icon. If you click this you see a bunch of options, one of
-which is `Enable JS source maps`.
+Open provided `index.html` at the root of the project directory in
+Google Chrome. If you've enabled source maps you should see a
+`console.log` that references a line in ClojureScript. You can enable
+source maps by right clicking in the window and selecting `Inspect
+Element`, in the right corner you should see a gear icon. If you click
+this you see a bunch of options, one of which is `Enable JS source
+maps`.
 
 Try editing `src/hello_world/core.cljs`, for example make your file
 look like this:
