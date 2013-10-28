@@ -49,7 +49,8 @@ Open the provided `index.html` (at the root of the project directory)
 in Google Chrome. Enable source maps by clicking on the **View** menu and
 selecting **Developer > Developer Tools**. In the bottom right corner of
 the **Developer Tools** pane you should see a gear icon. If you click this
-you will get a pane of settings, one of which is **Enable JS source maps**.
+you will get a pane of settings, one of which is **Enable JS source
+maps**. Enable it.
 
 Refresh the browser, you should see that the `console.log` references
 a line in ClojureScript. If you click the line number displayed to
