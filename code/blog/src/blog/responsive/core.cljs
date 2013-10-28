@@ -111,7 +111,7 @@
 (defn create-example [id event-fn render-fn ctor-fn]
   (let [hc      (r/hover (dom/by-id id))
         prevent (atom false)
-        raw     (event-fn prevent)
+        raw     (event-fn #(deref prevent))
         c       (r/toggle raw)
         changes (ctor-fn (:chan c))
         ctrl    (:control c)]
@@ -144,7 +144,7 @@
     (aset list n (set-char! (aget list n) 0 ">")))
   (-unhighlight! [list n]
     (aset list n (set-char! (aget list n) 0 " ")))
-  
+
   ISelectable
   (-select! [list n]
     (aset list n (set-char! (aget list n) 1 "*")))
@@ -197,7 +197,7 @@
     (dom/add-class! (nth (dom/by-tag-name list "li") n) "highlighted"))
   (-unhighlight! [list n]
     (dom/remove-class! (nth (dom/by-tag-name list "li") n) "highlighted"))
-  
+
   ISelectable
   (-select! [list n]
     (dom/add-class! (nth (dom/by-tag-name list "li") n) "selected"))
