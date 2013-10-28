@@ -46,13 +46,13 @@ compile the standard library. Don't worry if you edit your source
 file, subsequent compiles will be sub second.
 
 Open the provided `index.html` (at the root of the project directory)
-in Google Chrome. Enable source maps by clicking on the View menu and
-selecting Developer > Developer Tools. In the bottom right corner of
-the Developer Tools pane you should see a gear icon. If you click this
-you will get a pane of settings, one of which is `Enable JS source maps`.
+in Google Chrome. Enable source maps by clicking on the **View** menu and
+selecting **Developer > Developer Tools**. In the bottom right corner of
+the **Developer Tools** pane you should see a gear icon. If you click this
+you will get a pane of settings, one of which is **Enable JS source maps**.
 
 Refresh the browser, you should see that the `console.log` references
-a line in ClojureScript. If you click the line number displayed on to
+a line in ClojureScript. If you click the line number displayed to
 the right of the log message you will be taken to that line in the
 original ClojureScript source.
 
