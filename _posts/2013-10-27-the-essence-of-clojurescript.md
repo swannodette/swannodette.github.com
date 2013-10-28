@@ -35,8 +35,8 @@ lein cljsbuild auto hello-world
 
 It'll take a little while for the first build - a second for JVM start
 up time, a few seconds to compile ClojureScript, and a few seconds to
-compile the standard library. Don't worry if you edit your source
-file, subsequent compiles will be sub second.
+compile the standard library. Don't worry, if you edit your source
+file subsequent compiles will be sub second.
 
 Open the provided `index.html` (at the root of the project directory)
 in Google Chrome. Enable source maps by clicking on the **View** menu and
