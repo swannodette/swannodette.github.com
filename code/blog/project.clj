@@ -10,7 +10,7 @@
 
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/clojurescript "0.0-2014"]
-                 [org.clojure/core.async "0.1.0-SNAPSHOT"]
+                 [org.clojure/core.async "0.1.256.0-1bf8cf-alpha"]
                  [org.clojure/core.match "0.2.0-rc5"]]
 
   :plugins [[lein-cljsbuild "1.0.0-alpha2"]]
