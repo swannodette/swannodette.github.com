@@ -31,7 +31,7 @@ run the following at the command line in whatever directory you like:
 lein new mies async-tut1
 ```
 
-This will create a template project that so you don't worry about
+This will create a template project so you don't have to worry about
 configuring `lein-cljsbuild` yourself.
 
 Unless otherwise noted files are relative to the project directory.
