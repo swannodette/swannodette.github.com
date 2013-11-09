@@ -98,8 +98,8 @@ the button put the click event onto a **core.async** *channel*.
 
 Let's write a little helper called `listen` that will return a channel
 of the events for a particular element and particular event
-type. First we need to require **core.async** macros and functions, our
-`ns` should look like the following now:
+type. We need to require **core.async** macros and functions. Our
+`ns` should now look like the following:
 
 ```
 (ns async-tut1.core
