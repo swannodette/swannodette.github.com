@@ -51,9 +51,6 @@ process:
 lein cljsbuild auto async-tut1
 ```
 
-We're going to demonstrate all the steps required to build a simple search
-interface.
-
 First off we want to add the following markup to `index.html` before
 the first script tag which loads `goog/base.js`:
 
