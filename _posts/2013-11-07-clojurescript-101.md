@@ -14,7 +14,7 @@ explored fairly sophisticated uses of **core.async**, this post instead
 takes the form of a very basic tutorial on using **core.async** with [ClojureScript](http://github.com/clojure/clojurescript).
 
 We're going to demonstrate all the steps required to build a simple search
-interface and we'll see how core.async provides some unique solutions
+interface and we'll see how **core.async** provides some unique solutions
 to problems common to client side user interface programming.
 
 I recommend using Google
@@ -110,7 +110,7 @@ type. We need to require **core.async** macros and functions. Our
 ```
 
 Again we want to abstract away browser quirks so we use `goog.events`
-for dealing with that. We include only the `core.async` macros and
+for dealing with that. We include only the **core.async** macros and
 functions that we intend to use.
 
 Now we can write our `listen` fn, it looks like this:
