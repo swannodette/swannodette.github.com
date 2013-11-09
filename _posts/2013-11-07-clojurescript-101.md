@@ -11,7 +11,7 @@ While none of the ideas in [core.async](http://github.com/clojure/core.async) ar
 solve problems with [CSP](http://github.com/clojure/clojurescript) is simply not as well documented as using
 plain callbacks or [Promises](http://promises-aplus.github.io/promises-spec/). My previous posts have mostly
 explored fairly sophisticated uses of **core.async**, this post instead
-takes the form of a very basic tutorial.
+takes the form of a very basic tutorial on using **core.async** with [ClojureScript](http://github.com/clojure/clojurescript).
 
 We're going to demonstrate all the steps required to build a simple search
 interface and we'll see how core.async provides some unique solutions
