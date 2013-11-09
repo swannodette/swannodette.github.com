@@ -25,13 +25,16 @@ I recommend installing the [paredit](http://github.com/odyssomay/paredit) and [l
 
 If you have
 [Leiningen](http://github.com/technomancy/leiningen) installed you can
-run the following at the command line:
+run the following at the command line in whatever directory you like:
 
 ```
 lein new mies async-tut1
 ```
 
-Change the `:dependencies` in `project.clj` file to look like the following:
+This will create a template project that so you don't worry about
+configuring `lein-cljsbuild` yourself.
+
+Change the `:dependencies` in `async-tut1/project.clj` file to look like the following:
 
 ```
 :dependencies [[org.clojure/clojure "1.5.1"]
