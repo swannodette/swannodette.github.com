@@ -70,8 +70,8 @@ Now we want to write some code so that we can interact with the
 DOM. We want our code to be resilient to browser differences so we'll
 use Google Closure to abstract this stuff away as we might with jQuery.
 
-So we want to require `goog.dom` and give it a less annoying alias,
-change the `ns` form in `src/async_tut1/core.cljs` to the following:
+We require `goog.dom` and give it a less annoying alias.
+Change the `ns` form in `src/async_tut1/core.cljs` to the following:
 
 ```
 (ns async-tut1.core
