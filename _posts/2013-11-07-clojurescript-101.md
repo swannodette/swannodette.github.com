@@ -153,7 +153,7 @@ We again reach for Google Closure to avoid browser quirks. Make your
 
 ```
 (ns async-tut1.core
-  (:require-macros [cljs.core.async.macros :refer [go go-loop]])
+  (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [goog.dom :as dom]
             [goog.events :as events]
             [cljs.core.async :refer [>! <! put! chan]])
@@ -260,7 +260,7 @@ A beautiful succinct program! The complete listing follows:
 
 ```
 (ns async-tut1.core
-  (:require-macros [cljs.core.async.macros :refer [go go-loop]])
+  (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [goog.dom :as dom]
             [goog.events :as events]
             [cljs.core.async :refer [>! <! put! chan]])
