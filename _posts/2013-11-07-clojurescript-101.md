@@ -34,7 +34,9 @@ lein new mies async-tut1
 This will create a template project that so you don't worry about
 configuring `lein-cljsbuild` yourself.
 
-Change the `:dependencies` in `async-tut1/project.clj` file to look like the following:
+Unless otherwise noted files are relative to the project directory.
+
+Change the `:dependencies` in the `project.clj` file to look like the following:
 
 ```
 :dependencies [[org.clojure/clojure "1.5.1"]
