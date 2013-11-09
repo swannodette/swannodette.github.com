@@ -106,7 +106,7 @@ type. We need to require **core.async** macros and functions. Our
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [goog.dom :as dom]
             [goog.events :as events]
-            [cljs.core.async :refer [put! chan >! <!]]))
+            [cljs.core.async :refer [put! chan <!]]))
 ```
 
 Again we want to abstract away browser quirks so we use `goog.events`
@@ -156,7 +156,7 @@ We again reach for Google Closure to avoid browser quirks. Make your
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [goog.dom :as dom]
             [goog.events :as events]
-            [cljs.core.async :refer [>! <! put! chan]])
+            [cljs.core.async :refer [<! put! chan]])
   (:import [goog.net Jsonp]
            [goog Uri]))
 ```
@@ -263,7 +263,7 @@ A beautiful succinct program! The complete listing follows:
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [goog.dom :as dom]
             [goog.events :as events]
-            [cljs.core.async :refer [>! <! put! chan]])
+            [cljs.core.async :refer [<! put! chan]])
   (:import [goog.net Jsonp]
            [goog Uri]))
 
