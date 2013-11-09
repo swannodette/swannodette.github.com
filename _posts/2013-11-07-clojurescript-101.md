@@ -61,7 +61,7 @@ the first script tag which loads `goog/base.js`:
 <p id="results"></p>
 ```
 
-Open `index.html` and make sure you see an input field and a text
+Open `index.html` in Chrome and make sure you see an input field and a text
 button.
 
 Now we want to write some code so that we can interact with the
