@@ -17,8 +17,7 @@ We're going to demonstrate all the steps required to build a simple search
 interface and we'll see how core.async provides some unique solutions
 to problems common to client side user interface programming.
 
-You can follow along by using
-[mies](http://github.com/swannodette/mies). I recommend use Google
+I recommend use Google
 Chrome so that you can get good [source map](http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/) support. You don't need
 Emacs to have fun with Lisp. [SublimeText 2](http://www.sublimetext.com/2) is pretty nice these days,
 I recommend installing the [paredit](http://github.com/odyssomay/paredit) and [lispindent](http://github.com/odyssomay/sublime-lispindent) packages via
