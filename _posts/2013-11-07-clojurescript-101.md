@@ -3,14 +3,14 @@ layout: post
 title: "ClojureScript 101"
 description: ""
 category: 
-tags: ["clojurescript" "core.async"]
+tags: ["clojurescript", "core.async"]
 ---
 {% include JB/setup %}
 
-While few of the ideas in the core.async are new, understanding how to
-solve problems with [CSP]() is simply not as well documented as using
-plain callbacks or [Promises](). My previous posts have mostly
-explored fairly sophisticated uses of [core.async], this post instead
+While none of the ideas in [core.async](http://github.com/clojure/core.async) are new, understanding how to
+solve problems with [CSP](http://github.com/clojure/clojurescript) is simply not as well documented as using
+plain callbacks or [Promises](http://promises-aplus.github.io/promises-spec/). My previous posts have mostly
+explored fairly sophisticated uses of **core.async**, this post instead
 takes the form of a very basic tutorial.
 
 We're going to demonstrate all the steps required to build a simple search
@@ -20,7 +20,7 @@ to problems common to client side user interface programming.
 You can follow along by using
 [mies](http://github.com/swannodette/mies). I recommend use Google
 Chrome so that you can get good [source map]() support. You don't need
-Emacs to have fun with Lisp. SublimeText 2 is pretty nice these days,
+Emacs to have fun with Lisp. [SublimeText 2](http://www.sublimetext.com/2) is pretty nice these days,
 I recommend installing the [paredit](http://github.com/odyssomay/paredit) and [lispindent](http://github.com/odyssomay/sublime-lispindent) packages via
 [Sublime Package Control](http://sublime.wbond.net/installation).
 
@@ -59,7 +59,7 @@ the first script tag which loads `goog/base.js`:
 <p id="results"></p>
 ```
 
-Open `index.html` and make sure you see a input field and a text
+Open `index.html` and make sure you see an input field and a text
 button.
 
 Now we want to write some code so that we can interact with the
@@ -83,18 +83,19 @@ instead:
 
 Save the file and it should be recompiled instantly. We should be able
 refresh the browser and see that a DOM element got printed in the
-JavaScript console (**View > Developer > JavaScript Console**). Remove
+JavaScript Console (**View > Developer > JavaScript Console**). Remove
 this little test snippet after you've confirmed it works.
 
 So far so good.
 
 Now we want a way to deal with the user clicking the mouse. Instead of
-just setting up a call back on the button directly we're going to make
-the button put the click event onto a core.async channel.
+just setting up a callback on the button directly we're going to make
+the button put the click event onto a **core.async** *channel*.
 
-Let's write a little helper called `listen` that will already return a
-channel of any DOM element's events. First we need to require
-core.async macros and functions, our `ns` should look like the following now:
+Let's write a little helper called `listen` that will return a channel
+of the events for a particular element and particular event
+type. First we need to require **core.async** macros and functions, our
+`ns` should look like the following now:
 
 ```
 (ns async-tut1.core
@@ -118,8 +119,8 @@ Now we can write our `listen` fn, it looks like this:
     out))
 ```
 
-We want very out function works as advertised we can check it with
-following bit of code:
+We want to verify our function works as advertised so we check it with
+following snippet of code at the end of the file:
 
 ```
 (let [clicks (listen (dom/getElement "search") "click")]
@@ -129,10 +130,11 @@ following bit of code:
 
 Note that we've created what appears to be an infinite loop here, but
 actually it's a little state machine. If there are no events to read
-from the click channel, the go block will be suspended!
+from the click channel, the go block will be suspended.
 
-Let's search Wikipedia. Lets define the basic URL we are going to hit
-via [JSONP](). Put this right after the `ns` form.
+Let's search Wikipedia. Define the basic URL we are going to hit via
+[JSONP](http://en.wikipedia.org/wiki/JSONP), put this right after the
+`ns` form.
 
 ```
 (def wiki-search-url
@@ -156,7 +158,10 @@ We again reach for Google Closure to avoid browser quirks. Make your
 ```
 
 Here we use `:import` so that we can use short names for the
-constructors.
+Google Closure constructor
+
+> **Note:** `:import` is only for this use case, you never use it with
+> ClojureScript libraries).
 
 Our JSONP helper looks like the following (put it after `listen` in
 the file):
@@ -169,7 +174,7 @@ the file):
     out))
 ```
 
-This looks pretty straight forward, very similar to `listen`. Let
+This looks pretty straight forward, very similar to `listen`. Let's
 write a simple function for constructing a query url:
 
 ```
@@ -211,13 +216,13 @@ button clicks!
 
 Think a bit how this works, when the page loads, `init` will run, the
 `go` block will try to read from `clicks`, but there will be nothing
-to read so, so the `go` block becomes suspended. Only you click on the
-button can it proceed at which point we'll run the query and loop. The
-code reads exactly how it would if you didn't have to consider
-asynchrony!
+to read so the `go` block becomes suspended. Only when you click on the
+button can it proceed at which point we'll run the query and loop
+around. The code reads exactly how it would if you didn't have to
+consider asynchrony!
 
 Instead of printing to the console we would like to render the results
-to the page. Let's do that now add the following before `init`:
+to the page. Let's do that now, add the following before `init`:
 
 ```
 (defn render-query [results]
@@ -229,7 +234,7 @@ to the page. Let's do that now add the following before `init`:
     "</ul>"))
 ```
 
-The usually string concatenation stuff, we use a list comprehension
+The usual string concatenation stuff - we use a list comprehension
 here just for fun.
 
 Now change `init` to look like the following:
@@ -247,7 +252,7 @@ Now change `init` to look like the following:
 Hopefully this code at this point just makes sense. Notice how we can
 use destructuring on the JSON array of Wikipedia results.
 
-A beautiful succinct program!
+A beautiful succinct program! The complete listing follows:
 
 ```
 (ns async-tut1.core
