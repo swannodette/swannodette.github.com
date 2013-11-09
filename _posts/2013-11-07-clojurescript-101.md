@@ -82,7 +82,7 @@ We want to confirm that this will work so let's change the
 `console.log` expression so it looks this instead:
 
 ```
-(. js/console (log (dom/getElement "query")))
+(.log js/console (dom/getElement "query"))
 ```
 
 Save the file and it should be recompiled instantly. We should be able
