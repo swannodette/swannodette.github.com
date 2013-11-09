@@ -218,7 +218,7 @@ If you've done any JavaScript programming this way of writing the code
 should be somewhat surprising - we don't need a callback to work with
 button clicks!
 
-Think a bit how this works, when the page loads, `init` will run, the
+Think a bit how this work. When the page loads, `init` will run, the
 `go` block will try to read from `clicks`, but there will be nothing
 to read so the `go` block becomes suspended. Only when you click on the
 button can it proceed at which point we'll run the query and loop
