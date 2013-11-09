@@ -165,7 +165,7 @@ Here we use `:import` so that we can use short names for the
 Google Closure constructors.
 
 > **Note:** `:import` is only for this use case, you never use it with
-> ClojureScript libraries).
+> ClojureScript libraries
 
 Our JSONP helper looks like the following (put it after `listen` in
 the file):
