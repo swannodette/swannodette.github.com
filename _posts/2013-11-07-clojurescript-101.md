@@ -70,16 +70,16 @@ Now we want to write some code so that we can interact with the
 DOM. We want our code to be resilient to browser differences so we'll
 use Google Closure to abstract this stuff away as we might with jQuery.
 
-So we want to require `goog.dom` and give it a less annoying alias:
+So we want to require `goog.dom` and give it a less annoying alias,
+change the `ns` form in `src/async_tut1/core` to the following:
 
 ```
 (ns async-tut1.core
   (:require [goog.dom :as dom]))
 ```
 
-We want to confirm that this will work so let's change
-`src/async_tut1/core.cljs` so that the `console.log` looks this
-instead:
+We want to confirm that this will work so let's change the
+`console.log` expression so it looks this instead:
 
 ```
 (. js/console (log (dom/getElement "query")))
@@ -162,7 +162,7 @@ We again reach for Google Closure to avoid browser quirks. Make your
 ```
 
 Here we use `:import` so that we can use short names for the
-Google Closure constructor
+Google Closure constructors.
 
 > **Note:** `:import` is only for this use case, you never use it with
 > ClojureScript libraries).
