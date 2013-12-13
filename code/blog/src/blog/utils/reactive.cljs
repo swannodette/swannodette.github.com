@@ -65,13 +65,7 @@
     out))
 
 (defn remove [f in]
-  (let [out (chan)]
-    (go (loop []
-          (if-let [v (<! in)]
-            (do (when-not (f v) (>! out v))
-              (recur))
-            (close! out))))
-    out))
+  (filter (complement f) in))
 
 (defn spool [xs]
   (let [out (chan)]
@@ -150,13 +144,7 @@
             coll)))))
 
 (defn always [v c]
-  (let [out (chan)]
-    (go (loop []
-          (if-let [e (<! c)]
-            (do (>! out v)
-              (recur))
-            (close! out))))
-    out))
+  (map (constantly v) c))
 
 (defn toggle [in]
   (let [out (chan)
