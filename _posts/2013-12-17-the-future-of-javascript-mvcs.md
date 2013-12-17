@@ -126,7 +126,7 @@ Technical description follows.
 
 ## How it works
 
-My recent in interest React is thanks to my friend Brandon Bloom has
+My recent in interest React is all thanks to [Brandon Bloom](http://twitter.com/brandonbloom) has
 been bugging me for month to give React a closer look, however I was
 turned off by the OOP-y documentation and the inline HTML. I didn't
 give it a proper chance until I saw the
