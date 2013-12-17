@@ -28,7 +28,7 @@ to do with future of JavaScript MVCs?
 
 A whole lot.
 
-We'll see how (unintuitively) immutable data allows a new library,
+We'll see how, perhaps unintuitively, immutable data allows a new library,
 [Om](http://github.com/swannodette/om), to outperform nearly every
 existing JavaScript MVC. Om itself is built upon the absolutely
 wonderful [React](http://facebook.github.io/react/) library from
@@ -106,16 +106,21 @@ much of the APIs they provide. You would need to ditch event
 communication between models and views. The View layer would need to
 replaced with React or something like it. And to get Om level
 rendering performance you need to switch all your data to immutable
-values. At which point you would probably just React for the rendering,
-[mori](http://swannodette.github.io/mori/) for your data, and you
-find yourself left less than 200 lines of code and around 6 public functions.
+values. At which point you would probably just use React for the
+rendering layer, [mori](http://swannodette.github.io/mori/) for your
+data, and you find yourself left less than 200 lines of code and
+around 6 public functions.
 
 Just like [Om](http://github.com/swannodette/om/blob/master/src/om/core.cljs).
 
-Hopefully the former gave you some food for thought. A compile to
-JavaScript language that uses data structures slower than the native
-ones provided by JavaScriopt is globally faster for rich user
-interfaces.
+Hopefully this gives the MVC fanatics some food for thought. A compile
+to JavaScript language that uses data structures slower than the
+native ones provided by JavaScriopt is globally faster for rich user
+interfaces than what's commonly available to JS devs. To top it off
+the Om TodoMVC weighs in at 66K gzipped, 1K shy of
+[Ember.js](http://emberjs.com) gzipped, even though we're including
+some serious firepower like
+[core.async](http://github.com/clojure/core.async).
 
 Chew on that.
 
