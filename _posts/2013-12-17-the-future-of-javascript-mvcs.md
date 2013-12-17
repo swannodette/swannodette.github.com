@@ -102,20 +102,14 @@ generally have an effect on *global performance*. Who cares if a
 framework has 5X faster templating when you'll still end up tying
 things together yet again in non-scalable ways? A thousand updates to the
 model will still trigger a thousand updates to views which will still
-trigger a thousand writes to local storage. Or you will write all that
-optimization logic yourself.
+trigger a thousand writes to local storage, and you will be destined
+to optimize your application by taking a series of steps on the long
+road towards the Om model.
 
-WAT.
-
-Now it may appear you could adopt the Om architecture with a traditional
-JS MVC. Yes you could. But you would need to ditch event communication
-between models and views. The View layer would need to replaced with
-React or something like it. And to get Om level rendering performance
-you need to switch most of your data to immutable values. At which point
-you would probably just use React for the rendering layer and
-[mori](http://swannodette.github.io/mori/) for your data. You'd find
-yourself left less than 200 lines of "framework" code and around 6 public
-functions ...
+Or you just start using React for your rendering later and
+[mori](http://swannodette.github.io/mori/) for your data layer. Then you'd
+be left with less than 200 lines of "framework" code and around
+6 public functions ...
 
 ... just like [Om](http://github.com/swannodette/om/blob/master/src/om/core.cljs).
 
