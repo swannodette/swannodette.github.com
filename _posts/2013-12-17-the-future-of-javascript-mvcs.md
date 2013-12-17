@@ -116,12 +116,13 @@ code and around 6 public functions ...
 Hopefully this gives the MVC fanatics some food for thought. A compile
 to JavaScript language that uses data structures slower than the
 native ones provided by JavaScript some how ends up globally faster
-for rich user interfaces. To top it off the Om TodoMVC weighs in at
-63K gzipped, 3K shy of [Ember.js](http://emberjs.com) gzipped, even
+than most of the competition for rich user interfaces. To top it off
+the Om TodoMVC with same bells and whistles as everyone else weighs in
+at 63K gzipped, 3K shy of [Ember.js](http://emberjs.com) gzipped, even
 though we're including some serious firepower like
 [core.async](http://github.com/clojure/core.async).
 
-Chew on that. Technical description follows.
+Technical description follows.
 
 ## How it works
 
