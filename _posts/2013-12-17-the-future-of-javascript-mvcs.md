@@ -43,14 +43,18 @@ that defy global optimization*. As far as using
 [TodoMVC](http://todomvc.com), it's only because it suitably
 demonstrates anti-patterns that will exist in any typical JavaScript
 MVC application. But it's also quite familiar to many JavaScript
-developers such that I can easily point out bad ideas that you're
-bound to recognize in your own code base if you leverage an MVC
-framework.
+developers such that I can easily point out things that you're bound
+to recognize in your own code base if you leverage an MVC
+framework. Note the blame lays not on the APIs that JS MVCs present,
+rather the *semantics* due to broken internal design that leaks
+through into your own code and inevitably cause performance
+bottlenecks.
 
 Of course you can correct these issues on a tedious case by case
 basis, but the whole point of Om is make an entire class of hand
 optimizations techniques *obsolete*. That's the power of starting with
-the right design to begin with.
+the right design to begin with, an better experience for the end user
+because the implementation doesn't leak in ridiculous ways.
 
 ## Game of Benchmarks
 
