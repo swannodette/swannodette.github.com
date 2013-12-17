@@ -106,11 +106,11 @@ much of the APIs they provide. You would need to ditch event
 communication between models and views. The View layer would need to
 replaced with React or something like it. And to get Om level
 rendering performance you need to switch all your data to immutable
-values. At which point you would probably just React, use
+values. At which point you would probably just React for the rendering,
 [mori](http://swannodette.github.io/mori/) for your data, and you
-would be left with about 6 functions.
+find yourself left less than 200 lines of code and around 6 public functions.
 
-Just like Om.
+Just like [Om](http://github.com/swannodette/om/blob/master/src/om/core.cljs).
 
 Hopefully the former gave you some food for thought. A compile to
 JavaScript language that uses data structures slower than the native
@@ -183,3 +183,7 @@ In short I don't think there is a future in JavaScript MVCs. I think
 if you sit down and think about in the end only something akin to Om
 (even it's tucked away under a traditional hood) will deliver an
 optimal balance between simplicity, performance, and expressivity.
+
+Expect more post in the future elaborating ideas I've only hinted at
+or haven't mentioned: VCR playback of UI state, client/server template sharing,
+relational user interfaces, and more.
