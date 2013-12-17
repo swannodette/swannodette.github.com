@@ -72,13 +72,13 @@ Open up the [Backbone.js TodoMVC in a tab]() and run the same
 Under Chrome and Firefox, Om on my machine is consistently 2-3X
 faster. 2-7X faster across 3 major browser should be enough to get
 anyone interested. If you try toggling all of the todos you'll notice
-Om feel natural, while Backbone.js will feel a bit stuttery. This is
-likely because Om only re-renders on
+Om feels natural, while Backbone.js will feel a bit janky. This is
+probably because Om always re-renders on
 [requestAnimationFrame](http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/).
 
-Excellent work! But, uh, that's nowhere near the 30X-40X claim!
+Ok, excellent work! But, uh, that's nowhere near the 30X-40X claim!
 
-Now try the following.
+Try the following.
 
 Open the [Om TodoMVC in a tab]() and run the first benchmark - it creates
 200 todos, toggles them all 5 times, and then deletes them. On my 11
