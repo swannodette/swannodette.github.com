@@ -30,7 +30,7 @@ A whole lot.
 
 We'll see how, perhaps unintuitively, immutable data allows a new
 library, [Om](http://github.com/swannodette/om), to outperform nearly
-every existing JavaScript MVC with zero hand optimization from the
+every existing JavaScript MVC without hand optimization from the
 user. Om itself is built upon the absolutely wonderful
 [React](http://facebook.github.io/react/) library from Facebook,
 however our approach allows Om to deliver even better results than
@@ -38,20 +38,17 @@ using React out of the box.
 
 Before we proceed it's important to understand that the following
 benchmarks are not the silly uninformed things you find on
-[jsperf.com](http://jsperf.com). These benchmarks are designed
-demonstrate *fundamentally flawed internal design decisions encouraged
-by JavaScript MVCs that defy global optimization*. As far as using
-[TodoMVC](http://todomvc.com), it's only because it suitably
-demonstrates how users will their applications on broken semantics.
-Again the blame lays not on the APIs that JS MVCs present, rather the
-internal implementation details due to bad design that leaks through
-into your own code and inevitably cause performance bottlenecks.
+[jsperf.com](http://jsperf.com). Nor are these benchmarks designed to
+prove that Om is the fastest possible UI component system in the
+world. These benchmarks are designed to demonstrate that JS MVCs often
+employ *fundamentally flawed internal design decisions that defy global
+optimization or leave so little guidance that users will inevitably
+make these same bad design decisions themselves*.
 
-Of course you can correct these issues on a tedious case by case
-basis, but the whole point of Om is make an entire class of hand
-optimizations techniques *obsolete*. That's the power of starting with
-the right design to begin with, an better experience for the end user
-because the implementation doesn't leak in ridiculous ways.
+Of course you can correct these issues in traditional MVCs on a
+tedious case by case basis, but the whole point of Om is to deliver
+comparable levels of component abstraction while making and entire
+family of common and tedious hand optimization techniques *obsolete*.
 
 ## Game of Benchmarks
 
