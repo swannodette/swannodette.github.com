@@ -100,7 +100,7 @@ architecturally separate. When JS frameworks duke it out on
 performance these benchmarks tend to emphasize some aspect that won't
 generally have an effect on *global performance*. Who cares if a
 framework has 5X faster templating when you'll still end up tying
-things yet together in non-scalable ways? A thousands update to the
+things together yet again in non-scalable ways? A thousand updates to the
 model will still trigger a thousand updates to views which will still
 trigger a thousand writes to local storage. Or you will write all that
 optimization logic yourself.
@@ -131,7 +131,7 @@ Chew on that. Technical description follows.
 
 ## How it works
 
-My recent in interest React is thanks to my friend Brandom Bloom has
+My recent in interest React is thanks to my friend Brandon Bloom has
 been bugging me for month to give React a closer look, however I was
 turned off by the OOP-y documentation and the inline HTML. I didn't
 give it a proper chance until I saw the
