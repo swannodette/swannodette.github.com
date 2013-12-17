@@ -1,11 +1,13 @@
 ---
 layout: post
-title: "The Future of JavaScript MVCs"
+title: "The Future of JavaScript MVC Frameworks"
 description: ""
 category: 
 tags: []
 ---
 {% include JB/setup %}
+
+## Introducing Om
 
 <div style="padding: 10px 0px 10px 45px; border-bottom: 1px solid
 #ccc;">
@@ -30,32 +32,32 @@ We'll see how (unintuitively) immutable data allows a new library,
 [Om](http://github.com/swannodette/om), to outperform nearly every
 existing JavaScript MVC. Om itself is built upon the absolutely
 wonderful [React](http://facebook.github.io/react/) library from
-Facebook. But our approach allows Om to deliver even better
+Facebook, however our approach allows Om to deliver even better
 results than using React out of the box.
 
-Befor we proceed it's important to understand that the following
+Before we proceed it's important to understand that the following
 benchmarks are not the silly uninformed things you find on
 [jsperf.com](http://jsperf.com). These benchmarks are designed
 demonstrate *fundamentally flawed design decisions in JavaScript MVCs
 that defy global optimization*. As far as using
 [TodoMVC](http://todomvc.com), it's only because it suitably
 demonstrates anti-patterns that will exist in any typical JavaScript
-MVC application that cannot be optimized without significant amounts
-of rewriting. But it's also quite familiar to MVC fanatics such that I
-easily point out bad ideas that are bound to exist in your own code
-base.
+MVC application. But it's also quite familiar to many JavaScript
+developers such that I can easily point out bad ideas that you're
+bound to recognize in your own code base if you leverage an MVC
+framework.
 
-With Om these kind of case by case optimizations are absolutely
-unnecessary - that's the kind of power you get from starting with the
-right design to being with.
+Of course you can correct these issues on tedious case by case basis,
+but the whole point of Om is to make these kind of hand optimizations
+obsolete. That's the power you get from starting with the
+right design to begin with.
 
-## Benchmarks
+"Worse is better" my ass.
 
-I admit my recent tweet was a bit of troll, but this troll has a
-whopping kernel of truth:
+## Game of Benchmarks
 
 <div style="padding: 10px 0px 10px 45px; border-bottom: 1px solid
-#ccc; border-top: 1px solid #ccc;">
+#ccc;">
 <blockquote class="twitter-tweet" lang="en"><p>ClojureScript om based TodoMVC looks 30-40X faster than Backbone.js TodoMVC, which means other JS frameworks left completely in the dust</p>&mdash; David Nolen (@swannodette) <a href="https://twitter.com/swannodette/statuses/412033352699744256">December 15, 2013</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js"
 charset="utf-8"></script>
@@ -68,7 +70,14 @@ Open up the [Backbone.js TodoMVC in a tab]() and run the second benchmark
 which does the exact same series of operations. On my machine this
 takes around 700ms to render.
 
-Under Chrome and Firefox Om is 2-3X faster.
+Under Chrome and Firefox Om on my machine is consistently 2-3X
+faster. 2-7X faster should be enough anyone interested. If you try
+toggling all of the todos you'll notice Om feel natural, while
+Backbone.js will feel a bit stuttery. This is likely because Om only
+re-renders on
+[requestAnimationFrame](http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/).
+
+Excellent work! But that's nowhere near the 30X-40X claim.
 
 Now try the following.
 
@@ -80,7 +89,7 @@ Open up the [Backbone.js TodoMVC in a tab]() and run the second benchmark
 which does the exact same series of operations. On my machine this
 takes around 2500ms seconds to render.
 
-How is this possible?
+*How is this possible?*
 
 Simple.
 
@@ -109,5 +118,3 @@ chance until I saw the
 [JSConf EU 2013 presentation by Peter Hunt](http://2013.jsconf.eu/speakers/pete-hunt-react-rethinking-best-practices.html)
 that explained the architecture. At that point I started jumping up
 and down.
-
-## The Power of Simplicity
