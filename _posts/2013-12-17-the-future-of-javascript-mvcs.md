@@ -30,9 +30,7 @@ A whole lot.
 
 We'll see how (unintuitively) immutable data allows a new library,
 [Om](http://github.com/swannodette/om), to outperform nearly every
-existing JavaScript MVC. While local mutability is quite useful in
-non-trivial applications it mostly a performance liability and Om is
-the proof in the pudding. Om itself is built upon the absolutely
+existing JavaScript MVC. Om itself is built upon the absolutely
 wonderful [React](http://facebook.github.io/react/) library from
 Facebook, however our approach allows Om to deliver even better
 results than using React out of the box.
@@ -51,8 +49,8 @@ framework.
 
 Of course you can correct these issues on tedious case by case basis,
 but the whole point of Om is to make these kind of hand optimizations
-obsolete. That's the power you get from starting with the
-right design to begin with.
+obsolete. That's the power of starting with the right design to begin
+with.
 
 "Worse is better" my ass.
 
