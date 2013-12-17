@@ -19,7 +19,7 @@ charset="utf-8"></script>
 We've known this for some time over here in the
 [ClojureScript](http://github.com/clojure/clojurescript) corner of the
 world - all of our collections are immutable and modeled directly on
-the original Clojure versions written in Java and modern JavaScript
+the original Clojure versions written in Java. Modern JavaScript
 engines have now been tuned to the point that it's no longer uncommon
 to see collection performance within 2.5X of the Java Virtual Machine.
 
