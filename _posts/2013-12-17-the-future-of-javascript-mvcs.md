@@ -106,10 +106,10 @@ trigger a thousand writes to local storage, and you will be destined
 to optimize your application by taking a series of steps on the long
 road towards the Om model.
 
-Or you just start using React for your rendering later and
-[mori](http://swannodette.github.io/mori/) for your data layer. Then you'd
-be left with less than 200 lines of "framework" code and around
-6 public functions ...
+Or you could just start using React for your rendering layer and
+[mori](http://swannodette.github.io/mori/) for your data layer. You'd
+probably find yourself left with less than 200 lines of "framework"
+code and around 6 public functions ...
 
 ... just like [Om](http://github.com/swannodette/om/blob/master/src/om/core.cljs).
 
