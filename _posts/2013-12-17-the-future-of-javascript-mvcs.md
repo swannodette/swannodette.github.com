@@ -112,6 +112,16 @@ be left with about 6 functions.
 
 Just like Om.
 
+Hopefully the former gave you some food for thought. A compile to
+JavaScript language that uses data structures slower than the native
+ones provided by JavaScriopt is globally faster for rich user
+interfaces.
+
+Chew on that.
+
+What follows is a pretty technical description which I don't think
+will be everyone's cup of tea.
+
 ## How it works
 
 My friend Brandom Bloom has been bugging me for ages to give React a
