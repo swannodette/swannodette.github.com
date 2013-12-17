@@ -52,8 +52,6 @@ basis, but the whole point of Om is make an entire class of hand
 optimizations techniques *obsolete*. That's the power of starting with
 the right design to begin with.
 
-"Worse is better" my ass.
-
 ## Game of Benchmarks
 
 <div style="padding: 10px 0px 10px 45px; border-bottom: 1px solid
