@@ -47,7 +47,7 @@ make these same bad design decisions themselves*.
 
 Of course you can correct these issues in traditional MVCs on a
 tedious case by case basis, but the whole point of Om is to deliver
-comparable levels of component abstraction while making and entire
+comparable levels of component abstraction while making an entire
 family of common and tedious hand optimization techniques *obsolete*.
 
 ## Game of Benchmarks
@@ -70,7 +70,8 @@ faster. 2-7X faster across 3 major browser should be enough to get
 anyone interested. If you try toggling all of the todos you'll notice
 Om feels natural, while Backbone.js will feel a bit janky. This is
 probably because Om always re-renders on
-[requestAnimationFrame](http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/).
+[requestAnimationFrame](http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/). That's
+a pretty nice optimization to have in all of your applications.
 
 Ok, excellent work! But, uh, that's nowhere near the 30X-40X claim!
 
