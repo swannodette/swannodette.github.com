@@ -128,9 +128,9 @@ Technical description follows.
 
 My recent in interest React is all thanks to [Brandon Bloom](http://twitter.com/brandonbloom) has
 been bugging me for month to give React a closer look, however I was
-turned off by the OOP-y documentation and the inline HTML. I didn't
-give it a proper chance until I saw the
-[JSConf EU 2013 presentation by Peter Hunt](http://2013.jsconf.eu/speakers/pete-hunt-react-rethinking-best-practices.html)
+turned off by the OOP-y documentation and the source inline HTML. I didn't
+give it a proper chance until I saw [Peter Hunt's
+[JSConf EU 2013 presentation](http://2013.jsconf.eu/speakers/pete-hunt-react-rethinking-best-practices.html)
 that explained the architecture.
 
 Modifying and querying the DOM is a huge performance bottleneck and
