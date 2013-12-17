@@ -143,11 +143,11 @@ The React Devs have been ridiculously friendly and responsive in
 answering many questions so I could determine an passable interface to
 React from ClojureScript.
 
-When React does a diff on the virtual DOM specified by your
-components there is a very critical function -
-`shouldComponentUpdate`. If this returns false, React will never
-compute the children of the component. This is aboslute critical to
-understand - React builds the virtual DOM tree lazily for diffing.
+When React does a diff on the virtual DOM specified by your components
+there is a very critical function - `shouldComponentUpdate`. If this
+returns false, React will never compute the children of the
+component. That is, *React builds the virtual DOM tree lazily for
+diffing*.
 
 As it turns out `shouldComponentUpdate` is extremely conservative
 because JavaScript devs tend to mutate objects - so in order to
