@@ -47,10 +47,10 @@ developers such that I can easily point out bad ideas that you're
 bound to recognize in your own code base if you leverage an MVC
 framework.
 
-Of course you can correct these issues on tedious case by case basis,
-but the whole point of Om is to make these kind of hand optimizations
-obsolete. That's the power of starting with the right design to begin
-with.
+Of course you can correct these issues on a tedious case by case
+basis, but the whole point of Om is make an entire class of hand
+optimizations techniques *obsolete*. That's the power of starting with
+the right design to begin with.
 
 "Worse is better" my ass.
 
