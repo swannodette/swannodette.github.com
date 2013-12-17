@@ -119,14 +119,54 @@ interfaces.
 
 Chew on that.
 
-What follows is a pretty technical description which I don't think
-will be everyone's cup of tea.
+What follows is a pretty technical description.
 
 ## How it works
 
-My friend Brandom Bloom has been bugging me for ages to give React a
-try, however I was turned off by the documentation. I didn't give it a
-chance until I saw the
+My recent in interest React is thanks to my friend Brandom Bloom has
+been bugging me for month to give React a closer look, however I was
+turned off by the OOP-y documentation and the inline HTML. I didn't
+give it a proper chance until I saw the
 [JSConf EU 2013 presentation by Peter Hunt](http://2013.jsconf.eu/speakers/pete-hunt-react-rethinking-best-practices.html)
-that explained the architecture. At that point I started jumping up
-and down.
+that explained the architecture.
+
+The React Devs have been ridiculously friendly and responsive in
+answering many questions so I could determine an passable interface to
+React from ClojureScript.
+
+When React does a diff on the virtual DOM specified by your
+components there is a very critical function -
+`shouldComponentUpdate`. If this returns false, React will never
+compute the children of the component. This is aboslute critical to
+understand - React builds the virtual DOM tree lazily for diffing.
+
+As it turns out `shouldComponentUpdate` is extremely conservative
+because JavaScript devs tend to mutate objects - so in order to
+determine if some properties of a component has changed they have to
+manually walk the JavaScript object / array to figure this out.
+
+Instead of using JavaScript objects Om uses ClojureScript data
+structures which we cannot be changed. Because of this we can provide
+a component that implements `shouldComponentUpdate` - all it needs to
+do is a reference equality check. This simply change means we can
+always determine the path changed starting from the root in
+logarithmic time.
+
+Because of this fact we don't need React convenience like `setState`
+which support efficient subtree updating. Subtree updating for Om is
+always lightning fast even if your UI graph is massive.
+
+Because we always re-render from the root, batched updates are trivial
+to implement. We don't even bother with the batched update support in
+React, we just rolled our own 6 lines change.
+
+Finally because we always have the entire state of the UI in a single
+piece of data we can trivially serialize all of the important app
+state - we don't need to bother with serialization protocols, or
+making sure that everyone implements them correctly. Om UIs are always
+serializable.
+
+But this also means that Om UIs get undo for free. You can simply
+snapshot any state in memory and reinstate it whenever you like. It's
+memory efficient as ClojureScript data structures work by sharing
+structure anyway.
