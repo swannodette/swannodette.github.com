@@ -184,11 +184,17 @@ structure anyway.
 
 ## Closing Thoughts
 
-In short I don't think there is a future in JavaScript MVCs. I think
-if you sit down and think about in the end only something akin to Om
-(even it's tucked away under a traditional hood) will deliver an
-optimal balance between simplicity, performance, and expressivity.
+In short I don't think there is a future in the current crop of
+JavaScript MVCs. I think if you sit down and think for months and
+years in the end only something akin to Om (even if tucked away under
+a traditional MVC hood) will deliver an optimal balance between
+simplicity, performance, and expressivity. This is because there's
+nothing special in Om that hasn't been known for a long, long, long
+time. If you treat the browser as a remote rendering engine and stop
+treating it as a place to query and store crap, everything gets
+faster. Sound like something familiar? Yeah, computer graphics
+programming.
 
 Expect more post in the future elaborating ideas I've only hinted at
-or haven't mentioned: VCR playback of UI state, client/server template sharing,
-relational user interfaces, and more.
+or haven't mentioned: VCR playback of UI state, client/server template
+sharing, relational user interfaces, and more.
