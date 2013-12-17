@@ -91,34 +91,40 @@ Simple.
 
 The first one doesn't do any work that it doesn't have to! Om is a
 thoroughly *decoupled* design: data, views and control logic are not
-inextricably tied together. This counter to MVC approaches that
-directly link together changes in the model, the view, and to
-fundamentally orthogonal concerns like serializing app state into
-localStorage. Every time you update a model you have to pay for a
-model change, a view update, and a localStorage write.
+inextricably tied together. Many MVC implementations (and/or
+applications that use them) directly link together changes in the
+model, the view, and truly orthogonal concerns like serializing app
+state into localStorage. While frameworks could, they don't generally
+provide enough scaffolding to ensure that users keep these concerns
+architecturally separate. When JS frameworks duke it out on
+performance these benchmarks tend to emphasize some aspect that won't
+generally have an effect on *global performance*. Who cares if a
+framework has 5X faster templating when you'll still end up tying
+things yet together in non-scalable ways? A thousands update to the
+model will still trigger a thousand updates to views which will still
+trigger a thousand writes to local storage. Or you will write all that
+optimization logic yourself.
 
 WAT.
 
-Now it may appear you could adopt this architecture with a traditional
-JS MVC. But actually you couldn't, at least not without discarding
-much of the APIs they provide. You would need to ditch event
-communication between models and views. The View layer would need to
-replaced with React or something like it. And to get Om level
-rendering performance you need to switch all your data to immutable
-values. At which point you would probably just use React for the
-rendering layer, [mori](http://swannodette.github.io/mori/) for your
-data, and you find yourself left less than 200 lines of code and
-around 6 public functions.
+Now it may appear you could adopt the Om architecture with a traditional
+JS MVC. Yes you could. But you would need to ditch event communication
+between models and views. The View layer would need to replaced with
+React or something like it. And to get Om level rendering performance
+you need to switch all your data to immutable values. At which point
+you would probably just use React for the rendering layer,
+[mori](http://swannodette.github.io/mori/) for your data. You'd find
+yourself left less than 200 lines of "framework" code and around 6 public
+functions ...
 
-Just like [Om](http://github.com/swannodette/om/blob/master/src/om/core.cljs).
+... just like [Om](http://github.com/swannodette/om/blob/master/src/om/core.cljs).
 
 Hopefully this gives the MVC fanatics some food for thought. A compile
 to JavaScript language that uses data structures slower than the
-native ones provided by JavaScriopt is globally faster for rich user
-interfaces than what's commonly available to JS devs. To top it off
-the Om TodoMVC weighs in at 66K gzipped, 1K shy of
-[Ember.js](http://emberjs.com) gzipped, even though we're including
-some serious firepower like
+native ones provided by JavaScript yet globally faster for rich user
+interfaces. To top it off the Om TodoMVC weighs in at 63K gzipped, 3K
+shy of [Ember.js](http://emberjs.com) gzipped, even though we're
+including some serious firepower like
 [core.async](http://github.com/clojure/core.async).
 
 Chew on that. Technical description follows.
