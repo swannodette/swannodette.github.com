@@ -28,27 +28,24 @@ to do with future of JavaScript MVCs?
 
 A whole lot.
 
-We'll see how, perhaps unintuitively, immutable data allows a new library,
-[Om](http://github.com/swannodette/om), to outperform nearly every
-existing JavaScript MVC. Om itself is built upon the absolutely
-wonderful [React](http://facebook.github.io/react/) library from
-Facebook, however our approach allows Om to deliver even better
-results than using React out of the box.
+We'll see how, perhaps unintuitively, immutable data allows a new
+library, [Om](http://github.com/swannodette/om), to outperform nearly
+every existing JavaScript MVC with zero hand optimization from the
+user. Om itself is built upon the absolutely wonderful
+[React](http://facebook.github.io/react/) library from Facebook,
+however our approach allows Om to deliver even better results than
+using React out of the box.
 
 Before we proceed it's important to understand that the following
 benchmarks are not the silly uninformed things you find on
 [jsperf.com](http://jsperf.com). These benchmarks are designed
-demonstrate *fundamentally flawed design decisions in JavaScript MVCs
-that defy global optimization*. As far as using
+demonstrate *fundamentally flawed internal design decisions encouraged
+by JavaScript MVCs that defy global optimization*. As far as using
 [TodoMVC](http://todomvc.com), it's only because it suitably
-demonstrates anti-patterns that will exist in any typical JavaScript
-MVC application. But it's also quite familiar to many JavaScript
-developers such that I can easily point out things that you're bound
-to recognize in your own code base if you leverage an MVC
-framework. Note the blame lays not on the APIs that JS MVCs present,
-rather the *semantics* due to broken internal design that leaks
-through into your own code and inevitably cause performance
-bottlenecks.
+demonstrates how users will their applications on broken semantics.
+Again the blame lays not on the APIs that JS MVCs present, rather the
+internal implementation details due to bad design that leaks through
+into your own code and inevitably cause performance bottlenecks.
 
 Of course you can correct these issues on a tedious case by case
 basis, but the whole point of Om is make an entire class of hand
