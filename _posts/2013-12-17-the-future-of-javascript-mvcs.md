@@ -24,7 +24,7 @@ Machine.
 But what in the world does that have to do with JavaScript MVCs?
 
 In this post we'll see how (unintuitively) immutable data allows us to
-outperform JavaScript MVC libraries. This is not about
+outperform nearly all JavaScript MVCs. This is not about
 microbenchmarks, it's about *fundamentally flawed design decisions in
 JavaScript MVCs that defy global optimization*. We'll start with
 gratuitous benchmarks that you can run on your own machine to verify
