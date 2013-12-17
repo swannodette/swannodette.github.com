@@ -100,13 +100,15 @@ model change, a view update, and a localStorage write.
 
 WAT.
 
-Now it may appear you could adopt this architecture with
-a traditional JS MVC. But actually you couldn't, at least not without
-discarding much of the APIs they provide. You would need to ditch the
-event system. The View layer would need to replaced with React or
-something like it. And to get Om level rendering performance you need
-to switch all your data to immutable values. At which point you would
-be left with about 6 functions.
+Now it may appear you could adopt this architecture with a traditional
+JS MVC. But actually you couldn't, at least not without discarding
+much of the APIs they provide. You would need to ditch event
+communication between models and views. The View layer would need to
+replaced with React or something like it. And to get Om level
+rendering performance you need to switch all your data to immutable
+values. At which point you would probably just React, use
+[mori](http://swannodette.github.io/mori/) for your data, and you
+would be left with about 6 functions.
 
 Just like Om.
 
