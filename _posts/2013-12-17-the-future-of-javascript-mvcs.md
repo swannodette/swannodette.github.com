@@ -28,18 +28,18 @@ A whole lot.
 
 We'll see how (unintuitively) immutable data allows a new library,
 [Om](http://github.com/swannodette/om), to outperform nearly every
-existing JavaScript MVC. Om itself is built upon
-[Facebook's React](http://facebook.github.io/react/) but our approach
-allows Om to deliver a faster default than using React directly
-from JavaScript.
+existing JavaScript MVC. Om itself is built upon the absolutely
+wonderful [React](http://facebook.github.io/react/) library from
+Facebook. But our approach allows Om to deliver even better
+results than using React out of the box.
 
-It's important to understand that the following benchmarks are not the
-silly uninformed things you find on
+Befor we proceed it's important to understand that the following
+benchmarks are not the silly uninformed things you find on
 [jsperf.com](http://jsperf.com). These benchmarks are designed
 demonstrate *fundamentally flawed design decisions in JavaScript MVCs
 that defy global optimization*. As far as using
 [TodoMVC](http://todomvc.com), it's only because it suitably
-demonstrate anti-patterns that will exist in any typical JavaScript
+demonstrates anti-patterns that will exist in any typical JavaScript
 MVC application that cannot be optimized without significant amounts
 of rewriting. But it's also quite familiar to MVC fanatics such that I
 easily point out bad ideas that are bound to exist in your own code
@@ -110,4 +110,4 @@ chance until I saw the
 that explained the architecture. At that point I started jumping up
 and down.
 
-
+## The Power of Simplicity
