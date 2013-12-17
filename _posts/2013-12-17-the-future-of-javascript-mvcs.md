@@ -92,22 +92,25 @@ takes around 2500ms seconds to render.
 
 Simple.
 
-The first one doesn't do any work that it doesn't have! The model
-changes come so fast there's absolute no reason to do any work. This
-works because Om is thoroughly decoupled design, data, views and
-control logic are no linked together. This counter to MVC approaches
-to link together changes in the model, to the view, and to completely
-unrelated side concerns like serializing app state into
-localStorage. This is what the Backbone.js version does and if you're
-a fan of JS MVCs I'm sure you've done this in your own applications.
+The first one doesn't do any work that it doesn't have to! Om is a
+thoroughly *decoupled* design: data, views and control logic are not
+inextricably tied together. This counter to MVC approaches that
+directly link together changes in the model, the view, and to
+fundamentally orthogonal concerns like serializing app state into
+localStorage. Every time you update a model you have to pay for a
+model change, a view update, and a localStorage write.
 
-You could argue that you could do this with Backbone.js. You could,
-but what would be the point, you would decouple your models, views,
-and controllers to the point where most of the APIs becomes
-effectively useless.
+WAT.
 
-This is exactly true for Om. We have a whopping 6 functions in our
-public api.
+Now it would seem you could adopt this architecture with
+a traditional JS MVC. But actually you couldn't, not without
+discarding much of the APIs they provide! You would need to ditch the
+event system. The View layer would need to replaced with React or
+something like it. And to get Om level rendering performance you need
+to switch all your data to immutable values. At which point you would
+be left with about 6 functions.
+
+Just like Om.
 
 ## How it works
 
