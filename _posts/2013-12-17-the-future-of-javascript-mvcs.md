@@ -176,3 +176,10 @@ But this also means that Om UIs get undo for free. You can simply
 snapshot any state in memory and reinstate it whenever you like. It's
 memory efficient as ClojureScript data structures work by sharing
 structure anyway.
+
+## Closing Thoughts
+
+In short I don't think there is a future in JavaScript MVCs. I think
+if you sit down and think about in the end only something akin to Om
+(even it's tucked away under a traditional hood) will deliver an
+optimal balance between simplicity, performance, and expressivity.
