@@ -130,6 +130,12 @@ give it a proper chance until I saw the
 [JSConf EU 2013 presentation by Peter Hunt](http://2013.jsconf.eu/speakers/pete-hunt-react-rethinking-best-practices.html)
 that explained the architecture.
 
+Modifying and querying the DOM is a huge performance bottleneck and
+React adopts an approach that avoids that without sacrificing
+expressivity. While it present a friendly well designed Object
+Oriented interface, everything underneath the hood is has been crafted
+with the eye of a pragmatic functional programmer.
+
 The React Devs have been ridiculously friendly and responsive in
 answering many questions so I could determine an passable interface to
 React from ClojureScript.
