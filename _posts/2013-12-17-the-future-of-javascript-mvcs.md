@@ -121,10 +121,10 @@ functions ...
 
 Hopefully this gives the MVC fanatics some food for thought. A compile
 to JavaScript language that uses data structures slower than the
-native ones provided by JavaScript yet globally faster for rich user
-interfaces. To top it off the Om TodoMVC weighs in at 63K gzipped, 3K
-shy of [Ember.js](http://emberjs.com) gzipped, even though we're
-including some serious firepower like
+native ones provided by JavaScript some how ends up globally faster
+for rich user interfaces. To top it off the Om TodoMVC weighs in at
+63K gzipped, 3K shy of [Ember.js](http://emberjs.com) gzipped, even
+though we're including some serious firepower like
 [core.async](http://github.com/clojure/core.async).
 
 Chew on that. Technical description follows.
@@ -198,6 +198,6 @@ treating it as a place to query and store crap, everything gets
 faster. Sound like something familiar? Yeah, computer graphics
 programming.
 
-Expect more post in the future elaborating ideas I've only hinted at
+Expect more posts in the future elaborating ideas I've only hinted at
 or haven't mentioned: VCR playback of UI state, client/server template
 sharing, relational user interfaces, and more.
