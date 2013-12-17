@@ -122,9 +122,7 @@ the Om TodoMVC weighs in at 66K gzipped, 1K shy of
 some serious firepower like
 [core.async](http://github.com/clojure/core.async).
 
-Chew on that.
-
-What follows is a pretty technical description.
+Chew on that. Technical description follows.
 
 ## How it works
 
