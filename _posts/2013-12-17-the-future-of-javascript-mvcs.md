@@ -111,8 +111,8 @@ Now it may appear you could adopt the Om architecture with a traditional
 JS MVC. Yes you could. But you would need to ditch event communication
 between models and views. The View layer would need to replaced with
 React or something like it. And to get Om level rendering performance
-you need to switch all your data to immutable values. At which point
-you would probably just use React for the rendering layer,
+you need to switch most of your data to immutable values. At which point
+you would probably just use React for the rendering layer and
 [mori](http://swannodette.github.io/mori/) for your data. You'd find
 yourself left less than 200 lines of "framework" code and around 6 public
 functions ...
