@@ -66,18 +66,17 @@ charset="utf-8"></script>
 Open the [Om TodoMVC in a tab]() and run the first benchmark - it creates
 200 todos. On my 11 inch Macbook it takes Safari 7 around 100ms to render.
 
-Open up the [Backbone.js TodoMVC in a tab]() and run the second benchmark
-which does the exact same series of operations. On my machine this
-takes around 700ms to render.
+Open up the [Backbone.js TodoMVC in a tab]() and run the same
+ benchmark.  On my machine this takes around 700ms to render.
 
-Under Chrome and Firefox Om on my machine is consistently 2-3X
-faster. 2-7X faster should be enough anyone interested. If you try
-toggling all of the todos you'll notice Om feel natural, while
-Backbone.js will feel a bit stuttery. This is likely because Om only
-re-renders on
+Under Chrome and Firefox, Om on my machine is consistently 2-3X
+faster. 2-7X faster across 3 major browser should be enough to get
+anyone interested. If you try toggling all of the todos you'll notice
+Om feel natural, while Backbone.js will feel a bit stuttery. This is
+likely because Om only re-renders on
 [requestAnimationFrame](http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/).
 
-Excellent work! But that's nowhere near the 30X-40X claim.
+Excellent work! But, uh, that's nowhere near the 30X-40X claim!
 
 Now try the following.
 
