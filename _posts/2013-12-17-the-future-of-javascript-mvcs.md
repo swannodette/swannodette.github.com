@@ -136,7 +136,7 @@ that explained the architecture.
 Modifying and querying the DOM is a huge performance bottleneck and
 React adopts an approach that avoids that without sacrificing
 expressivity. While it present a friendly well designed Object
-Oriented interface, everything underneath the hood is has been crafted
+Oriented interface, everything underneath the hood has been crafted
 with the eye of a pragmatic functional programmer.
 
 The React Devs have been ridiculously friendly and responsive in
