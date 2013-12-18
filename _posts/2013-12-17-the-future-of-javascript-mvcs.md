@@ -68,8 +68,10 @@ probably because Om always re-renders on
 pretty nice optimization to have enabled in your applications.
 
 Ok, excellent work! But, uh, while 2-7X faster across 3 major browser
-should be enough to get anyone interested, that's nowhere near the
-30X-40X claims you might have seen me make on Twitter.
+should be enough to get anyone interested, especially considering the
+fact that we're achieving this level of performance with immutable
+data. Still, that's nowhere near the 30X-40X claims you might have
+seen me make on Twitter.
 
 Try the second Om benchmark - it creates 200 todos, toggles them all 5
 times, and then deletes them. On my 11 inch Macbook it takes around
