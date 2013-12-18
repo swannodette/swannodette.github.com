@@ -57,7 +57,7 @@ Open the [Om TodoMVC in a tab]() and run the first benchmark. It
 creates 200 todos and on my 11 inch Macbook Air it takes Safari 7 around
 100ms to render.
 
-Open up the [Backbone.js TodoMVC in a tab]() and run the same
+Now open up the [Backbone.js TodoMVC in a tab]() and run the same
  benchmark.  On my machine this takes around 700ms to render.
 
 Under Chrome and Firefox, Om on my machine is consistently 2-3X
