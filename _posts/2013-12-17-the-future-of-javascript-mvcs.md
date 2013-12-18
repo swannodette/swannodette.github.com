@@ -120,7 +120,7 @@ string based templates, CSS selectors, and direct DOM manipulation -
 all markers of *place oriented* programming and potential bottlenecks
 that Om leaves behind.
 
-Hopefully this gives fans of the current crop JS MVCs and even people
+Hopefully this gives fans of the current crop of JS MVCs and even people
 who believe in just using plain JavaScript and jQuery some food for
 thought. I've shown that a compile to JavaScript language that uses
 slower data structures ends up faster than a reasonably fast
