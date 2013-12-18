@@ -94,8 +94,8 @@ applications that use them) directly link together changes in the
 model, the view, and truly orthogonal concerns like serializing app
 state into localStorage. Frameworks don't generally provide enough
 scaffolding to ensure that users keep these concerns architecturally
-separate. To make mattesr worse When JS frameworks duke it out on
-performance benchmarks emphasize aspects that won't have a real effect
+separate. To make matters worse When JS MVC frameworks duke it out on
+performance benchmarks they emphasize aspects that won't have any real effect
 on *global performance*. Who cares if a framework has 5X faster
 templating when you'll still end up tying things together yet again in
 non-scalable ways? A thousand updates to the model will still trigger
