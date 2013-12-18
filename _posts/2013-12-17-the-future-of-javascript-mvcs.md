@@ -117,7 +117,7 @@ convenience as few frameworks provide the required support to ensure
 that users keep these concerns architecturally separate. But really
 this should come as no surprise, the predominant culture leans on
 string based templates, CSS selectors, and direct DOM manipulation -
-all markers of "place oriented" programming and potential bottlenecks
+all markers of *place oriented* programming and potential bottlenecks
 that Om leaves behind.
 
 Hopefully this gives fans of the current crop JS MVCs and even people
@@ -126,7 +126,7 @@ thought. I've shown that a compile to JavaScript language that uses
 slower data structures ends up faster than a reasonably fast
 competitor for rich user interfaces. To top it off
 [Om TodoMVC](http://github.com/swannodette/todomvc/blob/gh-pages/labs/architecture-examples/om/src/todomvc/app.cljs)
-with same bells and whistles as everyone else weighs in at ~260 lines
+with the same bells and whistles as everyone else weighs in at ~260 lines
 of code (including all the templates) and the minified code is 63K
 gzipped (this total includes the 27K of React, the entire
 ClojureScript standard libary, core.async, a routing library, and
