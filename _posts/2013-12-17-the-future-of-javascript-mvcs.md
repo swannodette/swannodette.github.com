@@ -40,14 +40,14 @@ using React out of the box.
 
 These benchmarks are not designed to prove that Om is the fastest
 possible UI component system in the world. These benchmarks are
-designed to demonstrate that many MVCs make implementation decisions
-that defy global optimization or leave so little guidance that users
-will inevitably make these same problematic design decisions
-themselves.
+designed to demonstrate that it's important to avoid implementation
+decisions that defy global optimization or leave so little guidance
+that users will inevitably make these same problematic design
+decisions themselves.
 
 Of course you can correct these issues in your client side application
 on a tedious case by case basis, but the whole point of Om is to
-deliver comparable levels of component abstraction while making an
+deliver competitive levels of component abstraction while making an
 entire family of common and tedious hand optimization techniques
 *obsolete*.
 
@@ -179,8 +179,9 @@ faster. Sound like something familiar? Yeah, computer graphics
 programming.
 
 Expect more posts in the future elaborating ideas I've only hinted at
-or haven't mentioned: VCR playback of UI state, client/server template
-sharing, relational user interfaces, and more.
+or haven't mentioned: VCR playback of UI state, trivial UI
+instrumentation, client/server template sharing, relational user
+interfaces, and more.
 
 A huge thanks to [Jordan Walke](http://twitter.com/jordwalke)) for
 giving me the original inspiration for Om via a Twitter conversation
