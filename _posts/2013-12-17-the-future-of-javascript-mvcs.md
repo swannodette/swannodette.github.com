@@ -114,14 +114,13 @@ Technical description follows.
 ## How it works
 
 Modifying and querying the DOM is a huge performance bottleneck and
-React adopts an approach that avoids that without sacrificing
-expressivity. While it present a friendly well designed Object
-Oriented interface, everything underneath the hood has been crafted
-with the eye of a pragmatic functional programmer.
-
-The React Devs have been ridiculously friendly and responsive in
-answering many questions so I could determine an passable interface to
-React from ClojureScript.
+React embraces an approach that eschews with without sacrificing
+expressivity. It presents a well designed Object Oriented interface,
+but everything underneath the hood has been crafted with the eye of a
+pragmatic functional programmer. It works by generating a virtual
+version of the DOM and as your application state evolves it diffs changes
+between the virtual DOM trees over time. It uses these diffs to make
+the minimal set of changes required on the real DOM so you don't have to
 
 When React does a diff on the virtual DOM specified by your components
 there is a very critical function - `shouldComponentUpdate`. If this
