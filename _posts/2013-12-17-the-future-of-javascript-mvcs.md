@@ -35,7 +35,7 @@ reasonably performant JavaScript
 [Backbone.js](http://backbonejs.org) without hand optimization from
 the user. Om itself is built upon the absolutely wonderful
 [React](http://facebook.github.io/react/) library from Facebook. If
-you haven't checked it out before please give it another look, I
+you haven't checked it out before, I
 recommend [watching this video from JSConf EU 2013]
 (http://2013.jsconf.eu/speakers/pete-hunt-react-rethinking-best-practices.html).
 Interestingly because of immutable data Om can deliver even better results
