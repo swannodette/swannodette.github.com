@@ -177,7 +177,7 @@ structure.
 
 ## Closing Thoughts
 
-In short I don't think there is a much of future in the current crop
+In short I don't think there is much of future in the current crop
 of JavaScript MVCs. I think if you sit down and think for months and
 years in the end only something akin to Om (even if tucked away under
 a traditional MVC hood) will deliver an optimal balance between
