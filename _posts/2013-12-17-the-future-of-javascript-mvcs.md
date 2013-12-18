@@ -103,9 +103,11 @@ Hopefully this gives fans of JS MVC some food for thought. I've shown
 that a compile to JavaScript language that uses slower data structures
 ends up globally faster than most of the competition for rich user
 interfaces. To top it off the Om TodoMVC with same bells and whistles
-as everyone else weighs in at 63K gzipped - this total includes the 27K
-React, the entire ClojureScript standard libary, core.async, a routing
-library, and several helpers from Google Closure.
+as everyone else weighs in at ~260 lines of code including all the
+templates and the minified code is 63K gzipped (this total
+includes the 27K React, the entire ClojureScript standard libary,
+core.async, a routing library, and several helpers from Google
+Closure).
 
 Technical description follows.
 
