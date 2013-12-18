@@ -53,15 +53,9 @@ entire family of common and tedious hand optimization techniques
 
 ## Game of Benchmarks
 
-<div style="padding: 10px 0px 10px 45px; border-bottom: 1px solid
-#ccc;">
-<blockquote class="twitter-tweet" lang="en"><p>ClojureScript om based TodoMVC looks 30-40X faster than Backbone.js TodoMVC, which means other JS frameworks left completely in the dust</p>&mdash; David Nolen (@swannodette) <a href="https://twitter.com/swannodette/statuses/412033352699744256">December 15, 2013</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js"
-charset="utf-8"></script>
-</div>
-
-Open the [Om TodoMVC in a tab]() and run the first benchmark - it creates
-200 todos. On my 11 inch Macbook it takes Safari 7 around 100ms to render.
+Open the [Om TodoMVC in a tab]() and run the first benchmark - it
+creates 200 todos. On my 11 inch Macbook Air it takes Safari 7 around
+100ms to render.
 
 Open up the [Backbone.js TodoMVC in a tab]() and run the same
  benchmark.  On my machine this takes around 700ms to render.
@@ -71,10 +65,11 @@ faster. 2-7X faster across 3 major browser should be enough to get
 anyone interested. If you try toggling all of the todos you'll notice
 Om feels natural, while Backbone.js will feel a bit janky. This is
 probably because Om always re-renders on
-[requestAnimationFrame](http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/). That's
-a pretty nice optimization to have in all of your applications.
+[requestAnimationFrame](http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/). A
+pretty nice optimization to always have in all of your applications.
 
-Ok, excellent work! But, uh, that's nowhere near the 30X-40X claim!
+Ok, excellent work! But, uh, that's nowhere near the 30X-40X claims
+you might have seen me make on Twitter.
 
 Try the following.
 
