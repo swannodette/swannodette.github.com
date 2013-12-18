@@ -49,10 +49,11 @@ that users will inevitably make these same problematic design
 decisions themselves.
 
 Of course you can correct these issues in your client side application
-on a tedious case by case basis, but the whole point of Om is to
-deliver competitive levels of component abstraction while making an
-entire family of common and tedious hand optimization techniques
-*obsolete*.
+on a
+[tedious case by case basis](http://blog.scalyr.com/2013/10/31/angularjs-1200ms-to-35ms/),
+but the whole point of Om is to deliver competitive levels of
+component abstraction while making an entire family of common and
+tedious hand optimization techniques *obsolete*.
 
 ## Game of Benchmarks
 
