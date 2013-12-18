@@ -91,19 +91,20 @@ tied together. If data changes we never immediately trigger a
 re-render - we simply schedule a render of the data via
 `requestAnimationFrame`.
 
-Many MVC implementations (and/or applications that use them) directly
-link together changes in the model, the view, and truly orthogonal
-concerns like serializing app state into localStorage. While
-frameworks could, they don't generally provide enough scaffolding to
-ensure that users keep these concerns architecturally separate. When
-JS frameworks duke it out on performance these benchmarks tend to
-emphasize some aspect that won't generally have an effect on *global
-performance*. Who cares if a framework has 5X faster templating when
-you'll still end up tying things together yet again in non-scalable
-ways? A thousand updates to the model will still trigger a thousand
-updates to views which will still trigger a thousand writes to local
-storage, and you will be destined to optimize your application by
-taking a series of steps on the long road towards the Om model.
+I suspect many MVC based application like the toy TodoMVC (and/or
+applications that use them) directly link together changes in the
+model, the view, and truly orthogonal concerns like serializing app
+state into localStorage. Frameworks don't generally provide enough
+scaffolding to ensure that users keep these concerns architecturally
+separate. To make mattesr worse When JS frameworks duke it out on
+performance benchmarks emphasize aspects that won't have a real effect
+on *global performance*. Who cares if a framework has 5X faster
+templating when you'll still end up tying things together yet again in
+non-scalable ways? A thousand updates to the model will still trigger
+a thousand updates to views which will still trigger a thousand writes
+to local storage, and you will be destined to optimize your
+application by taking a series of steps on the long road towards the
+Om model.
 
 Or you could just start using React for your rendering layer and
 [mori](http://swannodette.github.io/mori/) for your data layer. You'd
