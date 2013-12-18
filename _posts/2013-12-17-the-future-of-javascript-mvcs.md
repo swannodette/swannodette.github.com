@@ -103,7 +103,7 @@ potential bottlenecks that Om leaves behind.
 
 Hopefully this gives fans of JS MVC some food for thought. I've shown
 that a compile to JavaScript language that uses slower data structures
-ends up globally faster than most of the competition for rich user
+ends up faster than a reasonably fast competitor for rich user
 interfaces. To top it off the Om TodoMVC with same bells and whistles
 as everyone else weighs in at ~260 lines of code including all the
 templates and the minified code is 63K gzipped (this total
