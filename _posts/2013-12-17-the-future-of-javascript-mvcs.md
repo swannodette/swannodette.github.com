@@ -29,8 +29,8 @@ to do with future of JavaScript MVCs?
 A whole lot.
 
 We'll see how, perhaps unintuitively, immutable data allows a new
-library, [Om](http://github.com/swannodette/om), to outperform nearly
-every existing JavaScript MVC without hand optimization from the
+library, [Om](http://github.com/swannodette/om), to outperform a reasonably
+performant JavaScript MVC like Backbone.js without hand optimization from the
 user. Om itself is built upon the absolutely wonderful
 [React](http://facebook.github.io/react/) library from Facebook,
 however our approach allows Om to deliver even better results than
@@ -89,7 +89,7 @@ takes around 2500ms seconds to render.
 
 Simple.
 
-The first one doesn't do any work that it doesn't have to! Om is a
+Om doesn't The first one doesn't do any work that it doesn't have to! Om is a
 thoroughly *decoupled* design: data, views and control logic are not
 inextricably tied together. Many MVC implementations (and/or
 applications that use them) directly link together changes in the
