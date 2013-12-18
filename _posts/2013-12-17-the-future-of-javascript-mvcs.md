@@ -89,14 +89,15 @@ tied together. If data changes we never immediately trigger a
 re-render - we simply schedule a render of the data via
 `requestAnimationFrame`.
 
-I suspect many MVC based application like the toy TodoMVC (and/or
-applications that use them) directly link together changes in the
-model, the view, and truly orthogonal concerns like serializing app
-state into localStorage. Frameworks don't generally provide enough
-scaffolding to ensure that users keep these concerns architecturally
-separate. To make matters worse When JS MVC frameworks duke it out on
-performance benchmarks they emphasize aspects that won't have any real effect
-on *global performance*. Who cares if a framework has 5X faster
+I suspect many MVC based application like the toy TodoMVC directly
+link together changes in the model, the view, and truly orthogonal
+concerns like serializing app state into localStorage simply out of
+convenience as frameworks don't generally provide any support to
+ensure that users keep these concerns architecturally separate.
+
+To make matters worse When JS MVC frameworks duke it out on
+performance benchmarks they emphasize aspects that won't have any real
+effect on *global performance*. Who cares if a framework has 5X faster
 templating when you'll still end up tying things together yet again in
 non-scalable ways? A thousand updates to the model will still trigger
 a thousand updates to views which will still trigger a thousand writes
