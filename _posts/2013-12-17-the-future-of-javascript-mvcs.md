@@ -92,7 +92,7 @@ re-render - we simply schedule a render of the data via
 `requestAnimationFrame`. Om conceptually considers the browser as
 something more akin to a GPU, not a "place".
 
-I suspect many JS MVC applications follow TodoMVC's lead and
+I suspect many JS MVC applications follow the Backbone.js TodoMVC lead and
 link together changes in the model, the view, and truly orthogonal
 concerns like serializing app state into localStorage simply out of
 convenience as few frameworks provide the required support to ensure that
