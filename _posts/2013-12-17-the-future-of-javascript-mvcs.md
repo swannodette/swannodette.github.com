@@ -202,8 +202,7 @@ following people.
 for many months to give React a closer look. Sadly I didn't give it a
 proper chance until I saw
 [Peter Hunt's JSConf EU 2013 presentation](http://2013.jsconf.eu/speakers/pete-hunt-react-rethinking-best-practices.html)
-that explained the architecture. If you haven't seen it yet, highly
-recommended.
+that explained the architecture.
 
 A huge thanks to [Jordan Walke](http://twitter.com/jordwalke) for
 inadvertently giving me the original inspiration to try something like
@@ -211,4 +210,4 @@ Om via a Twitter conversation and to
 [Peter Hunt](http://twitter.com/floydophone) and
 [Ben Alpert](http://github.com/spicyj) and the other super friendly
 people on the React IRC channel for answering my numerous
-questions
+questions.
