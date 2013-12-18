@@ -90,38 +90,21 @@ re-render - we simply schedule a render of the data via
 `requestAnimationFrame`. Om conceptually considers the browser as
 something more akin to a GPU, not a "place".
 
-I suspect many MVC based application like the toy TodoMVC directly
+I suspect many JS MVC applications follow TodoMVC's lead and
 link together changes in the model, the view, and truly orthogonal
 concerns like serializing app state into localStorage simply out of
 convenience as few frameworks provide the required support to ensure that
-users keep these concerns architecturally separate. Frameworks that
-emphasize manipulating string based templates, CSS selectors, and the
-DOM as a place to store things are hampering themselves.
+users keep these concerns architecturally separate. But it's no
+surprise, string based templates, CSS selectors, and direct DOM
+manipulation abound in the culture - all bottlenecks.
 
-To make matters worse When JS MVC frameworks duke it out on
-performance benchmarks they emphasize aspects that won't have any real
-effect on *global performance*. Who cares if a framework has 5X faster
-templating when you'll still end up tying things together yet again in
-non-scalable ways? A thousand updates to the model will still trigger
-a thousand updates to views which will still trigger a thousand writes
-to local storage, and you will be destined to optimize your
-application by taking a series of steps on the long road towards the
-Om model.
-
-Or you could just start using React for your rendering layer and
-[mori](http://swannodette.github.io/mori/) for your data layer. You'd
-probably find yourself left with less than 200 lines of "framework"
-code and around 6 public functions ...
-
-... just like [Om](http://github.com/swannodette/om/blob/master/src/om/core.cljs).
-
-Hopefully this gives the MVC fanatics some food for thought. A compile
-to JavaScript language that uses data structures slower than the
-native ones provided by JavaScript some how ends up globally faster
-than most of the competition for rich user interfaces. To top it off
-the Om TodoMVC with same bells and whistles as everyone else weighs in
-at 63K gzipped, 3K shy of [Ember.js](http://emberjs.com) gzipped, even
-though we're including some serious firepower like
+Hopefully this gives fans of JS MVC some food for thought. Here we
+have A compile to JavaScript language that uses data structures slower
+than the native ones provided by JavaScript that somehow ends up globally
+faster than most of the competition for rich user interfaces. To top
+it off the Om TodoMVC with same bells and whistles as everyone else
+weighs in at 63K gzipped, 3K shy of [Ember.js](http://emberjs.com)
+gzipped, even though we're including some serious firepower like
 [core.async](http://github.com/clojure/core.async).
 
 Technical description follows.
