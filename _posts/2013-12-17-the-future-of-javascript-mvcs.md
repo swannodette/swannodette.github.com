@@ -174,7 +174,7 @@ programming.
 Expect more posts in the future elaborating ideas I've only hinted at
 or haven't mentioned: VCR playback of UI state, trivial UI
 instrumentation, client/server template sharing, relational user
-interfaces, and more.
+interfaces, and much more.
 
 ## Thanks
 
