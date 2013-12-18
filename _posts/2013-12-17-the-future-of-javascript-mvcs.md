@@ -38,14 +38,12 @@ the user. Om itself is built upon the absolutely wonderful
 however our approach allows Om to deliver even better results than
 using React out of the box.
 
-Before we proceed it's important to understand that the following
-benchmarks are not the silly uninformed things you find on
-[jsperf.com](http://jsperf.com). Nor are these benchmarks designed to
-prove that Om is the fastest possible UI component system in the
-world. These benchmarks are designed to demonstrate that MVCs internal
-design decisions that defy global optimization or leave so little
-guidance that users will inevitably make these same problematic design
-decisions themselves.
+These benchmarks are not designed to prove that Om is the fastest
+possible UI component system in the world. These benchmarks are
+designed to demonstrate that many MVCs make implementation decisions
+that defy global optimization or leave so little guidance that users
+will inevitably make these same problematic design decisions
+themselves.
 
 Of course you can correct these issues in traditional MVCs on a
 tedious case by case basis, but the whole point of Om is to deliver
