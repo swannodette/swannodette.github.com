@@ -39,7 +39,7 @@ however our approach allows Om to deliver even better results than
 using React out of the box.
 
 These benchmarks are not designed to prove that Om is the fastest
-possible UI component system in the world. These benchmarks are
+UI component system in the world. These benchmarks are
 designed to demonstrate that it's important to avoid implementation
 decisions that defy global optimization or leave so little guidance
 that users will inevitably make these same problematic design
