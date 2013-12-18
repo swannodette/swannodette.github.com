@@ -60,7 +60,7 @@ Open the [Om TodoMVC in a tab](http://swannodette.github.io/todomvc/labs/archite
 creates 200 todos and on my 11 inch Macbook Air it takes Safari 7 around
 120ms to render.
 
-Now open up the [Backbone.js TodoMVC in a tab]() and run the same
+Now open up the [Backbone.js TodoMVC in a tab](http://swannodette.github.io/todomvc/architecture-examples/backbone/index.html) and run the same
  benchmark.  On my machine this takes around 500ms to render.
 
 Under Chrome and Firefox, Om on my machine is consistently 2-4X
@@ -77,12 +77,12 @@ data, that's nowhere near the 30X-40X claims you might have
 seen me make on Twitter.
 
 Try the second Om benchmark - it creates 200 todos, toggles them all 5
-times, and then deletes them. On my 11 inch Macbook it takes around
+times, and then deletes them. Safari 7 my 11 inch Macbook Air takes around
 5ms to render.
 
-Now try the second Backbone.js benchmark which does the exact same series
-of operations. On my machine this takes around 2500ms seconds to
-render.
+Make sure to delete all of the todos from the Backbone.js benchmark
+first then try the second Backbone.js benchmark. On my machine
+Safari takes around 4200ms seconds to completed.
 
 *How is this possible?*
 
