@@ -65,7 +65,7 @@ faster. If you try toggling all of the todos you'll notice
 Om feels natural, while Backbone.js will feel a bit janky. This is
 probably because Om always re-renders on
 [requestAnimationFrame](http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/). A
-pretty nice optimization to always have in all of your applications.
+pretty nice optimization to have enabled in your applications.
 
 Ok, excellent work! But, uh, while 2-7X faster across 3 major browser
 should be enough to get anyone interested, that's nowhere near the
