@@ -70,8 +70,9 @@ probably because Om always re-renders on
 [requestAnimationFrame](http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/). A
 pretty nice optimization to have enabled in your applications.
 
-Taking a loop at the flame graphs is suprisingly informative as far as
-how Om/React works under versus how an unoptimzed Backbone.js works:
+Taking a look at the Chrome JS profile flame graphs for this benchmark
+is suprisingly informative as far as how Om/React works out of the box
+versus how unoptimzed Backbone.js works:
 
 This is Om/React:
 
