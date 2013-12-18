@@ -126,7 +126,7 @@ slower data structures ends up faster than a reasonably fast
 competitor for rich user interfaces. To top it off
 [Om TodoMVC](http://github.com/swannodette/todomvc/blob/gh-pages/labs/architecture-examples/om/src/todomvc/app.cljs)
 with same bells and whistles as everyone else weighs in at ~260 lines
-of code including all the templates and the minified code is 63K
+of code (including all the templates) and the minified code is 63K
 gzipped (this total includes the 27K of React, the entire
 ClojureScript standard libary, core.async, a routing library, and
 several helpers from Google Closure).
