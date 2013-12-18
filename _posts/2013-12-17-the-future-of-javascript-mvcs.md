@@ -92,7 +92,7 @@ data, that's nowhere near the 30X-40X claims you might have
 seen me make on Twitter.
 
 Try the second Om benchmark - it creates 200 todos, toggles them all 5
-times, and then deletes them. Safari 7 my 11 inch Macbook Air takes around
+times, and then deletes them. Safari 7 on my 11 inch Macbook Air takes around
 5ms to render.
 
 Make sure to delete all of the todos from the Backbone.js benchmark
