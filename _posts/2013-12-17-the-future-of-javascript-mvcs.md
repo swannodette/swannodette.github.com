@@ -146,7 +146,7 @@ Technical description follows.
 ## How it works
 
 Modifying and querying the DOM is a huge performance bottleneck and
-React embraces an approach that eschews them without sacrificing
+React embraces an approach that eschews this without sacrificing
 expressivity. It presents a well designed Object Oriented interface,
 but everything underneath the hood has been crafted with the eye of a
 pragmatic functional programmer. It works by generating a virtual
