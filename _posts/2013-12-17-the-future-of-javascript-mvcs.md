@@ -72,7 +72,7 @@ pretty nice optimization to have enabled in your applications.
 
 Ok, excellent work! But, uh, while 2-4X faster across 3 major browser
 should be enough to get anyone interested, especially considering the
-fact that we're achieving this level of performance with immutable
+fact that we're achieving this level of performance *because of* immutable
 data, that's nowhere near the 30X-40X claims you might have
 seen me make on Twitter.
 
