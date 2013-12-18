@@ -87,13 +87,16 @@ Om never does any work it doesn't have to. We have a
 *decomplected* design: data, views and control logic are not
 tied together. If data changes we never immediately trigger a
 re-render - we simply schedule a render of the data via
-`requestAnimationFrame`.
+`requestAnimationFrame`. Om conceptually considers the browser as
+something more akin to a GPU, not a "place".
 
 I suspect many MVC based application like the toy TodoMVC directly
 link together changes in the model, the view, and truly orthogonal
 concerns like serializing app state into localStorage simply out of
-convenience as frameworks don't generally provide any support to
-ensure that users keep these concerns architecturally separate.
+convenience as few frameworks provide the required support to ensure that
+users keep these concerns architecturally separate. Frameworks that
+emphasize manipulating string based templates, CSS selectors, and the
+DOM as a place to store things are hampering themselves.
 
 To make matters worse When JS MVC frameworks duke it out on
 performance benchmarks they emphasize aspects that won't have any real
