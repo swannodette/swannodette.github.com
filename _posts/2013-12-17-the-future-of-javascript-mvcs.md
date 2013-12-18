@@ -94,14 +94,15 @@ trigger a re-render - we simply schedule a render of the data via
 `requestAnimationFrame`. Om conceptually considers the browser as
 something more akin to a GPU.
 
-I suspect many JS MVC applications follow the Backbone.js TodoMVC lead and
-link together changes in the model, the view, and truly orthogonal
+I suspect many JS MVC applications follow the Backbone.js TodoMVC lead
+and link together changes in the model, the view, and truly orthogonal
 concerns like serializing app state into localStorage simply out of
-convenience as few frameworks provide the required support to ensure that
-users keep these concerns architecturally separate. But really this
-should come as no surprise, the predominant culture leans on string based
-templates, CSS selectors, and direct DOM manipulation - all
-potential bottlenecks that Om leaves behind.
+convenience as few frameworks provide the required support to ensure
+that users keep these concerns architecturally separate. But really
+this should come as no surprise, the predominant culture leans on
+string based templates, CSS selectors, and direct DOM manipulation -
+all markers of "place oriented" programming and potential bottlenecks
+that Om leaves behind.
 
 Hopefully this gives fans of the current crop JS MVCs and even people
 who believe in just using plain JavaScript and jQuery some food for
