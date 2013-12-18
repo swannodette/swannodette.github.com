@@ -107,7 +107,7 @@ ends up faster than a reasonably fast competitor for rich user
 interfaces. To top it off the Om TodoMVC with same bells and whistles
 as everyone else weighs in at ~260 lines of code including all the
 templates and the minified code is 63K gzipped (this total
-includes the 27K React, the entire ClojureScript standard libary,
+includes the 27K of React, the entire ClojureScript standard libary,
 core.async, a routing library, and several helpers from Google
 Closure).
 
