@@ -75,7 +75,7 @@ Try the second Om benchmark - it creates 200 todos, toggles them all 5
 times, and then deletes them. On my 11 inch Macbook it takes around
 50ms to render.
 
-Now try the second benchmark Backbone.js which does the exact same series
+Now try the second Backbone.js benchmark which does the exact same series
 of operations. On my machine this takes around 2500ms seconds to
 render.
 
