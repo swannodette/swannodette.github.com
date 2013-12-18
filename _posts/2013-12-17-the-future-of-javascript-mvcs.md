@@ -72,10 +72,10 @@ probably because Om always re-renders on
 pretty nice optimization to have enabled in your applications.
 
 Taking a look at the Chrome Dev Tools JS profile flame graphs for this benchmark
-is suprisingly informative as far as how Om/React works out of the box
+is suprisingly informative as far as how React/Om works out of the box
 versus how unoptimzed Backbone.js works:
 
-This is Om/React:
+This is React/Om:
 
 <img style="border: 1px solid #ccc" src="/assets/images/om.jpg" />
 
@@ -83,7 +83,7 @@ This is Backbone.js:
 
 <img style="border: 1px solid #ccc" src="/assets/images/bb.jpg" />
 
-The Om/React flame graph seems to suggest, at least to my eyes, a
+The React/Om flame graph seems to suggest, at least to my eyes, a
 design far more amenable to global optimization.
 
 Ok, excellent work! But, uh, while 2-4X faster across 3 major browser
@@ -199,10 +199,10 @@ structure.
 
 In short I don't think there is much of future in the current crop
 of JavaScript MVCs. I think if you sit down and think for months and
-years in the end only something akin to Om (even if tucked away under
+years in the end only something akin to React/Om (even if tucked away under
 a traditional MVC hood) will deliver an optimal balance between
 simplicity, performance, and expressivity. There's
-nothing special in Om that hasn't been known for a long, long, long
+nothing special here that hasn't been known for a long, long
 time. If you treat the browser as a remote rendering engine and stop
 treating it as a place to query and store crap, everything gets
 faster. Sound like something familiar? Yeah, computer graphics
