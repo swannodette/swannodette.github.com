@@ -118,7 +118,7 @@ several helpers from Google Closure).
 
 I think taking a hard look at React is a really good idea. I think
 coupling React with a persistent data structure library like
-[mori](http://swannodette.github.io/mori/) could bring a JS
+[mori](http://swannodette.github.io/mori/) could bring JS
 applications all the way to the type of flexible yet tuned
 architecture that Om delivers.
 
