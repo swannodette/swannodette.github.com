@@ -94,18 +94,18 @@ I suspect many JS MVC applications follow TodoMVC's lead and
 link together changes in the model, the view, and truly orthogonal
 concerns like serializing app state into localStorage simply out of
 convenience as few frameworks provide the required support to ensure that
-users keep these concerns architecturally separate. But it's no
-surprise, string based templates, CSS selectors, and direct DOM
-manipulation abound in the culture - all bottlenecks.
+users keep these concerns architecturally separate. But really this
+should come as no surprise: the culture leans on string based
+templates, CSS selectors, and direct DOM manipulation - all
+potential bottlenecks that Om leaves behind.
 
-Hopefully this gives fans of JS MVC some food for thought. Here we
-have A compile to JavaScript language that uses data structures slower
-than the native ones provided by JavaScript that somehow ends up globally
-faster than most of the competition for rich user interfaces. To top
-it off the Om TodoMVC with same bells and whistles as everyone else
-weighs in at 63K gzipped, 3K shy of [Ember.js](http://emberjs.com)
-gzipped, even though we're including some serious firepower like
-[core.async](http://github.com/clojure/core.async).
+Hopefully this gives fans of JS MVC some food for thought. I've shown
+that a compile to JavaScript language that uses slower data structures
+ends up globally faster than most of the competition for rich user
+interfaces. To top it off the Om TodoMVC with same bells and whistles
+as everyone else weighs in at 63K gzipped - this total includes the 27K
+React, the entire ClojureScript standard libary, core.async, a routing
+library, and several helpers from Google Closure.
 
 Technical description follows.
 
