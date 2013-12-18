@@ -53,8 +53,8 @@ entire family of common and tedious hand optimization techniques
 
 ## Game of Benchmarks
 
-Open the [Om TodoMVC in a tab]() and run the first benchmark - it
-creates 200 todos. On my 11 inch Macbook Air it takes Safari 7 around
+Open the [Om TodoMVC in a tab]() and run the first benchmark. It
+creates 200 todos and on my 11 inch Macbook Air it takes Safari 7 around
 100ms to render.
 
 Open up the [Backbone.js TodoMVC in a tab]() and run the same
