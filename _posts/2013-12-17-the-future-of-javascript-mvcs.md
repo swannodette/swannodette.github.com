@@ -133,13 +133,14 @@ ClojureScript standard libary, core.async, a routing library, and
 several helpers from Google Closure).
 
 If you're a JavaScript developer I think taking a hard look at React
-is a really good idea. I think coupling React with a persistent data
-structure library like [mori](http://swannodette.github.io/mori/)
-could bring JS applications all the way to the type of flexible yet
-highly tuned architecture that Om delivers. While it's true immutable
-data structures tend to generate more garbage we strongly believe
-modern JS engines are up to the task and the hardware we carry around
-in our pockets is improving at a rapid clip.
+is a really good idea. I think in the future coupling React with a
+persistent data structure library like
+[mori](http://swannodette.github.io/mori/) could bring JS applications
+all the way to the type of flexible yet highly tuned architecture that
+Om delivers. While it's true immutable data structures tend to
+generate more garbage we strongly believe modern JS engines are up to
+the task and the hardware we carry around in our pockets is improving
+at a rapid clip.
 
 Technical description follows.
 
