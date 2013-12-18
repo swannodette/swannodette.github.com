@@ -170,8 +170,9 @@ the fastest check possible - a reference equality check. This means we
 can always determine the paths changed starting from the root in
 logarithmic time.
 
-Thus we don't bother with React conveniences like `setState` which
-exist to support efficient subtree updating. Subtree updating for Om
+Thus we don't need React operations like `setState` which
+exists to support both efficient subtree updating as well as good
+Object Oriented style. Subtree updating for Om
 starting from root is always lightning fast because we're just doing
 reference equality checks all the way down.
 
