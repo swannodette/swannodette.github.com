@@ -111,13 +111,6 @@ Technical description follows.
 
 ## How it works
 
-My recent in interest React is all thanks to [Brandon Bloom](http://twitter.com/brandonbloom) has
-been bugging me for month to give React a closer look, however I was
-turned off by the OOP-y documentation and the source inline HTML. I didn't
-give it a proper chance until I saw [Peter Hunt's
-[JSConf EU 2013 presentation](http://2013.jsconf.eu/speakers/pete-hunt-react-rethinking-best-practices.html)
-that explained the architecture.
-
 Modifying and querying the DOM is a huge performance bottleneck and
 React adopts an approach that avoids that without sacrificing
 expressivity. While it present a friendly well designed Object
@@ -183,8 +176,22 @@ or haven't mentioned: VCR playback of UI state, trivial UI
 instrumentation, client/server template sharing, relational user
 interfaces, and more.
 
+## Thanks
+
+I would have written this post or written Om if wasn't for the
+following people.x
+
+[Brandon Bloom](http://twitter.com/brandonbloom) has been bugging me
+for many months to give React a closer look. Sadly I didn't give it a
+proper chance until I saw
+[Peter Hunt's [JSConf EU 2013 presentation](http://2013.jsconf.eu/speakers/pete-hunt-react-rethinking-best-practices.html)
+that explained the architecture. If you haven't seen it yet, highly
+recommended.
+
 A huge thanks to [Jordan Walke](http://twitter.com/jordwalke)) for
-giving me the original inspiration for Om via a Twitter conversation
-and to [Peter Hunt](http://twitter.com/floydophone) and
-[Ben Alpert](http://github.com/spicyj) for answering my numerous
-questions on the React IRC channel.
+inadvertently giving me the original inspiration to try something like
+Om via a Twitter conversation and to
+[Peter Hunt](http://twitter.com/floydophone) and
+[Ben Alpert](http://github.com/spicyj) and the other super friendly
+people on the React IRC channel for answering my numerous
+questions
