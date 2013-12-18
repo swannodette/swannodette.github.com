@@ -114,58 +114,61 @@ Technical description follows.
 ## How it works
 
 Modifying and querying the DOM is a huge performance bottleneck and
-React embraces an approach that eschews with without sacrificing
+React embraces an approach that eschews them without sacrificing
 expressivity. It presents a well designed Object Oriented interface,
 but everything underneath the hood has been crafted with the eye of a
 pragmatic functional programmer. It works by generating a virtual
 version of the DOM and as your application state evolves it diffs changes
 between the virtual DOM trees over time. It uses these diffs to make
-the minimal set of changes required on the real DOM so you don't have to
+the minimal set of changes required on the real DOM so you don't have to.
 
 When React does a diff on the virtual DOM specified by your components
 there is a very critical function - `shouldComponentUpdate`. If this
 returns false, React will never compute the children of the
 component. That is, *React builds the virtual DOM tree lazily for
-diffing*.
+diffing based on what path in the tree actually changed*.
 
-As it turns out `shouldComponentUpdate` is extremely conservative
-because JavaScript devs tend to mutate objects - so in order to
-determine if some properties of a component has changed they have to
-manually walk the JavaScript object / array to figure this out.
+As it turns out the default `shouldComponentUpdate` implementation is
+extremely conservative because JavaScript devs tend to mutate
+objects and arrays! So in order to determine if some properties of a component
+has changed they have to manually walk JavaScript objects and arrays
+to figure this out.
 
 Instead of using JavaScript objects Om uses ClojureScript data
-structures which we cannot be changed. Because of this we can provide
-a component that implements `shouldComponentUpdate` - all it needs to
-do is a reference equality check. This simply change means we can
-always determine the path changed starting from the root in
+structures which we know will not be changed. Because of this we can
+provide a component that implements `shouldComponentUpdate` that does
+the fastest check possible - a reference equality check. This means we
+can always determine the paths changed starting from the root in
 logarithmic time.
 
-Because of this fact we don't need React convenience like `setState`
-which support efficient subtree updating. Subtree updating for Om is
-always lightning fast even if your UI graph is massive.
+Thus we don't bother with React conveniences like `setState` which
+exist to support efficient subtree updating. Subtree updating for Om
+starting from root is always lightning fast because we're just doing
+reference equality checks all the way down.
 
-Because we always re-render from the root, batched updates are trivial
-to implement. We don't even bother with the batched update support in
-React, we just rolled our own 6 lines change.
+Also because we always re-render from the root, batched updates are
+trivial to implement. We don't bother with the batched update support
+in React as it's designed to handle cases we don't care about, so we
+just rolled our own 6 line rocket fuel enhancement.
 
 Finally because we always have the entire state of the UI in a single
 piece of data we can trivially serialize all of the important app
 state - we don't need to bother with serialization protocols, or
-making sure that everyone implements them correctly. Om UIs are always
-serializable.
+making sure that everyone implements them correctly. Om UI states are
+always serializable, always snapshotable.
 
-But this also means that Om UIs get undo for free. You can simply
+This also means that Om UIs get undo for free. You can simply
 snapshot any state in memory and reinstate it whenever you like. It's
 memory efficient as ClojureScript data structures work by sharing
-structure anyway.
+structure.
 
 ## Closing Thoughts
 
-In short I don't think there is a future in the current crop of
-JavaScript MVCs. I think if you sit down and think for months and
+In short I don't think there is a much of future in the current crop
+of JavaScript MVCs. I think if you sit down and think for months and
 years in the end only something akin to Om (even if tucked away under
 a traditional MVC hood) will deliver an optimal balance between
-simplicity, performance, and expressivity. This is because there's
+simplicity, performance, and expressivity. There's
 nothing special in Om that hasn't been known for a long, long, long
 time. If you treat the browser as a remote rendering engine and stop
 treating it as a place to query and store crap, everything gets
@@ -179,8 +182,8 @@ interfaces, and much more.
 
 ## Thanks
 
-I would have written this post or written Om if wasn't for the
-following people.x
+I would not have written this post or written Om if wasn't for the
+following people.
 
 [Brandon Bloom](http://twitter.com/brandonbloom) has been bugging me
 for many months to give React a closer look. Sadly I didn't give it a
