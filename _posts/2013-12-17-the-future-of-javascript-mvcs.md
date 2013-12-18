@@ -97,7 +97,7 @@ link together changes in the model, the view, and truly orthogonal
 concerns like serializing app state into localStorage simply out of
 convenience as few frameworks provide the required support to ensure that
 users keep these concerns architecturally separate. But really this
-should come as no surprise: the culture leans on string based
+should come as no surprise, the predominant culture leans on string based
 templates, CSS selectors, and direct DOM manipulation - all
 potential bottlenecks that Om leaves behind.
 
