@@ -139,7 +139,7 @@ could bring JS applications all the way to the type of flexible yet
 highly tuned architecture that Om delivers. While it's true immutable
 data structures tend to generate more garbage we strongly believe
 modern JS engines are up to the task and the hardware we carry around
-in our pockets is improving at rapid clip.
+in our pockets is improving at a rapid clip.
 
 Technical description follows.
 
