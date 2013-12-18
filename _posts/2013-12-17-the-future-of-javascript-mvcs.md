@@ -92,7 +92,7 @@ Om never does any work it doesn't have to: data, views and control
 logic are not tied together. If data changes we never immediately
 trigger a re-render - we simply schedule a render of the data via
 `requestAnimationFrame`. Om conceptually considers the browser as
-something more akin to a GPU, not a "place".
+something more akin to a GPU.
 
 I suspect many JS MVC applications follow the Backbone.js TodoMVC lead and
 link together changes in the model, the view, and truly orthogonal
