@@ -84,7 +84,7 @@ render.
 Simple.
 
 Om never does any work it doesn't have to. We have a
-*decomplected* design: data, views and control logic are not inextricably
+*decomplected* design: data, views and control logic are not
 tied together. If data changes we never immediately trigger a
 re-render - we simply schedule a render of the data via
 `requestAnimationFrame`.
