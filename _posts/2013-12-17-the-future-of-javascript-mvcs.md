@@ -73,13 +73,13 @@ you might have seen me make on Twitter.
 
 Try the following.
 
-Open the [Om TodoMVC in a tab]() and run the first benchmark - it creates
-200 todos, toggles them all 5 times, and then deletes them. On my 11
-inch Macbook it takes around 50ms to render.
+Try the second Om benchmark - it creates 200 todos, toggles them all 5
+times, and then deletes them. On my 11 inch Macbook it takes around
+50ms to render.
 
-Open up the [Backbone.js TodoMVC in a tab]() and run the second benchmark
-which does the exact same series of operations. On my machine this
-takes around 2500ms seconds to render.
+Try the second benchmark Backonbe.js which does the exact same series
+of operations. On my machine this takes around 2500ms seconds to
+render.
 
 *How is this possible?*
 
