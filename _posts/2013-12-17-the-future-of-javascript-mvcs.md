@@ -45,10 +45,10 @@ that defy global optimization or leave so little guidance that users
 will inevitably make these same problematic design decisions
 themselves.
 
-Of course you can correct these issues in traditional MVCs on a
-tedious case by case basis, but the whole point of Om is to deliver
-comparable levels of component abstraction while making an entire
-family of common and tedious hand optimization techniques
+Of course you can correct these issues in your client side application
+on a tedious case by case basis, but the whole point of Om is to
+deliver comparable levels of component abstraction while making an
+entire family of common and tedious hand optimization techniques
 *obsolete*.
 
 ## Game of Benchmarks
