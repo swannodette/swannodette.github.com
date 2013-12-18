@@ -71,13 +71,11 @@ pretty nice optimization to always have in all of your applications.
 Ok, excellent work! But, uh, that's nowhere near the 30X-40X claims
 you might have seen me make on Twitter.
 
-Try the following.
-
 Try the second Om benchmark - it creates 200 todos, toggles them all 5
 times, and then deletes them. On my 11 inch Macbook it takes around
 50ms to render.
 
-Try the second benchmark Backonbe.js which does the exact same series
+Now try the second benchmark Backbone.js which does the exact same series
 of operations. On my machine this takes around 2500ms seconds to
 render.
 
