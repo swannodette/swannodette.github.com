@@ -53,7 +53,7 @@ entire family of common and tedious hand optimization techniques
 
 ## Game of Benchmarks
 
-Open the [Om TodoMVC in a tab]() and run the first benchmark. It
+Open the [Om TodoMVC in a tab](http://swannodette.github.io/todomvc/labs/architecture-examples/om/index.html) and run the first benchmark. It
 creates 200 todos and on my 11 inch Macbook Air it takes Safari 7 around
 100ms to render.
 
