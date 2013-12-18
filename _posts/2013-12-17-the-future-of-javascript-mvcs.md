@@ -198,3 +198,9 @@ programming.
 Expect more posts in the future elaborating ideas I've only hinted at
 or haven't mentioned: VCR playback of UI state, client/server template
 sharing, relational user interfaces, and more.
+
+A huge thanks to [Jordan Walke](http://twitter.com/jordwalke)) for
+giving me the original inspiration for Om via a Twitter conversation
+and to [Peter Hunt](http://twitter.com/floydophone) and
+[Ben Alpert](http://github.com/spicyj) for answering my numerous
+questions on the React IRC channel.
