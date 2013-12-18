@@ -70,6 +70,20 @@ probably because Om always re-renders on
 [requestAnimationFrame](http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/). A
 pretty nice optimization to have enabled in your applications.
 
+Taking a loop at the flame graphs is suprisingly informative as far as
+how Om/React works under versus how an unoptimzed Backbone.js works:
+
+This is Om/React:
+
+<img style="border: 1px solid #ccc" src="/assets/images/om.jpg" />
+
+This is Backbone.js:
+
+<img style="border: 1px solid #ccc" src="/assets/images/bb.jpg" />
+
+The Om/React flame graph seems to suggest, at least to my eyes, a
+design far more amenable to global optimization.
+
 Ok, excellent work! But, uh, while 2-4X faster across 3 major browser
 should be enough to get anyone interested, especially considering the
 fact that we're achieving this level of performance *because of* immutable
