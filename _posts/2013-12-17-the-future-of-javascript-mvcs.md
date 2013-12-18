@@ -42,7 +42,7 @@ Before we proceed it's important to understand that the following
 benchmarks are not the silly uninformed things you find on
 [jsperf.com](http://jsperf.com). Nor are these benchmarks designed to
 prove that Om is the fastest possible UI component system in the
-world. These benchmarks are designed to demonstrate that JS MVCs often
+world. These benchmarks are designed to demonstrate that MVCs often
 employ *fundamentally flawed internal design decisions that defy global
 optimization or leave so little guidance that users will inevitably
 make these same bad design decisions themselves*.
