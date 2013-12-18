@@ -116,6 +116,12 @@ gzipped (this total includes the 27K of React, the entire
 ClojureScript standard libary, core.async, a routing library, and
 several helpers from Google Closure).
 
+I think taking a hard look at React is a really good idea. I think
+coupling React with a persistent data structure library like
+[mori](http://swannodette.github.io/mori/) could bring a JS
+applications all the way to the type of flexible yet tuned
+architecture that Om delivers.
+
 Technical description follows.
 
 ## How it works
