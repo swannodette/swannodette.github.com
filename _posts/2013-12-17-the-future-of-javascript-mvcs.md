@@ -34,9 +34,12 @@ reasonably performant JavaScript
 [MVC](http://en.wikipedia.org/wiki/Model-view-controller) like
 [Backbone.js](http://backbonejs.org) without hand optimization from
 the user. Om itself is built upon the absolutely wonderful
-[React](http://facebook.github.io/react/) library from Facebook,
-however our approach allows Om to deliver even better results than
-using React out of the box.
+[React](http://facebook.github.io/react/) library from Facebook. If
+you haven't checked it out before please give it another look, I
+recommend [watching this video from JSConf EU 2013]
+(http://2013.jsconf.eu/speakers/pete-hunt-react-rethinking-best-practices.html).
+Interestingly because of immutable data Om can deliver even better results
+than using React out of the box.
 
 These benchmarks are not designed to prove that Om is the fastest
 UI component system in the world. These benchmarks are
@@ -55,19 +58,19 @@ entire family of common and tedious hand optimization techniques
 
 Open the [Om TodoMVC in a tab](http://swannodette.github.io/todomvc/labs/architecture-examples/om/index.html) and run the first benchmark. It
 creates 200 todos and on my 11 inch Macbook Air it takes Safari 7 around
-100ms to render.
+120ms to render.
 
 Now open up the [Backbone.js TodoMVC in a tab]() and run the same
- benchmark.  On my machine this takes around 700ms to render.
+ benchmark.  On my machine this takes around 500ms to render.
 
-Under Chrome and Firefox, Om on my machine is consistently 2-3X
+Under Chrome and Firefox, Om on my machine is consistently 2-4X
 faster. If you try toggling all of the todos you'll notice
 Om feels natural, while Backbone.js will feel a bit janky. This is
 probably because Om always re-renders on
 [requestAnimationFrame](http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/). A
 pretty nice optimization to have enabled in your applications.
 
-Ok, excellent work! But, uh, while 2-7X faster across 3 major browser
+Ok, excellent work! But, uh, while 2-4X faster across 3 major browser
 should be enough to get anyone interested, especially considering the
 fact that we're achieving this level of performance with immutable
 data, that's nowhere near the 30X-40X claims you might have
@@ -75,7 +78,7 @@ seen me make on Twitter.
 
 Try the second Om benchmark - it creates 200 todos, toggles them all 5
 times, and then deletes them. On my 11 inch Macbook it takes around
-50ms to render.
+5ms to render.
 
 Now try the second Backbone.js benchmark which does the exact same series
 of operations. On my machine this takes around 2500ms seconds to
@@ -100,15 +103,17 @@ should come as no surprise, the predominant culture leans on string based
 templates, CSS selectors, and direct DOM manipulation - all
 potential bottlenecks that Om leaves behind.
 
-Hopefully this gives fans of JS MVC some food for thought. I've shown
-that a compile to JavaScript language that uses slower data structures
-ends up faster than a reasonably fast competitor for rich user
-interfaces. To top it off the Om TodoMVC with same bells and whistles
-as everyone else weighs in at ~260 lines of code including all the
-templates and the minified code is 63K gzipped (this total
-includes the 27K of React, the entire ClojureScript standard libary,
-core.async, a routing library, and several helpers from Google
-Closure).
+Hopefully this gives fans of the current crop JS MVCs and even people
+who believe in just using plain JavaScript and jQuery some food for
+thought. I've shown that a compile to JavaScript language that uses
+slower data structures ends up faster than a reasonably fast
+competitor for rich user interfaces. To top it off
+[Om TodoMVC](http://github.com/swannodette/todomvc/blob/gh-pages/labs/architecture-examples/om/src/todomvc/app.cljs)
+with same bells and whistles as everyone else weighs in at ~260 lines
+of code including all the templates and the minified code is 63K
+gzipped (this total includes the 27K of React, the entire
+ClojureScript standard libary, core.async, a routing library, and
+several helpers from Google Closure).
 
 Technical description follows.
 
