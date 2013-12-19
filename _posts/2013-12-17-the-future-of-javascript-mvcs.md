@@ -112,7 +112,7 @@ something more akin to a GPU.
 
 I suspect many JS MVC applications follow the Backbone.js TodoMVC lead
 and link together changes in the model, the view, and truly orthogonal
-concerns like serializing app state into localStorage simply out of
+concerns like serializing app state into `localStorage` simply out of
 convenience as few frameworks provide the required support to ensure
 that users keep these concerns architecturally separate. But really
 this should come as no surprise, the predominant culture leans on
