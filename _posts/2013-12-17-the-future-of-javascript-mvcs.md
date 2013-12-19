@@ -73,7 +73,7 @@ pretty nice optimization to have enabled in your applications.
 
 Taking a look at the Chrome Dev Tools JS profile flame graphs for this benchmark
 is suprisingly informative as far as how React/Om works out of the box
-versus how unoptimzed Backbone.js works:
+versus how unoptimized Backbone.js works:
 
 This is React/Om:
 
