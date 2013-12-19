@@ -120,6 +120,14 @@ string based templates, CSS selectors, and direct DOM manipulation -
 all markers of *place oriented* programming and potential bottlenecks
 that Om leaves behind.
 
+Of course you can use Backbone.js or your favorite JS MVC with React
+and that's a [great combo](http://joelburget.com/backbone-to-react/)
+that delivers
+[a lot of value](http://github.com/usepropeller/react.backbone). However
+I'll go out on a limb and I say I simply don't believe in event oriented
+MVC systems - the flame graph above says it all. Decoupling the
+models from the view is only the first important step.
+
 Hopefully this gives fans of the current crop of JS MVCs and even people
 who believe in just using plain JavaScript and jQuery some food for
 thought. I've shown that a compile to JavaScript language that uses
