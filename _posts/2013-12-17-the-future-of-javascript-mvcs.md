@@ -24,7 +24,7 @@ engines have now been tuned to the point that it's no longer uncommon
 to see collection performance within 2.5X of the Java Virtual Machine.
 
 Wait, wait, wait. What does the performance of persistent data structures have
-to do with future of JavaScript MVCs?
+to do with the future of JavaScript MVCs?
 
 A whole lot.
 
