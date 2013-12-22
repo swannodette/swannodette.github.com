@@ -7,6 +7,10 @@ tags: []
 ---
 {% include JB/setup %}
 
+**UPDATE**: This is now an outdated post. For more accurate
+  information on enabling source maps please refer to the [ClojureScript
+  Wiki entry](http://github.com/clojure/clojurescript/wiki/Source-maps).
+
 ClojureScript has had experimental
 [source map](http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/)
 support for some time. Unlike other transpile to JavaScript languages,
