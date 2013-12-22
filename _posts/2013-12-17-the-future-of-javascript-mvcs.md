@@ -86,7 +86,7 @@ This is Backbone.js:
 The React/Om flame graph seems to suggest, at least to my eyes, a
 design far more amenable to global optimization.
 
-Ok, excellent work! But, uh, while 2-4X faster across 3 major browser
+Ok, excellent work! But, uh, while 2-4X faster across 3 major browsers
 should be enough to get anyone interested, especially considering the
 fact that we're achieving this level of performance *because of* immutable
 data, that's nowhere near the 30X-40X claims you might have
@@ -94,18 +94,18 @@ seen me make on Twitter.
 
 Try the second Om benchmark - it creates 200 todos, toggles them all 5
 times, and then deletes them. Safari 7 on my 11 inch Macbook Air takes around
-5ms to render.
+5ms to render this.
 
 Make sure to delete all of the todos from the Backbone.js benchmark
-first then try the second Backbone.js benchmark. On my machine
-Safari takes around 4200ms seconds to complete.
+first, then try the second Backbone.js benchmark. On my machine, running Safari,
+this takes around 4200ms seconds to complete.
 
 *How is this possible?*
 
 Simple.
 
-Om never does any work it doesn't have to: data, views and control
-logic are not tied together. If data changes we never immediately
+Om never does any work it doesn't have to. Data, views and control
+logic are not tied together. If data changes, we never immediately
 trigger a re-render - we simply schedule a render of the data via
 `requestAnimationFrame`. Om conceptually considers the browser as
 something more akin to a GPU.
@@ -113,40 +113,39 @@ something more akin to a GPU.
 I suspect many JS MVC applications follow the Backbone.js TodoMVC lead
 and link together changes in the model, the view, and truly orthogonal
 concerns like serializing app state into `localStorage` simply out of
-convenience as few frameworks provide the required support to ensure
-that users keep these concerns architecturally separate. But really
-this should come as no surprise, the predominant culture leans on
-string based templates, CSS selectors, and direct DOM manipulation -
-all markers of *place oriented* programming and potential bottlenecks
-that Om leaves behind.
+convenience, as few frameworks provide the required support to ensure that users
+keep these concerns architecturally separate. But really this should come as
+no surprise, because the predominant culture leans on string based templates,
+CSS selectors, and direct DOM manipulation - all markers of *place-oriented*
+programming, and all potential bottlenecks which Om leaves behind.
 
-Of course you can use Backbone.js or your favorite JS MVC with React
+Of course you can use Backbone.js or your favorite JS MVC with React,
 and that's a [great combo](http://joelburget.com/backbone-to-react/)
 that delivers
-[a lot of value](http://github.com/usepropeller/react.backbone). However
-I'll go out on a limb and I say I simply don't believe in event oriented
+[a lot of value](http://github.com/usepropeller/react.backbone). However,
+I'll go out on a limb and say I simply don't believe in event-oriented
 MVC systems - the flame graph above says it all. Decoupling the
 models from the views is only the first important step.
 
-Hopefully this gives fans of the current crop of JS MVCs and even people
-who believe in just using plain JavaScript and jQuery some food for
-thought. I've shown that a compile to JavaScript language that uses
+Hopefully, this gives fans of the current crop of JS MVCs, and even people
+who believe in just using plain JavaScript and jQuery, some food for
+thought. I've shown that a compile-to-JavaScript language which uses
 slower data structures ends up faster than a reasonably fast
-competitor for rich user interfaces. To top it off
-[Om TodoMVC](http://github.com/swannodette/todomvc/blob/gh-pages/labs/architecture-examples/om/src/todomvc/app.cljs)
-with the same bells and whistles as everyone else weighs in at ~260 lines
+competitor for rich user interfaces. To top it off,
+[Om TodoMVC](http://github.com/swannodette/todomvc/blob/gh-pages/labs/architecture-examples/om/src/todomvc/app.cljs),
+with the same bells and whistles as everyone else, weighs in at ~260 lines
 of code (including all the templates) and the minified code is 63K
 gzipped (this total includes the 27K of React, the entire
 ClojureScript standard libary, core.async, a routing library, and
 several helpers from Google Closure).
 
-If you're a JavaScript developer I think taking a hard look at React
-is a really good idea. I think in the future coupling React with a
+If you're a JavaScript developer, I think taking a hard look at React
+is a really good idea. I think in the future, coupling React with a
 persistent data structure library like
 [mori](http://swannodette.github.io/mori/) could bring JS applications
-all the way to the type of flexible yet highly tuned architecture that
+all the way to the type of flexible yet highly-tuned architecture that
 Om delivers. While it's true immutable data structures tend to
-generate more garbage we strongly believe modern JS engines are up to
+generate more garbage, we strongly believe modern JS engines are up to
 the task and the hardware we carry around in our pockets is improving
 at a rapid clip.
 
@@ -154,61 +153,61 @@ Technical description follows.
 
 ## How it works
 
-Modifying and querying the DOM is a huge performance bottleneck and
+Modifying and querying the DOM is a huge performance bottleneck, and
 React embraces an approach that eschews this without sacrificing
-expressivity. It presents a well designed Object Oriented interface,
+expressivity. It presents a well-designed object-oriented interface,
 but everything underneath the hood has been crafted with the eye of a
 pragmatic functional programmer. It works by generating a virtual
-version of the DOM and as your application state evolves it diffs changes
+version of the DOM and, as your application state evolves, it diffs changes
 between the virtual DOM trees over time. It uses these diffs to make
 the minimal set of changes required on the real DOM so you don't have to.
 
-When React does a diff on the virtual DOM specified by your components
+When React does a diff on the virtual DOM specified by your components,
 there is a very critical function - `shouldComponentUpdate`. If this
 returns false, React will never compute the children of the
 component. That is, *React builds the virtual DOM tree lazily for
 diffing based on what path in the tree actually changed*.
 
-As it turns out the default `shouldComponentUpdate` implementation is
-extremely conservative because JavaScript devs tend to mutate
+As it turns out, the default `shouldComponentUpdate` implementation is
+extremely conservative, because JavaScript devs tend to mutate
 objects and arrays! So in order to determine if some properties of a component
-has changed they have to manually walk JavaScript objects and arrays
+have changed, they have to manually walk JavaScript objects and arrays
 to figure this out.
 
-Instead of using JavaScript objects Om uses ClojureScript data
-structures which we know will not be changed. Because of this we can
-provide a component that implements `shouldComponentUpdate` that does
+Instead of using JavaScript objects, Om uses ClojureScript data
+structures which we know will not be changed. Because of this, we can
+provide a component that implements `shouldComponentUpdate` by doing
 the fastest check possible - a reference equality check. This means we
-can always determine the paths changed starting from the root in
+can always determine if the paths changed, starting from the root, in
 logarithmic time.
 
-Thus we don't need React operations like `setState` which
+Thus we don't need React operations like `setState`, which
 exists to support both efficient subtree updating as well as good
-Object Oriented style. Subtree updating for Om
+object-oriented style. Subtree updating for Om
 starting from root is always lightning fast because we're just doing
 reference equality checks all the way down.
 
-Also because we always re-render from the root, batched updates are
+Also, because we always re-render from the root, batched updates are
 trivial to implement. We don't bother with the batched update support
-in React as it's designed to handle cases we don't care about, so we
-just rolled our own 6 line rocket fuel enhancement.
+in React, as it's designed to handle cases we don't care about, so we
+can just use our own 6-line rocket fuel enhancement.
 
-Finally because we always have the entire state of the UI in a single
-piece of data we can trivially serialize all of the important app
+Finally, because we always have the entire state of the UI in a single
+piece of data, we can trivially serialize all of the important app
 state - we don't need to bother with serialization protocols, or
 making sure that everyone implements them correctly. Om UI states are
-always serializable, always snapshotable.
+always serializable, always snapshottable.
 
 This also means that Om UIs get undo for free. You can simply
 snapshot any state in memory and reinstate it whenever you like. It's
-memory efficient as ClojureScript data structures work by sharing
+memory-efficient, as ClojureScript data structures work by sharing
 structure.
 
 ## Closing Thoughts
 
-In short I don't think there is much of a future in the current crop
+In short, I don't think there is much of a future in the current crop
 of JavaScript MVCs. I think if you sit down and think for months and
-years in the end only something akin to React/Om (even if tucked away under
+years, in the end only something akin to React/Om (even if tucked away under
 a traditional MVC hood) will deliver an optimal balance between
 simplicity, performance, and expressivity. There's
 nothing special here that hasn't been known for a long, long
@@ -230,8 +229,8 @@ following people.
 [Brandon Bloom](http://twitter.com/brandonbloom) has been bugging me
 for many months to give React a closer look. Sadly I didn't give it a
 proper chance until I saw
-[Peter Hunt's JSConf EU 2013 presentation](http://2013.jsconf.eu/speakers/pete-hunt-react-rethinking-best-practices.html)
-that explained the architecture.
+[Peter Hunt's JSConf EU 2013 presentation](http://2013.jsconf.eu/speakers/pete-hunt-react-rethinking-best-practices.html),
+which explained the architecture.
 
 Thanks to [Kovas Boguta](http://twitter.com/kovasb) for humoring and
 encouraging me through several Om design discussions.
