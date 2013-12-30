@@ -98,7 +98,7 @@ times, and then deletes them. Safari 7 on my 11 inch Macbook Air takes around
 
 Make sure to delete all of the todos from the Backbone.js benchmark
 first, then try the second Backbone.js benchmark. On my machine, running Safari,
-this takes around 4200ms seconds to complete.
+this takes around 4200ms to complete.
 
 *How is this possible?*
 
