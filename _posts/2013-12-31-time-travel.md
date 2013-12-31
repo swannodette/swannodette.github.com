@@ -36,8 +36,8 @@ I added the following 13 lines of code:
 Again in Om we always have access to the entire app state so we just
 need to save it on every serious change in app state. Then undo is
 simply loading a previous snapshot. Because of immutable data
-structures React can re-render just as quickly going back in time as
-it does going forward in time.
+structures [React](http://facebook.github.io/react/) can re-render
+just as quickly going back in time as it does going forward in time.
 
 Much more powerful undo/redo capability can be easily added with a
 little more effort. It's worth considering how much work it would take
