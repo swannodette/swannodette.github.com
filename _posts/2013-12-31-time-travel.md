@@ -13,7 +13,7 @@ I claimed it was trivial to implement undo in
 [Om](http://github.com/swannodette/om). You can see it in action
 [here](http://swannodette.github.io/todomvc/labs/architecture-examples/om-undo/index.html).
 
-I added the following 13 lines to add undo.
+I added the following 13 lines of code:
 
 ```
 (def app-history (atom [@app-state]))
@@ -32,6 +32,12 @@ I added the following 13 lines to add undo.
       (swap! app-history pop)
       (reset! app-state (last @app-history)))))
 ```
+
+Again in Om we always have access to the entire app state so we just
+need to save it on every serious change in app state. Then undo is
+simply loading a previous snapshot. Because of immutable data
+structures React can re-render just as quickly going back in time as
+it does going forward in time.
 
 Much more powerful undo/redo capability can be easily added with a
 little more effort. It's worth considering how much work it would take
