@@ -23,7 +23,8 @@ I added the following 13 lines to add undo.
     (when-not (= (last @app-history) n)
       (swap! app-history conj n))
     (set! (.-innerHTML (.getElementById js/document "message"))
-      (str (count @app-history) " Saved States"))))
+      (let [c (count @app-history)]
+        (str c " Saved " (pluralize c "State"))))))
 
 (aset js/window "undo"
   (fn [e]
@@ -35,3 +36,5 @@ I added the following 13 lines to add undo.
 Much more powerful undo/redo capability can be easily added with a
 little more effort. It's worth considering how much work it would take
 to accomplish the same thing in a traditional JavaScript MVC.
+
+Full source [here](http://github.com/swannodette/todomvc/blob/gh-pages/labs/architecture-examples/om-undo/src/todomvc/app.cljs).
