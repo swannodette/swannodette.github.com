@@ -44,3 +44,5 @@ little more effort. It's worth considering how much work it would take
 to accomplish the same thing in a traditional JavaScript MVC.
 
 Full source [here](http://github.com/swannodette/todomvc/blob/gh-pages/labs/architecture-examples/om-undo/src/todomvc/app.cljs).
+
+Happy New Years!
