@@ -37,12 +37,18 @@ Again in Om we always have access to the entire app state so we just
 need to save it on every serious change in app state. Then undo is
 simply loading a previous snapshot. Because of immutable data
 structures [React](http://facebook.github.io/react/) can re-render
-just as quickly going back in time as it does going forward in time.
+just as quickly going back in time as it does going forward in
+time. While it may appear that storing the app state like this would
+consume a lot of memory, it doesn't because ClojureScript data
+structures work via structural sharing.
 
 Much more powerful undo/redo capability can be easily added with a
-little more effort. It's worth considering how much work it would take
-to accomplish the same thing in a traditional JavaScript MVC.
+little more effort. It's worth considering
+[how much work it](http://discuss.emberjs.com/t/undo-manager-implementation/1603)
+would take to accomplish the same thing in
+[a traditional JavaScript MVC]().
 
-Full source [here](http://github.com/swannodette/todomvc/blob/gh-pages/labs/architecture-examples/om-undo/src/todomvc/app.cljs).
+Full source
+[here](http://github.com/swannodette/todomvc/blob/gh-pages/labs/architecture-examples/om-undo/src/todomvc/app.cljs).
 
 Happy New Years!
