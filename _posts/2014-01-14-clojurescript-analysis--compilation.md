@@ -7,10 +7,11 @@ tags: []
 ---
 {% include JB/setup %}
 
-Without a doubt [Light Table](http://www.lighttable.com/) is now the
-most popular [ClojureScript](http://github.com/clojure/clojurescript)
-application in the world. It's also likely one of the most complex at
-around 11,000 lines of ClojureScript. 
+Without a doubt [Light Table](http://www.lighttable.com/) is now one
+of the most popular
+[ClojureScript](http://github.com/clojure/clojurescript) application
+in the world. It's also likely one of the most complex at around
+11,000 lines of ClojureScript.
 
 I think Light Tablers looking to extend their shiny new environment
 might first consider reaching for JavaScript. I challenge them to give
