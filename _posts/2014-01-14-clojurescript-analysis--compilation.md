@@ -9,7 +9,7 @@ tags: []
 
 Without a doubt [Light Table](http://www.lighttable.com/) is now one
 of the most popular
-[ClojureScript](http://github.com/clojure/clojurescript) application
+[ClojureScript](http://github.com/clojure/clojurescript) applications
 in the world. It's also likely one of the most complex at around
 11,000 lines of ClojureScript.
 
