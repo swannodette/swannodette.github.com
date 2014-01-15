@@ -20,7 +20,7 @@ To encourage users of Light Table, Clojure, and ClojureScript to get
 to know their tool better, I've put together an
 [interactive guide to the ClojureScript analyzer and compiler](http://github.com/swannodette/hello-cljsc).
 
-I think interacting with any compiler should always be this simple and
+I think exploring a compiler should always be this simple and
 interactive.
 
 Enjoy.
