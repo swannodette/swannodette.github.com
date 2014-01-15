@@ -16,7 +16,7 @@ I think Light Tablers looking to extend their shiny new environment
 might first consider reaching for JavaScript. I challenge them to give
 ClojureScript a very serious consideration before doing so.
 
-To encourage users of Light Tablers, Clojure, and ClojureScript to get
+To encourage users of Light Table, Clojure, and ClojureScript to get
 to know their tool better, I've put together an
 [interactive guide to the ClojureScript analyzer and compiler](http://github.com/swannodette/hello-cljsc).
 
