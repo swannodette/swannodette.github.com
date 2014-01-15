@@ -7,12 +7,22 @@ tags: []
 ---
 {% include JB/setup %}
 
-As [ClojureScript](http://github.com/clojure/clojurescript) matures
-there's a growing community interest in understanding how
-ClojureScript analysis and compilation works. I've put together a
-[repository]() and a [screencast]() using
-[Light Table](http://www.lighttable.com/) that you can follow
-along. The material is based on a talk I gave a while back at
-[Hacker School](https://www.hackerschool.com/).
+Without a doubt [Light Table](http://www.lighttable.com/) is now the
+most popular [ClojureScript](http://github.com/clojure/clojurescript)
+application in the world. It's also likely one of the most complex at
+around 11,000 lines of ClojureScript. 
+
+I think Light Tablers looking to extend their shiny new environment
+might first consider reaching for JavaScript. I challenge them to give
+ClojureScript a very serious consideration before doing so.
+
+To encourage users of Light Tablers, Clojure, and ClojureScript to get
+to know their tool better, I've put together an
+[interactive guide to the ClojureScript analyzer and compiler](http://github.com/swannodette/hello-cljsc).
+
+I think interacting with any compiler should always be this simple and
+interactive.
 
 Enjoy.
+
+<img style="border: 1px solid #000" src="/assets/images/lt.jpg" />
