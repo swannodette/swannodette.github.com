@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "ClojureScript Analysis & Compilation"
+title: "ClojureScript Analysis and Compilation"
 description: ""
 category: 
 tags: []
