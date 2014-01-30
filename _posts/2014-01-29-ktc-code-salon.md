@@ -15,15 +15,15 @@ something missing and with the help of
 actually do something about it - **KTC Code Salon**.
 
 If you don't know, Kitchen Table Coders is a loose collective of
-un-like-minded hackers both software and hardware, artists, builders,
-musicians, and educators that share a studio space in Brooklyn. You're
-just as likely to find us discussing the finer points of drawing as
-you are the finer points of programming language design. It's an
-eye-opening break from the focused community building which is so
-necessary for more topical meetup groups. While I like meetups just as
-much as anyone, I've found that it's the explicit cultivation of diversity
-that makes me love places like [Hacker School](http://hackerschool.com) and
-conferences like [Strange Loop](http://thestrangeloop.com).
+un-like-minded hackers, artists, builders, musicians, and educators
+that share a studio space in Brooklyn. You're just as likely to find
+us discussing the finer points of drawing as you are the finer points
+of programming language design. It's an eye-opening break from the
+focused community building which is so necessary for more topical
+meetup groups. While I like meetups just as much as anyone, I've found
+that it's the explicit cultivation of diversity that makes me love
+places like [Hacker School](http://hackerschool.com) and conferences
+like [Strange Loop](http://thestrangeloop.com).
 
 So what is **KTC Code Salon** exactly? It's a monthly gathering curated
 by yours truly in an attempt to bring some of the excitement you find at
