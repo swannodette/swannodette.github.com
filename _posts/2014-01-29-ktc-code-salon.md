@@ -18,7 +18,7 @@ If you don't know, Kitchen Table Coders is a loose collective of
 un-like-minded hackers both software and hardware, artists, builders,
 musicians, and educators that share a studio space in Brooklyn. You're
 just as likely to find us discussing the finer points of drawing as
-you are the finer points of programming language design. It's a
+you are the finer points of programming language design. It's an
 eye-opening break from the focused community building which is so
 necessary for more topical meetup groups. While I like meetups just as
 much as anyone, I've found that it's the explicit cultivation of diversity
@@ -36,7 +36,7 @@ hacking, and perhaps a heated [Go](http://senseis.xmp.net/?WhatIsGo)
 match or two. We charge a small fee for attendees to cover the space,
 setup, and beer in exchange for what we believe will be a uniquely
 invigorating space of ideas. Seating is very limited so grab a spot
-for the speakers you want to see! If you're speaker who might be
+for the speakers you want to see! If you're a speaker who might be
 visiting New York this year, get in touch!
 
 For more details refer to our official
