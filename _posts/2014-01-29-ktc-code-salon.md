@@ -20,13 +20,13 @@ musicians, and educators that share a studio space in Brooklyn. You're
 just as likely to find us discussing the finer points of drawing as
 you are the finer points of programming language design. It's a
 eye-opening break from the focused community building which is so
-necessary for more topical meetup groups. While I like meetup just as
-much as anyone, I've found that it's explicit cultivation of diversity
+necessary for more topical meetup groups. While I like meetups just as
+much as anyone, I've found that it's the explicit cultivation of diversity
 that makes me love places like [Hacker School](http://hackerschool.com) and
 conferences like [Strange Loop](http://thestrangeloop.com).
 
-So what is **KTC Code Salon** exactly? It's a monthly meetup curated
-by yours truly in attempt to bring some of the excitement you find at
+So what is **KTC Code Salon** exactly? It's a monthly gathering curated
+by yours truly in an attempt to bring some of the excitement you find at
 well run conferences into the comfort of Brooklyn. We bring talented
 speakers to present original technical content in an intimate
 atmosphere where both the speaker and the audience will feel
