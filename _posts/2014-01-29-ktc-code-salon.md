@@ -29,16 +29,18 @@ So what is **KTC Code Salon** exactly? It's a monthly gathering curated
 by yours truly in an attempt to bring some of the excitement you find at
 well run conferences into the comfort of Brooklyn. We bring talented
 speakers to present original technical content in an intimate
-atmosphere where both the speaker and the audience will feel
+atmosphere where we hope both the speaker and the audience will feel
 stimulated and challenged. Talks will always be limited to forty
 minutes with ample room for discussion, friendly debate, collaborative
 hacking, and perhaps a heated [Go](http://senseis.xmp.net/?WhatIsGo)
 match or two. We charge a small fee for attendees to cover the space,
 setup, and beer in exchange for what we believe will be a uniquely
 invigorating space of ideas. Seating is very limited so grab a spot
-for the speakers you want to see!
+for the speakers you want to see! If you're speaker who might be
+visiting New York this year, get in touch!
 
 For more details refer to our official
 [post](http://kitchentablecoders.com/event/2014/02/12/code-salon). We'll be
-announcing our first set of speakers in the next week or so. Stay
-tuned.
+announcing our first set of speakers in the next week or so.
+
+Stay tuned.
