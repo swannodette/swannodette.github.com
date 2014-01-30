@@ -34,3 +34,6 @@ stimulated and challenged. Talks will always be limited to forty
 minutes with ample room for discussion, friendly debate, collaborative
 hacking, and perhaps a [Go](http://senseis.xmp.net/?WhatIsGo)
 match or two.
+
+For more details refer to our [post](). We'll be announcing our first
+set of speakers in the next week or so.
