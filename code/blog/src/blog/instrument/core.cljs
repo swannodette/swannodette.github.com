@@ -74,15 +74,17 @@
           (dom/code nil (pr-str (om/path cursor))))
         (dom/div nil
           (dom/label nil "value:")
-          (dom/input #js {:className "edit"
-                          :value (if editing
-                                   value
-                                   (pr-map-cursor cursor))
-                          :onFocus (fn [e]
-                                     (om/set-state! owner :editing true)
-                                     (om/set-state! owner :value (pr-map-cursor (second (om/get-props owner)))))
-                          :onBlur (fn [e] (om/set-state! owner :editing false))
-                          :onChange #(handle-change % cursor owner)}))
+          (dom/input
+            #js {:className "edit"
+                 :value (if editing
+                          value
+                          (pr-map-cursor cursor))
+                 :onFocus (fn [e]
+                            (om/set-state! owner :editing true)
+                            (om/set-state! owner :value
+                              (pr-map-cursor (second (om/get-props owner)))))
+                 :onBlur (fn [e] (om/set-state! owner :editing false))
+                 :onChange #(handle-change % cursor owner)}))
         (apply om/build* original)))))
 
 ;; =============================================================================
