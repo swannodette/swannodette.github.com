@@ -1,6 +1,7 @@
 _site/*
 code/_site
 _theme_packages/*
+assets/js/instrument/out
 
 Thumbs.db
 .DS_Store
