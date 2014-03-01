@@ -7,19 +7,36 @@ tags: []
 ---
 {% include JB/setup %}
 
-The post title is a nod to
-[one of the more interesting thinkers](http://twitter.com/worrydream)
-of our time.
+<style>
+  .radio label {
+     margin-left: 0.5em;
+  }
+  .edit {
+     width: 250px;
+     border: 1px solid #ccc;
+     padding: 4px;
+     margin-left: 0.5em;
+  }
+  code {
+     margin-left: 0.5em;
+  }
+</style>
 
-Here is a list of animals:
+Here is a typical user interface element:
 
 <div id="ex0"></div>
 
-Here is the same list of animals with the blindfold off:
+Here is the same element with the blindfold off:
 
 <div id="ex1"></div>
 
-<script src="http://fb.me/react-0.9.0.js"></script>
+Taking off the blindfold should not require us to change anything in the
+original program. Instead we should be able to intercept the
+particular part of the UI that interests us modify its behavior.
+
+Of course this is the thinking behind
+
+<script src="/assets/js/react.js"></script>
 <script src="/assets/js/instrument/out/goog/base.js" type="text/javascript"></script>
 <script src="/assets/js/instrument/main.js" type="text/javascript"></script>
 <script type="text/javascript">goog.require("blog.instrument.core");</script>
