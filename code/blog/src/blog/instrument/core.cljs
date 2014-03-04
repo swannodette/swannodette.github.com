@@ -48,12 +48,11 @@
   (let [value (.. e -target -value)]
     (try
       (let [data (reader/read-string value)]
-        (if (= (set (keys @cursor))
-               (set (keys data)))
+        (if (= (set (keys @cursor)) (set (keys data)))
           (do
             (om/transact! cursor (fn [_] data))
             (om/set-state! owner :value value))
-          (om/set-state! owner :value (om/get-state owner :value))))
+          (om/update-state! owner :value identity)))
       (catch :default ex
         (om/set-state! owner :value value)))))
 
@@ -70,12 +69,12 @@
        :editing false})
     om/IRenderState
     (render-state [_ {:keys [editing value]}]
-      (dom/div nil
+      (dom/div #js {:className "editor"}
         (dom/div nil
-          (dom/label nil "path:")
+          (dom/label #js {:className "inspector"} "path:")
           (dom/code nil (pr-str (om/path cursor))))
         (dom/div nil
-          (dom/label nil "value:")
+          (dom/label #js {:className "inspector"} "value:")
           (dom/input
             #js {:className "edit"
                  :value (if editing

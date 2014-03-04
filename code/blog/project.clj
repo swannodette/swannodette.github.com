@@ -12,7 +12,7 @@
                  [org.clojure/clojurescript "0.0-2173"]
                  [org.clojure/core.async "0.1.267.0-0d7780-alpha"]
                  [org.clojure/core.match "0.2.0"]
-                 [om "0.5.1-SNAPSHOT"]]
+                 [om "0.5.2-SNAPSHOT"]]
 
   :plugins [[lein-cljsbuild "1.0.2"]]
 
@@ -107,6 +107,7 @@
     {:id "instrument-release"
      :source-paths ["src/blog/instrument"]
      :compiler {:optimizations :advanced
+                :pretty-print false
                 :output-to "../../assets/js/instrument/main.js"
                 :preamble ["react/react.min.js"]
                 :externs ["react/externs/react.js"]}}]})
