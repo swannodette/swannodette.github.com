@@ -10,10 +10,8 @@
 
 (def app-state
   (atom {:ui [{:checked false :label "Foo" :count 0}
-              {:checked false :label "Foo" :count 0}]}))
-
-(defn inline-block []
-  #js {:style #js {:display "inline-block"}})
+              {:checked false :label "Bar" :count 0}
+              {:checked false :label "Baz" :count 0}]}))
 
 ;; =============================================================================
 ;; Application
@@ -31,20 +29,20 @@
                           (om/transact! data :count inc))})
         (dom/label nil (:label data))))))
 
-(defn first-view [data owner]
+(defn all-buttons [data owner]
   (reify
     om/IRender
     (render [_]
-      (om/build radio-button (nth (:ui data) 0)))))
-
-(defn second-view [data owner]
-  (reify
-    om/IRender
-    (render [_]
-      (om/build radio-button (nth (:ui data) 1)))))
+      (apply dom/div nil
+        (om/build-all radio-button (:ui data))))))
 
 ;; =============================================================================
 ;; Inspection
+
+(defn pr-map-cursor [cursor]
+  (pr-str
+    (into cljs.core.PersistentHashMap.EMPTY
+      (om/value cursor))))
 
 (defn handle-change [e cursor owner]
   (let [value (.. e -target -value)]
@@ -60,7 +58,7 @@
     (into cljs.core.PersistentHashMap.EMPTY
       (om/value cursor))))
 
-(defn something-else [[_ cursor :as original] owner opts]
+(defn editor [[_ cursor :as original] owner opts]
   (reify
     om/IInitState
     (init-state [_]
@@ -90,13 +88,13 @@
 ;; =============================================================================
 ;; Init
 
-(om/root first-view app-state
+(om/root all-buttons app-state
   {:target (.getElementById js/document "ex0")})
 
-(om/root second-view app-state
+(om/root all-buttons app-state
   {:target (.getElementById js/document "ex1")
    :instrument
    (fn [f cursor m]
      (if (= f radio-button)
-       (om/build* something-else (om/graft [f cursor m] cursor))
+       (om/build* editor (om/graft [f cursor m] cursor))
        ::om/pass))})
