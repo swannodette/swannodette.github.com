@@ -48,9 +48,13 @@
   (let [value (.. e -target -value)]
     (try
       (let [data (reader/read-string value)]
-        (om/transact! cursor (fn [_] data)))
-      (catch :default ex nil)
-      (finally
+        (if (= (set (keys @cursor))
+               (set (keys data)))
+          (do
+            (om/transact! cursor (fn [_] data))
+            (om/set-state! owner :value value))
+          (om/set-state! owner :value (om/get-state owner :value))))
+      (catch :default ex
         (om/set-state! owner :value value)))))
 
 (defn pr-map-cursor [cursor]
