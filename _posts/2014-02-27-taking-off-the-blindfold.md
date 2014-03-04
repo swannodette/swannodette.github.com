@@ -94,7 +94,6 @@ calls to `om.core/build` so that we can *instrument* the user
 interface without having to actually change it directly.
 
 I suspect `:instrument` will allow us to build a useful universe of
-*meta* components that help
-[us see more clearly](http://worrydream.com/LearnableProgramming/).
+*meta* components that [help us see more clearly](http://worrydream.com/LearnableProgramming/).
 
 <script src="/assets/js/instrument/main.js" type="text/javascript"></script>
