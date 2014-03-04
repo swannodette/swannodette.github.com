@@ -89,7 +89,7 @@ The second example is rendered with the following:
        ::om/pass))})
 ```
 
-The new `:instrument` option of `om.core/root` let us intercept all
+The new `:instrument` option of `om.core/root` lets us intercept all
 calls to `om.core/build` so that we can *instrument* the user
 interface without having to actually change it directly.
 
