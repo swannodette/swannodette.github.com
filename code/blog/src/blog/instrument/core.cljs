@@ -56,10 +56,6 @@
       (catch :default ex
         (om/set-state! owner :value value)))))
 
-(defn pr-map-cursor [cursor]
-  (pr-str
-    (into cljs.core.PersistentHashMap.EMPTY
-      (om/value cursor))))
 
 (defn editor [[_ cursor :as original] owner opts]
   (reify
