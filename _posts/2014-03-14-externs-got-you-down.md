@@ -20,7 +20,7 @@ lucky.
 For some JavaScript libraries there is an acceptable workaround - you
 can use the JavaScript library itself as an externs file! This would
 normally spew many warnings from Closure Compiler, but recent
-versions of ClojureScript expose a knobs to control how Closure
+versions of ClojureScript expose knobs to control how Closure
 reports warnings.
 
 For example imagine that an externs file did not exist for
