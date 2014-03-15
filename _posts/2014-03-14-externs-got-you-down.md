@@ -14,7 +14,7 @@ great JavaScript library that simply does not play well with advanced
 compilation. Integrating these libraries is problematic because of the
 [externs file requirement](http://developers.google.com/closure/compiler/docs/api-tutorial3). For
 example this is true for React. Fortunately someone has taken the time
-to write the externs file for React, but most of time you won't be so
+to write the externs file for React, but most of the time you won't be so
 lucky.
 
 For some JavaScript libraries there is an acceptable workaround - you
