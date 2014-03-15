@@ -8,7 +8,7 @@ tags: []
 {% include JB/setup %}
 
 While ClojureScript's strategy of generating and leveraging code
-optimized for the [Google Closure Compiler](http://developers.google.com/closure/compiler/) has turned out to be great
+optimized for the [Google Closure Compiler](http://developers.google.com/closure/compiler/) has turned out to be fantastic
 for managing production code size, sometimes you find yourself needing a
 great JavaScript library that simply does not play well with advanced
 compilation. Integrating these libraries is problematic because of the
