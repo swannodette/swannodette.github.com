@@ -104,9 +104,9 @@ a base class or mixin. By subclassing you can provide custom interface
 representations. When it comes to the most complex and application
 specific code - event stream coordination - many well intentioned
 components devolve into an
-[async mess made worse by the requisite complex state management](http://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.autocomplete.js).
+[async mess made worse by the requisite complex state management](https://github.com/jquery/jquery-ui/blob/master/ui/autocomplete.js).
 
-Ok, but what value can we derive if we take the time pull these
+Ok, but what value can we derive if we take the time to pull these
 elements apart as described?
 
 <div id="resp">
