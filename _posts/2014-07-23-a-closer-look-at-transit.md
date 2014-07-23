@@ -46,8 +46,9 @@ announcement post read:
 
 Yet people continued to enumerate existing formats which do not actually compete
 in the same design space as JSON. If you use some binary data format you are
-unlikely to be the target consumer of Transit. If you do use JSON, Transit is
-well worth thinking long and hard about.
+unlikely to be the target consumer of Transit. If you do use JSON, like the
+benefits of JSON and are OK with something comparable in performance to JSON,
+then Transit is well worth thinking long and hard about.
 
 Why?
 
@@ -127,6 +128,7 @@ Contrast using JSON versus using transit-js on the front end:
 ```
 (function(global) {
     var j  = global.jQuery,
+        _  = global.underscore,
         t  = global.transit,
         th = global.transitHandlers,
         r  = transit.reader("json", {
@@ -156,19 +158,25 @@ Contrast using JSON versus using transit-js on the front end:
 
 In the case of JSON you are stuck with a string. In the case of transit-js we can
 override the read handlers to use [moment.js](http://momentjs.com/) to hydrate
-all Transit dates. If we extracted urls we'd get URI instances with
-sensible methods. 
+all Transit dates. If we extracted urls we'd get URIjs URI instances with
+sensible methods. With fast ES6-like maps and sets and user extensibility baked
+in you can transport values that best describe your application without chaining
+yourself to the representational boundaries imposed by JSON.
 
 But at what cost?
 
 <img style="border: 1px solid #ccc" src="/assets/images/transit_net.png" />
 
 The transit-js version of the original Twitter payload is smaller and does not
-take measurably longer to transit to the client.
+take measurably longer to transmit to the client.
 
-Note how far down the profile transit-js appears:
+Here's a Chrome Dev Tools JavaScript profile to determine where our program is
+spending it's time. Note how far down the profile transit-js appears:
 
 <img style="border: 1px solid #ccc" src="/assets/images/profile.png" />
+
+You can profile under Firefox, Opera, Safari, and Internet Explorer the results
+will be much the same.
 
 You can find the [entire
 example](http://github.com/swannodette/transit-js-example) shown here on GitHub.
