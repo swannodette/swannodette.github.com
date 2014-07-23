@@ -4,6 +4,7 @@ title: "A Closer Look at Transit"
 description: ""
 category: 
 tags: ["javascript", "transit"]
+draft: true
 ---
 {% include JB/setup %}
 
@@ -45,10 +46,11 @@ announcement post read:
 > and fragile programs.
 
 Yet people continued to enumerate existing formats which do not actually compete
-in the same design space as JSON. If you use some binary data format you are
-unlikely to be the target consumer of Transit. If you do use JSON, like the
-benefits of JSON and are OK with something comparable in performance to JSON,
-then Transit is well worth thinking long and hard about.
+in the same design space as JSON. If you only use a binary data format to convey
+values in your heterogenous system you are unlikely to be the target consumer of
+Transit. However, if some components of your system marshal JSON and you would
+prefer something comparable in performance to JSON when communicating with those
+components then Transit is well worth thinking long and hard about.
 
 Why?
 
@@ -116,14 +118,16 @@ t.map([
 ])
 ```
 
-When this value is written with, transit does not discard the important
+When this value is written out, transit does not discard the important
 semantic information needed to interpret this data upon arrival at the
 client. If we're using JavaScript on the front and back end it's simple to
 [share
 handlers](http://github.com/swannodette/transit-js-example/blob/master/shared/handlers.js),
-so we get the same types in both places.
+so that we get the same types in both places.
 
-Contrast using JSON versus using transit-js on the front end:
+Now let's contrast using JSON versus using transit-js on the front end. In the top example
+we use jQuery to fetch the original Twitter JSON result. In the bottom example
+we fetch the Transit JSON which represents the exact same data.
 
 ```
 (function(global) {
@@ -171,7 +175,7 @@ The transit-js version of the original Twitter payload is smaller and does not
 take measurably longer to transmit to the client.
 
 Here's a Chrome Dev Tools JavaScript profile to determine where our program is
-spending it's time. Note how far down the profile transit-js appears:
+spending its time. Note how far down the profile transit-js appears:
 
 <img style="border: 1px solid #ccc" src="/assets/images/profile.png" />
 
@@ -180,3 +184,4 @@ will be much the same.
 
 You can find the [entire
 example](http://github.com/swannodette/transit-js-example) shown here on GitHub.
+
