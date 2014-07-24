@@ -229,6 +229,9 @@ will be much the same.
 You can find the [entire
 example](http://github.com/swannodette/transit-js-example) shown here on GitHub.
 
+If you'd like to play around with transit-js without installing Node.js I
+recommend taking a look at the [tour](http://cognitect.github.io/transit-tour).
+
 (1) [msgpack vs. JSON benchmarks](http://jsperf.com/msgpack-js-vs-json/20).
 
 (2) [transit-js vs. JSON](http://jsperf.com/json-vs-transit/2).
