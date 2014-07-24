@@ -220,7 +220,7 @@ this:
 
 <img style="border: 1px solid #ccc" src="/assets/images/flame.png" />
 
-`V.j` is the call into Transit. Note the self time. This means Transit is
+`V.j` is the call into transit-js. Note the self time. This means transit-js is
 unlikely to be the bottleneck, rather the bottleneck will be whatever
 particular type you wish to hydrate with.
 
