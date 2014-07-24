@@ -149,7 +149,6 @@ programming!
 ```
 (function(g) {
     var j   = g.jQuery,
-        _   = g._,
         h   = g.transitHandlers,
         rdr = g.transit.reader("json", {handlers: h.readHandlers});
 
