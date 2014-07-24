@@ -4,7 +4,6 @@ title: "A Closer Look at Transit"
 description: ""
 category: 
 tags: ["javascript", "transit"]
-draft: true
 ---
 {% include JB/setup %}
 
