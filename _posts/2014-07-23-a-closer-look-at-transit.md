@@ -205,7 +205,7 @@ But at what cost?
 The transit-js version of the original Twitter payload is smaller and does not
 take measurably longer to transmit to the client.
 
-Here's a Chrome Dev Tools JavaScript profile to determine where our program is
+Here's a Chrome DevTools JavaScript profile to determine where our program is
 spending its time. Note how far down the profile transit-js appears:
 
 <img style="border: 1px solid #ccc" src="/assets/images/profile.png" />
