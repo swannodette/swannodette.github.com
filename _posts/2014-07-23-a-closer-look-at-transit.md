@@ -16,10 +16,10 @@ draft: true
 By now you may have heard of something called
 [Transit](http://blog.cognitect.com/blog/2014/7/22/transit), a new format for
 conveying values between heterogenous systems. Transit seemed to generate a lot
-of interest but given the quality of many of the comments on the announcement
+of interest but given many of the comments on the announcement
 post and elsewhere like [Hacker
 News](https://news.ycombinator.com/item?id=8069346) it seems
-many people may be unclear about the value proposition.
+people may be unclear about the value proposition.
 
 Admittedly this state of affairs is not entirely the fault of the audience. I've
 had the pleasure of using software designed under the guidance of [Rich
@@ -32,11 +32,11 @@ some of these points concrete via an example in [Node.js](http://nodejs.org)
 [Python](http://github.com/cognitect/transit-ruby),
 [Java](http://github.com/cognitect/transit-ruby),
 [Clojure](http://github.com/cognitect/transit-ruby) work just as well). We'll
-communicate with client side JavaScript but you can use whatever compile to
-JavaScript language you prefer.
+communicate with client side JavaScript but you can use whatever compile-to-JavaScript
+language you prefer.
 
 But before we do any of that let's first address something that appeared with
-surprising frequency folowing the announcement - *"Why not use existing data format X
+surprising frequency following the announcement - *"Why not use existing data format X
 instead?"*. This kept getting asked even though the third sentence of the
 announcement post read:
 
