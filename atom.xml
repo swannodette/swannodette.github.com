@@ -16,6 +16,7 @@ title : Atom Feed
  </author>
 
  {% for post in site.posts %}
+ {% unless post.draft %}
  <entry>
    <title>{{ post.title }}</title>
    <link href="{{ site.production_url }}{{ post.url }}"/>
@@ -23,6 +24,7 @@ title : Atom Feed
    <id>{{ site.production_url }}{{ post.id }}</id>
    <content type="html">{{ post.content | xml_escape }}</content>
  </entry>
+ {% endunless %}
  {% endfor %}
  
 </feed>

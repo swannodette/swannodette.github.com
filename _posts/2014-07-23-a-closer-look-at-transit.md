@@ -133,11 +133,13 @@ When this value is written out, Transit does not discard the important semantic
 information needed to interpret this data upon arrival at the client. If we're
 using JavaScript on the front and back end it's simple to [share
 handlers](http://github.com/swannodette/transit-js-example/blob/master/shared/handlers.js)
-so that we get the same types in both places.
-
-["Isomorphic"
+so that we get the same types in both places - ["isomorphic"
 JavaScript](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/)
 people.
+
+Or if you're writing Java it's nice to know your [Joda Time
+instances](http://www.joda.org/joda-time/) become Moment instances on
+the front end and so forth.
 
 Now let's contrast using JSON versus using transit-js on the front end. Notice
 below that in the case of Transit the types are always the ones you expect, no need to
