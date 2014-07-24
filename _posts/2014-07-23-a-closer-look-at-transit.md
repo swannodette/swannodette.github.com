@@ -214,7 +214,7 @@ What about Firefox?
 
 <img style="border: 1px solid #ccc" src="/assets/images/ff_profile.png" />
 
-If we dig in a bit more and checkout the flame graph we'll see something like
+If we dig in a bit more and check out the flame graph we'll see something like
 this:
 
 <img style="border: 1px solid #ccc" src="/assets/images/flame.png" />
