@@ -142,7 +142,7 @@ instances](http://www.joda.org/joda-time/) become Moment instances on
 the front end and so forth.
 
 Now let's contrast using JSON versus using transit-js on the front end. Notice
-below that in the case of Transit the types are always the ones you expect, no need to
+below that in the case of transit-js the types are always the ones you expect, no need to
 remember which date format or what color library was agreed upon. Just start
 programming!
 
