@@ -21,7 +21,7 @@ post and elsewhere like [Hacker
 News](https://news.ycombinator.com/item?id=8069346) it seems
 many people may be unclear about the value proposition.
 
-Admittedly this state affairs is not entirely the fault of the audience. I've
+Admittedly this state of affairs is not entirely the fault of the audience. I've
 had the pleasure of using software designed under the guidance of [Rich
 Hickey](http://www.infoq.com/presentations/Simple-Made-Easy) for seven years
 now. Often his design decisions cover nuanced territory with far more dimensions
