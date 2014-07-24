@@ -56,7 +56,7 @@ As to to why transit-js doesn't yet use the binary
 [msgpack](http://msgpack.org) encoding, benchmarking has shown that existing binary
 formats don't yet compete with JSON (see footnote (1) at the end of the post).
 
-Let's dig in and take a typical API result, for example the [JSON response from
+Let's consider a typical API result, for example the [JSON response from
 Twitter's search api](https://dev.twitter.com/docs/api/1.1/get/search/tweets):
 
 ```
