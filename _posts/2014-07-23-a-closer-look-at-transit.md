@@ -181,7 +181,7 @@ programming!
         var user = status["user"];
         return {
             weekLater: new Date(status["created_at"]).add("days", 7), // OOPS!!!
-            color: user["profile_sidebar_fill_color"]), // BLAST!
+            color: user["profile_sidebar_fill_color"], // BLAST!
             url: URI(user["profile_image_url"]).path() 
         };
     }
