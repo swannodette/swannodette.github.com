@@ -25,7 +25,7 @@ Admittedly this state of affairs is not entirely the fault of the audience. I've
 had the pleasure of using software designed under the guidance of [Rich
 Hickey](http://www.infoq.com/presentations/Simple-Made-Easy) for seven years
 now. Often his design decisions cover nuanced territory with far more dimensions
-than can be communicated in a single well articulated blog post. I'll try here
+than can be communicated in a short introduction. I'll try here
 to illuminate some properties of Transit that I think were largely
 overlooked due to the Internet fog machine. We'll make some of these points
 concrete via an example in [Node.js](http://nodejs.org) ([Ruby](http://github.com/cognitect/transit-ruby),
