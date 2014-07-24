@@ -232,4 +232,5 @@ You can find the [entire
 example](http://github.com/swannodette/transit-js-example) shown here on GitHub.
 
 (1) [msgpack vs. JSON benchmarks](http://jsperf.com/msgpack-js-vs-json/20).
+
 (2) [transit-js vs. JSON](http://jsperf.com/json-vs-transit/2).
