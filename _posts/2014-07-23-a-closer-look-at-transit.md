@@ -52,9 +52,9 @@ Transit. However, if some components of your system marshal JSON and you would
 prefer something comparable in performance to JSON when communicating with those
 components then Transit is well worth thinking long and hard about.
 
-As to to why transit-js doesn't yet use the binary [msgpack](http://msgpack.org)
-encoding look no further than these
-[benchmarks](http://jsperf.com/msgpack-js-vs-json/20).
+As to to why transit-js doesn't yet use the binary
+[msgpack](http://msgpack.org) encoding, benchmarking has shown that existing binary
+formats don't yet compete with JSON (see footnote (1) at the end of the post).
 
 Let's dig in and take a typical API result, for example the [JSON response from
 Twitter's search api](https://dev.twitter.com/docs/api/1.1/get/search/tweets):
@@ -139,9 +139,10 @@ so that we get the same types in both places.
 JavaScript](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/)
 people.
 
-Now let's contrast using JSON versus using transit-js on the front end. In the
-top example we get the types we want along with their lovely APIs. In the bottom
-example we get ... strings.
+Now let's contrast using JSON versus using transit-js on the front end. Notice
+below that in the case of Transit the types are always the ones you expect, no need to
+remember which date format or what color library was agreed upon. Just start
+programming!
 
 ```
 (function(g) {
@@ -150,33 +151,43 @@ example we get ... strings.
         h   = g.transitHandlers,
         rdr = g.transit.reader("json", {handlers: h.readHandlers});
 
+    // Reading transit, values are already the types your team expects
+    // just start programming
+
+    function parseTransitStatus(status) {
+        var user = status.get("user");
+        return {
+            weekLater: status.get("created_at").add("days", 7),
+            color: user.get("profile_sidebar_fill_color").cmyk(),
+            url: user.get("profile_image_url").path()
+        };
+    };
+
     j.ajax({
         type: "GET",
         url: "transit",
         complete: function(res) {
-            var data    = rdr.read(res.responseText),
-                status  = data.get("statuses")[0],
-                created = status.get("created_at"),
-                user    = status.get("user"),
-                rgb     = user.get("profile_sidebar_fill_color"),
-                url     = user.get("profile_image_url");
-
-            console.log(created.add("days", 7).format('MMMM Do YYYY, h:mm:ss a'));
-            console.log(rgb.cmyk());
-            console.log(url.protocol(), url.path());
+            var data = rdr.read(res.responseText),
+                xs   = data.get("statuses").map(parseTransitStatus);
+            console.log(xs);
         }
     });
-    
-    j.get("json", function(data) {
-        var status  = data["statuses"][0],
-            created = status["created_at"]
-            user    = status["user"],
-            rgb     = user["profile_sidebar_fill_color"],
-            url     = user["profile_image_url"];
 
-        console.log(created);
-        console.log(rgb);
-        console.log(url);
+    // Reading JSON, you always need to remember exactly what to hydrate
+    // to which types your team has agreed upon
+
+    function parseJSONStatus(status) {
+        var user = status["user"];
+        return {
+            weekLater: new Date(status["created_at"]).add("days", 7), // OOPS!!!
+            color: user["profile_sidebar_fill_color"]), // BLAST!
+            url: URI(user["profile_image_url"]).path() 
+        };
+    }
+
+    j.get("json", function(data) {
+        var xs = data["statuses"].map(parseJSONStatus);
+        console.log(xs);
     });
 
 })(this);
@@ -217,3 +228,4 @@ will be much the same.
 You can find the [entire
 example](http://github.com/swannodette/transit-js-example) shown here on GitHub.
 
+(1) [msgpack vs. JSON benchmarks](http://jsperf.com/msgpack-js-vs-json/20).
