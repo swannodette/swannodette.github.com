@@ -36,7 +36,7 @@ communicate with client side JavaScript but you can use whatever compile to
 JavaScript language you prefer.
 
 But before we do any of that let's first address something that appeared with
-surprising frequency yesterday - *"Why not use existing data format X
+surprising frequency folowing the announcement - *"Why not use existing data format X
 instead?"*. This kept getting asked even though the third sentence of the
 announcement post read:
 
