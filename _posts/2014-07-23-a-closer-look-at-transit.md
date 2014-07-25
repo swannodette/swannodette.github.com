@@ -15,9 +15,9 @@ tags: ["javascript", "transit"]
 By now you may have heard of something called
 [Transit](http://blog.cognitect.com/blog/2014/7/22/transit), a new format for
 conveying values between heterogenous systems. Transit seemed to generate a lot
-of interest but given many of the comments on the announcement
+of interest, but given many of the comments on the announcement
 post and elsewhere like [Hacker
-News](https://news.ycombinator.com/item?id=8069346) it seems
+News](https://news.ycombinator.com/item?id=8069346), it seems that
 people may be unclear about the value proposition.
 
 Admittedly this state of affairs is not entirely the fault of the audience. I've
@@ -29,12 +29,12 @@ some properties of Transit that I think might easily be overlooked. We'll make
 some of these points concrete via an example in [Node.js](http://nodejs.org)
 ([Ruby](http://github.com/cognitect/transit-ruby),
 [Python](http://github.com/cognitect/transit-ruby),
-[Java](http://github.com/cognitect/transit-ruby),
+[Java](http://github.com/cognitect/transit-ruby), and
 [Clojure](http://github.com/cognitect/transit-ruby) work just as well). We'll
-communicate with client side JavaScript but you can use whatever compile-to-JavaScript
+communicate with client-side JavaScript, but you can use whatever compile-to-JavaScript
 language you prefer.
 
-But before we do any of that let's first address something that appeared with
+But before we do any of that, let's first address something that appeared with
 surprising frequency following the announcement - *"Why not use existing data format X
 instead?"*. This kept getting asked even though the third sentence of the
 announcement post read:
@@ -46,10 +46,10 @@ announcement post read:
 
 Yet people continued to enumerate existing formats which do not actually compete
 in the same design space as JSON. If you only use a binary data format to convey
-values in your heterogenous system you are unlikely to be the target consumer of
+values in your heterogenous system, you are unlikely to be the target consumer of
 Transit. However, if some components of your system marshal JSON and you would
 prefer something comparable in performance to JSON when communicating with those
-components then Transit is well worth thinking long and hard about.
+components, then Transit is well worth thinking long and hard about.
 
 As to to why transit-js doesn't yet use the binary [msgpack](http://msgpack.org)
 encoding, benchmarking has shown that existing binary formats don't yet compete
@@ -92,14 +92,14 @@ Twitter's search api](https://dev.twitter.com/docs/api/1.1/get/search/tweets):
 Obviously we can represent strings and some numbers just fine with JSON - but
 fields like `created_at`, `profile_image_url`, `profile_sidebar_fill_color`,
 `profile_link_color`, etc. have lost their meaning. It's likely that this JSON
-response was generated with `URI` and `DateTime` and `Color` instances in hand
+response was generated with `URI` and `DateTime` and `Color` instances in hand,
 but on the wire they simply become strings. The receiver now must know which
 parts of this response represents which values.
 
 Contrast this to a transit-js value before encoding where `t` is the `transit`
-library and `URI` is the constructor from the
+library, `URI` is the constructor from the
 [URIjs](http://medialize.github.io/URI.js/) library, `moment` is
-[moment.js](http://momentjs.com) and `color` is
+[moment.js](http://momentjs.com), and `color` is
 [onecolor](https://github.com/One-com/one-color):
 
 ```
@@ -132,18 +132,18 @@ t.map([
 
 When this value is written out, Transit does not discard the important semantic
 information needed to interpret this data upon arrival at the client. If we're
-using JavaScript on the front and back end it's simple to [share
+using JavaScript on the front and back end, it's simple to [share
 handlers](http://github.com/swannodette/transit-js-example/blob/master/shared/handlers.js)
 so that we get the same types in both places - ["isomorphic"
 JavaScript](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/)
 people.
 
-Or if you're writing Java it's nice to know your [Joda Time
+Or, if you're writing Java, it's nice to know your [Joda Time
 instances](http://www.joda.org/joda-time/) become Moment instances on
 the front end and so forth.
 
 Now let's contrast using JSON versus using transit-js on the front end. Notice
-below that in the case of transit-js the types are always the ones you expect, no need to
+below that in the case of transit-js the types are always the ones you expect: no need to
 remember which date format or what color library was agreed upon. Just start
 programming!
 
@@ -196,7 +196,7 @@ programming!
 ```
 
 With fast ES6-like maps and sets and user extensibility baked
-in you can transport values that best describe your application without chaining
+in, you can transport values that best describe your application without chaining
 yourself to the representational boundaries imposed by JSON.
 
 But at what cost?
@@ -215,22 +215,22 @@ What about Firefox?
 
 <img style="border: 1px solid #ccc" src="/assets/images/ff_profile.png" />
 
-If we dig in a bit more and check out the flame graph we'll see something like
+If we dig in a bit more and check out the flame graph, we'll see something like
 this:
 
 <img style="border: 1px solid #ccc" src="/assets/images/flame.png" />
 
 `V.j` is the call into transit-js. Note the self time. This means transit-js is
-unlikely to be the bottleneck, rather the bottleneck will be whatever
+unlikely to be the bottleneck; rather, the bottleneck will be whatever
 particular type you wish to hydrate with.
 
-You can profile under Opera, Safari, and Internet Explorer the results
+You can profile under Opera, Safari, and Internet Explorer: the results
 will be much the same.
 
 You can find the [entire
 example](http://github.com/swannodette/transit-js-example) shown here on GitHub.
 
-If you'd like to play around with transit-js without installing Node.js I
+If you'd like to play around with transit-js without installing Node.js, I
 recommend taking a look at the [tour](http://cognitect.github.io/transit-tour).
 
 (1) [msgpack vs. JSON benchmarks](http://jsperf.com/msgpack-js-vs-json/20).
