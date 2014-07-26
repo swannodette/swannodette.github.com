@@ -60,7 +60,7 @@ footnote (2)).
 Let's consider a typical API result, for example the [JSON response from
 Twitter's search api](https://dev.twitter.com/docs/api/1.1/get/search/tweets):
 
-```
+```js
 {
   "statuses": [
     {
@@ -102,7 +102,7 @@ library, `URI` is the constructor from the
 [moment.js](http://momentjs.com), and `color` is
 [onecolor](https://github.com/One-com/one-color):
 
-```
+```js
 t.map([
   "statuses", [
     t.map([
@@ -147,7 +147,7 @@ below that in the case of transit-js the types are always the ones you expect: n
 remember which date format or what color library was agreed upon. Just start
 programming!
 
-```
+```js
 (function(g) {
     var j   = g.jQuery,
         h   = g.transitHandlers,
