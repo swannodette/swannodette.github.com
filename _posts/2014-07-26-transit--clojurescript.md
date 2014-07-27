@@ -65,7 +65,7 @@ Compiler is already a part of the ClojureScript compilation pipeline,
 transit-cljs depends directly on the original unoptimized and unminified
 transit-js source code. This means far more of the transit-js implementation
 can be leveraged - for example transit-js 64 bit
-integers are `goog.math.Long` instances and you can treat them as such with
+integers are [`goog.math.Long`](http://docs.closure-library.googlecode.com/git/class_goog_math_Long.html) instances and you can treat them as such with
 no issues:
 
 ```clj
