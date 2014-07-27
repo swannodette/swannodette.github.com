@@ -77,6 +77,12 @@ no issues:
 (.add (t/read r "{\"~#':\":\"~i9007199254740993\"\"}") (Long.fromInt 1))
 ```
 
+## Beyond JSON
+
+Of course the most ideal scenario is to just expose your API optionally as
+Transit service along side the plain JSON service as this delivers the best read
+performance for clients.
+            
 If you are ClojureScript user building an application that currently accepts or
 marshals either EDN or JSON I strongly recommend switching to transit-cljs for
 both tasks.
