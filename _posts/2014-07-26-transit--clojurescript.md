@@ -83,6 +83,6 @@ Of course the most ideal scenario is to just expose your API optionally as
 a Transit service alongside the plain JSON service as this delivers the best read
 performance for clients.
             
-If you are ClojureScript user building an application that currently accepts or
-marshals either EDN or JSON I strongly recommend switching to transit-cljs for
-both tasks.
+If you are a ClojureScript user building an application that accepts
+or marshals either EDN or JSON I strongly recommend switching to
+transit-cljs for both tasks.
