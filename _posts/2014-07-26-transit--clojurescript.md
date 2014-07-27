@@ -19,10 +19,10 @@ services.
 ClojureScript launched more than 3 years ago with `cljs.reader/read-string`
 . This allowed Clojure and ClojureScript programs to comfortably communicate
 with each other. However, even after seeing several rounds of optimizations
-`cljs.reader/read-string` still delivers poor performance compared to `JSON.parse`.
+[`cljs.reader/read-string`](https://github.com/clojure/clojurescript/blob/master/src/cljs/cljs/reader.cljs#L291) still delivers poor performance compared to `JSON.parse`.
 
 Worse, most services speak JSON not EDN. You can `JSON.parse` and convert to
-ClojureScript data structures via `cljs.core/js->clj` but performance is even
+ClojureScript data structures via [`cljs.core/js->clj`](https://github.com/clojure/clojurescript/blob/master/src/cljs/cljs/core.cljs#L7729) but performance is even
 worse than `cljs.reader/read-string`.
 
 transit-cljs addresses all of these issues at once.
