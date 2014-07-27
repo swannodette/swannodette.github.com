@@ -34,7 +34,7 @@ transit-cljs addresses all of these issues at once.
 
 You can consume any existing JSON service in ClojureScript with transit-cljs and
 you will get ClojureScript data structures. The performance is 20-30X faster
-than combining `JSON.parse` with `cljs.core/js-clj`.
+than combining `JSON.parse` with `cljs.core/js->clj`.
 
 ```clj
 (def r (transit/reader :json))
