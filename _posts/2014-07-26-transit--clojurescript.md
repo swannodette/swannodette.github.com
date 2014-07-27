@@ -54,7 +54,7 @@ You can send JSON to any service simply by using a verbose writer:
 ```
 
 Again your map keys must be strings but encoding is often more than a magnitude
-faster than `pr-str`.
+faster than [`cljs.core/pr-str`](https://github.com/clojure/clojurescript/blob/master/src/cljs/cljs/core.cljs#L7304).
 
 ## Advantages over transit-js
 
