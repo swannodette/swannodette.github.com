@@ -60,7 +60,7 @@ faster than `pr-str`.
 
 transit-cljs offers benefits above and beyond those provided by
 transit-js. transit-js is consumed by JavaScript applications developers as a
-Google Closure Compiler advance compiled artifact. But because Google Closure
+[Google Closure Compiler advanced compiled](https://developers.google.com/closure/compiler/docs/api-tutorial3) artifact. But because Google Closure
 Compiler is already a part of the ClojureScript compilation pipeline,
 transit-cljs depends directly on the original unoptimized and unminified
 transit-js source code. This means far more of the transit-js implementation
