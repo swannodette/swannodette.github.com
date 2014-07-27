@@ -9,7 +9,7 @@ tags: []
 
 If you're a ClojureScript user
 [transit-cljs](http://github.com/cognitect/transit-cljs) offers nearly all the
-benefits of [EDN]() while delivering performance comparable to native
+benefits of [EDN](https://github.com/edn-format/edn) while delivering performance comparable to native
 [JSON](http://json.org). And since the Transit JSON encoding is truly just JSON,
 transit-cljs also provides a better story when communicating with existing JSON
 services.
