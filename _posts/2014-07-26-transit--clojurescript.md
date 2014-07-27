@@ -80,7 +80,7 @@ no issues:
 ## Beyond JSON
 
 Of course the most ideal scenario is to just expose your API optionally as
-Transit service along side the plain JSON service as this delivers the best read
+a Transit service alongside the plain JSON service as this delivers the best read
 performance for clients.
             
 If you are ClojureScript user building an application that currently accepts or
