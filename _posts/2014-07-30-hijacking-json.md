@@ -12,7 +12,7 @@ Facebook just released
 [a persistent data structure library](http://en.wikipedia.org/wiki/Persistent_data_structure)
 for JavaScript. Given the
 [performance benefit immutable data can bring to React](http://swannodette.github.io/2013/12/17/the-future-of-javascript-mvcs/),
-it's little suprise Facebook is investing them. However the question
+it's little surprise Facebook is investing in them. However the question
 remains how to deliver immutable data to clients given the prevalence
 of [JSON](http://json.org).
 
