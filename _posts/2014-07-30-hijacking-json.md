@@ -81,7 +81,7 @@ yet. transit-js maps and ClojureScript both have an array map type for
 maps with less than or equal to 8 keys and it is a significant
 performance enhancement in time and space.
 
-We can now read JSON objects and arrays into immutable maps:
+We can now read JSON objects and arrays into immutable maps and vectors:
 
 ```js
 rdr.read("[1,2,3]"); // Vector [ 1, 2, 3 ]
@@ -120,10 +120,10 @@ wrtr.write(rdr.read('{"foo":"bar"}')); // {"foo":"bar"}
 ```
 
 If you're excited about getting immutable data from your server into
-your React client application transit-js presents a pretty good story
-even plain JSON. However, if you change your backend to emit Transit
-JSON you will see a fairly significant performance boost. If in the
-future Immutable provides more efficient means to construct values as
-well as exposing an array map type, you will be able deserialize
-immutable values near as fast or faster than you can `JSON.parse` plain
-JSON data in many modern browsers.
+your React client application, transit-js presents a pretty good story
+even if you marshal plain JSON. However, if you change your backend to
+emit Transit JSON you will see a fairly significant performance
+boost. If in the future Immutable provides more efficient means to
+construct values as well as exposing an array map type, you will be
+able deserialize immutable values near as fast or faster than you can
+`JSON.parse` plain JSON data in many modern browsers.
