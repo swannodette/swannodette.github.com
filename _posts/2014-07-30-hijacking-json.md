@@ -69,7 +69,7 @@ var rdr = transit.reader("json", {
 });
 ```
 
-Note that the builder methods get the original node as contextual
+Note that the builder methods get the original JSON node as contextual
 information. By default transit-js builds the values
 incrementally. transit-js can also build values at once from an array
 as in the case of `Immutable.Vector`. Sadly this can't be done for
