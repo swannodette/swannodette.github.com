@@ -56,30 +56,26 @@ We can customize a reader to return `Immutable.Map` and
 ```js
 var rdr = transit.reader("json", {
     mapBuilder: {
-        init: function(node) { return Immutable.Map(); },
+        init: function(node) { return Immutable.Map().asMutable(); },
         add: function(ret, key, val, node) { return ret.set(key, val);  },
-        finalize: function(ret, node) { return ret; }
+        finalize: function(ret, node) { return ret.asImmutable(); }
     },
     arrayBuilder: {
-        init: function(node) { return Immutable.Vector(); },
+        init: function(node) { return Immutable.Vector().asMutable(); },
         add: function(ret, val, node) { return ret.push(val); },
-        finalize: function(node) { return ret; },
+        finalize: function(node) { return ret.asImmutable(); },
         fromArray: function(arr, node) { return Immutable.Vector.from(arr); }
     }
 });
 ```
 
 Note that the builder methods get the original node as contextual
-information. Also note that transit-js can build the values
-incrementally. Unfortunately Immutable doesn't yet provide a function
-to get a mutable copy of an immutable value - thus this is slower
-than it coudld be.
-
-transit-js can also build values at once from an array as in the case
-of `Immutable.Vector`. Sadly this can't be done for `Immutable.Map`
-yet. transit-js maps and ClojureScript both have an array map type for
-maps with less than or equal to 8 keys and it is a significant
-performance enhancement in time and space.
+information. By default transit-js builds the values
+incrementally. transit-js can also build values at once from an array
+as in the case of `Immutable.Vector`. Sadly this can't be done for
+`Immutable.Map` yet. transit-js maps and ClojureScript both have an
+array map type for maps with less than or equal to 8 keys and it is a
+significant performance enhancement in time and space.
 
 We can now read JSON objects and arrays into immutable maps and vectors:
 
