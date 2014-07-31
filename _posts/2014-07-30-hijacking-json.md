@@ -20,7 +20,7 @@ If you have [Node.js](http://nodejs.org) installed you can follow the
 code presented in the post easily on your machine. Create a directory
 on your machine and add the following `package.json` file to it:
 
-```js
+```
 {
     "name": "immutable-json",
     "version": "0.1.0",
@@ -40,7 +40,7 @@ npm install
 
 Create a JavaScript file and put the following requires at the top:
 
-```js
+```
 var Immutable = require("immutable"),
     transit   = require("transit-js");
 ```
@@ -53,7 +53,7 @@ array and map encodings.
 We can customize a reader to return `Immutable.Vector` and `Immutable.Map`
 like so:
 
-```js
+```
 var rdr = transit.reader("json", {
     arrayBuilder: {
         init: function(node) { return Immutable.Vector().asMutable(); },
@@ -79,7 +79,7 @@ significant performance enhancement in time and space.
 
 We can now read JSON objects and arrays into immutable maps and vectors:
 
-```js
+```
 rdr.read("[1,2,3]"); // Vector [ 1, 2, 3 ]
 rdr.read('{"foo":"bar"}'); // Map { foo: "bar" }
 ```
@@ -87,7 +87,7 @@ rdr.read('{"foo":"bar"}'); // Map { foo: "bar" }
 For writing we need to make write handlers. This is also pretty
 straightforward:
 
-```js
+```
 var VectorHandler = transit.makeWriteHandler({
     tag: function(v) { return "array"; },
     rep: function(v) { return v; },
@@ -110,7 +110,7 @@ var wrtr = transit.writer("json-verbose", {
 
 And now we can roundtrip:
 
-```js
+```
 wrtr.write(rdr.read("[1,2,3]")); // [1,2,3]
 wrtr.write(rdr.read('{"foo":"bar"}')); // {"foo":"bar"}
 ```
