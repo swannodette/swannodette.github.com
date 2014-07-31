@@ -45,13 +45,13 @@ var Immutable = require("immutable"),
     transit   = require("transit-js");
 ```
 
-transit-js exposes two low-level options `mapBuilder` and
-`arrayBuilder` for constructing readers. This allows readers to
+transit-js exposes two low-level options `arrayBuilder` and
+`mapBuilder` for constructing readers. This allows readers to
 interpret the meaning of the [Transit](http://transit-format.org) map
 and array encodings.
 
-We can customize a reader to return `Immutable.Map` and
-`Immutable.Vector` like so:
+We can customize a reader to return `Immutable.Vector` and `Immutable.Map`
+like so:
 
 ```js
 var rdr = transit.reader("json", {
