@@ -9,10 +9,10 @@ draft: true
 {% include JB/setup %}
 
 Facebook just released
-[immutable-js](https://github.com/facebook/immutable-js) [a persistent
-data structure
-library](http://en.wikipedia.org/wiki/Persistent_data_structure) for
-JavaScript. In this post I'm going to demonstrate consuming [JSON](http://json.org) with
+[immutable-js](https://github.com/facebook/immutable-js)
+[a persistent data structure library](http://en.wikipedia.org/wiki/Persistent_data_structure)
+for JavaScript. In this post I'm going to demonstrate consuming plain
+[JSON](http://json.org) with
 [transit-js](http://github.com/cognitect/transit-js) and producing
 immutable-js values instead of JavaScript objects and arrays.
 
