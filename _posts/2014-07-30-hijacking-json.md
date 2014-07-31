@@ -11,8 +11,14 @@ draft: true
 Facebook just released
 [immutable-js](https://github.com/facebook/immutable-js)
 [a persistent data structure library](http://en.wikipedia.org/wiki/Persistent_data_structure)
-for JavaScript. In this post I'm going to demonstrate consuming plain
-[JSON](http://json.org) with
+for JavaScript. Given the
+[performance benefit immutable data can bring to React](http://swannodette.github.io/2013/12/17/the-future-of-javascript-mvcs/),
+it's little suprise Facebook is investing them. However the question
+remains how to deliver immutable data to clients given the prevalence
+of [JSON](http://json.org).
+
+In this post I'm going to demonstrate consuming plain
+JSON with
 [transit-js](http://github.com/cognitect/transit-js) and producing
 immutable-js values instead of JavaScript objects and arrays.
 
