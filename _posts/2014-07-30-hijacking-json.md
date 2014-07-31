@@ -25,7 +25,7 @@ on your machine and add the following `package.json` file to it:
     "name": "immutable-json",
     "version": "0.1.0",
     "dependencies": {
-        "immutable": "2.0.1",
+        "immutable": "2.0.3",
         "transit-js": "0.8.670"
     }
 }
