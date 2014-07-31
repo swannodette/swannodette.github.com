@@ -199,7 +199,7 @@ ul.posts span {
 
 #post code, #post .code {
     font-weight: bold;
-    padding: 0 .2em;
+    padding: 0;
 }
 
 #post pre code {
@@ -238,7 +238,7 @@ blockquote {
 #post p {
     font-family: 'Latin Modern Roman', Georgia, 'Times New Roman', Times, serif;
     color: #333;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 #post p.meta {
