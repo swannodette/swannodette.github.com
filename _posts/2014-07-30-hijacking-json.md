@@ -4,7 +4,6 @@ title: "Immutable JSON"
 description: ""
 category: 
 tags: []
-draft: true
 ---
 {% include JB/setup %}
 
