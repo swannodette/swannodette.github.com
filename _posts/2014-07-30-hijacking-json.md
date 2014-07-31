@@ -47,8 +47,8 @@ var Immutable = require("immutable"),
 
 transit-js exposes two low-level options `arrayBuilder` and
 `mapBuilder` for constructing readers. This allows readers to
-interpret the meaning of the [Transit](http://transit-format.org) map
-and array encodings.
+interpret the meaning of the [Transit](http://transit-format.org)
+array and map encodings.
 
 We can customize a reader to return `Immutable.Vector` and `Immutable.Map`
 like so:
