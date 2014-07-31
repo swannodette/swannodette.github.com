@@ -63,7 +63,7 @@ var rdr = transit.reader("json", {
     arrayBuilder: {
         init: function(node) { return Immutable.Vector().asMutable(); },
         add: function(ret, val, node) { return ret.push(val); },
-        finalize: function(node) { return ret.asImmutable(); },
+        finalize: function(ret, node) { return ret.asImmutable(); },
         fromArray: function(arr, node) { return Immutable.Vector.from(arr); }
     },
     mapBuilder: {
