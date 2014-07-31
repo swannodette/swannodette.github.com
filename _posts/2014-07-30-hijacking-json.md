@@ -125,5 +125,5 @@ even if you marshal plain JSON. However, if you change your backend to
 emit Transit JSON you will see a fairly significant performance
 boost. If in the future Immutable provides more efficient means to
 construct values as well as exposing an array map type, you will be
-able deserialize immutable values near as fast or faster than you can
+able deserialize immutable values nearly as fast or faster than you can
 `JSON.parse` plain JSON data in many modern browsers.
