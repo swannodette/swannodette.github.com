@@ -12,7 +12,7 @@
                  [org.clojure/clojurescript "0.0-2173"]
                  [org.clojure/core.async "0.1.267.0-0d7780-alpha"]
                  [org.clojure/core.match "0.2.0"]
-                 [om "0.5.2-SNAPSHOT"]]
+                 [om "0.5.2"]]
 
   :plugins [[lein-cljsbuild "1.0.2"]]
 
