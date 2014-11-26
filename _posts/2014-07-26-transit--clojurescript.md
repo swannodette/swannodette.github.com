@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Transit, JSON & ClojureScript"
+title: "Transit, JSON &amp; ClojureScript"
 description: ""
 category: 
 tags: []
