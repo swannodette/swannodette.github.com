@@ -180,7 +180,7 @@ Let's see `listen` in action:
 ```
 (let [el  (by-id "ex1")
       out (by-id "ex1-mouse")
-      c   (listen el :mousemove)]
+      c   (listen el "mousemove")]
   (go (while true
         (let [e (<! c)]
           (set-html! out (str (.-offsetX e) ", " (.-offsetY e)))))))
@@ -232,7 +232,7 @@ Let's use `map`:
 (let [el  (by-id "ex2")
       out (by-id "ex2-mouse")
       c   (map (location el)
-            (listen el :mousemove))]
+            (listen el "mousemove"))]
   (go (while true
         (let [e (<! c)]
           (set-html! out (str (:x e) ", " (:y e)))))))
