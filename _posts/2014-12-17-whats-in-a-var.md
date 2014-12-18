@@ -24,7 +24,7 @@ later.
 
 ## Metadata
 
-Metadata in Clojure is beautiful simple - it's data *about* data. All
+Metadata in Clojure is beautifully simple - it's data *about* data. All
 persistent collections in Clojure support metadata. They allow you to
 arbitrarily annotate values leaving the value otherwise unchanged:
 
