@@ -107,7 +107,7 @@ Doesn't seem very useful.
 Boom.
 
 Vars are an incredible powerful direct reflective tool - a considerable
-amount of existing Clojure tooling relies on vars to meaningful reason
+amount of existing Clojure tooling relies on vars to meaningfully reason
 about Clojure programs without having to play the tedious Parser/AST
 game.
 
@@ -145,7 +145,7 @@ with the compilation strategy.
 
 Or is it?
 
-Upon closer inspection a surprisingly large number amount of Clojure
+Upon closer inspection a surprisingly large amount of Clojure
 var usage is in fact of the *static* variety - "Give me the docstring
 for this var", or "Give me all the vars in the namespace foo.bar.baz".
 
