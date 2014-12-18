@@ -106,7 +106,7 @@ Doesn't seem very useful.
 
 Boom.
 
-Vars are an incredible powerful direct reflective tool - a considerable
+Vars are a powerful direct reflective tool - a considerable
 amount of existing Clojure tooling relies on vars to meaningfully reason
 about Clojure programs without having to play the tedious Parser/AST
 game.
@@ -124,7 +124,7 @@ deliver compact code to browser based clients.
 
 ClojureScript generates code optimized for the Google Closure
 Compiler - by following certain conventions Closure can perform
-incredibly aggressive minification and dead code elimination. However
+aggressive minification and dead code elimination. However
 the conventions are quite strict - Closure namespaces are represented
 as JavaScript objects where all properties are known at compile time:
 
@@ -179,7 +179,7 @@ Couple this arrival with an evolving stable and simplified
 [API](https://github.com/clojure/clojurescript/blob/master/src/clj/cljs/analyzer/api.clj),
 ClojureScript now delivers fantastic facilities for user programs to
 reflect on static information known to the compiler to enable
-incredibly powerful metaprogramming facilities. All this without
+powerful metaprogramming facilities. All this without
 sacrificing a compilation model that enables reasonably compact and
 efficient JavaScript.
 
