@@ -161,7 +161,7 @@ Starting with ClojureScript 0.0-2496 the following works fine:
   (+ a b))
 
 (meta (var foo))
-;; => {:ns #<Namespace my.cool.program>, :name add, :arglists ([a b])
+;; => {:ns #<Namespace my.cool.program>, :name foo, :arglists ([a b])
 ;;     :file "my/cool/program.cljs", :column 1, :line 3}
 ```
 
