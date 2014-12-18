@@ -108,7 +108,7 @@ Boom.
 
 Vars are a powerful direct reflective tool - a considerable
 amount of existing Clojure tooling relies on vars to meaningfully reason
-about Clojure programs without having to play the tedious Parser/AST
+about Clojure programs without having to play the tedious parser/AST
 game.
 
 So it's little surprise that Clojure testing frameworks (including the
