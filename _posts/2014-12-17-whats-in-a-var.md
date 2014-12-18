@@ -172,7 +172,7 @@ special form. When it encounters a var expression it emits a `Var`
 instance which has all the *compile time* metadata you've come to know
 and love in Clojure.
 
-The new cjls.test namespace is built on this functionality and anyone
+The new **cljs.test** namespace is built on this functionality and anyone
 else can do the same.
 
 Couple this arrival with an evolving stable and simplified
