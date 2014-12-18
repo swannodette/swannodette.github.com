@@ -33,7 +33,7 @@ arbitrarily annotate values leaving the value otherwise unchanged:
 
 (def xs (with-meta [1 2 3] {::created #inst "2014-12-18T00:20:51.337-00:00"})
 
-(println (map inc x)) ;; => (2 3 4)
+(println (map inc xs)) ;; => (2 3 4)
 
 (println (meta xs)) ;; => {::created #inst "2014-12-18T00:20:51.337-00:00"}
 ```
