@@ -162,7 +162,7 @@ Starting with ClojureScript 0.0-2496 the following works fine:
 
 (meta (var foo))
 ;; => {:ns #<Namespace my.cool.program>, :name add, :arglists ([a b])
-;;     :file "my/cool/program.clj", :column 1, :line 3}
+;;     :file "my/cool/program.cljs", :column 1, :line 3}
 ```
 
 Wow. What just happened?
