@@ -179,7 +179,7 @@ Couple this arrival with an evolving stable and simplified
 [API](https://github.com/clojure/clojurescript/blob/master/src/clj/cljs/analyzer/api.clj),
 ClojureScript now delivers fantastic facilities for user programs to
 reflect on static information known to the compiler to enable
-powerful metaprogramming facilities. All this without
+powerful forms of metaprogramming. All this without
 sacrificing a compilation model that enables reasonably compact and
 efficient JavaScript.
 
