@@ -84,7 +84,7 @@ cljs.core/first
 ([coll])
   Returns the first item in the collection. Calls seq on its
   argument. If coll is nil, returns nil.
-  nil
+nil
 ```
 
 Load a library and try it:
