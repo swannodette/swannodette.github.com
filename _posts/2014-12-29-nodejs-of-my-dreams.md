@@ -50,7 +50,7 @@ to make sure you have Node.js installed.
 git clone https://github.com/clojure/clojurescript
 cd clojurescript
 ./script/bootstrap
-./self-compile
+./script/self-compile
 npm install source-map-support
 ```
 
