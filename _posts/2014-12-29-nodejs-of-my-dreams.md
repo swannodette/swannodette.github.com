@@ -43,8 +43,8 @@ browser.
 
 Enter the Node.js REPL!
 
-Without further ado why don't you give it a shot? You just need
-to make sure you have Node.js installed.
+Why don't you give it a shot? You just need to make sure you have
+Node.js installed:
 
 ```
 git clone https://github.com/clojure/clojurescript
