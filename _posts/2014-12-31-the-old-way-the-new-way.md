@@ -138,7 +138,8 @@ lein trampoline run -m clojure.main node_repl.clj
 The first time will be slow as we cache everything. Quit the
 REPL and try this again.
 
-The REPL should launch in a couple of seconds.
+On my macine the REPL should launch in a couple of seconds. On
+newer hardware this should be pretty quick.
 
 Now let's give test.check a try, let's require the generators namespace:
 
