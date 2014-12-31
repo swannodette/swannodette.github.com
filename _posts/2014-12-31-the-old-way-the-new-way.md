@@ -43,7 +43,7 @@ project.clj. It will probably NOT be `0.0-2606` for you.
 Let switch to the directory where our project will live and create it:
 
 ```
-lein mies new test-fun
+lein new mies test-fun
 cd test-fun
 ```
 
