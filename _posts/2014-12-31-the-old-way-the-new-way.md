@@ -141,7 +141,7 @@ REPL and try this again.
 On my macine the REPL should launch in a couple of seconds. On
 newer hardware this should be pretty quick.
 
-Now let's give test.check a try, require the generators namespace:
+It's time for test.check fun, require the generators namespace:
 
 ```
 To quit, type: :cljs/quit
