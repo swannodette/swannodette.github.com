@@ -116,8 +116,8 @@ not cache compilation and analysis to disk. Every REPL invocation
 recompiles everything in memory again and streams it to the JS
 process.
 
-Now lets try the new Node.js REPL. Let make a file `node_repl.clj`
-its contents should like the following:
+Now let's try the new Node.js REPL. Make a new file
+`node_repl.clj`, it's contents should like the following:
 
 ```clj
 (require '[cljs.repl :as repl] 
