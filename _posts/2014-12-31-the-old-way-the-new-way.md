@@ -129,7 +129,7 @@ Now let's try the new Node.js REPL. Make a new file
    :source-map true})"
 ```
 
-Now try the following:
+Run the following:
 
 ```
 lein trampoline run -m clojure.main node_repl.clj
