@@ -168,7 +168,7 @@ cljs.test.check.generators/sample
 nil
 ```
 
-The old REPL model provided a inferior development experience. By
+The old REPL model provided an inferior development experience. By
 embracing the same caching infrastructure as provided to ClojureScript
 builds we can deliver a REPL experience far more in the line with the
 one enjoyed in Clojure today.
