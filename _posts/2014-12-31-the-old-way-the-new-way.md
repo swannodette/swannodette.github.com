@@ -143,7 +143,7 @@ newer hardware this should be pretty quick.
 
 Now let's give test.check a try, let's require the generators namespace:
 
-```clj
+```
 To quit, type: :cljs/quit
 ClojureScript Node.js REPL server listening on 5001
 ClojureScript:cljs.user> (require '[cljs.test.check.generators :as gen])
@@ -151,14 +151,14 @@ ClojureScript:cljs.user> (require '[cljs.test.check.generators :as gen])
 
 Now lets generate some data!
 
-```clj
+```
 ClojureScript:cljs.user> (gen/sample (gen/vector gen/int))
 ([] [] [] [] [4 0 -4] [3 -4 3] [-4 -5 -3 -5 6 5] [-1 4] ...)
 ```
 
 Let's check out some docstrings:
 
-```clj
+```
 ClojureScript:cljs.user> (doc gen/sample)
 -------------------------
 cljs.test.check.generators/sample
