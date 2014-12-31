@@ -141,7 +141,7 @@ REPL and try this again.
 On my macine the REPL should launch in a couple of seconds. On
 newer hardware this should be pretty quick.
 
-Now let's give test.check a try, let's require the generators namespace:
+Now let's give test.check a try, require the generators namespace:
 
 ```
 To quit, type: :cljs/quit
@@ -149,14 +149,14 @@ ClojureScript Node.js REPL server listening on 5001
 ClojureScript:cljs.user> (require '[cljs.test.check.generators :as gen])
 ```
 
-Now lets generate some data!
+Now generate some data!
 
 ```
 ClojureScript:cljs.user> (gen/sample (gen/vector gen/int))
 ([] [] [] [] [4 0 -4] [3 -4 3] [-4 -5 -3 -5 6 5] [-1 4] ...)
 ```
 
-Let's check out some docstrings:
+Check out some docstrings:
 
 ```
 ClojureScript:cljs.user> (doc gen/sample)
@@ -168,7 +168,7 @@ cljs.test.check.generators/sample
 nil
 ```
 
-The old REPL model simply provides a inferior development
-experience. By embracing the same caching infrastructure as provided
-to CloureScript builds we can deliver a REPL experience far
-more in the line with one enjoyed in Clojure today.
+The old REPL model provided a inferior development experience. By
+embracing the same caching infrastructure as provided to ClojureScript
+builds we can deliver a REPL experience far more in the line with the
+one enjoyed in Clojure today.
