@@ -12,7 +12,7 @@ My
 demonstrated a very manual series of steps for getting a sensible
 ClojureScript REPL setup going.
 
-This post covers the *easy* way using the shiny 0.0-2644 release of
+This post covers the *easy* way using the shiny 0.0-2655 release of
 ClojureScript. The only thing you need to go through this is to have
 [Node.js](http://nodejs.org/) and
 [rlwrap](http://utopia.knoware.nl/~hlub/uck/rlwrap/) (under OS X
@@ -85,10 +85,10 @@ Edit the `hello-world.core` namespace again with your text editor:
 ```
 
 Just press the up arrow at the REPL to get back to the previous
-require statement and run it again:
+require statement and edit it to include `:reload`:
 
 ```
-ClojureScript:cljs.user> (require '[hello-world.core :refer [foo]])
+ClojureScript:cljs.user> (require '[hello-world.core :refer [foo]] :reload)
 Hello world!
 ClojureScript:cljs.user> hello-world.core
 #js {:foo #<function foo(a,b){
