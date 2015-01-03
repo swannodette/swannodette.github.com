@@ -29,7 +29,7 @@ ClojureScript once and for all:
 ./script/compile_cljsc
 ```
 
-Before we start our REPL lets add a definition to the
+Before we start our REPL let's add a definition to the
 `hello-world.core` namespace. Use your favorite text editor
 to make it look like the following:
 
