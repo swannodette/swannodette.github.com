@@ -89,7 +89,7 @@ require statement and run it again:
 ```
 ClojureScript:cljs.user> (require '[hello-world.core :refer [foo]])
 Hello world!
-ClojureScirpt:cljs.user> hello-world.core
+ClojureScript:cljs.user> hello-world.core
 #js {:foo #<function foo(a,b){
 return (a + b);
 }>, :bar #<function bar(a,b){
