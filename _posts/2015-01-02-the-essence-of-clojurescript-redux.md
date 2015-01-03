@@ -102,7 +102,7 @@ There's our new definition as expected!
 For the experienced ClojureScript developers I highly recommend poking
 around at the provided scripts. As you'll see with some investigation
 the Node.js REPL and the dev build use the same output directory. This
-means if you already have a build you start a REPL pretty much
+means if you already have a build you can start a REPL pretty much
 instantly by setting the REPLs `:output-dir` and `:cache-analysis`
 values to be the same as your build.
 
