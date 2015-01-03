@@ -27,7 +27,7 @@ We want the REPL to load as fast as possible so compile
 ClojureScript once and for all:
 
 ```
-./script/compile_cljsc
+./scripts/compile_cljsc
 ```
 
 Before we start our REPL let's add a definition to the
@@ -49,7 +49,7 @@ to make it look like the following:
 Now let's start a REPL:
 
 ```
-./script/repl
+./scripts/repl
 ```
 
 It will take a few seconds the first time as we compile the standard
