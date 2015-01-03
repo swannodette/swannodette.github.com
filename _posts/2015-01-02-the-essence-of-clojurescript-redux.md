@@ -15,7 +15,8 @@ ClojureScript REPL setup going.
 This post covers the *easy* way using the shiny 0.0-2644 release of
 ClojureScript. The only thing you need to go through this is to have
 [Node.js](http://nodejs.org/) and
-[rlwrap](http://utopia.knoware.nl/~hlub/uck/rlwrap/) installed:
+[rlwrap](http://utopia.knoware.nl/~hlub/uck/rlwrap/) (under OS X
+easily installed with [brew](http://brew.sh)) installed:
 
 ```
 lein new mies hello-world
