@@ -52,7 +52,7 @@ Now let's start a REPL:
 ```
 
 It will be take a while the first time as we compile the standard
-library. It should be very fast fast to start on subsequent runs.
+library. It should be very fast to start on subsequent runs.
 
 Once we have a REPL up and running let's import something and try it:
 
