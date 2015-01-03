@@ -51,7 +51,7 @@ Now let's start a REPL:
 ./script/repl
 ```
 
-It will be take a while the first time as we compile the standard
+It will take a few seconds the first time as we compile the standard
 library. It should be very fast to start on subsequent runs.
 
 Once we have a REPL up and running let's import something and try it:
