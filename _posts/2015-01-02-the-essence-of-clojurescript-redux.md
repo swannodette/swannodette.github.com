@@ -12,7 +12,7 @@ My
 demonstrated a very manual series of steps for getting a sensible
 ClojureScript REPL setup going.
 
-This post covers the *easy* way using the shiny 0.0-2655 release of
+This post covers the *easy* way using the shiny 0.0-2665 release of
 ClojureScript. The only thing you need to go through this is to have
 [Node.js](http://nodejs.org/) and
 [rlwrap](http://utopia.knoware.nl/~hlub/uck/rlwrap/) (under OS X
