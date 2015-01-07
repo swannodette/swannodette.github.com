@@ -90,7 +90,7 @@ other day I needed a pseudorandom number generator for
 [test.check](https://github.com/clojure/test.check), Closure did not
 [disappoint](http://docs.closure-library.googlecode.com/git/class_goog_testing_PseudoRandom.html).
 
-In some cases the Google Closure doesn't provide the nicest of APIs or
+In some cases Google Closure doesn't provide the nicest of APIs or
 is poorly documented but it's generally a simple matter to present
 a
 [lovingly crafted facade](https://github.com/andrewmcveigh/cljs-time). There's
