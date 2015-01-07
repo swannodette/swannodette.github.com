@@ -32,7 +32,7 @@ if you don't exert some discipline. Surmountable for sure, but
 certainly not as simple to reason about as a single concatenated file.
 
 The other option is to use smaller dependencies. The problem with this
-is that
+is that the
 [microlib](https://web.archive.org/web/20111214102140/http://momentjs.com/)
 of yesterday may very well become the [macrolib](http://momentjs.com) of
 tomorrow. The fully internationalized version of moment.js is as big as
@@ -86,7 +86,7 @@ If you're a ClojureScript developer I highly recommend always first
 checking to see if there isn't a
 [satisfactory Google Closure module](http://docs.closure-library.googlecode.com/git/index.html)
 that will get the job done. Just the
-other day I needed a pseudo random number generator for
+other day I needed a pseudorandom number generator for
 [test.check](https://github.com/clojure/test.check), Closure did not
 [disappoint](http://docs.closure-library.googlecode.com/git/class_goog_testing_PseudoRandom.html).
 
