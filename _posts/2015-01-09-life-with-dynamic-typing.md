@@ -124,9 +124,9 @@ runtime cost. React.js actually elides `invariant` from production
 builds. If you're a JavaScript developer this is yet another reason
 why a build step might not be a bad idea.
 
-All ClojureScript developers again a leg up, simply provide
-`:elide-asserts true` to your production build and be on your merry
-way.
+All ClojureScript developers again have a leg up - simply provide
+`:elide-asserts true` to your production build config and be on your
+merry way.
 
 ## Conclusion
 
