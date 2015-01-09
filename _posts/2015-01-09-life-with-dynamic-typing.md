@@ -84,8 +84,7 @@ typeclasses etc.
   (-return-even [x]))
 ```
 
-One useful pattern to pair with this is to provide a common entry
-point:
+One useful pattern to pair with this - provide a common entry point:
 
 ```clj
 (defn return-even [x]
