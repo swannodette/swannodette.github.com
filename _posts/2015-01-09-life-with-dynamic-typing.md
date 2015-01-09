@@ -51,7 +51,7 @@ As the above React.js assertion alludes, asserting function arguments
 and return values yields the most bang for the buck.
 
 ClojureScript like Clojure has direct support for this pattern in the
-form of `:pre` and `:post` conditions. This yet another
+form of `:pre` and `:post` conditions. This is yet another
 [old good idea](http://en.wikipedia.org/wiki/Design_by_contract).
 
 Here's an example from Om 0.8.0. The `get-props` helper validates
