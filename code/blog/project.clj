@@ -8,13 +8,13 @@
   :repositories {"sonatype-staging"
                  "https://oss.sonatype.org/content/groups/staging/"}
 
-  :dependencies [[org.clojure/clojure "1.5.1"]
-                 [org.clojure/clojurescript "0.0-2173"]
-                 [org.clojure/core.async "0.1.267.0-0d7780-alpha"]
-                 [org.clojure/core.match "0.2.0"]
-                 [om "0.5.2-SNAPSHOT"]]
+  :dependencies [[org.clojure/clojure "1.6.0"]
+                 [org.clojure/clojurescript "0.0-2665"]
+                 [org.clojure/core.async "0.1.346.0-17112a-alpha"]
+                 [org.clojure/core.match "0.3.0-alpha4"]
+                 [org.om/om "0.8.0"]]
 
-  :plugins [[lein-cljsbuild "1.0.2"]]
+  :plugins [[lein-cljsbuild "1.0.4"]]
 
   :cljsbuild
   {:builds
