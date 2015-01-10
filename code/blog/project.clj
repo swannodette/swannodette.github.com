@@ -16,6 +16,8 @@
 
   :plugins [[lein-cljsbuild "1.0.4"]]
 
+  :source-paths ["src" "target/classes"]
+
   :cljsbuild
   {:builds
    [{:id "csp-dev"
@@ -110,4 +112,17 @@
                 :pretty-print false
                 :output-to "../../assets/js/instrument/main.js"
                 :preamble ["react/react.min.js"]
-                :externs ["react/externs/react.js"]}}]})
+                :externs ["react/externs/react.js"]}}
+
+    {:id "faster-dev"
+     :source-paths ["src/blog/faster"]
+     :compiler {:optimizations :none
+                :source-map true
+                :output-dir "../../assets/js/faster/out"
+                :output-to "../../assets/js/faster/main.js"}}
+
+    {:id "faster-release"
+     :source-paths ["src/blog/faster"]
+     :compiler {:optimizations :advanced
+                :pretty-print false
+                :output-to "../../assets/js/faster/main.js"}}]})
