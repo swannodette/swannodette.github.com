@@ -21,7 +21,7 @@ want. All Clojure and ClojureScript data structures already adopt
 innocuous mutation in the form of hash code caching. By using the
 same idea we can achieve faster validation.
 
-First let imagine a function which takes two immutable maps that
+First let us imagine a function which takes two immutable maps that
 represent points and computes the distance:
 
 ```clj
@@ -113,5 +113,9 @@ through a herbert data description.
 ```clj
 (def point? (validator '{:x int :y int}))
 ```
+
+Note that none of the above would work with mutable data
+structures. If a mutation occurred the validation tagging would become
+invalid.
 
 And so we witness the beautiful intersection of Lisp and immutable data.
