@@ -123,9 +123,9 @@ The problem with good invariant checking is that it often comes with a
 runtime cost. React.js actually elides `invariant` from production
 builds (**Update:** Scott Feeney
 [clarified this](https://twitter.com/graue/status/553833079865749504),
-React.js does not actually elide the logic, just the strings). If
-you're a JavaScript developer this is yet another reason why a build
-step might not be a bad idea.
+React.js does not elide the logic, just the strings). If you're a
+JavaScript developer this is yet another reason why a build step might
+not be a bad idea.
 
 All ClojureScript developers again have a leg up - simply provide
 `:elide-asserts true` to your production build config and be on your
