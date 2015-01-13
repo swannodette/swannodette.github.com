@@ -69,11 +69,11 @@ following:
      (-seq [_]
        (map #(do (assert (f %)) %) v))
      ICollection
-     (-conj [this x]
+     (-conj [_ x]
        (assert (f x))
        (add-contract* (-conj v x) cvar f src-info))
      IVector
-     (-assoc-n [this i x]
+     (-assoc-n [_ i x]
        (assert (f x))
        (add-contract* (-assoc-n v i x) cvar f src-info)))))
 ```
@@ -99,11 +99,11 @@ Now let's rewrite `add-contract*`:
      (-seq [_]
        (map #(do (assert (f %) (contract-fail-str % (meta cvar) src-info)) %) v))
      ICollection
-     (-conj [this x]
+     (-conj [_ x]
        (assert (f x) (contract-fail-str x (meta cvar) src-info))
        (add-contract* (-conj v x) cvar f src-info))
      IVector
-     (-assoc-n [this i x]
+     (-assoc-n [_ i x]
        (assert (f x) (contract-fail-str x (meta cvar) src-info))
        (add-contract* (-assoc-n v i x) cvar f src-info)))))
 ```
