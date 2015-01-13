@@ -35,6 +35,8 @@ however for completeness you should implement `IReduce` and
 `IKVReduce`. They are trivial to do and involve the same simple
 delegation approach.
 
+## Lazy Contracts
+
 We will provide a function called `add-contract*` that takes 3
 arguments: a vector, a Var and a map of source location information
 that informs us where the contract was asserted. This is important
@@ -147,6 +149,8 @@ This is because printing needs to traverse the vector!
 
 In a real program if contract fails the error will always
 tell you precisely where the contract was asserted.
+
+## Conclusion
 
 Of the course the above could benefit from generalization but we
 already have a powerful lazy contract system without bothering
