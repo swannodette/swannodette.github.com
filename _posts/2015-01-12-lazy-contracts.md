@@ -128,7 +128,6 @@ vector:
 To quit, type: :cljs/quit
 ClojureScript Node.js REPL server listening on 54977
 ClojureScript:cljs.user> (require '[blog.contracts.core :as c :include-macros true])
-
 ClojureScript:cljs.user> (c/add-contract [2 4 6] #'even?)
 [2 4 6]
 ```
