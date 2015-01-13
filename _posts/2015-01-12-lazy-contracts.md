@@ -155,7 +155,7 @@ Error: Assert failed: 1 fails vector contract cljs.core/even?
 
 This is because printing needs to traverse the vector!
 
-Again a program if a lazy contract fails the error will always
+Again if a program with a lazy contract fails the error will always
 tell you precisely where the contract was asserted.
 
 ## Conclusion
