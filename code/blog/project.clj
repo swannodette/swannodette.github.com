@@ -9,7 +9,7 @@
                  "https://oss.sonatype.org/content/groups/staging/"}
 
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2665"]
+                 [org.clojure/clojurescript "0.0-2678"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [org.clojure/core.match "0.3.0-alpha4"]
                  [org.om/om "0.8.0"]]
@@ -125,4 +125,18 @@
      :source-paths ["src/blog/faster"]
      :compiler {:optimizations :advanced
                 :pretty-print false
-                :output-to "../../assets/js/faster/main.js"}}]})
+                :output-to "../../assets/js/faster/main.js"}}
+
+    {:id "contracts-dev"
+     :source-paths ["src/blog/contracts"]
+     :compiler {:optimizations :none
+                :source-map true
+                :output-dir "../../assets/js/contracts/out"
+                :output-to "../../assets/js/contracts/main.js"}}
+
+    {:id "contracts-release"
+     :source-paths ["src/blog/contracts"]
+     :compiler {:optimizations :advanced
+                :pretty-print false
+                ;:elide-asserts true
+                :output-to "../../assets/js/contracts/main.js"}}]})
