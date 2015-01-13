@@ -146,7 +146,7 @@ Error: Assert failed: 7 fails vector contract cljs.core/even? ...
 
 Voila!
 
-We'll also a sensible error even in simple cases like this:
+We'll also get a sensible error even in simple cases like this:
 
 ```
 ClojureScript:cljs.user> (c/add-contract [1 2 3] #'even?)
