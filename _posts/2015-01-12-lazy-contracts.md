@@ -71,7 +71,7 @@ following:
      ICollection
      (-conj [this x]
        (assert (f x))
-       (add-contract* (-conj v x) f src-info))
+       (add-contract* (-conj v x) cvar f src-info))
      IVector
      (-assoc-n [this i x]
        (assert (f x))
@@ -101,7 +101,7 @@ Now let's rewrite `add-contract*`:
      ICollection
      (-conj [this x]
        (assert (f x) (contract-fail-str x (meta cvar) src-info))
-       (add-contract* (-conj v x) f src-info))
+       (add-contract* (-conj v x) cvar f src-info))
      IVector
      (-assoc-n [this i x]
        (assert (f x) (contract-fail-str x (meta cvar) src-info))
