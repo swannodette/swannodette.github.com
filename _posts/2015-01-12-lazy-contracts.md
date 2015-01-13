@@ -97,7 +97,11 @@ Now let's rewrite `add-contract*`:
    (specify v
      ISeqable
      (-seq [_]
-       (map #(do (assert (f %) (contract-fail-str % (meta cvar) src-info)) %) v))
+       (letfn [(check [x]
+                 (assert (f x) 
+                   (contract-fail-str x (meta cvar) src-info))
+                 x)]
+         (map check v))
      ICollection
      (-conj [_ x]
        (assert (f x) (contract-fail-str x (meta cvar) src-info))
