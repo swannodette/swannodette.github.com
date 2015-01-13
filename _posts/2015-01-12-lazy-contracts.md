@@ -16,6 +16,11 @@ time we'll see how ClojureScript's `specify` construct allows us to
 trivially build a form of lazy contracts similar to those described by
 [Findler et al.](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.124.180).
 
+Lazy contracts are useful because they allow us to lazily validate a large
+data structure. All the previous examples with `:pre` and `:post`
+validated eagerly which is quite impractical when dealing with large amounts
+of data.
+
 For some time now ClojureScript has supported extension of individual
 values to protocols via `specify`. Again protocols are analogous to
 Java interfaces, Go interfaces, Haskell typeclasses, and Objective-C
