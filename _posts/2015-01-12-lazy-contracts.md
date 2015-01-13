@@ -165,7 +165,7 @@ already have a powerful lazy contract system without bothering
 with wrappers or having to dig into the implementation of any of
 the core data structures.
 
-With very little effort ClojureScript programs leverage
-powerful forms of runtime validation with accurate provenance.
+With very little effort ClojureScript programs can leverage
+powerful forms of runtime validation with precise provenance.
 
 Happy hacking!
