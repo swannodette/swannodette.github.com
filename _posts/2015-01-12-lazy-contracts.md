@@ -39,11 +39,11 @@ delegation approach.
 
 We will provide a function called `add-contract*` that takes 3
 arguments: a vector, a Var and a map of source location information
-that informs us where the contract was asserted. This is important
-for debugging as this allows us to prune our search for where
-the contract might have been violated - it had to happen *before*
-the contract. In a mutable context this wouldn't be much information
-but thanks immutability we can laser in on source of the trouble.
+that informs us where the contract was asserted. This is important for
+debugging as this allows us to prune our search - the contract
+violation had to occur *before* the contract. In a mutable context
+this wouldn't be very useful but because of immutability we can laser
+in on the origin of the issue.
 
 As to why we take a Var for the second argument, the Var holds useful
 reflection information if we want to print verbose error messages. We
