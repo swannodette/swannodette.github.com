@@ -150,7 +150,7 @@ Error: Assert failed: 1 fails vector contract cljs.core/even?
 
 This is because printing needs to traverse the vector!
 
-In a real program if contract fails the error will always
+Again a program if a lazy contract fails the error will always
 tell you precisely where the contract was asserted.
 
 ## Conclusion
@@ -160,8 +160,7 @@ already have a powerful lazy contract system without bothering
 with wrappers or having to dig into the implementation of any of
 the core data structures.
 
-With very little effort ClojureScript programs can benefit from
-some of the most powerful forms of runtime validation with provenance
-available to dynamic programming languages today.
+With very little effort ClojureScript programs leverage
+powerful forms of runtime validation with accurate provenance.
 
 Happy hacking!
