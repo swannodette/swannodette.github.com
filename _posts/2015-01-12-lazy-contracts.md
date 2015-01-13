@@ -101,7 +101,7 @@ Now let's rewrite `add-contract*`:
                  (assert (f x) 
                    (contract-fail-str x (meta cvar) src-info))
                  x)]
-         (map check v))
+         (map check v)))
      ICollection
      (-conj [_ x]
        (assert (f x) (contract-fail-str x (meta cvar) src-info))
@@ -123,9 +123,8 @@ In a `lazy-contract.core` macro file we write the following:
 (ns blog.contracts.core)
 
 (defmacro add-contract [v cvar]
-  (let [m (meta &form)]
-    `(blog.contracts.core/add-contract*
-       ~v ~cvar ~(select-keys m [:file :line]))))
+  `(blog.contracts.core/add-contract*
+     ~v ~cvar ~(select-keys (meta &form) [:file :line])))
 ```
 
 That's it!
