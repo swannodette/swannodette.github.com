@@ -31,7 +31,7 @@ JavaScript and the performance of modern JavaScript engines permit
 practical efficient implementation.
 
 Imagine that we want to ensure that a vector contains only
-numbers. Fortunately there are only two ways to get an updated vector
+even numbers. Fortunately there are only two ways to get an updated vector
 in Clojure, `conj` and `assoc`. So given an existing vector we simply
 need to `specify` new implementations of the `ICollection` and
 `IVector` protocols. The only other protocols we care about are those
