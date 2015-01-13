@@ -143,7 +143,7 @@ Voila!
 
 We'll also a sensible error even in simple cases like this:
 
-```clj
+```
 ClojureScript:cljs.user> (c/add-contract [1 2 3] #'even?)
 Error: Assert failed: 1 fails vector contract cljs.core/even?
 ```
