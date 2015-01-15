@@ -15,6 +15,8 @@ let's consider validations beyond `:pre` and `:post` conditions. This
 time we'll see how ClojureScript's `specify` construct allows us to
 trivially build a form of lazy contracts similar to those described by
 [Findler et al.](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.124.180).
+Note: the following approach can be duplicated with `deftype` or
+`reify` on Clojure JVM, but `specify` is more succinct.
 
 Lazy contracts are useful because they allow us to lazily validate a large
 data structure. All the previous examples with `:pre` and `:post`
