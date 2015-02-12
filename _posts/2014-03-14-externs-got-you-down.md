@@ -7,6 +7,13 @@ tags: []
 ---
 {% include JB/setup %}
 
+**Update**: This post was written nearly a year ago. A lot of things
+can change in a year. People start using React and third party
+JavaScript packaging stories for ClojureScript can appear out of
+nowhere. This post describes a quick hack when you are in a bind but I
+would not use it in production setting. Use a
+[CLJSJS](http://cljsjs.github.io) package instead.
+
 While ClojureScript's strategy of generating and leveraging code
 optimized for the [Google Closure Compiler](http://developers.google.com/closure/compiler/) has turned out to be fantastic
 for managing production code size, sometimes you find yourself needing a
