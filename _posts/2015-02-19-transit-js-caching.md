@@ -62,7 +62,7 @@ trouble.
 
 We need to duplicate the idea behind Transit's key caching. Key
 caching works because the traversal order for reading and writing is
-precisely the same. With this knowledge we build a caching system on
+precisely the same. With this knowledge we can build a caching system on
 top of Transit with the help of some Maps!
 
 Examine our new caching `PointHandler`:
