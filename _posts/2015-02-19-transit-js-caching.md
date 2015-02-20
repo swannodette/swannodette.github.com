@@ -140,7 +140,7 @@ What about reading this back out?
 
 ## Custom Read Handler With Caching
 
-Write `cachingRead` is quite a bit simpler than `cachingWrite`:
+Writing `cachingRead` is quite a bit simpler than `cachingWrite`:
 
 ```js
 function cachingRead(obj) {
