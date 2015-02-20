@@ -132,8 +132,8 @@ What do we get?
 ```
 
 This should put a smile on your face. The second time we see a cached
-value we emit the `"cache"` tagged value. The third time we emit the
-standard Transit key caching kicks and we get a very succinct
+value we emit the `"cache"` tagged value. The third time we emit, the
+standard Transit key caching kicks in and we get a very succinct
 representation.
 
 What about reading this back out?
