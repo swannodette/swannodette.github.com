@@ -177,4 +177,24 @@ And we'll get the following result:
 [{x: 1.5, y: 2.5 , {x: 1.5, y: 2.5}, {x: 1.5, y: 2.5}]
 ```
 
-Go forth and serialize your application states into efficiently packed JSON values!
+Perhaps you're not convinced these are all the same object in
+memory. Let's do a quick check:
+
+```js
+var equal = function(x, y) {
+    return !x ? false : x===y && y;
+};
+
+console.log(cachingRead(cachingWrite([p,p,p])).reduce(equal);
+```
+
+We get back a non-false value:
+
+```js
+{x: 1.5, y: 2.5}
+```
+
+Which means all the values in the array were exactly the same object.
+
+Go forth and serialize your application states into efficiently packed
+JSON values!
