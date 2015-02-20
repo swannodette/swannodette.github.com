@@ -185,7 +185,7 @@ var equal = function(x, y) {
     return !x ? false : x===y && y;
 };
 
-console.log(cachingRead(cachingWrite([p,p,p])).reduce(equal);
+console.log(cachingRead(cachingWrite([p,p,p])).reduce(equal));
 ```
 
 We get back a non-false value:
