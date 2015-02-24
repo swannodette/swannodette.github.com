@@ -150,7 +150,7 @@ say that this is a "game changer".
 I'd like to thank Thomas Heller for his work incorporating Google
 Closure Modules into his
 [shadow-build](https://github.com/thheller/shadow-build) project. He provided
-a lot of inspiration and rationale that inspired me to land this
+a lot of inspiration and rationale that convinced me to land this
 functionality into ClojureScript itself.
 
 For more details on actual usage checkout the
