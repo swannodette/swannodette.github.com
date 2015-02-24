@@ -88,7 +88,7 @@ Now lets imagine another namespace that we would like to load:
 (println "Hello world from module bar!")
 ```
 
-We'd like split our application into three pieces, the shared bit, the
+We'd like to split our application into three pieces, the shared bit, the
 bit for `hello-world.foo` and the bit for `hello-world.bar`. So in
 our `project.clj` file we would define a `:modules` entry like so:
 
