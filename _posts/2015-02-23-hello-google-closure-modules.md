@@ -153,4 +153,7 @@ Closure Modules into his
 a lot of inspiration and rationale that inspired me to land this
 functionality into ClojureScript itself.
 
+For more details on actual usage checkout the
+[ClojureScript wiki](https://github.com/clojure/clojurescript/wiki/Compiler-Options#modules).
+
 Happy hacking!
