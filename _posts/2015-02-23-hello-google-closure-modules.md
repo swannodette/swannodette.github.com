@@ -27,7 +27,7 @@ control how chunking of the split occurs because modules written by
 humans are actually a terrible unit of modularity when it comes to
 optimizing the production artifact. I've already talked about this
 from a different angle
-[elsewhere](http://localhost:4000/2015/01/06/the-false-promise-of-javascript-microlibs/).
+[elsewhere](http://swannodette.github.io/2015/01/06/the-false-promise-of-javascript-microlibs/).
 
 Google Closure Modules maintains the simple Closure Compiler
 philosophy: don't let a human do anything a computer can do for
