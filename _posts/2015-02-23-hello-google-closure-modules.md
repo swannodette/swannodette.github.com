@@ -34,8 +34,8 @@ philosophy: don't let a human do anything a computer can do for
 you. Code splits are not defined in the source code and the modules
 you end up with may have nothing to do with the modules you actually
 wrote. This is a good thing. Closure Compiler may freely *move code
-between the modules* you wrote to get optimized modules that you have
-never written by hand that contain precisely what is needed.
+between the modules* you wrote to get optimized modules that you would
+have never written by hand that contain precisely what is needed.
 
 ## Code Motion
 
