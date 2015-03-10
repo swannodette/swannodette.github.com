@@ -93,3 +93,5 @@ by running the following instead:
 ```
 jjs -J-Djava.class.path=cljs.jar build.js
 ```
+
+Fun stuff.
