@@ -13,6 +13,8 @@ compiler with the Nashorn JavaScript engine that ships with Java 8.
 Create a file called `build.js` with the following contents:
 
 ```js
+// Use the Java interop clojure.lang.RT namespace to get at 
+// Clojure vars
 var ArrayList = java.util.ArrayList,
     RT = Packages.clojure.lang.RT,
     seq = RT.var("clojure.core", "seq");
