@@ -29,7 +29,7 @@ While slow compile times are acceptable for production builds,
 significantly slowing down the precious interactive programming
 feedback loop McCarthy gave us during development is simply
 unacceptable. ClojureScript now ships with aggressive caching features
-enabled including a pre-compiled standard library, pre-caculated
+enabled including a pre-compiled standard library, pre-calculated
 analysis information, and pre-generated source map.
 
 On my work machine I can now compile a trivial `"Hello world!"` from
