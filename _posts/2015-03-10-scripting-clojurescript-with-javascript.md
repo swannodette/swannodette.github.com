@@ -82,9 +82,7 @@ function build(src, obj) {
 }
 
 // Build!
-build("src", {
-    outputTo: "out/main.js"
-});
+build("src", {outputTo: "out/main.js"});
 ```
 
 You can use this script in place of the `build.clj` script described
