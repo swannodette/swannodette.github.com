@@ -116,6 +116,12 @@ Let's change `build.clj` to the following:
 (System/exit 0)
 ```
 
+And rebuild:
+
+```js
+java -cp cljs.jar:src clojure.main build.clj
+```
+
 This time we examine `out/main.js`. Since we use a Google Closure
 optimization pass we end up with a single JavaScript file. By setting
 `:static-fns` we are asking the ClojureScript compiler to leverage
@@ -155,6 +161,12 @@ Change your `build.clj` to the following:
    :verbose true})
 
 (System/exit 0)
+```
+
+And rebuild:
+
+```js
+java -cp cljs.jar:src clojure.main build.clj
 ```
 
 We pretty-print and enable `:pseudo-names` so that we can see human
