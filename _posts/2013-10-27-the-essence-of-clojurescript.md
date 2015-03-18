@@ -7,6 +7,11 @@ tags: []
 ---
 {% include JB/setup %}
 
+*UPDATE: This post now contains obsolete information. Please
+read the new
+[ClojureScript Quick Start](https://github.com/clojure/clojurescript/wiki/Quick-Start)
+instead*
+
 Recently a couple of people have communicated that getting up and
 running with ClojureScript is challenging. While there's a
 [book](http://shop.oreilly.com/product/0636920025139.do) and a

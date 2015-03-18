@@ -7,6 +7,11 @@ tags: []
 ---
 {% include JB/setup %}
 
+*UPDATE: This post now contains obsolete information. Please
+read the new
+[ClojureScript Quick Start](https://github.com/clojure/clojurescript/wiki/Quick-Start)
+instead*
+
 My
 [previous post](http://swannodette.github.io/2014/12/31/the-old-way-the-new-way)
 demonstrated a very manual series of steps for getting a sensible
