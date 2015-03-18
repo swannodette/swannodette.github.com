@@ -19,7 +19,7 @@ that deliver the functionality people have long ago come to expect
 from Clojure: `:reload`, `:reload-all`, `doc`, `source`, `find-doc`,
 `apropos`, `dir`, and `pst` are all there.
 
-All REPLs ship with source mapping support enabled. Wether you're in a
+All REPLs ship with source mapping support enabled. Whether you're in a
 REPL hooked up to Firefox, Safari, Chrome, Node.js, Rhino, or Nashorn
 you will always get a *ClojureScript* stacktrace.
 
