@@ -171,7 +171,7 @@ java -cp cljs.jar:src clojure.main build.clj
 
 We pretty-print and enable `:pseudo-names` so that we can see human
 readable output. Now if we look at the last line of `out/main.js`
-we'll get
+we'll see:
 
 ```js
 $cljs$core$nth$$.$cljs$core$IFn$_invoke$arity$3$(...);
