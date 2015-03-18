@@ -7,6 +7,11 @@ tags: []
 ---
 {% include JB/setup %}
 
+*UPDATE: This post now contains obsolete information. Please
+read the new
+[ClojureScript Quick Start](https://github.com/clojure/clojurescript/wiki/Quick-Start)
+instead*
+
 Clojure has always been about embracing existing mature
 platforms. Being on the JVM means tapping into untold person years
 poured into battle-tested libraries and access to a vast ecosystem

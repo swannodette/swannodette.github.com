@@ -7,6 +7,11 @@ tags: []
 ---
 {% include JB/setup %}
 
+*UPDATE: This post now contains obsolete information. Please
+read the new
+[ClojureScript Quick Start](https://github.com/clojure/clojurescript/wiki/Quick-Start)
+instead*
+
 This post will walk you through using ClojureScript from master, using
 a contrib SNAPSHOT release, and getting a productive fast REPL setup
 using the new Node.js REPL support.
