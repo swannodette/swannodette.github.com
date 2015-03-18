@@ -182,4 +182,4 @@ significantly faster than the development version.
 
 Future posts will cover protocol dispatch, type inference, arithmetic,
 and other neat things we're doing to ensure that ClojureScript is
-zippy across all JavaScript engines old and new.
+zippy across JavaScript engines old and new.
