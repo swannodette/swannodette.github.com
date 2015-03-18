@@ -18,7 +18,7 @@ and thus ClojureScript functions leverage multiple arities.
 On the JVM this is handled via the `clojure.lang.IFn` interface as the JVM
 already has good support for methods with multiple arities. When writing
 JavaScript by hand this feature is simulated by dispatching on the
-`length` property of the magic `arguments` objects available to any
+`length` property of the magic `arguments` object available to any
 JavaScript function. However using the `arguments` object is not free
 so we would rather not pay this cost if we don't have to.
 
