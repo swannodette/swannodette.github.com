@@ -75,8 +75,8 @@ extras. We can likely further improve this, but already a significant
 amount of ClojureScript source is now movable that previously wasn't.
 
 For those of you unlucky souls that have to deal with JavaScript
-build tools this is all the configuration required to get this
-optimized split:
+build tools this was all the configuration required to get the
+optimized Mori split:
 
 ```clj
 {:cljs-base {:entries #{cljs.core mori}
