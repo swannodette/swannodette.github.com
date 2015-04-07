@@ -54,8 +54,8 @@ But that's our problem right there! Constructing multi-arity and
 variadic function values requires an invoke and invokes aren't on the
 list of things that Google Closure will move.
 
-Simply put, the ClojureScript library was considered too dynamic to
-move by the Closure Compiler.
+Simply put, the large chunks of ClojureScript standard library was
+considered too dynamic to move by the Closure Compiler.
 
 So after assessing a variety of ways to make the top-level more
 static, I ended up deciding that top-level fns should be treated as a
