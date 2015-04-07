@@ -54,7 +54,7 @@ But that's our problem right there! Constructing multi-arity and
 variadic function values requires an invoke and invokes aren't on the
 list of things that Google Closure will move.
 
-Simply put, large chunks of ClojureScript standard library was
+Simply put, large chunks of the ClojureScript standard library was
 considered too dynamic to move by the Closure Compiler.
 
 So after assessing a variety of ways to make the top-level more
