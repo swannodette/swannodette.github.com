@@ -63,7 +63,7 @@ special case and to avoid further complications to the actual compiler
 to implement the change via customizing the `defn` macro.
 
 The actual changeset is pretty technical and of interest mostly to
-experienced Clojure devs and ClojureScript hackers, you can
+experienced Clojure devs and ClojureScript compiler hackers, you can
 [see it here](https://github.com/clojure/clojurescript/commit/576fb6e054dd50ec458a3c9e4172a5a0002c7aea).
 
 After this change the end result for Mori is a much more reasonable
