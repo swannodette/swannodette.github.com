@@ -71,6 +71,19 @@ split, ~27K gzipped for the base module and ~18K gzipped for the
 extras. We can likely further improve this, but already a significant
 amount of ClojureScript source is now movable that previously wasn't.
 
+For those of you unlucky souls that have to deal with JavaScript
+build tools this is all the configuration required to get this
+optimized split:
+
+```clj
+{:cljs-base {:entries #{cljs.core mori}
+             :output-to "release/build/mori.base.js"}
+ :mutable   {:entries #{mori.mutable}
+             :output-to "release/build/mori.mutable.js"}
+ :extra     {:entries #{clojure.data cljs.reader clojure.set mori.extra}
+             :output-to "release/build/mori.extra.js"}}
+```
+
 You can experiment with `:modules` and the enhanced code motion by
 using the
 [0.0-3178](https://github.com/clojure/clojurescript/releases/tag/r3178)
