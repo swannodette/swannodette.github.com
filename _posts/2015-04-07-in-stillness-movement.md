@@ -59,7 +59,7 @@ considered too dynamic to move by the Closure Compiler.
 
 So after assessing a variety of ways to make the top-level more
 static, I ended up deciding that top-level fns should be treated as a
-special case and to avoid further complications to the actual compiler
+special case and, to avoid further complications to the actual compiler,
 to implement the change via customizing the `defn` macro. Being
 able to do significant work at the macro level is definitely one of the big
 perks of Lisp - it will probably come as no surprise to the Lisperati that the
