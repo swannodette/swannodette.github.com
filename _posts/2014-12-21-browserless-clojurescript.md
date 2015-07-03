@@ -7,6 +7,11 @@ tags: []
 ---
 {% include JB/setup %}
 
+*UPDATE: This post now contains obsolete information. Please
+read the new
+[ClojureScript Quick Start](https://github.com/clojure/clojurescript/wiki/Quick-Start)
+instead*
+
 As of ClojureScript 0.0-2505 support for Node.js has improved to the
 point where a browserless workflow is now quite productive. I now
 prefer this approach when developing libraries where dealing with the
