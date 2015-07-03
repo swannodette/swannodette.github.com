@@ -7,25 +7,34 @@ tags: ["clojurescript", "core.async"]
 ---
 {% include JB/setup %}
 
-While none of the ideas in [core.async](http://github.com/clojure/core.async) are new, understanding how to
-solve problems with [CSP](http://en.wikipedia.org/wiki/Communicating_sequential_processes) is simply not as well documented as using
-plain callbacks or [Promises](http://promises-aplus.github.io/promises-spec/). My previous posts have mostly
-explored fairly sophisticated uses of **core.async**, this post instead
-takes the form of a very basic tutorial on using **core.async** with [ClojureScript](http://github.com/clojure/clojurescript).
+While none of the ideas in
+[core.async](http://github.com/clojure/core.async) are new,
+understanding how to solve problems with
+[CSP](http://en.wikipedia.org/wiki/Communicating_sequential_processes)
+is simply not as well documented as using plain callbacks or
+[Promises](http://promises-aplus.github.io/promises-spec/). My
+previous posts have mostly explored fairly sophisticated uses of
+**core.async**, this post instead takes the form of a very basic
+tutorial on using **core.async** with
+[ClojureScript](http://github.com/clojure/clojurescript).
 
-We're going to demonstrate all the steps required to build a simple search
-interface and we'll see how **core.async** provides some unique solutions
-to problems common to client side user interface programming.
+We're going to demonstrate all the steps required to build a simple
+search interface and we'll see how **core.async** provides some unique
+solutions to problems common to client side user interface
+programming.
 
-I recommend using Google
-Chrome so that you can get good [source map](http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/) support. You don't need
-Emacs to have fun with Lisp. [SublimeText 2](http://www.sublimetext.com/2) is pretty nice these days,
-I recommend installing the [paredit](http://github.com/odyssomay/paredit) and [lispindent](http://github.com/odyssomay/sublime-lispindent) packages via
-[Sublime Package Control](http://sublime.wbond.net/installation).
+I recommend using Google Chrome so that you can get good
+[source map](http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/)
+support. You don't need Emacs to have fun with
+Lisp. [SublimeText 2](http://www.sublimetext.com/2) is pretty nice
+these days, I recommend installing the
+[paredit](http://github.com/odyssomay/paredit) and
+[lispindent](http://github.com/odyssomay/sublime-lispindent) packages
+via [Sublime Package Control](http://sublime.wbond.net/installation).
 
-If you have
-[Leiningen](http://github.com/technomancy/leiningen) installed you can
-run the following at the command line in whatever directory you like:
+If you have [Leiningen](http://github.com/technomancy/leiningen)
+installed you can run the following at the command line in whatever
+directory you like:
 
 ```
 lein new mies async-tut1
@@ -54,7 +63,7 @@ lein cljsbuild auto async-tut1
 First off we want to add the following markup to `index.html` before
 the first script tag which loads `goog/base.js`:
 
-```
+```html
 <input id="query" type="text"></input>
 <button id="search">Search</button>
 <p id="results"></p>
@@ -70,7 +79,7 @@ use Google Closure to abstract this stuff away as we might with jQuery.
 We require `goog.dom` and give it a less annoying alias.
 Change the `ns` form in `src/async_tut1/core.cljs` to the following:
 
-```
+```clj
 (ns async-tut1.core
   (:require [goog.dom :as dom]))
 ```
@@ -78,7 +87,7 @@ Change the `ns` form in `src/async_tut1/core.cljs` to the following:
 We want to confirm that this will work so let's change the
 `console.log` expression so it looks this instead:
 
-```
+```clj
 (.log js/console (dom/getElement "query"))
 ```
 
@@ -98,7 +107,7 @@ of the events for a particular element and particular event
 type. We need to require **core.async** macros and functions. Our
 `ns` should now look like the following:
 
-```
+```clj
 (ns async-tut1.core
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [goog.dom :as dom]
@@ -112,7 +121,7 @@ functions that we intend to use.
 
 Now we can write our `listen` fn, it looks like this:
 
-```
+```clj
 (defn listen [el type]
   (let [out (chan)]
     (events/listen el type
@@ -123,7 +132,7 @@ Now we can write our `listen` fn, it looks like this:
 We want to verify our function works as advertised so we check it with
 following snippet of code at the end of the file:
 
-```
+```clj
 (let [clicks (listen (dom/getElement "search") "click")]
   (go (while true
         (.log js/console (<! clicks)))))
@@ -137,7 +146,7 @@ Let's search Wikipedia. Define the basic URL we are going to hit via
 [JSONP](http://en.wikipedia.org/wiki/JSONP), put this right after the
 `ns` form.
 
-```
+```clj
 (def wiki-search-url
   "http://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=")
 ```
@@ -148,7 +157,7 @@ results.
 We again reach for Google Closure to avoid browser quirks. Make your
 `ns` form looking like the following:
 
-```
+```clj
 (ns async-tut1.core
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [goog.dom :as dom]
@@ -167,7 +176,7 @@ Google Closure constructors.
 Our JSONP helper looks like the following (put it after `listen` in
 the file):
 
-```
+```clj
 (defn jsonp [uri]
   (let [out (chan)
         req (Jsonp. (Uri. uri))]
@@ -178,14 +187,14 @@ the file):
 This looks pretty straight forward, very similar to `listen`. Let's
 write a simple function for constructing a query url:
 
-```
+```clj
 (defn query-url [q]
   (str wiki-search-url q))
 ```
 
 Again lets test this by writing a snippet of code at the bottom of the file.
 
-```
+```clj
 (go (.log js/console (<! (jsonp (query-url "cats")))))
 ```
 
@@ -195,7 +204,7 @@ back from Wikipedia. Success!
 It's time to hook everything together. Remove the test snippet and
 replace it with the following:
 
-```
+```clj
 (defn user-query []
   (.-value (dom/getElement "query")))
 
@@ -225,7 +234,7 @@ consider asynchrony!
 Instead of printing to the console we would like to render the results
 to the page. Let's do that now, add the following before `init`:
 
-```
+```clj
 (defn render-query [results]
   (str
     "<ul>"
@@ -240,7 +249,7 @@ here just for fun.
 
 Now change `init` to look like the following:
 
-```
+```clj
 (defn init []
   (let [clicks (listen (dom/getElement "search") "click")
         results-view (dom/getElement "results")]
@@ -255,7 +264,7 @@ use destructuring on the JSON array of Wikipedia results.
 
 A beautiful succinct program! The complete listing follows:
 
-```
+```clj
 (ns async-tut1.core
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [goog.dom :as dom]
