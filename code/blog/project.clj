@@ -8,13 +8,13 @@
   :repositories {"sonatype-staging"
                  "https://oss.sonatype.org/content/groups/staging/"}
 
-  :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2678"]
+  :dependencies [[org.clojure/clojure "1.7.0"]
+                 [org.clojure/clojurescript "1.7.9"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [org.clojure/core.match "0.3.0-alpha4"]
-                 [org.om/om "0.8.0"]]
+                 [org.om/om "0.9.0"]]
 
-  :plugins [[lein-cljsbuild "1.0.4"]]
+  :plugins [[lein-cljsbuild "1.0.6"]]
 
   :source-paths ["src" "target/classes"]
 
@@ -139,4 +139,11 @@
      :compiler {:optimizations :advanced
                 :pretty-print false
                 ;:elide-asserts true
-                :output-to "../../assets/js/contracts/main.js"}}]})
+                :output-to "../../assets/js/contracts/main.js"}}
+
+    {:id "cljs_next"
+     :source-paths ["src/blog/cljs_next"]
+     :compiler {:optimizations :advanced
+                :pretty-print false
+                ;:elide-asserts true
+                :output-to "../../assets/js/cljs_next/main.js"}}]})
