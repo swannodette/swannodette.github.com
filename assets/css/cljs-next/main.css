@@ -1,0 +1,35 @@
+.CodeMirror {
+  border: 1px solid #eee;
+  height: auto;
+  font-size: 15px;
+  font-family: 'Inconsolata';
+}
+
+.CodeMirror-scroll {
+  overflow-y: hidden;
+  overflow-x: auto;
+  height: auto;
+}
+
+button {
+    padding: 4px 8px;
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: white;
+    font-weight: bold;
+}
+
+.eval-ctrl {
+    margin-top: 1em;
+}
+
+.eval-ctrl input {
+    font-size: 15px;
+    font-family: 'Inconsolata';
+    padding: 4px;
+    width: 400px;
+}
+
+.eval-ctrl button {
+    float: right;
+}

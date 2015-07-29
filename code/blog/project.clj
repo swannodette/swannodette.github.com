@@ -9,10 +9,11 @@
                  "https://oss.sonatype.org/content/groups/staging/"}
 
   :dependencies [[org.clojure/clojure "1.7.0"]
-                 [org.clojure/clojurescript "1.7.9"]
+                 [org.clojure/clojurescript "1.7.12"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [org.clojure/core.match "0.3.0-alpha4"]
-                 [org.omcljs/om "0.9.0"]]
+                 [org.omcljs/om "0.9.0"]
+                 [cljsjs/codemirror "5.1.0-2"]]
 
   :plugins [[lein-cljsbuild "1.0.6"]]
 
@@ -147,14 +148,11 @@
                 :main cljs-next.core
                 :source-maps true
                 :verbose true
-                ;:elide-asserts true
                 :output-to "../../assets/js/cljs_next/main.js"
                 :output-dir "../../assets/js/cljs_next"
-                :asset-path "/assets/js/cljs_next"}}
-
-    {:id "cljs-next-release"
-     :source-paths ["src/blog/cljs_next"]
-     :compiler {:optimizations :advanced
-                :pretty-print false
-                ;:elide-asserts true
-                :output-to "../../assets/js/cljs_next/main.js"}}]})
+                :asset-path "/assets/js/cljs_next"
+                :foreign-libs
+                [{:provides ["cljsjs.codemirror.addons.matchbrackets"]
+                  :requires ["cljsjs.codemirror"]
+                  :file "../../assets/js/codemirror/matchbrackets.js"}]}}
+    ]})

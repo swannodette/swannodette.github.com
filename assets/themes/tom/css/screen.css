@@ -252,3 +252,11 @@ blockquote {
     border: none !important;
     padding: 0 !important;
 }
+
+/* CodeMirror */
+
+#post .CodeMirror-code pre {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
