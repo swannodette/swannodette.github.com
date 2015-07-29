@@ -19,7 +19,12 @@ button {
     font-weight: bold;
 }
 
+.eval-cljs {
+    position: relative;
+}
+
 .eval-ctrl {
+    position: relative;
     margin-top: 1em;
 }
 
@@ -31,5 +36,19 @@ button {
 }
 
 .eval-ctrl button {
-    float: right;
+    position: absolute;
+    right: 0px;
+    top: 2px;
+}
+
+.eval-ctrl button:hover {
+    color: #222;
+    border: 1px solid black;
+    background-color: #efefef;
+    font-weight: bold;
+}
+
+.eval-ctrl button:active {
+    color: black;
+    background-color: #ddd;
 }
