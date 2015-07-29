@@ -12,7 +12,7 @@
                  [org.clojure/clojurescript "1.7.9"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [org.clojure/core.match "0.3.0-alpha4"]
-                 [org.om/om "0.9.0"]]
+                 [org.omcljs/om "0.9.0"]]
 
   :plugins [[lein-cljsbuild "1.0.6"]]
 
@@ -141,7 +141,18 @@
                 ;:elide-asserts true
                 :output-to "../../assets/js/contracts/main.js"}}
 
-    {:id "cljs_next"
+    {:id "cljs-next-dev"
+     :source-paths ["src/blog/cljs_next"]
+     :compiler {:optimizations :none
+                :main cljs-next.core
+                :source-maps true
+                :verbose true
+                ;:elide-asserts true
+                :output-to "../../assets/js/cljs_next/main.js"
+                :output-dir "../../assets/js/cljs_next"
+                :asset-path "/assets/js/cljs_next"}}
+
+    {:id "cljs-next-release"
      :source-paths ["src/blog/cljs_next"]
      :compiler {:optimizations :advanced
                 :pretty-print false
