@@ -46,7 +46,8 @@
     (events/listen (gdom/getElement "ex0-run") EventType.CLICK
       (fn [e]
         (cljs/eval-str st (.getValue ed) 'ex0.core
-          {:eval cljs/js-eval}
+          {:eval cljs/js-eval
+           :source-map true}
           (fn [{:keys [error value]}]
             (if-not error
               (set! (.-value out) value)

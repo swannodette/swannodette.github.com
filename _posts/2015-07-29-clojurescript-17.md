@@ -41,3 +41,20 @@ the **EVAL** button.
 
 <script type="text/javascript"
 src="/assets/js/cljs_next/main.js"></script>
+
+The humble result hides the enormity of the event :)
+
+We read a string out of [CodeMirror](https://codemirror.net/), read
+with [tools.reader](https://github.com/clojure/tools.reader) into a
+persistent data structure, passed it into the ClojureScript analyzer,
+constructed an immutable AST, passed that to the compiler, and
+generated JavaScript with inline source maps. All of this happened
+inside of your web browser.
+
+To be very clear, *this precisely the same compiler that runs
+on the Java Virtual Machine running on Plain Old JavaScript*.
+
+For the unbelievers, open Chrome DevTools, open the Sources tab and
+you should see something like the following:
+
+<img width="590" style="border: 1px solid #ccc" src="/assets/images/inline_source_maps.png" />
