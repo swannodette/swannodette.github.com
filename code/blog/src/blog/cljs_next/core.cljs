@@ -6,7 +6,7 @@
 (def st (cljs/empty-state))
 
 (cljs/eval-str st "(+ 1 2)" 'cljs-next.core
-  {:eval js/eval
+  {:eval cljs/js-eval
    :context :expr}
   (fn [res]
     (println res)))
