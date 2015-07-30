@@ -4,6 +4,7 @@
             [goog.events :as events]
             [goog.object :as gobj]
             [cljs.js :as cljs]
+            [cljs.analyzer :as ana]
             [cljsjs.codemirror.mode.clojure]
             [cljsjs.codemirror.addons.matchbrackets]
             [cljs.core.async :as async :refer [chan <! >! put! take!]])
@@ -48,6 +49,24 @@
         (cljs/eval-str st (.getValue ed) 'ex0.core
           {:eval cljs/js-eval
            :source-map true}
+          (fn [{:keys [error value]}]
+            (if-not error
+              (set! (.-value out) value)
+              (.error js/console error))))))))
+
+(def ex1-src
+  (str "(+ 1 1)"))
+
+(defn elide-meta [env ast opts]
+  (dissoc ast :env))
+
+(defn ex1 []
+  (let [ed  (textarea->cm "ex1" ex0-src)
+        out (gdom/getElement "ex1-out")]
+    (events/listen (gdom/getElement "ex1-run") EventType.CLICK
+      (fn [e]
+        (cljs/analyze st (.getValue ed) nil
+          {:passes [ana/infer-type elide-meta]}
           (fn [{:keys [error value]}]
             (if-not error
               (set! (.-value out) value)
