@@ -10,6 +10,9 @@
             [cljs.core.async :as async :refer [chan <! >! put! take!]])
   (:import [goog.events EventType]))
 
+;; -----------------------------------------------------------------------------
+;; Setup
+
 (enable-console-print!)
 
 ;; create cljs.user
@@ -22,18 +25,15 @@
        :mode #js {:name "clojure"}})
 
 (defn textarea->cm [id code]
-  (let [ta (gdom/getElement "ex0")]
+  (let [ta (gdom/getElement id)]
     (js/CodeMirror
       #(.replaceChild (.-parentNode ta) % ta)
       (doto (cm-opts) (gobj/set "value" code)))))
 
 (def st (cljs/empty-state))
 
-(cljs/eval-str st "(+ 1 2)" 'cljs-next.core
-  {:eval cljs/js-eval
-   :context :expr}
-  (fn [res]
-    (println res)))
+;; -----------------------------------------------------------------------------
+;; Example 0
 
 (def ex0-src
   (str "(defn foo [a b]\n"
@@ -54,14 +54,17 @@
               (set! (.-value out) value)
               (.error js/console error))))))))
 
-(def ex1-src
-  (str "(+ 1 1)"))
+;;-----------------------------------------------------------------------------
+;; Example 1
 
 (defn elide-meta [env ast opts]
   (dissoc ast :env))
 
+(def ex1-src
+  (str "(+ 1 1)"))
+
 (defn ex1 []
-  (let [ed  (textarea->cm "ex1" ex0-src)
+  (let [ed  (textarea->cm "ex1" ex1-src)
         out (gdom/getElement "ex1-out")]
     (events/listen (gdom/getElement "ex1-run") EventType.CLICK
       (fn [e]
@@ -72,7 +75,11 @@
               (set! (.-value out) value)
               (.error js/console error))))))))
 
+;; -----------------------------------------------------------------------------
+;; Main
+
 (defn main []
-  (ex0))
+  (ex0)
+  (ex1))
 
 (main)

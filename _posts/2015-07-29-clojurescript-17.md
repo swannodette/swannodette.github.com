@@ -65,9 +65,6 @@ definition and immediately invokes it. Click the **EVAL** button.
     </div>
 </div>
 
-<script type="text/javascript"
-src="/assets/js/cljs_next/main.js"></script>
-
 The humble result hides the enormity of the event :)
 
 We read a string out of [CodeMirror](https://codemirror.net/), read
@@ -129,3 +126,5 @@ So how long does it take to read the entire standard library (about
 </div>
 
 ## Loop (Conclusion)
+
+<script type="text/javascript" src="/assets/js/cljs_next/main.js"></script>
