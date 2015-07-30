@@ -52,3 +52,30 @@ button {
     color: black;
     background-color: #ddd;
 }
+
+#ana-cljs {
+    Position: relative;
+    height: 300px;
+}
+
+#ana-cljs .CodeMirror,
+#ana-cljs .CodeMirror .CodeMirror-scroll,
+#ana-cljs .CodeMirror .CodeMirror-gutters {
+    height: 300px;
+}
+
+.eval-cljs .cols .left,
+.eval-cljs .cols .right {
+    width: 290px;
+    height: 300px;
+}
+
+.eval-cljs .cols .left {
+    position: absolute;
+    left: 0px;
+}
+
+.eval-cljs .cols .right {
+    Position: absolute;
+    right: 0px;
+}

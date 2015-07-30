@@ -122,14 +122,22 @@ Now let's consider the next step, analysis.
 
 ## Analysis
 
-<div class="eval-cljs">
+To further drive home that this is the *real* ClojureScript compiler
+let's take a look at the immutable AST generated from a trivial
+ClojureScript expression:
+
+<div id="ana-cljs" class="eval-cljs">
     <div class="cols">
-         <textarea id="ex2" class="left"></textarea>
-         <textarea id="ex2-out" class="left"></textarea>
+         <div class="left">
+              <textarea id="ex2" width="290"></textarea>
+         </div>
+         <div class="right">
+              <textarea id="ex2-out" width="290"></textarea>
+         </div>
     </div>
-    <div class="eval-ctrl">
-        <button id="ex2-run" class="eval">ANALYZE</button>
-    </div>
+</div>
+<div class="eval-ctrl">
+     <button id="ex2-run" class="eval">ANALYZE</button>
 </div>
 
 ## Compilation

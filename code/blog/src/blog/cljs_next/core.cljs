@@ -3,6 +3,7 @@
   (:require [goog.dom :as gdom]
             [goog.events :as events]
             [goog.object :as gobj]
+            [cljs.pprint :refer [pprint]]
             [cljs.js :as cljs]
             [cljs.analyzer :as ana]
             [cljs.tools.reader :as r]
@@ -10,7 +11,7 @@
             [cljs.tagged-literals :as tags]
             [cljsjs.codemirror.mode.clojure]
             [cljsjs.codemirror.addons.matchbrackets]
-            [cljs.core.async :as async :refer [chan <! >! put! take!]])
+            [cljs.core.async :as async :refer [chan <! >! put! take!]]            )
   (:import [goog.events EventType]
            [goog.net XhrIo]))
 
@@ -100,15 +101,17 @@
   (str "(+ 1 1)"))
 
 (defn ex2 []
-  (let [ed  (textarea->cm "ex2" ex2-src)
-        out (gdom/getElement "ex2-out")]
+  (let [ed0 (textarea->cm "ex2" ex2-src)
+        ed1 (textarea->cm "ex2-out" "foo")]
     (events/listen (gdom/getElement "ex2-run") EventType.CLICK
       (fn [e]
-        (cljs/analyze st (.getValue ed) nil
+        (cljs/analyze st (.getValue ed0) nil
           {:passes [ana/infer-type elide-meta]}
-          (fn [{:keys [error value]}]
+          (fn [{:keys [error value] :as res}]
+            (.log js/console ed1)
+            (println res)
             (if-not error
-              (set! (.-value out) value)
+              (.setValue ed1 (with-out-str (pprint value)))
               (.error js/console error))))))))
 
 ;; -----------------------------------------------------------------------------
@@ -116,6 +119,7 @@
 
 (defn main []
   (ex0)
-  (ex1))
+  (ex1)
+  (ex2))
 
 (main)
