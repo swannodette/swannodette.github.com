@@ -23,18 +23,20 @@ language of the day, and despite Steele's characterization, it seemed
 miles away from Scheme or anything like it.
 
 From one angle the next 13 years were my attempt to make Lisp more
-relevant for day to day work. For many years it seemed like a
-crackpot dream. So it's with a constant sense of wonder that I look
-around at the rapidly expanding ClojureScript community who share the
-same love for simpler yet more expressive systems.
+relevant for day to day work and not just for some cultic inner
+circle. For many years it seemed like a crackpot dream. So it's with a
+constant sense of wonder that I look around at the rapidly expanding
+ClojureScript community who share the same love for simpler yet more
+expressive production systems.
 
-So it's with much happiness that I say today is a big Lisp-y day.
+So it's with much happiness that I say today is a big Lisp-y milestone
+for ClojureScript.
 
 *ClojureScript can compile itself.*
 
 Yeah.
 
-There's a lot to say but first a few words on another big change.
+Before we dig into this mind-bender, a few words on another big change.
 
 ## Clojurescript 1.7
 
@@ -45,10 +47,12 @@ four years of very active development. Instead we're adopting 1.7 as
 this communicates the incredibly important relationship that
 ClojureScript has with its parent language, Clojure.
 
-One of the most critical aspects of this relationship - the actual
-differences between Clojure and ClojureScript are quite small. So much
-so that with the help of reader conditionals and some dedicated
-collaborative effort, ClojureScript can now compile itself.
+This close relationship means the differences between Clojure and
+ClojureScript are largely uninteresting. So much so that with the help
+of
+[reader conditionals](http://blog.cognitect.com/blog/2015/6/30/clojure-17)
+and some dedicated collaborative effort, ClojureScript can now compile
+itself.
 
 Enough ado, let's get to it.
 
@@ -83,7 +87,10 @@ JavaScript*.
 For the unbelievers, open Chrome DevTools, open the Sources tab and
 you should see something like the following:
 
-<img width="590" style="border: 1px solid #ccc" src="/assets/images/inline_source_maps.png" />
+<img width="590" style="border: 1px solid #ccc"
+src="/assets/images/inline_source_maps.png" />
+
+Let's dig into details that enabled the humble result above.
 
 ## Reading
 
@@ -97,19 +104,31 @@ hand-written JavaScript. This is the style employed for critical bits
 like persistent data structures and hashing.
 
 So how long does it take to read the entire standard library (about
-10,000 lines of code) into persistent data structures?
+10,000 lines of code) into persistent data structures? Click the
+following button. This will download the entire standard library and
+then measure the time it takes to read all of it.
 
-<button id="ex1-run">Read cljs.core!</button>
+<div class="eval-cljs">
+    <div class="eval-ctrl">
+        <input id="ex1-out" type="text" value="No Runs"></input>
+        <button id="ex1-run">Read cljs.core!</button>
+    </div>
+</div>
+
+On my 3.5ghz iMac this takes ~80ms under WebKit Nightly, ~130ms
+under Chrome Canary, and ~110ms under Firefox Nightly.
+
+Now let's consider the next step, analysis.
 
 ## Analysis
 
 <div class="eval-cljs">
     <div class="cols">
-         <textarea id="ex1" class="left"></textarea>
-         <textarea id="ex1-out" class="left"></textarea>
+         <textarea id="ex2" class="left"></textarea>
+         <textarea id="ex2-out" class="left"></textarea>
     </div>
     <div class="eval-ctrl">
-        <button id="ex1-run" class="eval">ANALYZE</button>
+        <button id="ex2-run" class="eval">ANALYZE</button>
     </div>
 </div>
 
@@ -117,11 +136,11 @@ So how long does it take to read the entire standard library (about
 
 <div class="eval-cljs">
     <div class="cols">
-        <textarea id="ex2" class="code"></textarea>
-        <textarea id="ex2-out" class="code"></textarea>
+        <textarea id="ex3" class="code"></textarea>
+        <textarea id="ex3-out" class="code"></textarea>
     </div>
     <div class="eval-ctrl">
-        <button id="ex2-run" class="eval">COMPILE</button>
+        <button id="ex3-run" class="eval">COMPILE</button>
     </div>
 </div>
 

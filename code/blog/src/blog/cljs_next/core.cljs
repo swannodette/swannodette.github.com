@@ -5,10 +5,14 @@
             [goog.object :as gobj]
             [cljs.js :as cljs]
             [cljs.analyzer :as ana]
+            [cljs.tools.reader :as r]
+            [cljs.tools.reader.reader-types :refer [string-push-back-reader]]
+            [cljs.tagged-literals :as tags]
             [cljsjs.codemirror.mode.clojure]
             [cljsjs.codemirror.addons.matchbrackets]
             [cljs.core.async :as async :refer [chan <! >! put! take!]])
-  (:import [goog.events EventType]))
+  (:import [goog.events EventType]
+           [goog.net XhrIo]))
 
 ;; -----------------------------------------------------------------------------
 ;; Setup
@@ -29,6 +33,13 @@
     (js/CodeMirror
       #(.replaceChild (.-parentNode ta) % ta)
       (doto (cm-opts) (gobj/set "value" code)))))
+
+(defn get-file [url]
+  (let [c (chan)]
+    (.send XhrIo url
+      (fn [e]
+        (put! c (.. e -target getResponseText))))
+    c))
 
 (def st (cljs/empty-state))
 
@@ -57,16 +68,41 @@
 ;;-----------------------------------------------------------------------------
 ;; Example 1
 
+(def core-url "/assets/cljs/core.cljs")
+
+(defn read-core [core]
+  (let [t (with-out-str
+            (time
+              (let [rdr (string-push-back-reader core)
+                    eof (js-obj)
+                    env (ana/empty-env)]
+                (binding [ana/*cljs-ns*   'cljs.user
+                          *ns*            (create-ns 'cljs.core)
+                          r/*data-readers* tags/*cljs-data-readers*]
+                  (loop []
+                    (let [form (r/read {:eof eof} rdr)]
+                      (when-not (identical? eof form)
+                        (recur))))))))]
+    (set! (.-value (gdom/getElement "ex1-out")) t)))
+
+(defn ex1 []
+  (events/listen (gdom/getElement "ex1-run") EventType.CLICK
+    (fn [e]
+      (go (read-core (<! (get-file core-url)))))))
+
+;;-----------------------------------------------------------------------------
+;; Example 2
+
 (defn elide-meta [env ast opts]
   (dissoc ast :env))
 
-(def ex1-src
+(def ex2-src
   (str "(+ 1 1)"))
 
-(defn ex1 []
-  (let [ed  (textarea->cm "ex1" ex1-src)
-        out (gdom/getElement "ex1-out")]
-    (events/listen (gdom/getElement "ex1-run") EventType.CLICK
+(defn ex2 []
+  (let [ed  (textarea->cm "ex2" ex2-src)
+        out (gdom/getElement "ex2-out")]
+    (events/listen (gdom/getElement "ex2-run") EventType.CLICK
       (fn [e]
         (cljs/analyze st (.getValue ed) nil
           {:passes [ana/infer-type elide-meta]}
