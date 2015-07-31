@@ -227,7 +227,13 @@ and write fast starting shell scripts with
 [Node.js](https://github.com/kanaka/cljs-bootstrap). Suffice to say
 we've only scratched the surface of an iceberg of potential.
 
-After something this signifanct you think we would be done, but
+To be clear this not something you want to use for the traditional
+ClojureScript use case, building typical web applications. The output
+file starting size is simply to large (~300K gzipped). But there are
+now many new reachable target where this cost is not a constraint as
+in the examples previously enumerated.
+
+After something this significant you think we would be done, but
 there's a lot more good stuff
 coming. [Maria Geller's](https://twitter.com/mayaneise) excellent
 JavaScript module work should make it a breeze to integrate the
