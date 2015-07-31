@@ -219,8 +219,8 @@ compilable by ClojureScript JS.
 
 There's little doubt that this feature enhancement will create an
 avalanche of new innovation. You can already run ClojureScript on your
-iPhone with [Replete](https://github.com/mfikes/replete), build iOS
-apps with
+iPhone with [Mike Fikes'](https://github.com/mfikes)
+[Replete](https://github.com/mfikes/replete), build iOS apps with
 [React Native](https://github.com/omcljs/ambly/wiki/ClojureScript-React-Native-Quick-Start),
 and write fast starting shell scripts with
 [Planck](https://github.com/mfikes/planck) or with
