@@ -1,7 +1,7 @@
 .CodeMirror {
   border: 1px solid #eee;
   height: auto;
-  font-size: 15px;
+  font-size: 13px;
   font-family: 'Inconsolata';
 }
 
@@ -65,6 +65,11 @@ button {
     height: 125px;    
 }
 
+#macro-cljs {
+    position: relative;
+    height: 125px;    
+}
+
 #ana-cljs .CodeMirror,
 #ana-cljs .CodeMirror .CodeMirror-scroll,
 #ana-cljs .CodeMirror .CodeMirror-gutters {
@@ -74,6 +79,12 @@ button {
 #comp-cljs .CodeMirror,
 #comp-cljs .CodeMirror .CodeMirror-scroll,
 #comp-cljs .CodeMirror .CodeMirror-gutters {
+    height: 125px;
+}
+
+#macro-cljs .CodeMirror,
+#macro-cljs .CodeMirror .CodeMirror-scroll,
+#macro-cljs .CodeMirror .CodeMirror-gutters {
     height: 125px;
 }
 

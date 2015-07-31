@@ -24,7 +24,7 @@
 (set! (.. js/window -cljs -user) #js {})
 
 (defn cm-opts []
-  #js {:font-size 15
+  #js {:fontSize 13
        :lineNumbers true
        :matchBrackets true
        :mode #js {:name "clojure"}})
@@ -64,7 +64,9 @@
           (fn [{:keys [error value]}]
             (if-not error
               (set! (.-value out) value)
-              (.error js/console error))))))))
+              (do
+                (set! (.-value out) "ERROR")
+                (.error js/console error)))))))))
 
 ;;-----------------------------------------------------------------------------
 ;; Example 1
@@ -105,7 +107,7 @@
         ed1 (textarea->cm "ex2-out" "")]
     (events/listen (gdom/getElement "ex2-run") EventType.CLICK
       (fn [e]
-        (cljs/analyze st (.getValue ed0) nil
+        (cljs/analyze-str st (.getValue ed0) nil
           {:passes [ana/infer-type elide-env]}
           (fn [{:keys [error value] :as res}]
             (if-not error
@@ -115,13 +117,39 @@
 ;;-----------------------------------------------------------------------------
 ;; Example 3
 
+(def ex3-src
+  (str "(js/alert (+ 1 1))\n"
+       "(js/alert (aget #js [1 2 3] 0))\n"
+       "(js/alert (fn []))\n"
+       "(js/alert (if true \"foo\" \"bar\"))"))
+
 (defn ex3 []
-  (let [ed0 (textarea->cm "ex3" ex0-src)
+  (let [ed0 (textarea->cm "ex3" ex3-src)
         ed1 (textarea->cm "ex3-out" "")]
     (events/listen (gdom/getElement "ex3-run") EventType.CLICK
       (fn [e]
-        (cljs/compile st (.getValue ed0) nil
-          nil
+        (cljs/compile-str st (.getValue ed0) nil
+          (fn [{:keys [error value]}]
+            (if-not error
+              (.setValue ed1 value)
+              (.error js/console error))))))))
+
+;;-----------------------------------------------------------------------------
+;; Example 4
+
+(def ex4-src
+  (str "(ns foo.core\n"
+       "  (:require-macros\n"
+       "    [bar.core :refer [mult]]))\n"
+       "\n"
+       "(mult 4 4)"))
+
+(defn ex4 []
+  (let [ed0 (textarea->cm "ex4" ex4-src)
+        ed1 (textarea->cm "ex4-out" "")]
+    (events/listen (gdom/getElement "ex4-run") EventType.CLICK
+      (fn [e]
+        (cljs/compile-str st (.getValue ed0) nil
           (fn [{:keys [error value]}]
             (if-not error
               (.setValue ed1 value)
@@ -134,6 +162,7 @@
   (ex0)
   (ex1)
   (ex2)
-  (ex3))
+  (ex3)
+  (ex4))
 
 (main)

@@ -22,21 +22,25 @@ seemed both deeply pragmatic (Objects!) and deeply sophisticated
 language of the day, and despite Steele's characterization, it seemed
 miles away from Scheme or anything like it.
 
-From one angle the next 13 years were my attempt to make Lisp more
-relevant for day to day work and not just for some cultic inner
-circle. For many years it seemed like a crackpot dream. So it's with a
-constant sense of wonder that I look around at the rapidly expanding
-ClojureScript community who share the same love for simpler yet more
-expressive production systems.
+For many years it seemed unlikely that Lisp would be more widely used
+by the working programmer. So it's with a constant sense of wonder
+that I look around at the rapidly expanding ClojureScript community
+who share the same love for simpler yet more expressive systems. It's
+seem fair to attribute this quickening pace of adoption to
+ClojureScript's steadfast dedication to pragmatism.
 
-So it's with much happiness that I say today is a big Lisp-y milestone
-for ClojureScript.
+But always taking the practical route can cut off unforeseen avenues
+and vistas.
+
+Today ClojureScript embraces the less practical and "dream bigger"
+side of Lisp.
 
 *ClojureScript can compile itself.*
 
 Yeah.
 
-Before we dig into this mind-bender, a few words on another big change.
+There's a lot to talk about, but first a few words on another big
+change.
 
 ## Clojurescript 1.7
 
@@ -51,8 +55,8 @@ This close relationship means the differences between Clojure and
 ClojureScript are largely uninteresting. So much so that with the help
 of
 [reader conditionals](http://blog.cognitect.com/blog/2015/6/30/clojure-17)
-and some dedicated collaborative effort, ClojureScript can now compile
-itself.
+and some dedicated collaborative effort, self compilation came rather
+quickly.
 
 Enough ado, let's get to it.
 
@@ -69,9 +73,13 @@ definition and immediately invokes it. Click the **EVAL** button.
     </div>
 </div>
 
-The humble result hides the enormity of the event :)
+The humble result hides the enormity of the event :) If you know
+ClojureScript (or even if you don't), feel free to modify the source
+and evaluate whatever you like.
 
-We read a string out of [CodeMirror](https://codemirror.net/), read
+So what is happening here?
+
+We grab a string out of [CodeMirror](https://codemirror.net/), read
 it via [tools.reader](https://github.com/clojure/tools.reader) into
 persistent data structures, passed it into the ClojureScript analyzer,
 constructed an immutable AST, passed that AST to the compiler, and
@@ -94,14 +102,12 @@ Let's dig into details that enabled the humble result above.
 
 ## Reading
 
-ClojureScript has never been slow. Internally we've spent years tuning
-code generation for modern JavaScript JITs without catering to any
-specific engine (for a long time V8 was king, but these days
-JavaScriptCore is screaming ahead of the pack).
-
-For ClojureScript experts it's possible to achieve zero overhead over
-hand-written JavaScript. This is the style employed for critical bits
-like persistent data structures and hashing.
+The first step is converting a string into a series of data
+structures. What other languages call parsing is traditionally called
+reading in Lisp. It's important for this process to be fast. We've
+spent years tuning ClojureScript code generation for modern JavaScript
+JITs without catering to any specific engine (for a long time V8 was
+king, but these days JavaScriptCore is screaming ahead of the pack).
 
 So how long does it take to read the entire standard library (about
 10,000 lines of code) into persistent data structures? Click the
@@ -118,13 +124,19 @@ then measure the time it takes to read all of it.
 On my 3.5ghz iMac this takes ~80ms under WebKit Nightly, ~130ms
 under Chrome Canary, and ~110ms under Firefox Nightly.
 
+A big shoutout to Andrew McVeigh and Nicola Mometto for pushing the
+ClojureScript port of tools.reader through.
+
 Now let's consider the next step, analysis.
 
 ## Analysis
 
-To further drive home that this is the *real* ClojureScript compiler
-let's take a look at the immutable AST generated from a trivial
-ClojureScript expression:
+After successfully reading a form that form is passed to the analyzer
+for analyze. This step produces an AST. ClojureScript's AST is
+composed entirely of simple immutable values. Similar to the strategy
+taken by many popular JavaScript parsers and compilers, a data
+oriented representation means the AST can be manipulated easily
+without an API of any kind.
 
 <div id="ana-cljs" class="eval-cljs">
     <div class="cols">
@@ -140,8 +152,9 @@ ClojureScript expression:
      <button id="ex2-run" class="eval">ANALYZE</button>
 </div>
 
-The ClojureScript is represented entirely as simple data, maps,
-string, numbers, vectors, symbols, etc.
+A big shoutout to Shaun Lebron and Jonathan Boston's work on porting
+`clojure.pprint` to ClojureScript so that we can see a pretty-printed
+AST.
 
 From the AST we can now generate JavaScript.
 
@@ -169,6 +182,46 @@ oriented AST:
 Let's show a less trivial example. We can load a macros file from a
 URL, compile it, and then compile the source that uses the macro:
 
+<div id="macro-cljs" class="eval-cljs">
+   <div class="eval-cljs">
+       <div class="cols">
+           <div class="left">
+               <textarea id="ex4" class="code"></textarea>
+           </div>
+           <div class="right">    
+               <textarea id="ex4-out" class="code"></textarea>
+           </div>
+       </div>
+    </div>
+</div>
+<div class="eval-ctrl">
+    <button id="ex4-run" class="eval">COMPILE</button>
+</div>
+
+This example demonstrate not only how pluggable the bootstrapped
+compiler is, but how anything compilable by ClojureScript JVM is
+compilable by ClojureScript JS.
+
 ## Loop (Conclusion)
+
+There's little doubt that this feature enhancement will create an
+avalanche of new innovation. You can already run ClojureScript on your
+iPhone with [Replete]() and write fast starting shell scripts with
+[Planck]() or with [Node.js](). Suffice to say we've only scratched
+the surface of an iceberg of potential.
+
+After something this signifanct you think we would be done, but
+there's a lot more good stuff coming. Maria Neise's excellent
+JavaScript module work should make it a breeze to integrate the
+various module types you find in the wild including the new ES 2015
+standard. Further out we're looking into automatically generating
+externs where possible.
+
+You have an amazing tool for thought at your fingertips. As I said at
+EuroClojure:
+
+*Keep calm and try to take over the world*.
+
+Happy hacking!
 
 <script type="text/javascript" src="/assets/js/cljs_next/main.js"></script>
