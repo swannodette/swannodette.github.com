@@ -235,7 +235,7 @@ in the examples previously enumerated.
 
 After something this significant you think we would be done, but
 there's a lot more good stuff
-coming. [Maria Geller's](https://twitter.com/mayaneise) excellent
+coming. [Maria Geller's](https://github.com/MNeise) excellent
 JavaScript module work should make it a breeze to integrate the
 various module types you find in the wild including the new ES 2015
 standard. Further out we're looking into automatically generating
