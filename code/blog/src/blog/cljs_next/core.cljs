@@ -129,6 +129,7 @@
     (events/listen (gdom/getElement "ex3-run") EventType.CLICK
       (fn [e]
         (cljs/compile-str st (.getValue ed0) nil
+          {:source-map true}
           (fn [{:keys [error value]}]
             (if-not error
               (.setValue ed1 value)
@@ -157,7 +158,8 @@
       (fn [e]
         (cljs/compile-str st (.getValue ed0) 'foo.bar
           {:load load
-           :eval cljs/js-eval}
+           :eval cljs/js-eval
+           :source-map true}
           (fn [{:keys [error value]}]
             (if-not error
               (.setValue ed1 value)

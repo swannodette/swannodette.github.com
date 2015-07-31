@@ -116,7 +116,8 @@ king, but these days
 So how long does it take to read the entire standard library (about
 10,000 lines of code) into persistent data structures? Click the
 following button. This will download the entire standard library and
-then measure the time it takes to read all of it.
+then measure the time it takes to read all of it. Make sure to click
+a few times and you will observe it get faster.
 
 <div class="eval-cljs">
     <div class="eval-ctrl">
@@ -219,7 +220,7 @@ compilable by ClojureScript JS.
 There's little doubt that this feature enhancement will create an
 avalanche of new innovation. You can already run ClojureScript on your
 iPhone with [Replete](https://github.com/mfikes/replete), build iOS
-app with
+apps with
 [React Native](https://github.com/omcljs/ambly/wiki/ClojureScript-React-Native-Quick-Start),
 and write fast starting shell scripts with
 [Planck](https://github.com/mfikes/planck) or with
@@ -234,8 +235,10 @@ various module types you find in the wild including the new ES 2015
 standard. Further out we're looking into automatically generating
 externs where possible.
 
-You have an amazing tool for thought at your fingertips. As I said at
-EuroClojure:
+You have an amazing tool for thought at your fingertips. You can play
+with the
+[latest goodies today](https://github.com/clojure/clojurescript). As I
+said at EuroClojure:
 
 *Keep calm and try to take over the world*.
 
