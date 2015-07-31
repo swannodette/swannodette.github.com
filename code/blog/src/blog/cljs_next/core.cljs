@@ -156,11 +156,14 @@
     (events/listen (gdom/getElement "ex4-run") EventType.CLICK
       (fn [e]
         (cljs/compile-str st (.getValue ed0) 'foo.bar
-          {:load load}
+          {:load load
+           :eval cljs/js-eval}
           (fn [{:keys [error value]}]
             (if-not error
               (.setValue ed1 value)
-              (.error js/console error))))))))
+              (do
+                (println (.. error -cause -stack))
+                (.error js/console error)))))))))
 
 ;; -----------------------------------------------------------------------------
 ;; Main

@@ -1,4 +1,4 @@
 (ns bar.core)
 
-(defmacro multi [a b]
+(defmacro mult [a b]
   `(* ~a ~b))
