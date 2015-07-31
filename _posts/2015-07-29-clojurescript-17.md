@@ -126,21 +126,23 @@ then measure the time it takes to read all of it.
 </div>
 
 On my 3.5ghz iMac this takes ~80ms under WebKit Nightly, ~130ms
-under Chrome Canary, and ~110ms under Firefox Nightly.
+under Chrome Canary, and ~110ms under Firefox Nightly. These numbers
+range from only 1.5X to 3X slower than ClojureScript JVM performance.
 
-A big shoutout to Andrew McVeigh and Nicola Mometto for pushing the
+A big shoutout to [Andrew McVeigh](https://github.com/andrewmcveigh)
+and [Nicola Mometto](https://github.com/Bronsa) for pushing the
 ClojureScript port of tools.reader through.
 
 Now let's consider the next step, analysis.
 
 ## Analysis
 
-After successfully reading a form that form is passed to the analyzer
-for analyze. This step produces an AST. ClojureScript's AST is
-composed entirely of simple immutable values. Similar to the strategy
-taken by many popular JavaScript parsers and compilers, a data
-oriented representation means the AST can be manipulated easily
-without an API of any kind.
+After successfully reading a form that form is passed to the
+analyzer. This step produces an AST. ClojureScript's AST is composed
+entirely of simple immutable values. Similar to the strategy taken by
+many popular JavaScript parsers and compilers, a data oriented
+representation means the AST can be manipulated easily without an API
+of any kind.
 
 <div id="ana-cljs" class="eval-cljs">
     <div class="cols">
@@ -156,7 +158,8 @@ without an API of any kind.
      <button id="ex2-run" class="eval">ANALYZE</button>
 </div>
 
-A big shoutout to Shaun Lebron and Jonathan Boston's work on porting
+A big shoutout to [Shaun Lebron](https://github.com/shaunlebron) and
+[Jonathan Boston's](https://github.com/bostonou) work on porting
 `clojure.pprint` to ClojureScript so that we can see a pretty-printed
 AST.
 
@@ -183,8 +186,13 @@ oriented AST:
     <button id="ex3-run" class="eval">COMPILE</button>
 </div>
 
-Let's show a less trivial example. We can load a macros file from a
-URL, compile it, and then compile the source that uses the macro:
+Let's show a less trivial example. The following includes a library
+import. Users of bootstrapped ClojureScript have total control how
+library names are resolved to actual sources. In this case we've
+configured libraries to be fetched via a simple XMLHttpRequest. In
+order to expand the macros we must first get the macros file, compile
+it, eval it, and then continue to parse, analyze, and compile the
+`foo.core` namespace.
 
 <div id="macro-cljs" class="eval-cljs">
    <div class="eval-cljs">
@@ -206,16 +214,21 @@ This example demonstrate not only how pluggable the bootstrapped
 compiler is, but how anything compilable by ClojureScript JVM is
 compilable by ClojureScript JS.
 
-## Loop (Conclusion)
+## Conclusion
 
 There's little doubt that this feature enhancement will create an
 avalanche of new innovation. You can already run ClojureScript on your
-iPhone with [Replete]() and write fast starting shell scripts with
-[Planck]() or with [Node.js](). Suffice to say we've only scratched
-the surface of an iceberg of potential.
+iPhone with [Replete](https://github.com/mfikes/replete), build iOS
+app with
+[React Native](https://github.com/omcljs/ambly/wiki/ClojureScript-React-Native-Quick-Start),
+and write fast starting shell scripts with
+[Planck](https://github.com/mfikes/planck) or with
+[Node.js](https://github.com/kanaka/cljs-bootstrap). Suffice to say
+we've only scratched the surface of an iceberg of potential.
 
 After something this signifanct you think we would be done, but
-there's a lot more good stuff coming. Maria Neise's excellent
+there's a lot more good stuff
+coming. [Maria Geller's](https://twitter.com/mayaneise) excellent
 JavaScript module work should make it a breeze to integrate the
 various module types you find in the wild including the new ES 2015
 standard. Further out we're looking into automatically generating
