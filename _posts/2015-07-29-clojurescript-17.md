@@ -230,7 +230,7 @@ we've only scratched the surface of an iceberg of potential.
 To be clear this not something you want to use for the traditional
 ClojureScript use case, building typical web applications. The output
 file starting size is simply to large (~300K gzipped). But there are
-now many new reachable target where this cost is not a constraint as
+now many new reachable targets where this cost is not a constraint as
 in the examples previously enumerated.
 
 After something this significant you think we would be done, but
