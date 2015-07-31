@@ -138,7 +138,7 @@ Now let's consider the next step, analysis.
 
 ## Analysis
 
-After successfully reading a form that form is passed to the
+After successfully reading a form, that form is passed to the
 analyzer. This step produces an AST. ClojureScript's AST is composed
 entirely of simple immutable values. Similar to the strategy taken by
 many popular JavaScript parsers and compilers, a data oriented
@@ -229,7 +229,7 @@ we've only scratched the surface of an iceberg of potential.
 
 To be clear this not something you want to use for the traditional
 ClojureScript use case, building typical web applications. The output
-file starting size is simply to large (~300K gzipped). But there are
+file starting size is simply too large (~300K gzipped). But there are
 now many new reachable targets where this cost is not a constraint as
 in the examples previously enumerated.
 
