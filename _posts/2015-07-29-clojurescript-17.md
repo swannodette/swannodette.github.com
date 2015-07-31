@@ -24,10 +24,13 @@ miles away from Scheme or anything like it.
 
 For many years it seemed unlikely that Lisp would be more widely used
 by the working programmer. So it's with a constant sense of wonder
-that I look around at the rapidly expanding ClojureScript community
-who share the same love for simpler yet more expressive systems. It's
-seem fair to attribute this quickening pace of adoption to
-ClojureScript's steadfast dedication to pragmatism.
+that I look around at a rapidly expanding
+[ClojureScript](http://cljsjs.github.io/)
+[community](http://cljs.info/cheatsheet/) that
+[shares](https://github.com/clojure/clojurescript/wiki/Companies-Using-ClojureScript)
+the same love for simpler yet more expressive systems. It seems fair
+to attribute this quickening pace of adoption to ClojureScript's
+steadfast dedication to pragmatism.
 
 But always taking the practical route can cut off unforeseen avenues
 and vistas.
@@ -79,7 +82,7 @@ and evaluate whatever you like.
 
 So what is happening here?
 
-We grab a string out of [CodeMirror](https://codemirror.net/), read
+We grabbed a string out of [CodeMirror](https://codemirror.net/), read
 it via [tools.reader](https://github.com/clojure/tools.reader) into
 persistent data structures, passed it into the ClojureScript analyzer,
 constructed an immutable AST, passed that AST to the compiler, and
@@ -107,7 +110,8 @@ structures. What other languages call parsing is traditionally called
 reading in Lisp. It's important for this process to be fast. We've
 spent years tuning ClojureScript code generation for modern JavaScript
 JITs without catering to any specific engine (for a long time V8 was
-king, but these days JavaScriptCore is screaming ahead of the pack).
+king, but these days
+[JavaScriptCore is screaming ahead of the pack](https://www.webkit.org/blog/3362/introducing-the-webkit-ftl-jit/)).
 
 So how long does it take to read the entire standard library (about
 10,000 lines of code) into persistent data structures? Click the

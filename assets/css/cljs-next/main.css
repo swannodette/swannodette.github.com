@@ -27,7 +27,8 @@ button {
     clear: both;
     position: relative;
     margin-top: 1em;
-    height: 20px;
+    margin-bottom: 1em;
+    height: 30px;
 }
 
 .eval-ctrl input {
