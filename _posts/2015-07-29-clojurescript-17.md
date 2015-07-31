@@ -227,7 +227,7 @@ and write fast starting shell scripts with
 [Node.js](https://github.com/kanaka/cljs-bootstrap). Suffice to say
 we've only scratched the surface of an iceberg of potential.
 
-To be clear this not something you want to use for the traditional
+To be clear this is not something you want to use for the traditional
 ClojureScript use case, building typical web applications. The output
 file starting size is simply too large (~300K gzipped). But there are
 now many new reachable targets where this cost is not a constraint as
