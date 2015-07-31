@@ -24,8 +24,10 @@ button {
 }
 
 .eval-ctrl {
+    clear: both;
     position: relative;
     margin-top: 1em;
+    height: 20px;
 }
 
 .eval-ctrl input {
@@ -54,14 +56,25 @@ button {
 }
 
 #ana-cljs {
-    Position: relative;
+    position: relative;
     height: 300px;
+}
+
+#comp-cljs {
+    position: relative;
+    height: 125px;    
 }
 
 #ana-cljs .CodeMirror,
 #ana-cljs .CodeMirror .CodeMirror-scroll,
 #ana-cljs .CodeMirror .CodeMirror-gutters {
     height: 300px;
+}
+
+#comp-cljs .CodeMirror,
+#comp-cljs .CodeMirror .CodeMirror-scroll,
+#comp-cljs .CodeMirror .CodeMirror-gutters {
+    height: 125px;
 }
 
 .eval-cljs .cols .left,

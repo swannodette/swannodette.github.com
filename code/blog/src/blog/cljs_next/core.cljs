@@ -94,7 +94,7 @@
 ;;-----------------------------------------------------------------------------
 ;; Example 2
 
-(defn elide-meta [env ast opts]
+(defn elide-env [env ast opts]
   (dissoc ast :env))
 
 (def ex2-src
@@ -102,16 +102,29 @@
 
 (defn ex2 []
   (let [ed0 (textarea->cm "ex2" ex2-src)
-        ed1 (textarea->cm "ex2-out" "foo")]
+        ed1 (textarea->cm "ex2-out" "")]
     (events/listen (gdom/getElement "ex2-run") EventType.CLICK
       (fn [e]
         (cljs/analyze st (.getValue ed0) nil
-          {:passes [ana/infer-type elide-meta]}
+          {:passes [ana/infer-type elide-env]}
           (fn [{:keys [error value] :as res}]
-            (.log js/console ed1)
-            (println res)
             (if-not error
               (.setValue ed1 (with-out-str (pprint value)))
+              (.error js/console error))))))))
+
+;;-----------------------------------------------------------------------------
+;; Example 3
+
+(defn ex3 []
+  (let [ed0 (textarea->cm "ex3" ex0-src)
+        ed1 (textarea->cm "ex3-out" "")]
+    (events/listen (gdom/getElement "ex3-run") EventType.CLICK
+      (fn [e]
+        (cljs/compile st (.getValue ed0) nil
+          nil
+          (fn [{:keys [error value]}]
+            (if-not error
+              (.setValue ed1 value)
               (.error js/console error))))))))
 
 ;; -----------------------------------------------------------------------------
@@ -120,6 +133,7 @@
 (defn main []
   (ex0)
   (ex1)
-  (ex2))
+  (ex2)
+  (ex3))
 
 (main)

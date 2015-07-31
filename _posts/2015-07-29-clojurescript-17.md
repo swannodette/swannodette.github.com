@@ -140,17 +140,34 @@ ClojureScript expression:
      <button id="ex2-run" class="eval">ANALYZE</button>
 </div>
 
+The ClojureScript is represented entirely as simple data, maps,
+string, numbers, vectors, symbols, etc.
+
+From the AST we can now generate JavaScript.
+
 ## Compilation
 
-<div class="eval-cljs">
-    <div class="cols">
-        <textarea id="ex3" class="code"></textarea>
-        <textarea id="ex3-out" class="code"></textarea>
-    </div>
-    <div class="eval-ctrl">
-        <button id="ex3-run" class="eval">COMPILE</button>
+The compiler generates JavaScript directly from the simple data
+oriented AST:
+
+<div id="comp-cljs" class="eval-cljs">
+   <div class="eval-cljs">
+       <div class="cols">
+           <div class="left">
+               <textarea id="ex3" class="code"></textarea>
+           </div>
+           <div class="right">    
+               <textarea id="ex3-out" class="code"></textarea>
+           </div>
+       </div>
     </div>
 </div>
+<div class="eval-ctrl">
+    <button id="ex3-run" class="eval">COMPILE</button>
+</div>
+
+Let's show a less trivial example. We can load a macros file from a
+URL, compile it, and then compile the source that uses the macro:
 
 ## Loop (Conclusion)
 
