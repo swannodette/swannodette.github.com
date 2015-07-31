@@ -144,12 +144,18 @@
        "\n"
        "(mult 4 4)"))
 
+(def bar-url "/assets/cljs/bar/core.clj")
+
+(defn load [lib cb]
+  (go (cb (<! (get-file bar-url)))))
+
 (defn ex4 []
   (let [ed0 (textarea->cm "ex4" ex4-src)
         ed1 (textarea->cm "ex4-out" "")]
     (events/listen (gdom/getElement "ex4-run") EventType.CLICK
       (fn [e]
-        (cljs/compile-str st (.getValue ed0) nil
+        (cljs/compile-str st (.getValue ed0) 'foo.bar
+          {:load load}
           (fn [{:keys [error value]}]
             (if-not error
               (.setValue ed1 value)
