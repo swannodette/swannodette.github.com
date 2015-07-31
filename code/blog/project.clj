@@ -142,11 +142,26 @@
                 ;:elide-asserts true
                 :output-to "../../assets/js/contracts/main.js"}}
 
-    {:id "cljs-next-dev"
+    #_{:id "cljs-next-dev"
      :source-paths ["src/blog/cljs_next"]
      :compiler {:optimizations :none
                 :main cljs-next.core
                 :source-maps true
+                :verbose true
+                :output-to "../../assets/js/cljs_next/main.js"
+                :output-dir "../../assets/js/cljs_next"
+                :asset-path "/assets/js/cljs_next"
+                :foreign-libs
+                [{:provides ["cljsjs.codemirror.addons.matchbrackets"]
+                  :requires ["cljsjs.codemirror"]
+                  :file "../../assets/js/codemirror/matchbrackets.js"}]}}
+
+    {:id "cljs-next-release"
+     :source-paths ["src/blog/cljs_next"]
+     :compiler {:optimizations :simple
+                :pretty-print false
+                :static-fns true
+                :optimize-constants true
                 :verbose true
                 :output-to "../../assets/js/cljs_next/main.js"
                 :output-dir "../../assets/js/cljs_next"
