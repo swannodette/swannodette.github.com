@@ -128,7 +128,7 @@ a few times and you will observe it get faster.
 
 On my 3.5ghz iMac this takes ~60ms under WebKit Nightly, ~80ms
 under Chrome Canary, and ~60ms under Firefox Nightly. These numbers
-are only 1.5X slower than ClojureScript JVM performance.
+are only 1.5X to 2X slower than ClojureScript JVM performance.
 
 A big shoutout to [Andrew McVeigh](https://github.com/andrewmcveigh)
 and [Nicola Mometto](https://github.com/Bronsa) for pushing the
