@@ -147,7 +147,8 @@
 (def bar-url "/assets/cljs/bar/core.clj")
 
 (defn load [lib cb]
-  (go (cb (<! (get-file bar-url)))))
+  (go (cb {:lang :clj
+           :source (<! (get-file bar-url))})))
 
 (defn ex4 []
   (let [ed0 (textarea->cm "ex4" ex4-src)
