@@ -1,5 +1,4 @@
 (ns cljs-next.core
-  (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [goog.dom :as gdom]
             [goog.events :as events]
             [goog.object :as gobj]
@@ -10,8 +9,7 @@
             [cljs.tools.reader.reader-types :refer [string-push-back-reader]]
             [cljs.tagged-literals :as tags]
             [cljsjs.codemirror.mode.clojure]
-            [cljsjs.codemirror.addons.matchbrackets]
-            [cljs.core.async :as async :refer [chan <! >! put! take!]]            )
+            [cljsjs.codemirror.addons.matchbrackets])
   (:import [goog.events EventType]
            [goog.net XhrIo]))
 
@@ -35,12 +33,10 @@
       #(.replaceChild (.-parentNode ta) % ta)
       (doto (cm-opts) (gobj/set "value" code)))))
 
-(defn get-file [url]
-  (let [c (chan)]
-    (.send XhrIo url
-      (fn [e]
-        (put! c (.. e -target getResponseText))))
-    c))
+(defn get-file [url cb]
+  (.send XhrIo url
+    (fn [e]
+      (cb (.. e -target getResponseText)))))
 
 (def st (cljs/empty-state))
 
@@ -91,7 +87,7 @@
 (defn ex1 []
   (events/listen (gdom/getElement "ex1-run") EventType.CLICK
     (fn [e]
-      (go (read-core (<! (get-file core-url)))))))
+      (get-file core-url read-core))))
 
 ;;-----------------------------------------------------------------------------
 ;; Example 2
@@ -148,8 +144,9 @@
 (def bar-url "/assets/cljs/bar/core.clj")
 
 (defn load [lib cb]
-  (go (cb {:lang :clj
-           :source (<! (get-file bar-url))})))
+  (get-file bar-url
+    (fn [src]
+      (cb {:lang :clj :source src}))))
 
 (defn ex4 []
   (let [ed0 (textarea->cm "ex4" ex4-src)
