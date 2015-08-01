@@ -211,7 +211,7 @@ it, eval it, and then continue to parse, analyze, and compile the
     <button id="ex4-run" class="eval">COMPILE</button>
 </div>
 
-This example demonstrate not only how pluggable the bootstrapped
+This example demonstrates not only how pluggable the bootstrapped
 compiler is, but how anything compilable by ClojureScript JVM is
 compilable by ClojureScript JS.
 
