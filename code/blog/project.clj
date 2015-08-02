@@ -9,13 +9,16 @@
                  "https://oss.sonatype.org/content/groups/staging/"}
 
   :dependencies [[org.clojure/clojure "1.7.0"]
-                 [org.clojure/clojurescript "1.7.32"]
+                 [org.clojure/clojurescript "1.7.33"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [org.clojure/core.match "0.3.0-alpha4"]
                  [org.omcljs/om "0.9.0"]
-                 [cljsjs/codemirror "5.1.0-2"]]
+                 [cljsjs/codemirror "5.1.0-2"]
+                 [com.cognitect/transit-clj "0.8.275"]
+                 [com.cognitect/transit-cljs "0.8.220"]]
 
-  :plugins [[lein-cljsbuild "1.0.6"]]
+  :plugins [[lein-cljsbuild "1.0.6"]
+            [cider/cider-nrepl "0.9.1"]]
 
   :source-paths ["src" "target/classes"]
 
