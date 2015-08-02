@@ -149,6 +149,7 @@
      :source-paths ["src/blog/cljs_next"]
      :compiler {:optimizations :none
                 :main cljs-next.core
+                :dump-core false
                 :source-maps true
                 :verbose true
                 :output-to "../../assets/js/cljs_next/main.js"
@@ -163,6 +164,7 @@
      :source-paths ["src/blog/cljs_next"]
      :compiler {:optimizations :simple
                 :pretty-print false
+                :dump-core false
                 :static-fns true
                 :optimize-constants true
                 :verbose true

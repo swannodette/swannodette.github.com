@@ -9,7 +9,8 @@
             [cljs.tools.reader.reader-types :refer [string-push-back-reader]]
             [cljs.tagged-literals :as tags]
             [cljsjs.codemirror.mode.clojure]
-            [cljsjs.codemirror.addons.matchbrackets])
+            [cljsjs.codemirror.addons.matchbrackets]
+            [cognitect.transit :as t])
   (:import [goog.events EventType]
            [goog.net XhrIo]))
 
@@ -167,11 +168,19 @@
 ;; -----------------------------------------------------------------------------
 ;; Main
 
+(def cache-path
+  "/assets/js/cljs_next/cljs/core.cljs.cache.aot.json")
+
 (defn main []
-  (ex0)
-  (ex1)
-  (ex2)
-  (ex3)
-  (ex4))
+  (get-file cache-path
+    (fn [txt]
+      (let [rdr   (t/reader :json)
+            cache (t/read rdr txt)]
+        (cljs/load-analysis-cache! st 'cljs.core cache)
+        (ex0)
+        (ex1)
+        (ex2)
+        (ex3)
+        (ex4)))))
 
 (main)
