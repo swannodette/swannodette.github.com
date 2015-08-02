@@ -6,13 +6,13 @@
   (read-string
     (slurp (io/resource "cljs/core.cljs.cache.aot.edn"))))
 
-(count
-  (slurp (io/resource "cljs/core.cljs.cache.aot.edn")))
-
 (def out (ByteArrayOutputStream. 1000000))
 
 (def writer (t/writer out :json))
 
 (t/write writer cache)
 
-(.toString out)
+(def out-path
+  "../../assets/js/cljs_next/cljs/core.cljs.cache.aot.json")
+
+(spit (io/file out-path) (.toString out))
