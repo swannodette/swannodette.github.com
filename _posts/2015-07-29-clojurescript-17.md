@@ -188,7 +188,7 @@ oriented AST:
 </div>
 
 Let's show a less trivial example. The following includes a library
-import. Users of bootstrapped ClojureScript have total control how
+import. Users of bootstrapped ClojureScript have total control over how
 library names are resolved to actual sources. In this case we've
 configured libraries to be fetched via a simple XMLHttpRequest. In
 order to expand the macros we must first get the macros file, compile
