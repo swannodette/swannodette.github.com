@@ -88,7 +88,7 @@ checking to see if there isn't a
 that will get the job done. Just the
 other day I needed a pseudorandom number generator for
 [test.check](https://github.com/clojure/test.check), Closure did not
-[disappoint](http://docs.closure-library.googlecode.com/git/class_goog_testing_PseudoRandom.html).
+[disappoint](https://google.github.io/closure-library/api/class_goog_testing_PseudoRandom.html).
 
 In some cases Google Closure doesn't provide the nicest of APIs or
 is poorly documented but it's generally a simple matter to present
