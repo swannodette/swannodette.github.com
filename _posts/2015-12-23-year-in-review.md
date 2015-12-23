@@ -229,7 +229,7 @@ adopt Om or the technologies that inspired it (Relay, Falcor,
 Datomic), I am confident that Graph-Query-View based UI architectures
 will gain steam in 2016. Kovas Boguta and I gave a
 [high level talk at QCon](http://www.infoq.com/presentations/domain-driven-architecture)
-and I deliver the
+and I delivered the
 [nitty gritty at Clojure/conj](https://www.youtube.com/watch?v=MDZpSIngwm4).
 
 ## Conclusion
