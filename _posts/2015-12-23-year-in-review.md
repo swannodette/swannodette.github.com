@@ -56,6 +56,11 @@ Reagent:
 src="https://www.youtube.com/embed/4txql-1VXJk" frameborder="0"
 allowfullscreen></iframe>
 
+For getting up and running with React Native, look at
+[natal](https://github.com/dmotz/natal) and
+[re-natal](https://github.com/drapanjanas/re-natal) as well the
+collection of resources at [cljsrn.org](http://cljsrn.org/).
+
 Suffice to say I see ClojureScript + React Native really taking off
 in 2016.
 
