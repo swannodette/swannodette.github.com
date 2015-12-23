@@ -192,8 +192,8 @@ phone 4 years ago I would have laughed in disbelief.
 This one came out of the blue. Lisp is 58 years old and people are
 still coming up with things that no one has tried before. With a
 clever algorithm and some inference driven by indentation, Shaun
-LeBron has probably created the most beginner friendly way to write
-Lisp the world has ever seen. The
+LeBron of [cljs.info](http://cljs.info) has probably created the most
+beginner friendly way to write Lisp the world has ever seen. The
 [parinfer blog post is a jaw dropper](https://shaunlebron.github.io/parinfer/).
 
 And of course Mike Fikes gets parinfer into Replete in short order:
