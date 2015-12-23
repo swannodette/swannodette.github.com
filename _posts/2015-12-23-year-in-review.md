@@ -112,7 +112,7 @@ before. As Alan Kay sez, a change of perspective is worth a
 non-trivial amount of IQ points.
 
 Combined with Figwheel, Devcards provides an interactive way to both
-develop and view component states radically simplifying the task of
+develop and view component states, radically simplifying the task of
 testing your UI work:
 
 <iframe style="border: 1px solid black; padding: 2px;" width="580" height="315"
