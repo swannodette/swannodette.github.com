@@ -167,7 +167,7 @@ your iPhone or iPad:
 src="https://www.youtube.com/embed/GVVugX3qqF8" frameborder="0"
 allowfullscreen></iframe>
 
-If you had told me I would be run a robust dialect of Clojure on my
+If you had told me I would be running a robust dialect of Clojure on my
 phone 4 years ago I would have laughed in disbelief.
 
 ## Parinfer
