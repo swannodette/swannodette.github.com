@@ -92,7 +92,7 @@ prior to 2015, it became clear with a slew of strong stable releases
 that, Bruce Hauman is one of ClojureScript's finest tooling
 authors. In a very short window of time Figwheel has taken the
 ClojureScript world by storm as the REPL of choice. The usefulness of
-hot-code loading when during UI work cannot be understated.
+hot-code loading during UI work cannot be understated.
 
 <iframe style="border: 1px solid black; padding: 2px;" width="580" height="315"
 src="https://www.youtube.com/embed/j-kj2qwJa_E" frameborder="0"
