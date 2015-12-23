@@ -24,7 +24,7 @@ combination of Bonjour and WebDAV, the Ambly REPL sets a new bar.
 
 Here's a basic Ambly demo:
 
-<iframe width="560" height="315"
+<iframe style="border: 1px solid black; padding: 2px;" width="580" height="315"
 src="https://www.youtube.com/embed/TVDkYZJW2MY" frameborder="0"
 allowfullscreen></iframe>
 
@@ -35,7 +35,7 @@ JavaScript Canvas 2D and WebGL APIs to native iOS clients.
 For example here's Ambly being used to develop an Ejecta application
 on [tvOS](https://developer.apple.com/tvos/?&cid=wwa-us-kwg-tv):
 
-<iframe width="420" height="315"
+<iframe style="border: 1px solid black; padding: 2px;"width="420" height="315"
 src="https://www.youtube.com/embed/eaWy5mliO38" frameborder="0"
 allowfullscreen></iframe>
 
@@ -52,7 +52,7 @@ over the past two years.
 Here is another Mike Fikes video demonstrating React Native with
 Reagent:
 
-<iframe width="560" height="315"
+<iframe style="border: 1px solid black; padding: 2px;" width="580" height="315"
 src="https://www.youtube.com/embed/4txql-1VXJk" frameborder="0"
 allowfullscreen></iframe>
 
@@ -87,14 +87,14 @@ prolific, active, and helpful.
 
 ## Figwheel
 
-While Figwheel appeared prior to 2015, it became clear with a slew of
-strong stable releases that, Bruce Hauman is one of ClojureScript's
-finest tooling authors. In a very short window of time Figwheel has
-taken the ClojureScript world by storm as the REPL of choice. The
-usefulness of hot-code loading when during UI work cannot be
-understated.
+While [Figwheel](https://github.com/bhauman/lein-figwheel) appeared
+prior to 2015, it became clear with a slew of strong stable releases
+that, Bruce Hauman is one of ClojureScript's finest tooling
+authors. In a very short window of time Figwheel has taken the
+ClojureScript world by storm as the REPL of choice. The usefulness of
+hot-code loading when during UI work cannot be understated.
 
-<iframe width="560" height="315"
+<iframe style="border: 1px solid black; padding: 2px;" width="580" height="315"
 src="https://www.youtube.com/embed/j-kj2qwJa_E" frameborder="0"
 allowfullscreen></iframe>
 
@@ -102,17 +102,20 @@ This video should be watched in its entirety.
 
 ## Devcards
 
-Clearly Figwheel wasn't enough for Bruce. Devcards sets a new bar for
-UI tooling. Have tried all kinds of UI tooling, Devcards legitimately
-provides something so obvious and simple it's incredible it hasn't bee
-tried before. As Alan Kay says, a chance of perspective is worth a
+Clearly Figwheel wasn't enough for
+Bruce. [Devcards](https://github.com/bhauman/devcards) sets a new bar
+for UI tooling. Devcards also came together prior to 2015 but the
+adoption rate has skyrocketed of late and for good reason. Having
+tried all kinds of UI tooling in my career, Devcards legitimately provides
+something so obvious and simple it's incredible it hasn't been tried
+before. As Alan Kay sez, a change of perspective is worth a
 non-trivial amount of IQ points.
 
 Combined with Figwheel, Devcards provides an interactive way to both
 develop and view component states radically simplifying the task of
 testing your UI work:
 
-<iframe width="560" height="315"
+<iframe style="border: 1px solid black; padding: 2px;" width="580" height="315"
 src="https://www.youtube.com/embed/DPHkBp9Mkzk" frameborder="0"
 allowfullscreen></iframe>
 
@@ -133,20 +136,26 @@ Some other neat bootstrapping projects follow.
 
 ## Planck
 
-Mike Fikes is clearly a tireless person, within what seems like hours
+Mike Fikes is clearly a tireless person, within what seemed like hours
 of bootstrapping, Mike Fikes had a standalone ClojureScript REPL that
 you can easily install with [brew](http://brew.sh).
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/CC5jGO712cE" frameborder="0" allowfullscreen></iframe>
+<iframe style="border: 1px solid black; padding: 2px;" width="580" height="315" src="https://www.youtube.com/embed/CC5jGO712cE" frameborder="0" allowfullscreen></iframe>
+
+If you want a ClojureScript REPL that starts fast for testing one
+liners, look no further than Planck.
 
 ## Replete
 
 Thanks to bootstrapping you can also use full blown ClojureScript on
 your iPhone or iPad:
 
-<iframe width="560" height="315"
+<iframe style="border: 1px solid black; padding: 2px;" width="580" height="315"
 src="https://www.youtube.com/embed/GVVugX3qqF8" frameborder="0"
 allowfullscreen></iframe>
+
+If you had told me I would be run a robust dialect of Clojure on my
+phone 4 years ago I would have laughed in disbelief.
 
 ## Parinfer
 
@@ -159,9 +168,13 @@ Lisp the world has ever seen. The
 
 And of course Mike Fikes gets parinfer into Replete in short order:
 
-<iframe width="560" height="315"
+<iframe style="border: 1px solid black; padding: 2px;" width="580" height="315"
 src="https://www.youtube.com/embed/xdIwkPEnlFY" frameborder="0"
 allowfullscreen></iframe>
+
+If anything 2015 has been the year of network effects. It's thrilling
+to see all these individual efforts come together as part of a grand
+shared vision.
 
 ## Cursive
 
@@ -176,7 +189,7 @@ it.
 [Cider 0.10](https://github.com/clojure-emacs/cider/releases/tag/v0.10.0)
 shipped with many, many enhancements for ClojureScript. If Emacs is
 your tool of choice, the ClojureScript story has improved leaps and
-bounds over the past year thanks to tireless work of many
+bounds over the past year thanks to the tireless work of many
 contributors.
 
 ## Om Next
@@ -184,19 +197,25 @@ contributors.
 I also did a series of talks on Om Next this year. Whether or not you
 adopt Om or the technologies that inspired it (Relay, Falcor,
 Datomic), I am confident that Graph-Query-View based UI architectures
-will gain steam in 2016
-
-http://www.infoq.com/presentations/domain-driven-architecture
-https://www.youtube.com/watch?v=MDZpSIngwm4
+will gain steam in 2016. Kovas Boguta and I gave a
+[high level talk at QCon](http://www.infoq.com/presentations/domain-driven-architecture)
+and I deliver the
+[nitty gritty at Clojure/conj](https://www.youtube.com/watch?v=MDZpSIngwm4).
 
 ## Conclusion
 
 The amount of innovation and invention in the ClojureScript community
-is nothing short of stunning. Hopefully this post give you a sense of
-what sets apart ClojureScript from pretty much ever other compile to
-JavaScript technology. As a group we are now thinking beyond
-programming language esoterica and have turned towards the challenge
-of building the much needed *environmental infrastructure* required
-for the construction of simpler and more robust software systems.
+is nothing short of stunning. Hopefully this post gives you a sense of
+what sets apart ClojureScript from pretty much every other
+compile-to-JavaScript technology. As a group we are now thinking
+far beyond programming language esoterica and have turned towards the
+challenge of building the much needed *environmental infrastructure*
+needed for the construction of simpler and more robust software
+systems.
 
-Looking forward to 2016!
+Congratulations to all that have given to the evolution of
+ClojureScript whether through adoption, contribution, or evangelism!
+
+I suspect 2016 will be an even bigger one for ClojureScript.
+
+Have a Happy New Year!
