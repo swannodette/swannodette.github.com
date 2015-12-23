@@ -44,11 +44,12 @@ You can find out more [here](https://github.com/omcljs/ambly);
 
 ## React Native
 
-Facebook announced React Native further solidifying the role of React
-as a critical part of the ClojureScript ecosystem. ClojureScript React
-bindings abound and now the community can easily reach the iOS and
-Android platforms using the same React bindings we've all come to love
-over the past two years.
+Facebook announced
+[React Native](https://github.com/facebook/react-native) further
+solidifying the role of React as a critical part of the ClojureScript
+ecosystem. ClojureScript React bindings abound and now the community
+can easily reach the iOS and Android platforms using the same React
+bindings we've all come to love over the past two years.
 
 Here is another Mike Fikes video demonstrating React Native with
 Reagent:
