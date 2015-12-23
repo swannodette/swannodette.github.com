@@ -17,7 +17,8 @@ infrastructure. This was an admittedly painful transition, but now
 that we are on the other side of the hump the considerable payoff is
 self-evident.
 
-Case in point, Mike Fike's Ambly REPL delivers a seamless live
+Case in point, Mike Fike's
+[Ambly REPL](https://github.com/omcljs/ambly) delivers a seamless live
 experience when developing iOS applications without requiring
 tethering or XCode beyond the initial install. Using a slick
 combination of Bonjour and WebDAV, the Ambly REPL sets a new bar.
