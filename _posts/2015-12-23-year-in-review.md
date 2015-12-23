@@ -17,7 +17,7 @@ While technically it appeared in late 2014,
 enhanced and standardized support for foreign dependencies in
 January. Thanks to the tireless work of many contributors, the wider
 community of ClojureScript users can now leverage the most popular
-JavaScipt libraries with minimal hassle. Many thanks to Martin Klepsch
+JavaScript libraries with minimal hassle. Many thanks to Martin Klepsch
 and Juho Teperi for leading the charge.
 
 ## Ambly
