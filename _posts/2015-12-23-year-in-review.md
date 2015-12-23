@@ -17,7 +17,7 @@ infrastructure. This was an admittedly painful transition, but now
 that we are on the other side of the hump the considerable payoff is
 self-evident.
 
-Case in point, Mike Fike's
+Case in point, Mike Fikes's
 [Ambly REPL](https://github.com/omcljs/ambly) delivers a seamless live
 experience when developing iOS applications without requiring
 tethering or XCode beyond the initial install. Using a slick
