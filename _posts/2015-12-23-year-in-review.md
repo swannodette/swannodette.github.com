@@ -206,11 +206,11 @@ and I deliver the
 
 The amount of innovation and invention in the ClojureScript community
 is nothing short of stunning. Hopefully this post gives you a sense of
-what sets apart ClojureScript from pretty much every other
+what sets ClojureScript apart from pretty much every other
 compile-to-JavaScript technology. As a group we are now thinking
 far beyond programming language esoterica and have turned towards the
-challenge of building the much needed *environmental infrastructure*
-needed for the construction of simpler and more robust software
+challenge of building the necessarry *environmental infrastructure*
+required for the construction of simpler and more robust software
 systems.
 
 Congratulations to all that have given to the evolution of
