@@ -78,7 +78,7 @@ in 2016.
 
 ## Google Summer of Code
 
-The ClojureScript Google Summer of Code 2015 project was smashing
+The ClojureScript Google Summer of Code 2015 project was a smashing
 success. Maria Geller dove deep into the problem of integrating
 CommonJS, AMD, ES2015 modules as well as integrating popular
 JavaScript compilation technology like Babel.js. There's more work to
