@@ -222,7 +222,7 @@ is nothing short of stunning. Hopefully this post gives you a sense of
 what sets ClojureScript apart from pretty much every other
 compile-to-JavaScript technology. As a group we are now thinking
 far beyond programming language esoterica and have turned towards the
-challenge of building the necessarry *environmental infrastructure*
+challenge of building the necessary *environmental infrastructure*
 required for the construction of simpler and more robust software
 systems.
 
