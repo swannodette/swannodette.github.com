@@ -181,7 +181,7 @@ shared vision.
 [Cursive IDE shipped](https://cursive-ide.com/)! If you're looking for
 a rich development environment for Clojure and ClojureScript, Cursive
 delivers in spades. I've been using it exclusively for Clojure and
-ClojureScript development since January and I can't imagine life with
+ClojureScript development since January and I can't imagine life without
 it.
 
 ## Cider 0.10
