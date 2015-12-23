@@ -7,7 +7,7 @@ tags: []
 ---
 {% include JB/setup %}
 
-It's been a very exciting year for ClojureScript. It clear that things
+It's been a very exciting year for ClojureScript. It's clear that things
 have been accelerating and here is a personal selection of highlights:
 
 ## CLJSJS
