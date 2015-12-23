@@ -99,8 +99,8 @@ appearance of [re-frame](https://github.com/Day8/re-frame), a very
 well-considered architecture for Reagent applications.
 
 If the other ClojureScript React bindings aren't your speed, Reagent
-and re-frame are well worthy of a close assessment. The community is
-prolific, active, and helpful.
+and re-frame invite close assessment. The community is prolific,
+active, and helpful.
 
 ## Figwheel
 
