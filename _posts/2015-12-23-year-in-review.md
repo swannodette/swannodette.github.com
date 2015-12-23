@@ -141,7 +141,7 @@ Again, this video must be watched in its entirety.
 ## Self Compilation
 
 With the appearance of reader conditionals in Clojure 1.7.0 I got the
-bug over the summer to make ClojureScript self-compile. While it may
+bug over the summer to make ClojureScript self compile. While it may
 seem like a feat to outsiders, ClojureScript was always ready for
 self compilation and the work was pretty boring. The repercussions
 however are only starting to be understood. Some great examples of the
@@ -150,7 +150,7 @@ power of optional bootstrapping are the winning
 web based [ClojureScript REPL](http://clojurescript.io).
 
 Some other neat bootstrapping projects follow after some brief words
-on ClojrueScript 1.7.X.
+on ClojureScript 1.7.X.
 
 ## ClojureScript 1.7.X
 
