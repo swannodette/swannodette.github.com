@@ -132,7 +132,20 @@ power of optional bootstrapping are the winning
 [Clojure Cup entry](http://landofquil.we-do-fp.berlin) and a new
 web based [ClojureScript REPL](http://clojurescript.io).
 
-Some other neat bootstrapping projects follow.
+Some other neat bootstrapping projects follow after some brief words
+on ClojrueScript 1.7.X.
+
+## ClojureScript 1.7.X
+
+Shortly after bootstrapping we released ClojureScript 1.7.28. This was
+the first release of ClojureScript with a proper version number. It
+also signified a much slower pace for releases, much needed to avoid
+tooling churn. Now that the fundamentals are in place expect 2016 releases
+to be heavily focused on compiler performance and build
+reliability. Master already includes exciting enhancements like
+parallel builds (40 lines of code written during a 45 minute train
+ride - thanks Clojure!). Users have reported 30-300% faster compile
+times on their multi-core machines.
 
 ## Planck
 
