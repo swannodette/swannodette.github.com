@@ -12,3 +12,6 @@ Thumbs.db
 .rvmrc
 
 *out/
+*.cljc
+*.cljs
+assets/js/cljs_next
