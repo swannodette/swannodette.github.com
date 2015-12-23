@@ -10,6 +10,16 @@ tags: []
 It's been a very exciting year for ClojureScript. It clear that things
 have been accelerating and here is a personal selection of highlights:
 
+## CLJSJS
+
+While technically it appeared in late 2014,
+[CLJSJS](http://cljsjs.github.io) took off when ClojureScript landed
+enhanced and standardized support for foreign dependencies in
+January. Thanks to the tireless work of many contributors, the wider
+community of ClojureScript users can now leverage the most popular
+JavaScipt libraries with minimal hassle. Many thanks to Martin Klepsch
+and Juho Teperi for leading the chard.
+
 ## Ambly
 
 2015 kicked off with a near complete rewrite of the ClojureScript REPL
