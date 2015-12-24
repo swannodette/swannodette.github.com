@@ -88,7 +88,7 @@ JavaScript ecosystem. You can read more about the project
 
 Also Maria Geller gave a stunning talk about the ClojureScript
 compiler internals at the Clojure/conj which is
-[well worth watching](https://www.youtube.com/watch?v=Elg17s_nwDg)
+[well worth watching](https://www.youtube.com/watch?v=Elg17s_nwDg).
 
 ## Re-frame
 
