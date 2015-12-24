@@ -70,7 +70,7 @@ allowfullscreen></iframe>
 
 For getting up and running with React Native, look at
 [natal](https://github.com/dmotz/natal) and
-[re-natal](https://github.com/drapanjanas/re-natal) as well the
+[re-natal](https://github.com/drapanjanas/re-natal) as well as the
 collection of resources at [cljsrn.org](http://cljsrn.org/).
 
 Suffice to say I see ClojureScript + React Native really taking off
