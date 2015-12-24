@@ -132,9 +132,9 @@ Combined with Figwheel, Devcards provides an interactive way to both
 develop and view component states, radically simplifying the task of
 testing your UI work:
 
-<iframe style="border: 1px solid black; padding: 2px;" width="580" height="315"
-src="https://www.youtube.com/embed/DPHkBp9Mkzk" frameborder="0"
-allowfullscreen></iframe>
+<iframe style="border: 1px solid black; padding: 2px;" width="580"
+height="315" src="https://www.youtube.com/embed/G7Z_g2fnEDg"
+frameborder="0" allowfullscreen></iframe>
 
 Again, this video must be watched in its entirety.
 
