@@ -111,11 +111,11 @@ authors. In a very short window of time Figwheel has taken the
 ClojureScript world by storm as the REPL of choice. The usefulness of
 hot-code loading during UI work cannot be overstated.
 
+This video should be watched in its entirety:
+
 <iframe style="border: 1px solid black; padding: 2px;" width="580" height="315"
 src="https://www.youtube.com/embed/j-kj2qwJa_E" frameborder="0"
 allowfullscreen></iframe>
-
-This video should be watched in its entirety.
 
 ## Devcards
 
@@ -125,18 +125,18 @@ for UI tooling. Devcards also came together prior to 2015 but the
 adoption rate has skyrocketed of late and for good reason. Having
 tried all kinds of UI tooling in my career, Devcards legitimately provides
 something so obvious and simple it's incredible it hasn't been tried
-before. As Alan Kay sez, a change of perspective is worth a
+before. As Alan Kay says, a change of perspective is worth a
 non-trivial amount of IQ points.
 
 Combined with Figwheel, Devcards provides an interactive way to both
 develop and view component states, radically simplifying the task of
 testing your UI work:
 
+Again, this video must be watched in its entirety:
+
 <iframe style="border: 1px solid black; padding: 2px;" width="580"
 height="315" src="https://www.youtube.com/embed/G7Z_g2fnEDg"
 frameborder="0" allowfullscreen></iframe>
-
-Again, this video must be watched in its entirety.
 
 ## Self Compilation
 
