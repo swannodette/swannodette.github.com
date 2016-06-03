@@ -4,6 +4,31 @@
 /*
 /*****************************************************************************/
 
+/*
+  Customizations
+*/
+
+@font-face {
+    font-family: "Computer Modern";
+    src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunss.otf');
+}
+@font-face {
+    font-family: "Computer Modern Bold";
+    src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunsx.otf');
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Computer Modern Italic";
+    src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunsi.otf');
+    font-style: italic, oblique;
+}
+@font-face {
+    font-family: "Computer Modern Bold Italic";
+    src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunbxo.otf');
+    font-weight: bold;
+    font-style: italic, oblique;
+}
+
 @font-face {
     font-family: 'Latin Modern Roman';
     src: url('lmroman10-regular-webfont.eot');
@@ -28,13 +53,14 @@ html, body {
 
 body {
     background-color: white;
-    font: 13.34px helvetica, arial, clean, sans-serif;
-    *font-size: small;
+    /*font: 18.00px helvetica, arial, clean, sans-serif;*/
+    font-size: small;
     text-align: center;
+    line-height: 1.5em;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Latin Modern Roman', Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Computer Modern', Georgia, 'Times New Roman', Times, serif;
     font-size: 100%;
 }
 
@@ -108,7 +134,7 @@ ul.posts span {
     text-align: justify;
     width: 586px;
     margin: 3em auto 2em auto;
-    line-height: 1.5em;
+    line-height: 1.75em;
 }
 
 .title {
@@ -194,7 +220,7 @@ ul.posts span {
 #post ul,
 #post ol {
     margin-left: 1.35em;
-    font-family: 'Latin Modern Roman', Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Computer Modern Roman', Georgia, 'Times New Roman', Times, serif;
 }
 
 #post code, #post .code {
@@ -229,16 +255,16 @@ ul.posts span {
 /* Customizations */
 
 blockquote {
-    font-family: 'Latin Modern Roman', Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Computer Modern', Georgia, 'Times New Roman', Times, serif;
     padding: 20px 30px 10px 30px;
     border: 1px solid black;
     margin: 15px 0;
 }
 
 #post p {
-    font-family: 'Latin Modern Roman', Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Computer Modern', Georgia, 'Times New Roman', Times, serif;
     color: #333;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 #post p.meta {
