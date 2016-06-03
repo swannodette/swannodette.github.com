@@ -208,11 +208,11 @@ problem.
 
 While the Clojurist loves to wax poetic about hammock driven
 development, Clojure(Script) *the language* did not offer much in the
-way of helping us think while keyword. Without belittling the power of
-pencil and paper, the whole point of a computer is to give us
-interactive ways of exploring our thoughts and our designs that pencil
-and paper can't! I think clojure.spec gives us a pretty damn nice
-hammock away from the hammock and I look forward to hearing more about
-it from the larger community.
+way of helping us really work through a design while sitting at a
+keyword. Without belittling the power of pencil and paper, the whole
+point of a computer is to give us interactive ways of exploring our
+thoughts in ways that pencil and paper can't! So I think
+clojure.spec gives us a pretty damn nice hammock away from the hammock
+and I look forward to hearing more about it from the larger community.
 
 Happy hacking!
