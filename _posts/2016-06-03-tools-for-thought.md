@@ -32,7 +32,7 @@ many programmers find it a comfortable train ride across the OOP / FP
 border and [Scala.js](https://www.scala-js.org/) means you can bring
 your experiences to the client. [PureScript](http://purescript.org)
 has a strong following in the [Haskell](http://haskell.org)
-community and course if you really just want Haskell or OCaml on the
+community and of course if you really just want Haskell or OCaml on the
 client you have a [few](https://github.com/ghcjs/ghcjs)
 [options](http://ocsigen.org/js_of_ocaml/) as well.
 
