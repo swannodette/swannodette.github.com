@@ -108,13 +108,13 @@ we know `let` must be made of some obvious basic parts:
   (s/cat
      :name     '#{let}
      :bindings ::bindings
-     :forms    (s/seq* identity)))
+     :forms    (s/seq* (constantly true))))
 ```
 
 Ah wishful thinking! How we adore thee. We know the
 first part of a `let` expression has to be the symbol `let` (Duh!),
 we're ignoring `::bindings` for now, and we know that we'll have zero
-or many forms after the bindings. After a some hammocking we give
+or many forms after the bindings. After some hammocking we give
 `::bindings` a go &mdash;
 
 ```clj
@@ -177,8 +177,8 @@ control what can appear in the vector:
 ```clj
 (s/def ::binding
   (s/cat
-    :name symbol?
-    :value identity))
+    :name  symbol?
+    :value (constantly true)))
 ```
 
 That looks right, now let's fix `::bindings` to use it:
