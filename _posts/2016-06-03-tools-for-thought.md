@@ -111,7 +111,7 @@ we know `let` must be made of some obvious basic parts:
      :forms    (s/seq* identity)))
 ```
 
-Ah our old friend wishful thinking! How we adore thee. We know the
+Ah wishful thinking! How we adore thee. We know the
 first part of a `let` expression has to be the symbol `let` (Duh!),
 we're ignoring `::bindings` for now, and we know that we'll have zero
 or many forms after the bindings. After a some hammocking we give
