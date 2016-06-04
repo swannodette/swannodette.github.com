@@ -88,7 +88,7 @@ moves that goal post *a lot closer*.
 
 In my humble opinion clojure.spec is the most
 [VPRI-worthy](http://www.vpri.org) feature Rich Hickey has shipped
-since delivering fast persistent data structure. Yes, yes you now have
+since delivering fast persistent data structures. Yes, yes you now have
 [Schema](https://github.com/plumatic/schema) like validations, but
 this is but the tip of an iceberg. clojure.spec takes
 [Matt Might et. al. Parsing with Derivatives](http://matt.might.net/papers/might2011derivatives.pdf)
