@@ -55,7 +55,7 @@ software development. Personally the thing I find most compelling
 about statically typed languages is that well designed ones give you a
 *tool for thinking*. As [Simon Peyton Jones](http://research.microsoft.com/en-us/people/simonpj/) sez in
 [Coders At Work](http://www.codersatwork.com/), it's not about
-*correctness* it's about *crispness*.
+correctness it's about *crispness*.
 
 As a Clojure(Script) programmer I would love to tap into that deep
 well of crispness somehow. Unfortunately idiomatic Clojure code
