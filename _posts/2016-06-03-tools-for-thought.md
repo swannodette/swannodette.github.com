@@ -108,7 +108,7 @@ we know `let` must be made of some obvious basic parts:
   (s/cat
      :name     '#{let}
      :bindings ::bindings
-     :forms    (s/seq* (constantly true))))
+     :forms    (s/* (constantly true))))
 ```
 
 Ah wishful thinking! How we adore thee. We know the
