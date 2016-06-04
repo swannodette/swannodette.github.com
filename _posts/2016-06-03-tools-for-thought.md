@@ -114,7 +114,7 @@ we know `let` must be made of some obvious basic parts:
 Ah wishful thinking! How we adore thee. We know the
 first part of a `let` expression has to be the symbol `let` (Duh!),
 we're ignoring `::bindings` for now, and we know that we'll have zero
-or many forms after the bindings. After some hammocking we give
+or more forms after the bindings. After some hammocking we give
 `::bindings` a go &mdash;
 
 ```clj
