@@ -21,7 +21,7 @@ ClojureScript. Now that I use both for the day job, has that wonderful
 image of computing that Sussman & Abelson mapped out faded over the
 ensuing years?
 
-Certainly looking around we see many compelling new languages with a
+Looking around we see many compelling new languages with a
 client story in the functional space especially of the typed
 variety. Some of these are truly new endeavors and others are simply
 old faces with JavaScript backends. [Elm](http://elm-lang.org/) is
