@@ -25,7 +25,7 @@ Certainly looking around we see many compelling new languages with a
 client story in the functional space especially of the typed
 variety. Some of these are truly new endeavors and others are simply
 old faces with JavaScript backends. [Elm](http://elm-lang.org/) is
-especially exciting with its principled stance on simplicity and
+notably exciting with its principled stance on simplicity and
 approachability while delivering on the benefits of static
 typing. Whatever your opinions of [Scala](http://www.scala-lang.org/),
 many programmers find it a comfortable train ride across the OOP / FP
