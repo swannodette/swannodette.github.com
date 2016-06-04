@@ -49,7 +49,7 @@ equally important considerations to weigh against static guarantees
 when choosing the programming language for clients.
 
 Still I'm not a staunch defender of the dynamic nor the static stance
-and I think people with the strong opinions either way are being more
+and I think people with strong opinions either way are being more
 than a bit dishonest to themselves about the realities of industrial
 software development. Personally the thing I find most compelling
 about statically typed languages is that well designed ones give you a
