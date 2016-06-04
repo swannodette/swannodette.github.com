@@ -160,7 +160,7 @@ more forthcoming:
 ```clj
 (s/explain ::let '(let [x 1 y] (+ x y)))
 ;; In: [1] val: [x 1 y] fails spec: 
-;;   :om.next.spec/bindings at: [:bindings] predicate:
+;;   :cljs.user/bindings at: [:bindings] predicate:
 ;;   (-> % count even?)
 ```
 
