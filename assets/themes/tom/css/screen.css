@@ -44,6 +44,9 @@
 /* Global Reset */
 
 * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -132,7 +135,9 @@ ul.posts span {
 .site {
     font-size: 110%;
     text-align: justify;
-    width: 586px;
+    min-width: 320px;
+    width: 100%;
+    max-width: 586px;
     margin: 3em auto 2em auto;
     line-height: 1.75em;
 }
@@ -162,6 +167,19 @@ ul.posts span {
 
 .site .title a.extra:hover {
     color: black;
+}
+
+@media screen and (max-width: 568px) {
+  .site {
+    padding: 20px;
+  }
+  .site .title a,
+  .site .title a.extra {
+    display: inline-block;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .site .meta {
