@@ -103,15 +103,18 @@
 ;; Example constructor
 
 (defn key-events [prevent-default?]
-  (->> (r/listen js/document :keydown prevent-default?)
-    (r/map key-event->keycode)
-    (r/filter KEYS)
-    (r/map key->keyword)))
+  (let [preventer-fn #(when @prevent-default?
+                        (.preventDefault %)
+                        (.stopPropagation %))]
+    (->> (r/listen js/document :keydown preventer-fn)
+      (r/map key-event->keycode)
+      (r/filter KEYS)
+      (r/map key->keyword))))
 
 (defn create-example [id event-fn render-fn ctor-fn]
   (let [hc      (r/hover (dom/by-id id))
         prevent (atom false)
-        raw     (event-fn #(deref prevent))
+        raw     (event-fn prevent)
         c       (r/toggle raw)
         changes (ctor-fn (:chan c))
         ctrl    (:control c)]
