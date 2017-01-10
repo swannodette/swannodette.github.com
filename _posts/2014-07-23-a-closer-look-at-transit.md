@@ -51,7 +51,7 @@ Transit. However, if some components of your system marshal JSON and you would
 prefer something comparable in performance to JSON when communicating with those
 components, then Transit is well worth thinking long and hard about.
 
-As to to why transit-js doesn't yet use the binary [msgpack](http://msgpack.org)
+As to why transit-js doesn't yet use the binary [msgpack](http://msgpack.org)
 encoding, benchmarking has shown that existing binary formats don't yet compete
 with JSON in many JavaScript environments (see footnote (1) at the end of the
 post). Currently transit-js compares quite favorably to plain old JSON (see
