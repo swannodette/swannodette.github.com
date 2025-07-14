@@ -280,3 +280,23 @@ body[data-page="/"] .post > h1.post-title,
     text-align: center !important;
     max-width: 48rem !important;
 }
+
+// Override post styling for home page
+.post:has(.home) {
+    background: white !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+}
+
+.post:has(.home) > * {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+}
+
+// Hide the post title when we have a home div
+.post:has(.home) > .post-title {
+    display: none !important;
+}

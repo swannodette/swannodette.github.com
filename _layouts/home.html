@@ -1,52 +1,18 @@
-<!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>{{ site.title }}{% if page.title and page.title != "" %} &mdash; {{ page.title }}{% endif %}</title>
+---
+layout: default
+---
 
-    {% if site.description %}<meta name="description" content="{{ site.description }}">{% endif %}  
+{% include back-link.html %}
 
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | absolute_url }}?{{ site.time | date: '%s%N' }}">
+<div class="home">
+  <h1 class="content-title">{{ site.title }}</h1>
 
-    <link rel="apple-touch-icon" href="{{ site.icon }}">
-  </head>
-  <body>
-
-    <a href="#main" class="skip-navigation">
-      Skip to list of posts
-    </a>
-
-    {% include back-link.html %}
-
-    <div class="home">
-      <h1 class="content-title">{{ site.title }}</h1>
-
-      <ul class="posts" id="main">
-        {% for post in site.posts %}
-          <li>
-            <span>{{ post.date | date: "%d %b %Y" }}</span>
-            <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-
-    {% unless site.hide_search %}
-      {% include search.html %}
-    {% endunless %}
-
-    {% include menu.html %}
-
-    {% unless site.hide_credits %}
-      <aside class="site-credits">
-        <p>
-          <small><a href="https://github.com/patdryburgh/hitchens">Hitchens Theme</a> powered by <a href="http://jekyllrb.com">Jekyll</a></small>
-        </p>
-      </aside>
-    {% endunless %}
-
-  </body>
-</html>
+  <ul class="posts" id="main">
+    {% for post in site.posts %}
+      <li>
+        <span>{{ post.date | date: "%d %b %Y" }}</span>
+        <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
