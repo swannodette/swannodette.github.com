@@ -1,26 +1,52 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>{{ site.title }}{% if page.title and page.title != "" %} &mdash; {{ page.title }}{% endif %}</title>
 
-<article class="post h-entry home-page" itemscope itemtype="http://schema.org/BlogPosting" id="main" role="article" aria-label="Content" data-layout="home">
+    {% if site.description %}<meta name="description" content="{{ site.description }}">{% endif %}  
 
-  <h1 class="post-title divided p-name" itemprop="name headline">
-    {{ site.title }}
-  </h1>
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | absolute_url }}?{{ site.time | date: '%s%N' }}">
 
-  <div class="post-content e-content" itemprop="articleBody">
-    <ul class="posts">
-      {% for post in site.posts %}
-        <li>
-          <span>{{ post.date | date: "%d %b %Y" }}</span>
-          <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
+    <link rel="apple-touch-icon" href="{{ site.icon }}">
+  </head>
+  <body>
 
-  <div class="post-meta">
-    <time class="post-date dt-published" datetime="" itemprop="datePublished"></time>
-  </div>
+    <a href="#main" class="skip-navigation">
+      Skip to list of posts
+    </a>
 
-</article>
+    {% include back-link.html %}
+
+    <div class="home">
+      <h1 class="content-title">{{ site.title }}</h1>
+
+      <ul class="posts" id="main">
+        {% for post in site.posts %}
+          <li>
+            <span>{{ post.date | date: "%d %b %Y" }}</span>
+            <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    {% unless site.hide_search %}
+      {% include search.html %}
+    {% endunless %}
+
+    {% include menu.html %}
+
+    {% unless site.hide_credits %}
+      <aside class="site-credits">
+        <p>
+          <small><a href="https://github.com/patdryburgh/hitchens">Hitchens Theme</a> powered by <a href="http://jekyllrb.com">Jekyll</a></small>
+        </p>
+      </aside>
+    {% endunless %}
+
+  </body>
+</html>
