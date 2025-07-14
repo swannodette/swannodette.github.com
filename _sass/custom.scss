@@ -183,15 +183,14 @@ ul.posts li {
     font-weight: normal !important;
 }
 
-// Remove Home link from main page only (when there's a post list)
+// Show back link on all pages by default
 .back-link {
-    display: none !important;
+    display: inline-block !important;
 }
 
-// Show back link only on individual post pages
-article.post + * .back-link,
-.post .back-link {
-    display: inline-block !important;
+// Hide Home link only on the landing page (when body contains post list)
+body:has(ul.posts) .back-link {
+    display: none !important;
 }
 
 // Right-align dates, left-align titles for sharp visual look
