@@ -1,0 +1,283 @@
+// Custom typography overrides for Hitchens theme
+// Preserving David Nolen's Computer Modern and Latin Modern Roman fonts
+
+@font-face {
+    font-family: "Computer Modern";
+    src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunss.otf');
+}
+
+@font-face {
+    font-family: "Computer Modern Bold";
+    src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunsx.otf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Computer Modern Italic";
+    src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunsi.otf');
+    font-style: italic, oblique;
+}
+
+@font-face {
+    font-family: "Computer Modern Bold Italic";
+    src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunbxo.otf');
+    font-weight: bold;
+    font-style: italic, oblique;
+}
+
+@font-face {
+    font-family: 'Latin Modern Roman';
+    src: url('/assets/fonts/lmroman10-regular-webfont.eot');
+    src: url('/assets/fonts/lmroman10-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/lmroman10-regular-webfont.woff') format('woff'),
+         url('/assets/fonts/lmroman10-regular-webfont.ttf') format('truetype'),
+         url('/assets/fonts/lmroman10-regular-webfont.svg#latin_modern_roman10_regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// Override Hitchens theme typography
+body {
+    font-family: 'Computer Modern', Georgia, 'Times New Roman', Times, serif !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Computer Modern Bold', Georgia, 'Times New Roman', Times, serif !important;
+}
+
+.site-title,
+.site-title a {
+    font-family: 'Computer Modern', Georgia, 'Times New Roman', Times, serif !important;
+}
+
+.post-content,
+.post-content p {
+    font-family: 'Computer Modern', Georgia, 'Times New Roman', Times, serif !important;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+// Preserve code styling
+pre, code {
+    font-family: 'Inconsolata', 'Monaco', 'Consolas', monospace !important;
+}
+
+// Mathematical content
+.MathJax .noError {
+    border: none !important;
+    padding: 0 !important;
+}
+
+// CodeMirror styling
+.CodeMirror-code pre {
+    padding: 0 4px;
+    margin: 0;
+    border: 0;
+}
+
+// Blockquotes
+blockquote {
+    font-family: 'Computer Modern Italic', Georgia, 'Times New Roman', Times, serif !important;
+    font-style: italic;
+}
+
+// Lists
+ul, ol {
+    font-family: 'Computer Modern', Georgia, 'Times New Roman', Times, serif !important;
+}
+
+// Maintain development blog specific styling - remove yellow backgrounds
+.highlight pre {
+    background-color: white !important;
+    border-top: 1px solid #ddd !important;
+    border-bottom: 1px solid #ddd !important;
+    border-left: none !important;
+    border-right: none !important;
+    padding: 1em !important;
+    overflow: auto;
+}
+
+// Remove the theme's automatic padding on highlight children
+.highlight > * {
+    padding: 0 !important;
+}
+
+// But restore padding only on the pre element
+.highlight > pre {
+    padding: 1em !important;
+}
+
+// Remove yellow backgrounds from all code highlighting
+code.highlighter-rouge {
+    background: white !important;
+}
+
+.highlight {
+    background: white !important;
+}
+
+.highlighter-rouge .highlight {
+    background: white !important;
+}
+
+// Ensure readability for code examples
+.language-clojure, .language-javascript, .language-cljs {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+// Hide search form
+#search {
+    display: none !important;
+}
+
+// Remove yellow background
+body {
+    background: white !important;
+}
+
+// Hide theme credits
+.site-credits {
+    display: none !important;
+}
+
+// Remove decoration below title (divided class)
+.divided::after {
+    display: none !important;
+}
+
+// Remove bullets from post list
+.post-list,
+ul.posts {
+    list-style: none !important;
+    padding-left: 0 !important;
+}
+
+.post-list li,
+ul.posts li {
+    list-style: none !important;
+}
+
+// Remove drop shadows
+.post {
+    box-shadow: none !important;
+}
+
+// Remove all yellow backgrounds
+.skip-navigation {
+    background: white !important;
+    border-color: #ccc !important;
+}
+
+.footnote:hover, 
+.footnote:focus {
+    background: #f0f0f0 !important;
+    border-color: #ccc !important;
+}
+
+// Style post dates: uppercase, smaller, lighter
+.post-date {
+    text-transform: uppercase !important;
+    font-size: 0.7em !important;
+    color: #888 !important;
+    font-weight: normal !important;
+}
+
+// Remove Home link from main page only (when there's a post list)
+.back-link {
+    display: none !important;
+}
+
+// Show back link only on individual post pages
+article.post + * .back-link,
+.post .back-link {
+    display: inline-block !important;
+}
+
+// Right-align dates, left-align titles for sharp visual look
+ul.posts li {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: baseline !important;
+    margin-bottom: 0.5em !important;
+    line-height: 1.75em !important;
+}
+
+ul.posts li span {
+    order: 2 !important;
+    text-align: right !important;
+    margin-left: 1em !important;
+    flex-shrink: 0 !important;
+    color: #888 !important;
+    font-size: 0.7em !important;
+    text-transform: uppercase !important;
+    font-weight: normal !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+ul.posts li a {
+    order: 1 !important;
+    text-align: left !important;
+    flex-grow: 1 !important;
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+// Remove dotted line (skip navigation styling)
+.skip-navigation {
+    border: none !important;
+}
+
+// Left-align section headers within post content and ensure proper sizing
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+    text-align: left !important;
+}
+
+// Section headers within post content should be smaller than post title
+.post-content h1 {
+    font-size: 1.5em !important;
+    margin: 1.5em 0 1em 0 !important;
+}
+
+.post-content h2 {
+    font-size: 1.25em !important;
+    margin: 1.25em 0 0.75em 0 !important;
+}
+
+.post-content h3 {
+    font-size: 1.1em !important;
+    margin: 1.1em 0 0.5em 0 !important;
+}
+
+// Fix post title alignment with content by matching the content constraints
+// Only apply to individual post pages, not the landing page
+body:not(.home) .post > h1 {
+    text-align: left !important;
+    max-width: 36rem !important;
+    padding: 2em 1em 1em 1em !important;
+}
+
+// Keep landing page title centered - target the home page specifically
+// Target the article that contains ul.posts (only on home page)
+article:has(ul.posts) > h1 {
+    text-align: center !important;
+    max-width: 48rem !important;
+}
+
+// Additional fallback - target .post.h-entry that contains ul.posts 
+.post:has(.post-content ul.posts) > h1 {
+    text-align: center !important;
+    max-width: 48rem !important;
+}
+
+// Fallback for browsers that don't support :has() - target landing page by URL
+body[data-page="/"] .post > h1.post-title,
+.post > h1.post-title.divided {
+    text-align: center !important;
+    max-width: 48rem !important;
+}

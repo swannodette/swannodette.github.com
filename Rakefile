@@ -97,8 +97,13 @@ end # task :page
 
 desc "Launch preview environment"
 task :preview do
-  system "jekyll --auto --server"
+  system "bundle exec jekyll serve --watch"
 end # task :preview
+
+desc "Build site"
+task :build do
+  system "bundle exec jekyll build"
+end # task :build
 
 # Public: Alias - Maintains backwards compatability for theme switching.
 task :switch_theme => "theme:switch"

@@ -1,0 +1,26 @@
+---
+layout: default
+---
+
+<article class="post h-entry home-page" itemscope itemtype="http://schema.org/BlogPosting" id="main" role="article" aria-label="Content" data-layout="home">
+
+  <h1 class="post-title divided p-name" itemprop="name headline">
+    {{ site.title }}
+  </h1>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="posts">
+      {% for post in site.posts %}
+        <li>
+          <span>{{ post.date | date: "%d %b %Y" }}</span>
+          <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="post-meta">
+    <time class="post-date dt-published" datetime="" itemprop="datePublished"></time>
+  </div>
+
+</article>
