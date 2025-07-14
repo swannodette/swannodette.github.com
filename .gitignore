@@ -18,3 +18,5 @@ assets/js/cljs_next
 .jekyll-cache
 .idea
 *.iml
+vendor
+.bundle
