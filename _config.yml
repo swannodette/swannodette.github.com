@@ -52,6 +52,10 @@ author :
 #
 production_url : https://swannodette.github.io
 
+# Site URL for absolute links
+url: "https://swannodette.github.io"
+baseurl: ""
+
 # Analytics (optional, can be configured later)
 # google_analytics: UA-123-12
   
