@@ -1,0 +1,38 @@
+.site-navigation {
+  margin-top: 2rem;
+  padding: 0 1rem;
+  &:hover,
+  &:focus-within {
+    a {
+      opacity: .7;
+    }
+  }
+}
+
+.site-navigation ul {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.site-navigation li {
+  list-style: none;
+  font-size: .875em;
+  font-variant: small-caps;
+  margin: 0;
+  &.active a {
+    text-decoration: underline;
+  }
+}
+
+.site-navigation a {
+  display: block;
+  padding: .25em .5em;
+  text-decoration: none;
+  transition: opacity .125s ease-in-out;
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,25 @@
+.site-masthead {
+  box-sizing: border-box;
+  position: relative;
+  text-align: center;
+}
+
+.site-masthead h1 {
+  font-size: 3em;
+  margin-bottom: 0;
+  margin-top: 1em;
+  padding: 0 2rem;
+  @media (min-width: $on-tablet) {
+    font-size: 6em;
+  }
+}
+
+.site-masthead h2 {
+  color: $muted-text-color;
+  font-size: 1.25em;
+  margin: 0;
+  padding: 0 2rem;
+  @media (min-width: $on-tablet) {
+    font-size: 3em;
+  }
+}

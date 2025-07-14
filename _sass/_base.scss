@@ -1,0 +1,161 @@
+body {
+  background: $brand-color;
+  color: $text-color;
+  font-family: $font-family;
+  font-size: 1.3125em;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 3em;
+  margin: .5em auto;
+}
+
+h2 {
+  font-size: 2em;
+  margin: 1em auto;
+  text-align: center;
+}
+
+h3 {
+  font-size: 1.5em;
+  margin: 1.3333em auto;
+  text-align: center;
+}
+
+h4 {
+  font-size: 1.25em;
+  font-style: italic;
+  margin: 1.875em auto;
+  text-align: center;
+}
+
+h5 {
+  font-size: 1em;
+  font-style: italic;
+  margin: 2em auto;
+  text-align: center;
+}
+
+h6 {
+  font-size: .875em;
+  font-style: italic;
+  margin: 2.25em auto;
+  text-align: center;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+a {
+  color: $text-color;
+}
+
+a:focus {
+  outline: 1px dashed $text-color;
+}
+
+blockquote {
+  margin: 2em auto;
+  opacity: .8;
+  > * {
+    padding: 0 3em;
+  }
+}
+
+blockquote.epigraph {
+  font-style: italic;
+}
+
+small {
+  font-size: .75em;
+}
+
+p > cite {
+  display: block;
+  text-align: right;
+}
+
+hr {
+  border: 0;
+  height: 0;
+  @include divider;
+  margin: 4em 0;
+}
+
+img {
+  display: flex;
+  max-width: 100%;
+  height: auto;
+  margin: 2em auto;
+}
+
+figure img {
+  margin: 2em auto 1em;
+}
+
+figcaption {
+  font-size: .875em;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 2em;
+  opacity: .7;
+}
+
+.divided::after {
+  content: "";
+  @include divider;
+}
+
+.home {
+  max-width: 24em;
+  margin: auto;
+  padding: 4em 1em;
+}
+
+.content-title {
+  font-size: 2em;
+  margin-bottom: 2em;
+  text-align: center;
+}
+
+.post-date {
+  color: $muted-text-color;
+  display: block;
+  font-size: .825em;
+  white-space: nowrap;
+  text-transform: uppercase;
+  .post-link & {
+    padding: .5em 0;
+  }
+}
+
+.site-credits {
+  margin: 0 auto 2em;
+  padding: 0 2em;
+  text-align: center;
+}
+
+.skip-navigation {
+  background: $brand-color;
+  border: 1px dashed transparent;
+  display: block;
+  font-size: .875em;
+  font-weight: 700;
+  margin-top: -2.625rem;
+  padding: .5rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  &:hover,
+  &:focus {
+    background: lighten($brand-color, 2.5%);
+    border-color: $text-color;
+    margin-top: 0;
+  }
+}

@@ -10,9 +10,7 @@ kramdown:
   hard_wrap: false
   syntax_highlighter: rouge
 
-# Theme configuration
-theme: hitchens-theme
-ignore_theme_config: true
+# No external theme - using inlined Hitchens theme files
 
 # Jekyll 3.x plugins
 plugins:

@@ -1,0 +1,19 @@
+{% capture excerpt %}
+  {{ post.excerpt | replace: "<p>", "" | replace: "</p>", "" }}
+{% endcapture %}
+
+{% if site.excerpt_length %}
+  {% assign excerpt_length = site.excerpt_length %}
+{% else %}
+  {% assign excerpt_length = 20 %}
+{% endif %}
+
+{% assign excerpt_size = excerpt | size %}
+
+<span class="post-link__excerpt">
+  {% if excerpt_size > 140 and excerpt_length > 0 %}
+    {{ excerpt | truncatewords: excerpt_length, '…' }}
+  {% else %}
+    {{ excerpt }}
+  {% endif %}
+</span>
