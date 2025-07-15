@@ -7,8 +7,8 @@ tags: []
 ---
 {% include JB/setup %}
 
-<link href="/assets/css/codemirror.css" rel="stylesheet"></link>
-<link href="/assets/css/cljs-next/main.css" rel="stylesheet"></link>
+<link href="/assets/css/codemirror.css" rel="stylesheet" />
+<link href="/assets/css/cljs-next/main.css" rel="stylesheet" />
 
 <img width="590" style="border: 1px solid #ccc" src="/assets/images/lambdam.jpeg" />
 
