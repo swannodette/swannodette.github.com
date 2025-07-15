@@ -71,7 +71,7 @@ definition and immediately invokes it. Click the **EVAL** button.
 <div class="eval-cljs">
     <textarea id="ex0" class="code"></textarea>
     <div class="eval-ctrl">
-        <input id="ex0-out" type="text"></input>
+        <input id="ex0-out" type="text" />
         <button id="ex0-run" class="eval">EVAL</button>
     </div>
 </div>
@@ -121,7 +121,7 @@ a few times and you will observe it get faster.
 
 <div class="eval-cljs">
     <div class="eval-ctrl">
-        <input id="ex1-out" type="text" value="No Runs"></input>
+        <input id="ex1-out" type="text" value="No Runs" />
         <button id="ex1-run">Read cljs.core!</button>
     </div>
 </div>
