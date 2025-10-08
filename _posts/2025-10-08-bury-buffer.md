@@ -30,7 +30,7 @@ Integrating this with a particular package eliminates the behavior of a "random"
 
 (add-to-list 'display-buffer-alist
   '("\\(magit-revision:\\|magit-diff:\\)"
-     (my/magit-display-buffer-in-right-window)
+     (my/magit-display-buffer)
     (inhibit-same-window . t)))
 ```
 
