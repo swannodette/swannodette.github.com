@@ -45,6 +45,11 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Iosevka Etoile', Georgia, 'Times New Roman', Times, serif;
 }
 
+// Landing page headlines should be smaller
+.home h1 {
+    font-size: 2em;
+}
+
 .site-title,
 .site-title a {
     font-family: 'Iosevka Etoile', Georgia, 'Times New Roman', Times, serif;
@@ -209,10 +214,10 @@ ul.posts li span {
     margin-left: 1em !important;
     flex-shrink: 0 !important;
     color: #888 !important;
-    font-size: 0.7em !important;
+    font-size: 13px !important;
     text-transform: uppercase !important;
     font-weight: normal !important;
-    font-family: Arial, Helvetica, sans-serif !important;
+    font-family: 'Iosevka Term', monospace !important;
 }
 
 ul.posts li a {
@@ -221,6 +226,7 @@ ul.posts li a {
     flex-grow: 1 !important;
     text-decoration: none !important;
     color: inherit !important;
+    font-size: 18px;
 }
 
 // Remove dotted line (skip navigation styling)
