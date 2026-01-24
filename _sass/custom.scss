@@ -38,28 +38,29 @@
 
 // Override Hitchens theme typography
 body {
-    font-family: 'Computer Modern', Georgia, 'Times New Roman', Times, serif !important;
+    font-family: 'Iosevka Etoile', Georgia, 'Times New Roman', Times, serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Computer Modern Bold', Georgia, 'Times New Roman', Times, serif !important;
+    font-family: 'Iosevka Etoile', Georgia, 'Times New Roman', Times, serif;
 }
 
 .site-title,
 .site-title a {
-    font-family: 'Computer Modern', Georgia, 'Times New Roman', Times, serif !important;
+    font-family: 'Iosevka Etoile', Georgia, 'Times New Roman', Times, serif;
 }
 
 .post-content,
 .post-content p {
-    font-family: 'Computer Modern', Georgia, 'Times New Roman', Times, serif !important;
-    font-size: 18px;
+    font-family: 'Iosevka Etoile', Georgia, 'Times New Roman', Times, serif;
+    font-size: 13px;
     line-height: 1.6;
 }
 
 // Preserve code styling
 pre, code {
-    font-family: 'Inconsolata', 'Monaco', 'Consolas', monospace !important;
+    font-family: 'Iosevka Term', 'Monaco', 'Consolas', monospace;
+    font-size: 13px;
 }
 
 // Mathematical content
@@ -77,13 +78,13 @@ pre, code {
 
 // Blockquotes
 blockquote {
-    font-family: 'Computer Modern Italic', Georgia, 'Times New Roman', Times, serif !important;
+    font-family: 'Iosevka Etoile', Georgia, 'Times New Roman', Times, serif;
     font-style: italic;
 }
 
 // Lists
 ul, ol {
-    font-family: 'Computer Modern', Georgia, 'Times New Roman', Times, serif !important;
+    font-family: 'Iosevka Etoile', Georgia, 'Times New Roman', Times, serif;
 }
 
 // Maintain development blog specific styling - remove yellow backgrounds

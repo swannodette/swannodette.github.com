@@ -1,14 +1,47 @@
-/* eb-garamond-regular - latin */
+/* Iosevka Etoile - Regular */
 @font-face {
-  font-family: 'EB Garamond';
+  font-family: 'Iosevka Etoile';
   font-style: normal;
   font-weight: 400;
-  font-display: auto;
-  src: url('#{$asset_url}/fonts/eb-garamond-v9-latin-regular.eot'); /* IE9 Compat Modes */
-  src: local('EB Garamond Regular'), local('EBGaramond-Regular'),
-       url('#{$asset_url}/fonts/eb-garamond-v9-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('#{$asset_url}/fonts/eb-garamond-v9-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
-       url('#{$asset_url}/fonts/eb-garamond-v9-latin-regular.woff') format('woff'), /* Modern Browsers */
-       url('#{$asset_url}/fonts/eb-garamond-v9-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('#{$asset_url}/fonts/eb-garamond-v9-latin-regular.svg#EBGaramond') format('svg'); /* Legacy iOS */
+  src: url('#{$asset_url}/fonts/IosevkaEtoile-Regular.woff2') format('woff2');
+}
+
+/* Iosevka Etoile - Medium */
+@font-face {
+  font-family: 'Iosevka Etoile';
+  font-style: normal;
+  font-weight: 500;
+  src: url('#{$asset_url}/fonts/IosevkaEtoile-Medium.woff2') format('woff2');
+}
+
+/* Iosevka Etoile - Bold */
+@font-face {
+  font-family: 'Iosevka Etoile';
+  font-style: normal;
+  font-weight: 700;
+  src: url('#{$asset_url}/fonts/IosevkaEtoile-Bold.woff2') format('woff2');
+}
+
+/* Iosevka Etoile - Italic */
+@font-face {
+  font-family: 'Iosevka Etoile';
+  font-style: italic;
+  font-weight: 400;
+  src: url('#{$asset_url}/fonts/IosevkaEtoile-Italic.woff2') format('woff2');
+}
+
+/* Iosevka Term - Regular */
+@font-face {
+  font-family: 'Iosevka Term';
+  font-style: normal;
+  font-weight: 400;
+  src: url('#{$asset_url}/fonts/IosevkaTerm-Regular.woff2') format('woff2');
+}
+
+/* Iosevka Term - Bold */
+@font-face {
+  font-family: 'Iosevka Term';
+  font-style: normal;
+  font-weight: 700;
+  src: url('#{$asset_url}/fonts/IosevkaTerm-Bold.woff2') format('woff2');
 }
